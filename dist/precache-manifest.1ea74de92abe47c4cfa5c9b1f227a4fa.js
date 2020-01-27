@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/k-azul.png"
   },
   {
-    "revision": "b51ed5afb567842d31fd416a677aeab2",
+    "revision": "8b755839a0d6ae8862e2505dfefda651",
     "url": "/konecta-se/manifest.json"
   },
   {
