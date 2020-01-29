@@ -22,23 +22,24 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn href="https://www.grupokonecta.com/somos-globales/peru/" target="_blank" text>
+      <v-btn v-if="$route.name == 'home'" href="https://www.grupokonecta.com/somos-globales/peru/" target="_blank" text>
         <span class="mr-2">Nosotros</span>
         <!-- <v-icon>mdi-open-in-new</v-icon> -->
       </v-btn>
-      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" class="ml-6" outlined>
-        <span class="mr-2">Postula</span>
+      <v-btn v-if="$route.name == 'home'" @click="$router.push('/login')" target="_blank" class="ml-6" outlined>
+        <span class="mr-2" >Postula</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-content>
-      <HelloWorld />
+      <router-view></router-view>
+      <!-- <HelloWorld /> -->
     </v-content>
     <!-- <v-footer color="blue darken-2" app>
       <span class="white--text">&copy; 2020</span>
     </v-footer>-->
-    <v-footer color="#032556">
+    <v-footer v-if="$route.name == 'home'" color="#032556">
       <v-card flat tile class=" white--text text-center" color="#032556">
         <v-card-text>
           <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
