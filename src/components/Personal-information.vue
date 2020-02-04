@@ -59,11 +59,6 @@
         </div>
         
         <div id="step0" v-if="counter == 0" class="px-3 pt-12">
-          <!-- <v-form
-      ref="form"
-      v-model="valid"
-      :lazy-validation="lazy"
-    > -->
           <p class="text-center black--text headline mb-0">¿Cuál es tu nombre?</p>
           <v-text-field
             :rules="nameRules"
@@ -94,7 +89,6 @@
               ></v-text-field>
             </v-col>
           </v-row>
-          <!-- </v-form> -->
         </div>
         <!-- step 1 -->
         <div id="step1" v-if="counter == 1" class="px-3 pt-12">
@@ -568,13 +562,11 @@ export default {
     },
     btnNextStep() {
       // datos personales
-      // if (this.$refs.form.validate()) {
         if (this.skill !== 100) {
           this.hidden = true;
           this.counter += 1;
           this.skill += 10;
         }
-      // }
 
       if (this.skill === 100) {
         this.counter += 1;
