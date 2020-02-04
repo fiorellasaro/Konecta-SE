@@ -53,6 +53,7 @@
             class="text-center black--text headline mb-4 font-weight-bold"
           >¿Cómo quiseras que te llamemos, brindanos tu nombre Social?</p>
           <v-text-field
+            value=""
             v-model="personalInformation.nombre_social"
             class="pt-2"
             color="teal"
@@ -210,6 +211,10 @@
 </template>
 
 <script>
+
+import firebase from 'firebase';
+import moment from 'moment';
+
 export default {
   data() {
     return {
@@ -239,22 +244,22 @@ export default {
         "Volantes"
       ],
       datosPostulantes: [],
-      personalInformation: [
+      personalInformation:[
         {
           tipodoc: "",
           numdoc: "",
           nombres: "",
           apellido_p: "",
           apellido_m: "",
-          nombre_social: "",
+          nombre_social: " ",
           nacionalidad: "",
           estado_civil: "radio-1",
           fecha_nac: false,
           genero: "",
           correo: "",
           telefono: null,
-          n_hijos: 0,
-          coordenadas_direccion: [1.23254, -2.00655],
+          n_hijos: Number,
+          coordenadas_direccion: [,],
           como_konecta: "",
           referidos: "",
           //datos profesionales
@@ -281,8 +286,7 @@ export default {
 
           //datos familiares
           familiares: ["familiar1", "familiar2"]
-        }
-      ],
+        }],
       nameRules: [v => !!v || "El nombre es requerido"],
       lastName1Rules: [v => !!v || "Apellido paterno es requerido"],
       lastName2Rules: [v => !!v || "Apellido materno es requerido"],
@@ -308,9 +312,77 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
+
+    postDatosExperiencia(id, experiencia){
+      for(let i=0; i< experiencia.length; i++){
+          const experienciaKey = firebase.database().ref("DATOS_EXPERIENCIA").push().key;
+
+          let experiencia_table ={
+            flag_se: experiencia[i].flag_se,
+            flag_ec: experiencia[i].flag_ec,
+            flag_eo: experiencia[i].flag_eo,
+
+            se_p_redes: experiencia[i].se_p_redes,
+            se_p_ventas: experiencia[i].se_p_ventas,
+            se_p_atc: experiencia[i].se_p_atc,
+            se_p_crosselling: experiencia[i].se_p_crosselling,
+            se_p_backof: experiencia[i].se_p_backof,
+            se_expect_salarial: [experiencia[i].se_expect_salarial[0], experiencia[i].se_expect_salarial[1]] ,
+
+            ec_empresa: experiencia[i].ec_empresa,
+            ec_cliente: experiencia[i].ec_cliente,
+            ec_rubro_cliente: experiencia[i].ec_rubro_cliente,
+            ec_segmento: experiencia[i].ec_segmento,
+            ec_tiempo_exp: experiencia[i].ec_tiempo_exp,
+            ec_retribucion_basico: experiencia[i].ec_retribucion_basico,
+            ec_retribucion_comisiones: experiencia[i].ec_retribucion_comisiones,
+
+            eo_empresa: experiencia[i].eo_empresa,
+            eo_rubro_empresa: experiencia[i].eo_rubro_empresa,
+            eo_puesto: experiencia[i].eo_puesto,
+            eo_tiempo_exp: experiencia[i].eo_tiempo_exp,
+            eo_retribucion_basico: experiencia[i].eo_retribucion_basico,
+            eo_retribucion_comisiones: experiencia[i].eo_retribucion_comisiones,
+            id_postulante: id
+          
+        }
+        firebase.database().ref("DATOS_EXPERIENCIA").child(experienciaKey).set(experiencia_table);
+
+      }
+
+
+     
+    },
+
+
+    postDatosFamiliares(id, familiares){
+      for(let i=0; i< familiares.length; i++){
+          const familiaresKey = firebase.database().ref("DATOS_FAMILIARES").push().key;
+
+          let familiares_table ={
+            parentesco: familiares[i].parentesco,
+            edad: familiares[i].edad,
+            trabaja: familiares[i].trabaja,
+            id_postulante: id
+          }
+          firebase.database().ref("DATOS_FAMILIARES").child(familiaresKey).set(familiares_table);
+
+      }
+     
+    },
+
+
     agregarPersonalDate() {
-      // console.log(this.nuevaTarea);
-      this.datosPostulantes.push({
+
+      let date = new Date();
+      let dateString = moment().format('L');
+      let hour = date.getHours() + ":" + date.getMinutes()+"";
+      const registerAt= {
+        date: dateString,
+        hour: hour
+      }
+
+      this.datosPostulantes = {
         tipodoc: "dni",
         numdoc: "456",
         nombres: this.personalInformation.nombres,
@@ -327,16 +399,33 @@ export default {
         coordenadas_direccion: [1.23254, -2.00655],
         como_konecta: this.personalInformation.como_konecta,
         referidos: this.personalInformation.referidos,
+
+        RegistradoDate: registerAt
+      };
+
+     localStorage.setItem("datos", JSON.stringify(this.datosPostulantes[0]));
+     let postulantes = JSON.parse( JSON.stringify(this.datosPostulantes) );
+      const postulateKey = firebase.database().ref("POSTULANTES").push().key;
+      firebase.database().ref("POSTULANTES").child(postulateKey).set(postulantes);
+
+      const profesionalesKey = firebase.database().ref("DATOS_PROFESIONALES").push().key;
+
+      const datos_profesionales = {
         //datos profesionales
         grado_formacion: "Universidad",
         institucion: "Universidad de Lima",
         estado_estudios: "Incompleta",
         rubro_carrera: "",
-        coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        coord_estudio: [0,0], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
         text_dir_estudio: "",
         horario_estudio: "TARDE",
-        experienciaPostulante: [
-          {
+        id_postulante: postulateKey
+      }
+      firebase.database().ref("DATOS_PROFESIONALES").child(profesionalesKey).set(datos_profesionales);
+
+
+      let datos_experiencia = [
+        {
             flag_se: 0,
             flag_ec: 1,
             flag_eo: 0,
@@ -346,7 +435,7 @@ export default {
             se_p_atc: "",
             se_p_crosselling: "",
             se_p_backof: "",
-            se_expect_salarial: [,],
+            se_expect_salarial: [0,0],
 
             ec_empresa: "ATENTO",
             ec_cliente: "Movistar",
@@ -361,7 +450,7 @@ export default {
             eo_puesto: "",
             eo_tiempo_exp: 0,
             eo_retribucion_basico: 0,
-            eo_retribucion_comisiones: 0
+            eo_retribucion_comisiones: 0,
           },
           {
             flag_se: 0,
@@ -373,7 +462,7 @@ export default {
             se_p_atc: "",
             se_p_crosselling: "",
             se_p_backof: "",
-            se_expect_salarial: [,],
+            se_expect_salarial: [0,0],
 
             ec_empresa: "",
             ec_cliente: "",
@@ -390,15 +479,37 @@ export default {
             eo_retribucion_basico: 800,
             eo_retribucion_comisiones: 300
           }
-        ],
-        familiares: [{ parentesco: "Esposa", edad: 28, trabaja: true }]
-      });
-      // console.log(this.tareas);
-      this.personalInformation.nombres = "";
-      localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
-      console.log(this.datosPostulantes);
-    }
-  }
+      ]
+
+    this.postDatosExperiencia(postulateKey, datos_experiencia);
+
+
+    let familiares= [{ parentesco: "Esposa", edad: 28, trabaja: true }];
+    this.postDatosFamiliares(postulateKey, familiares);
+
+
+    //datos rotacion
+     let datos_rotacion={
+          actividades: "Musica",
+          coord_actividad: [1.342, 2.332],
+          text_dir_actividad: "Jr. tarantula 889",
+          horario_actividad: "Noche",
+          fam_postulante: 2,
+          motivacion: "Viajar",
+          actividad_tiempo_libre: ["Cine", "Comer", "Familia"],
+          sede_preferencia: ["Fenix", "Sudameris", "Crillon"],
+          id_postulante: postulateKey
+     }     
+
+      const rotacionKey = firebase.database().ref("DATOS_ROTACION").push().key;
+      firebase.database().ref("DATOS_ROTACION").child(rotacionKey).set(datos_rotacion);
+
+
+    },
+
+
+  },
+
 };
 </script>
 
