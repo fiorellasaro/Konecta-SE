@@ -35,32 +35,11 @@
     <v-content>
       <router-view></router-view>
 
-        <vue-google-autocomplete
-            ref="address"
-            id="map"
-            classname="form-control"
-            placeholder="Please type your address"
-            v-on:placechanged="getAddressData"
-        >
-        </vue-google-autocomplete>
 
-      <GmapMap
-      :center="{lat:-12.054260, lng:-77.038333}"
-      :zoom="15"
-      map-type-id="terrain"
-      style="width: 500px; height: 300px"
-    >
-      <!-- <GmapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        :clickable="true"
-        :draggable="true"
-        @click="center=m.position"
-      /> -->
-    </GmapMap>
       <!-- <HelloWorld /> -->
     </v-content>
+
+    <Map></Map>
     <!-- <v-footer color="blue darken-2" app>
       <span class="white--text">&copy; 2020</span>
     </v-footer>-->
@@ -89,14 +68,16 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld";
-import VueGoogleAutocomplete from 'vue-google-autocomplete';
+import Map from "./components/Map";
+// import VueGoogleAutocomplete from 'vue-google-autocomplete';
 
 export default {
   name: "App",
 
   components: {
     HelloWorld,
-    VueGoogleAutocomplete,
+    Map,
+    // VueGoogleAutocomplete,
   },
 
   data () {
@@ -122,29 +103,8 @@ export default {
     
 
   },
-  mounted() {
-            // To demonstrate functionality of exposed component functions
-            // Here we make focus on the user input
-            this.$refs.address.focus();
-  },
- 
-  methods: {
-            /**
-            * When the location found
-            * @param {Object} addressData Data of the found location
-            * @param {Object} placeResultData PlaceResult object
-            * @param {String} id Input container ID
-            */
-            getAddressData: function (addressData, placeResultData, id) {
-                this.address = addressData;
-            }
-  }
-  // mounted() {
-  //   this.autocomplete = new google.maps.places.Autocomplete(
-  //     (this.$refs.autocomplete),
-  //     {types: ['geocode']}
-  //   );
-  // }
+
+
 
 };
 </script>
