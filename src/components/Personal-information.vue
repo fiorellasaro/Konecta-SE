@@ -2,20 +2,68 @@
   <v-container>
     <v-layout pa-2 align-center class="d-flex flex-column">
       <v-flex xs12 md6 xl3 pa-2 style="width: 100%;">
-        <div class="d-flex">
-          <v-progress-linear v-model="skill" color="teal" height="25" reactive v-if="skill !== 100">
+        <div class="d-flex align-content-space-around">
+          <v-progress-linear
+            :value="skill"
+            color="teal"
+            height="20"
+            style="border-radius: 100px;"
+            v-if="nextComponente !== 'componente3'"
+          >
             <template v-slot="{ value }">
-              <strong>{{ Math.ceil(value) }}%</strong>
+              <strong class="white--text body-2" v-if="skill > 0">{{ Math.ceil(value) }}%</strong>
             </template>
           </v-progress-linear>
-          <v-spacer></v-spacer>
-          <!-- <v-progress-linear v-model="professionalProgress" color="teal" height="25" reactive>
+          <v-progress-linear
+            :value="professionalProgress"
+            class="ml-4"
+            color="teal"
+            height="20"
+            style="border-radius: 100px;"
+            reactive
+            v-if="nextComponente !== 'componente3'"
+          >
             <template v-slot="{ value }">
-              <strong>{{ Math.ceil(value) }}%</strong>
+              <strong
+                class="white--text body-2"
+                v-if="professionalProgress > 0"
+              >{{ Math.ceil(value) }}%</strong>
             </template>
-          </v-progress-linear>-->
+          </v-progress-linear>
+          <v-progress-linear
+            v-if="nextComponente !== 'componente3'"
+            :value="expLabProgress"
+            class="ml-4"
+            color="teal"
+            height="20"
+            style="border-radius: 100px;"
+            reactive
+          >
+            <template v-slot="{ value }">
+              <strong class="white--text body-2" v-if="expLabProgress > 0">{{ Math.ceil(value) }}%</strong>
+            </template>
+          </v-progress-linear>
+          <v-progress-linear
+            v-if="nextComponente !== 'componente3'"
+            :value="rotacionProgress"
+            class="ml-4"
+            color="teal"
+            height="20"
+            style="border-radius: 100px;"
+            reactive
+          >
+            <template v-slot="{ value }">
+              <strong class="white--text body-2" v-if="rotacionProgress > 0">{{ Math.ceil(value) }}%</strong>
+            </template>
+          </v-progress-linear>
         </div>
+        
         <div id="step0" v-if="counter == 0" class="px-3 pt-12">
+          <!-- <v-form
+      ref="form"
+      v-model="valid"
+      :lazy-validation="lazy"
+    > -->
           <p class="text-center black--text headline mb-0">¿Cuál es tu nombre?</p>
           <v-text-field
             :rules="nameRules"
@@ -46,12 +94,13 @@
               ></v-text-field>
             </v-col>
           </v-row>
+          <!-- </v-form> -->
         </div>
         <!-- step 1 -->
         <div id="step1" v-if="counter == 1" class="px-3 pt-12">
           <p
-            class="text-center black--text headline mb-4 font-weight-bold"
-          >¿Cómo quiseras que te llamemos, brindanos tu nombre Social?</p>
+            class="text-center black--text headline mb-4"
+          >¿Cómo quisieras que te llamemos, brindanos tu nombre Social?</p>
           <v-text-field
             v-model="personalInformation.nombre_social"
             class="pt-2"
@@ -76,7 +125,13 @@
         <!-- step 2 -->
         <div id="step2" v-if="counter == 2" class="px-3 pt-12">
           <p class="text-center black--text headline mb-0">¿Cuál es tu nacionalidad?</p>
-          <v-text-field v-model="personalInformation.nacionalidad" class="pt-0" color="teal"></v-text-field>
+          <v-text-field
+            v-model="personalInformation.nacionalidad"
+            class="pt-0"
+            color="teal"
+            required
+            :rules="[v => !!v || 'Nacionalidad es requerida']"
+          ></v-text-field>
         </div>
 
         <!-- step 3 -->
@@ -85,9 +140,16 @@
           <v-radio-group
             v-model="personalInformation.estado_civil"
             :mandatory="false"
+            required
+            :rules="[v => !!v || 'Selecciona un estado civil']"
             class="body-1"
           >
-            <v-radio label="Soltero(a)" value="Soltero(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
+            <v-radio
+              label="Soltero(a)"
+              value="Soltero(a)"
+              color="teal"
+              class="pa-2 radioStateCivil"
+            ></v-radio>
             <v-radio label="Casado(a)" value="Casado(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
             <v-radio
               label="Divorciado(a)"
@@ -95,8 +157,18 @@
               color="teal"
               class="pa-2 radioStateCivil"
             ></v-radio>
-            <v-radio label="Separado(a)" value="Separado(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="Conviviente" value="Conviviente" color="teal" class="pa-2 radioStateCivil"></v-radio>
+            <v-radio
+              label="Separado(a)"
+              value="Separado(a)"
+              color="teal"
+              class="pa-2 radioStateCivil"
+            ></v-radio>
+            <v-radio
+              label="Conviviente"
+              value="Conviviente"
+              color="teal"
+              class="pa-2 radioStateCivil"
+            ></v-radio>
             <v-radio label="Viudo(a)" value="Viudo(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
           </v-radio-group>
         </div>
@@ -112,9 +184,19 @@
             min-width="290px"
           >
             <template v-slot:activator="{ on }">
-              <v-text-field v-model="date" label prepend-icon="event" readonly v-on="on"></v-text-field>
+              <v-text-field
+                v-model="date"
+                label
+                prepend-icon="event"
+                required
+                readonly
+                v-on="on"
+                :rules="[v => !!v || 'Fecha de nacimiento es requerido']"
+              ></v-text-field>
             </template>
             <v-date-picker
+              color="teal"
+              locale="es"
               ref="picker"
               v-model="date"
               :max="new Date().toISOString().substr(0, 10)"
@@ -127,10 +209,21 @@
         <!-- step 5 -->
         <div id="step5" v-if="counter == 5" class="px-3 pt-12">
           <p class="text-center black--text headline mb-0">¿Cuál es tu género?</p>
-          <v-radio-group v-model="personalInformation.genero" :mandatory="false" class="body-1">
+          <v-radio-group
+            v-model="personalInformation.genero"
+            :mandatory="false"
+            class="body-1"
+            required
+            :rules="[v => !!v || 'Género es requerido']"
+          >
             <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
             <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="No Binario" value="No_binario" color="teal" class="pa-2 radioStateCivil"></v-radio>
+            <v-radio
+              label="No Binario"
+              value="No_binario"
+              color="teal"
+              class="pa-2 radioStateCivil"
+            ></v-radio>
           </v-radio-group>
         </div>
 
@@ -145,13 +238,40 @@
             required
           ></v-text-field>
           <p class="text-center black--text headline mb-0 pt-4">¿Cuál es tu número de celular?</p>
-          <v-text-field v-model="personalInformation.telefono" color="teal" required></v-text-field>
+          <v-text-field
+            v-model="personalInformation.telefono"
+            color="teal"
+            required
+            :rules="[v => !!v || 'número de celular es requerido']"
+          ></v-text-field>
         </div>
 
+        <!-- hijos -->
         <!-- step7 -->
         <div id="step7" v-if="counter == 7" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuántos hijos tienes?</p>
-          <v-text-field v-model="personalInformation.n_hijos" color="teal" required></v-text-field>
+          <p class="text-center black--text headline mb-0">¿Tienes hijos?</p>
+          <v-radio-group
+            v-model="rdbHijos"
+            :mandatory="false"
+            class="body-1"
+            :rules="[v => !!v || 'Selecciona']"
+          >
+            <v-radio label="Si" value="sihijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
+            <v-radio label="No" value="nohijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          </v-radio-group>
+
+          <!-- step 8 -->
+          <v-expand-transition>
+            <div id="step7" v-if="rdbHijos == 'sihijos'" class="px-3 pt-12">
+              <p class="text-center black--text headline mb-0">¿Cuántos hijos tienes?</p>
+              <v-text-field
+                v-model="personalInformation.n_hijos"
+                color="teal"
+                required
+                :rules="[v => !!v || 'Es obligatorio']"
+              ></v-text-field>
+            </div>
+          </v-expand-transition>
         </div>
         <!-- step8 -->
         <div id="step8" v-if="counter == 8" class="px-3 pt-12">
@@ -159,7 +279,7 @@
           <v-text-field v-model="personalInformation.coordenadas_direccion" required></v-text-field>
         </div>
         <!-- step9 -->
-        <div id="step9" v-if="counter == 9" class="px-3 pt-12 ">
+        <div id="step9" v-if="counter == 9" class="px-3 pt-12">
           <p class="text-center black--text headline mb-0">¿Cuentanos cómo conociste a Konecta?</p>
           <v-select
             :items="itemsKonecta"
@@ -168,59 +288,107 @@
           ></v-select>
         </div>
         <!-- Envio de datos -->
-        <div v-if="skill == 100" class=" justify-center text-center">
-          <p class="headline text-center">¡Gracias por tu postulación! Nuestro equipo de Selección se comunicará contigo muy pronto</p>
-          <v-btn   color="#00B8AD" class="text-center white--text mt-4" @click="agregarPersonalDate">Enviar Datos</v-btn>
+        <div id="step10" v-if="counter == 11" class="px-3 pt-12">
+          <p
+            class="text-center black--text headline"
+          >Ahora nos gustaria saber más sobre tus estudios</p>
+          <v-img
+            src="../assets/profesionales.png"
+            aspect-ratio="1.7"
+            contain
+            style="border-radius: 50%;"
+          ></v-img>
         </div>
-      </v-flex>
-      <v-flex class="pt-4" xs12 md6 xl3 pa-2 style="width: 100%">
-        <v-row class="mt-12">
+        <div class="justify-center text-center">
+          <!-- <p
+            class="headline text-center"
+          >¡Gracias por tu postulación! Nuestro equipo de Selección se comunicará contigo muy pronto</p>
+          <v-btn
+            color="#00B8AD"
+            class="text-center white--text mt-4"
+            @click="agregarPersonalDate"
+          >Enviar Datos</v-btn>-->
+          <div v-if="skill == 100 && nextComponente === 'componente2'">
+            <datosProfesionales :countProf="countProf" />
+          </div>
+          <div v-if="nextComponente === 'componente3'">
+            <!-- <expLaboral :countExpLab="countExpLab" /> -->
+            <p
+              class="headline text-center"
+            >¡Gracias por tu postulación! Nuestro equipo de Selección se comunicará contigo muy pronto</p>
+            <v-btn
+              color="#00B8AD"
+              class="text-center white--text mt-4"
+              @click="agregarPersonalDate"
+            >Enviar Datos</v-btn>
+          </div>
+        </div>
+
+        <v-row v-if="nextComponente !== 'componente3'">
           <v-col class="text-start">
             <v-btn
-              v-if="counter !== 0 && skill !== 100"
-              :disabled="!isNext"
               color="#00B8AD"
+              v-show="hidden"
               class="white--text"
               fab
               large
-              @click="counter -= 1, skill -= 10"
+              absolute
+              dark
+              bottom
+              left
+              @click="btnPrevStep()"
             >
               <v-icon>mdi-arrow-left-bold</v-icon>
             </v-btn>
           </v-col>
 
           <v-col class="text-end">
-            <v-btn v-if="skill !== 100"
+            <v-btn
               fab
               large
               color="#00B8AD"
               class="white--text"
-              @click="counter += 1, skill += 10, isNext=true"
+              absolute
+              bottom
+              right
+              @click="btnNextStep()"
             >
               <v-icon>mdi-arrow-right-bold</v-icon>
             </v-btn>
           </v-col>
         </v-row>
-        <!-- <v-row>
-          <v-btn type="submit" class="btn btn-primary" @click="agregarPersonalDate">Add</v-btn>
-        </v-row> -->
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import datosProfesionales from "../components/Datos-profesionales";
+import expLaboral from "../components/Experiencia-laboral";
 export default {
+  components: {
+    datosProfesionales,
+    expLaboral
+  },
+
   data() {
     return {
+      hidden: false,
       skill: 0,
-      professionalProgress: 0,
+      nextComponente: "",
+      countProf: -1,
+      countExpLab: -1,
+      countExp: 0,
+      professionalProgress: -20,
+      expLabProgress: -20,
+      rotacionProgress: 0,
       hasSaved: false,
       isNext: null,
       model: null,
       counter: 0,
       date: null,
       menu: false,
+      rdbHijos: "",
       itemsKonecta: [
         "Familia/ Amigos",
         "Aptitus",
@@ -397,6 +565,66 @@ export default {
       this.personalInformation.nombres = "";
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
+    },
+    btnNextStep() {
+      // datos personales
+      // if (this.$refs.form.validate()) {
+        if (this.skill !== 100) {
+          this.hidden = true;
+          this.counter += 1;
+          this.skill += 10;
+        }
+      // }
+
+      if (this.skill === 100) {
+        this.counter += 1;
+        this.skill += 0;
+        this.hidden = false;
+      }
+      // Datos profesionales
+      if (this.counter === 12) {
+        this.nextComponente = "componente2";
+      }
+      if (this.nextComponente === "componente2") {
+        this.countProf += 1;
+        this.professionalProgress += 20;
+        this.hidden = true;
+      }
+      if (this.professionalProgress === 100) {
+        this.countProf += 1;
+        this.professionalProgress = 100;
+        this.hidden = false;
+      }
+      // Experiencia Laboral
+      if (this.countProf === 7) {
+        this.nextComponente = "componente3";
+        this.professionalProgress = 100;
+      }
+      //     if (this.nextComponente === "componente3") {
+      //       this.countExpLab += 1;
+      //       this.expLabProgress += 20;
+      //       this.hidden = true;
+      //     }
+      //     if(this.expLabProgress === 100){
+      //       this.countExpLab += 1;
+      //       this.expLabProgress += 0;
+      //       this.hidden = false;
+      //     }
+      this.isNext = true;
+    },
+    btnPrevStep() {
+      if (this.counter !== 0 && this.skill !== 100) {
+        this.counter -= 1;
+        this.skill -= 10;
+      }
+      if (this.nextComponente === "componente2") {
+        this.countProf -= 1;
+        this.professionalProgress -= 20;
+      }
+      if (this.nextComponente === "componente3") {
+        this.countExpLab -= 1;
+        this.expLabProgress -= 20;
+      }
     }
   }
 };
@@ -407,5 +635,16 @@ export default {
   background: #e5e5e5;
   border-radius: 4px;
   font-size: 18px;
+}
+.v-btn--absolute.v-btn--right,
+.v-btn--fixed.v-btn--right {
+  right: 24px;
+}
+.v-btn--fab.v-size--large.v-btn--absolute.v-btn--bottom {
+  bottom: 61px;
+}
+.v-btn--absolute.v-btn--left,
+.v-btn--fixed.v-btn--left {
+  left: 24px;
 }
 </style>
