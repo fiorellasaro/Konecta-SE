@@ -1,19 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "36e059fd3476322eb71b",
+    "revision": "d635c5a0cfd028fb0c1c",
     "url": "/konecta-se/css/app.f9bb66f0.css"
   },
   {
-    "revision": "12ff68a9b7f5e0944e76",
-    "url": "/konecta-se/css/chunk-1d4aee28.384b2f93.css"
+    "revision": "45e78d4ad92baacd072c",
+    "url": "/konecta-se/css/chunk-05ae7a16.6e927b5f.css"
   },
   {
     "revision": "ca601a407a1cf02bbb58",
     "url": "/konecta-se/css/chunk-20c4db10.b0982d31.css"
-  },
-  {
-    "revision": "bb5f50f7b4a5787489a8",
-    "url": "/konecta-se/css/chunk-49dc6578.6e927b5f.css"
   },
   {
     "revision": "e484949eed76d20654e6",
@@ -22,6 +18,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a1ea64c0fec929292c61",
     "url": "/konecta-se/css/chunk-63e37f00.076ea886.css"
+  },
+  {
+    "revision": "c3af21b5856027e19ff4",
+    "url": "/konecta-se/css/chunk-cbbbc08e.384b2f93.css"
   },
   {
     "revision": "eb8fd63bcc9b67091186",
@@ -84,16 +84,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/section-2.7ffa70fd.png"
   },
   {
-    "revision": "a5a587eaf475b4037114c475ed95564b",
+    "revision": "0448bd6565f7689a76b1ba234baabcf1",
     "url": "/konecta-se/index.html"
   },
   {
-    "revision": "36e059fd3476322eb71b",
-    "url": "/konecta-se/js/app.d86ae447.js"
+    "revision": "d635c5a0cfd028fb0c1c",
+    "url": "/konecta-se/js/app.22c238a3.js"
   },
   {
-    "revision": "12ff68a9b7f5e0944e76",
-    "url": "/konecta-se/js/chunk-1d4aee28.81e29694.js"
+    "revision": "45e78d4ad92baacd072c",
+    "url": "/konecta-se/js/chunk-05ae7a16.5d1aa14c.js"
   },
   {
     "revision": "ca601a407a1cf02bbb58",
@@ -104,16 +104,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/js/chunk-2d22d746.379c484c.js"
   },
   {
-    "revision": "bb5f50f7b4a5787489a8",
-    "url": "/konecta-se/js/chunk-49dc6578.92f72cb9.js"
-  },
-  {
     "revision": "e484949eed76d20654e6",
     "url": "/konecta-se/js/chunk-50305503.b7cd82d8.js"
   },
   {
     "revision": "a1ea64c0fec929292c61",
     "url": "/konecta-se/js/chunk-63e37f00.0cb02bc7.js"
+  },
+  {
+    "revision": "c3af21b5856027e19ff4",
+    "url": "/konecta-se/js/chunk-cbbbc08e.b3010d5e.js"
   },
   {
     "revision": "eb8fd63bcc9b67091186",
