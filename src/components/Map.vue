@@ -87,9 +87,11 @@ export default {
         console.log(this.directionText);
         this.center = position;
         this.starting_address_obj.place = null;
-      }else{
+      }
+      
+      else{
         this.directionText = this.starting_address;
-        console.log(directionText);
+        console.log(this.directionText);
       }
 
     },
