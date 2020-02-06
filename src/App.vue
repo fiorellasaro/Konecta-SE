@@ -1,15 +1,7 @@
 <template>
   <v-app>
-    <v-app-bar app color="#032556" dark>
+    <v-app-bar app color="teal" dark>
       <div class="d-flex align-center">
-        <!-- <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="../src/assets/k-blanco.png"
-          transition="scale-transition"
-          width="40"
-        /> -->
         <v-img
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down"
@@ -32,7 +24,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-content>
+    <v-content style="padding-top:37px;">
       <router-view></router-view>
 
 
@@ -40,11 +32,13 @@
     </v-content>
 
     <Map></Map>
+
+
     <!-- <v-footer color="blue darken-2" app>
       <span class="white--text">&copy; 2020</span>
     </v-footer>-->
-    <v-footer v-if="$route.name == 'home'" color="#032556">
-      <v-card flat tile class=" white--text text-center" color="#032556">
+    <v-footer v-if="$route.name == 'home'" color="teal">
+      <v-card flat tile class=" white--text text-center" color="teal">
         <v-card-text>
           <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
             <v-icon size="24px">{{ icon }}</v-icon>

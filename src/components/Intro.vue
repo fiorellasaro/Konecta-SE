@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container pt-10>
     <v-layout pa-2 justify-center>
       <v-flex xs12 md6 xl3 pa-2>
         <div class="px-10">

@@ -1,54 +1,25 @@
 <template>
-      <!-- <GmapMap
-      :center="{lat:-12.054260, lng:-77.038333}"
-      :zoom="15"
-      map-type-id="terrain"
-      style="width: 500px; height: 300px"
-    >
-      <GmapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        :clickable="true"
-        :draggable="true"
-        @click="center=m.position"
-      />
-    </GmapMap>
- -->
-
-<!-- 
-            <vue-google-autocomplete
-            ref="address"
-            id="map"
-            classname="form-control"
-            placeholder="Please type your address"
-            v-on:placechanged="getAddressData"
-        >
-        </vue-google-autocomplete> -->
   <div>
     <div>
-      <h2>Search and add a pin</h2>
-      <label>
-        <gmap-autocomplete
-          @place_changed="setPlace">
-        </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label>
+        <!-- <gmap-autocomplete class="input-google" 
+          @place_changed="setPlace" placeholder="Ingresa la dirección">
+        </gmap-autocomplete> -->
+       
       <br/>
+
+    <div class="input-google-container">
+        <v-text-field label="Dirección" placeholder="Ingresa la dirección" class="" v-model="starting_address" id="starting_address"></v-text-field>
+         <v-btn depressed color="primary" @click="addMarker">Buscar</v-btn>
+    </div>
 
     </div>
     <br>
     <gmap-map
       :center="{lat:this.center.lat, lng:this.center.lng}"
       :zoom="15"
-      style="width:100%;  height: 400px;"
+      style="width:50%;  height: 400px;"
     >
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        @click="center=m.position"
-      ></gmap-marker>
+    <gmap-marker :position="markers" :draggable="true" @drag="updateCoordinates" />
     </gmap-map>
   </div>
 
@@ -64,34 +35,63 @@ export default {
 
   data(){
     return {
-    center: {lat: -12.130745, lng:-77.030030},
-    markers: [],
+    starting_address: '',
+    starting_address_obj: {},
+    inputAdress: [],  
+    center: {},
+    markers: {},
     places: [],
     currentPlace: null,
     address: '',
+    coordinates: {},
+    directionText:''
     };
   },
 
    mounted() {
     this.geolocate();
+
+    let self = this
+    let starting_address_input = document.getElementById('starting_address')
+    let starting_address_autocomplete = new google.maps.places.Autocomplete(starting_address_input)
+    starting_address_autocomplete.addListener('place_changed', function() {
+      let place = starting_address_autocomplete.getPlace();
+      self.starting_address_obj = {
+       place
+      }
+    });
+
   },
 
   methods: {
-    // receives a place object via the autocomplete component
-    setPlace(place) {
-      this.currentPlace = place;
+
+    initSearch: function (event) {
+      console.log('Shots fired!')
     },
+
     addMarker() {
-      if (this.currentPlace) {
-        const marker = {
-          lat: this.currentPlace.geometry.location.lat(),
-          lng: this.currentPlace.geometry.location.lng()
+
+      if (this.starting_address_obj.place) {
+
+        const position = {
+          lat: this.starting_address_obj.place.geometry.location.lat(),
+          lng: this.starting_address_obj.place.geometry.location.lng()
         };
-        this.markers.push({ position: marker });
-        this.places.push(this.currentPlace);
-        this.center = marker;
-        this.currentPlace = null;
+
+
+
+       this.markers = position;
+        console.log(this.markers); 
+       this.places.push(this.starting_address_obj.place);
+        this.directionText = this.starting_address_obj.place.formatted_address;
+        console.log(this.directionText);
+        this.center = position;
+        this.starting_address_obj.place = null;
+      }else{
+        this.directionText = this.starting_address;
+        console.log(directionText);
       }
+
     },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
@@ -99,33 +99,29 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+        this.markers = this.center;
+
       });
+    },
+    updateCoordinates(location) {
+      this.coordinates = {
+          lat: location.latLng.lat(),
+          lng: location.latLng.lng(),
+      };
+      console.log(this.coordinates);
+      return(this.coordinates);
     }
-  }
+  },
 
-  // mounted() {
-  //           // To demonstrate functionality of exposed component functions
-  //           // Here we make focus on the user input
-  //           this.$refs.address.focus();
-  // },
- 
-  // methods: {
-            
-  //           // When the location found
-  //           // @param {Object} addressData Data of the found location
-  //           // @param {Object} placeResultData PlaceResult object
-  //           // @param {String} id Input container ID
-            
-  //           getAddressData: function (addressData, placeResultData, id) {
-  //               this.address = addressData;
-  //           }
-  // }
 
-    // mounted() {
-  //   this.autocomplete = new google.maps.places.Autocomplete(
-  //     (this.$refs.autocomplete),
-  //     {types: ['geocode']}
-  //   );
-  // }
+
+
+
 };
 </script>
+
+<style>
+.input-google-container{
+width: 50%;
+}
+</style>
