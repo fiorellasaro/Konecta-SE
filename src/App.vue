@@ -41,6 +41,8 @@
       </v-container>
       <!-- <HelloWorld /> -->
     </v-content>
+
+
     <!-- <v-footer color="blue darken-2" app>
       <span class="white--text">&copy; 2020</span>
     </v-footer>-->
@@ -88,11 +90,12 @@ export default {
   name: "App",
 
   components: {
-    HelloWorld
+    HelloWorld,
   },
 
-  data: () => ({
+  data () {
     //
+    return {
     icons: [
       "mdi-facebook-box",
       "mdi-twitter",
@@ -100,7 +103,14 @@ export default {
       "mdi-linkedin-box"
       // "fab fa-instagram"
     ]
-  })
+    };
+
+    
+
+  },
+
+
+
 };
 </script>
 <style>
