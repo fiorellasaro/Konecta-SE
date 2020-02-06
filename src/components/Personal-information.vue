@@ -2,209 +2,137 @@
   <v-container>
     <v-layout pa-2 align-center class="d-flex flex-column">
       <v-flex xs12 md6 xl3 pa-2 style="width: 100%;">
-        <div class="d-flex">
-          <v-progress-linear v-model="skill" color="teal" height="25" reactive v-if="skill !== 100">
+        <div class="d-flex align-content-space-around">
+          <v-progress-linear
+            :value="progressDatosPersonales"
+            color="teal"
+            height="20"
+            style="border-radius: 100px;"
+            v-if="nextComponente !== 'componente5'"
+          >
             <template v-slot="{ value }">
-              <strong>{{ Math.ceil(value) }}%</strong>
+              <strong
+                class="white--text body-2"
+                v-if="progressDatosPersonales > 0"
+              >{{ Math.ceil(value) }}%</strong>
             </template>
           </v-progress-linear>
-          <v-spacer></v-spacer>
-          <!-- <v-progress-linear v-model="professionalProgress" color="teal" height="25" reactive>
+          <v-progress-linear
+            :value="progressProfesional"
+            class="ml-4"
+            color="teal"
+            height="20"
+            style="border-radius: 100px;"
+            reactive
+            v-if="nextComponente !== 'componente5'"
+          >
             <template v-slot="{ value }">
-              <strong>{{ Math.ceil(value) }}%</strong>
+              <strong
+                class="white--text body-2"
+                v-if="progressProfesional > 0"
+              >{{ Math.ceil(value) }}%</strong>
             </template>
-          </v-progress-linear>-->
-        </div>
-        <div id="step0" v-if="counter == 0" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuál es tu nombre?</p>
-          <v-text-field
-            :rules="nameRules"
-            v-model="personalInformation.nombres"
-            class="pt-0"
+
+          </v-progress-linear>
+          <v-progress-linear
+            v-if="nextComponente !== 'componente5'"
+            :value="progressExpLaboral"
+            class="ml-4"
             color="teal"
-            required
-          ></v-text-field>
-          <p class="text-center black--text headline mb-0 mt-6">¿Cuáles son tus apellidos?</p>
-          <v-row>
-            <v-col cols="6" sm="6">
-              <v-text-field
-                :rules="lastName1Rules"
-                v-model="personalInformation.apellido_p"
-                color="teal"
-                label="Apellido Paterno"
-                required
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="6" sm="6">
-              <v-text-field
-                :rules="lastName2Rules"
-                v-model="personalInformation.apellido_m"
-                color="teal"
-                label="Apellido Materno"
-                required
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </div>
-        <!-- step 1 -->
-        <div id="step1" v-if="counter == 1" class="px-3 pt-12">
-          <p
-            class="text-center black--text headline mb-4 font-weight-bold"
-          >¿Cómo quiseras que te llamemos, brindanos tu nombre Social?</p>
-          <v-text-field
-            value=""
-            v-model="personalInformation.nombre_social"
-            class="pt-2"
-            color="teal"
-            placeholder="Ejemplo : “Cami” , “ Lu”, “Mari”"
-          ></v-text-field>
-          <p
-            class="grey--text subtitle-1 text-center pt-6"
-          >Podremos emplear este nombre cuándo nos visites</p>
-
-          <v-row class="justify-end">
-            <v-btn
-              text
-              small
-              class="text-capitalize subtitle-2"
-              color="#2D9CDB"
-              @click="counter += 1"
-            >Omitir</v-btn>
-          </v-row>
-        </div>
-
-        <!-- step 2 -->
-        <div id="step2" v-if="counter == 2" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuál es tu nacionalidad?</p>
-          <v-text-field v-model="personalInformation.nacionalidad" class="pt-0" color="teal"></v-text-field>
-        </div>
-
-        <!-- step 3 -->
-        <div id="step3" v-if="counter == 3" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuál es tu estado civil?</p>
-          <v-radio-group
-            v-model="personalInformation.estado_civil"
-            :mandatory="false"
-            class="body-1"
+            height="20"
+            style="border-radius: 100px;"
+            reactive
           >
-            <v-radio label="Soltero(a)" value="Soltero(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="Casado(a)" value="Casado(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio
-              label="Divorciado(a)"
-              value="Divorciado(a)"
-              color="teal"
-              class="pa-2 radioStateCivil"
-            ></v-radio>
-            <v-radio label="Separado(a)" value="Separado(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="Conviviente" value="Conviviente" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="Viudo(a)" value="Viudo(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          </v-radio-group>
-        </div>
-        <!-- step 4 -->
-        <div id="step4" v-if="counter == 4" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuál es tu fecha de nacimiento?</p>
-          <v-menu
-            ref="menu"
-            v-model="menu"
-            :close-on-content-click="false"
-            transition="scale-transition"
-            offset-y
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field v-model="date" label prepend-icon="event" readonly v-on="on"></v-text-field>
+            <template v-slot="{ value }">
+              <strong
+                class="white--text body-2"
+                v-if="progressExpLaboral > 0"
+              >{{ Math.ceil(value) }}%</strong>
             </template>
-            <v-date-picker
-              ref="picker"
-              v-model="date"
-              :max="new Date().toISOString().substr(0, 10)"
-              min="1950-01-01"
-              @change="save"
-            ></v-date-picker>
-          </v-menu>
-        </div>
-
-        <!-- step 5 -->
-        <div id="step5" v-if="counter == 5" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuál es tu género?</p>
-          <v-radio-group v-model="personalInformation.genero" :mandatory="false" class="body-1">
-            <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-            <v-radio label="No Binario" value="No_binario" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          </v-radio-group>
-        </div>
-
-        <!-- step 6 -->
-        <div id="step6" v-if="counter == 6" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuál es tu correo electrónico?</p>
-          <v-text-field
-            v-model="personalInformation.correo"
-            :rules="emailRules"
-            label="E-mail"
+          </v-progress-linear>
+          <v-progress-linear
+            v-if="nextComponente !== 'componente5'"
+            :value="progressRotation"
+            class="ml-4"
             color="teal"
-            required
-          ></v-text-field>
-          <p class="text-center black--text headline mb-0 pt-4">¿Cuál es tu número de celular?</p>
-          <v-text-field v-model="personalInformation.telefono" color="teal" required></v-text-field>
+            height="20"
+            style="border-radius: 100px;"
+            reactive
+          >
+            <template v-slot="{ value }">
+              <strong class="white--text body-2" v-if="progressRotation > 0">{{ Math.ceil(value) }}%</strong>
+            </template>
+          </v-progress-linear>
         </div>
 
-        <!-- step7 -->
-        <div id="step7" v-if="counter == 7" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Cuántos hijos tienes?</p>
-          <v-text-field v-model="personalInformation.n_hijos" color="teal" required></v-text-field>
+        <div class="justify-center text-center" style="margin-bottom: 70px;">
+          <div v-if="nextComponente === 'componente1'">
+            <datosPersonales
+              :countDatosPersonales="countDatosPersonales"
+              :datosPersonalesPost="datosPersonalesPost"
+            />
+          </div>
+          <div v-if="progressDatosPersonales == 100 && nextComponente === 'componente2'">
+            <datosProfesionales
+              :countProf="countProf"
+              :datosProfesionalesPost="datosProfesionalesPost"
+            />
+          </div>
+          <div v-if="nextComponente === 'componente3'">
+            <expLaboral :countExpLab="countExpLab" :datosExperienciaPost="datosExperienciaPost" />
+          </div>
+          <div v-if="nextComponente === 'componente4'">
+            <datosRotacion :countRotacion="countRotacion" :datosRotacionPost="datosRotacionPost" />
+          </div>
+          <div v-if="nextComponente === 'componente5'" class="pt-12 px-4">
+            <p class="title text-center headline">¡Gracias por tu postulación!</p>
+            <p
+              class="title text-center headline pt-6"
+            >Nuestro equipo de Selección se comunicará contigo muy pronto</p>
+          </div>
         </div>
-        <!-- step8 -->
-        <div id="step8" v-if="counter == 8" class="px-3 pt-12">
-          <p class="text-center black--text headline mb-0">¿Dónde vives actualmente?</p>
-          <v-text-field v-model="personalInformation.coordenadas_direccion" required></v-text-field>
-        </div>
-        <!-- step9 -->
-        <div id="step9" v-if="counter == 9" class="px-3 pt-12 ">
-          <p class="text-center black--text headline mb-0">¿Cuentanos cómo conociste a Konecta?</p>
-          <v-select
-            :items="itemsKonecta"
-            label="Selecciona"
-            v-model="personalInformation.como_konecta"
-          ></v-select>
-        </div>
-        <!-- Envio de datos -->
-        <div v-if="skill == 100" class=" justify-center text-center">
-          <p class="headline text-center">¡Gracias por tu postulación! Nuestro equipo de Selección se comunicará contigo muy pronto</p>
-          <v-btn   color="#00B8AD" class="text-center white--text mt-4" @click="agregarPersonalDate">Enviar Datos</v-btn>
-        </div>
-      </v-flex>
-      <v-flex class="pt-4" xs12 md6 xl3 pa-2 style="width: 100%">
-        <v-row class="mt-12">
+        <v-row v-if="nextComponente !== 'componente5'">
           <v-col class="text-start">
             <v-btn
-              v-if="counter !== 0 && skill !== 100"
-              :disabled="!isNext"
               color="#00B8AD"
+              v-show="hidden"
               class="white--text"
               fab
               large
-              @click="counter -= 1, skill -= 10"
+              absolute
+              dark
+              bottom
+              left
+              @click="btnPrevStep()"
             >
               <v-icon>mdi-arrow-left-bold</v-icon>
             </v-btn>
           </v-col>
-
           <v-col class="text-end">
-            <v-btn v-if="skill !== 100"
+            <v-btn
+              v-if="countRotacion !== 7"
               fab
               large
               color="#00B8AD"
               class="white--text"
-              @click="counter += 1, skill += 10, isNext=true"
+              absolute
+              bottom
+              right
+              @click="btnNextStep()"
             >
               <v-icon>mdi-arrow-right-bold</v-icon>
             </v-btn>
+            <v-btn
+              v-if="countRotacion === 7"
+              color="#00B8AD"
+              class="white--text"
+              absolute
+              bottom
+              right
+              @click="agregarPersonalDate()"
+            >Finalizar</v-btn>
           </v-col>
         </v-row>
-        <!-- <v-row>
-          <v-btn type="submit" class="btn btn-primary" @click="agregarPersonalDate">Add</v-btn>
-        </v-row> -->
       </v-flex>
     </v-layout>
   </v-container>
@@ -215,36 +143,39 @@
 import firebase from 'firebase';
 import moment from 'moment';
 
+
+import datosPersonales from "../components/Datos-personales.vue";
+import datosProfesionales from "../components/Datos-profesionales.vue";
+import expLaboral from "../components/Experiencia-laboral.vue";
+import datosRotacion from "../components/DatosRotacion";
+
 export default {
+  components: {
+    datosPersonales,
+    datosProfesionales,
+    expLaboral,
+    datosRotacion
+  },
+
   data() {
     return {
-      skill: 0,
-      professionalProgress: 0,
-      hasSaved: false,
-      isNext: null,
-      model: null,
-      counter: 0,
-      date: null,
-      menu: false,
-      itemsKonecta: [
-        "Familia/ Amigos",
-        "Aptitus",
-        "Bolsa Universidad ",
-        "Bolsa Instituto",
-        "Bumeran",
-        "Computrabajo",
-        "Indeed",
-        "Ministerio de Trabajo",
-        "Referidos*",
-        "Programa Aymimundo",
-        "Programa Forge",
-        "Programa Integralia",
-        "Programa Integra-Chiclayo",
-        "Programa Pachacutec",
-        "Volantes"
-      ],
+      hidden: false,
+      progressDatosPersonales: 0,
+      nextComponente: "componente1",
+      nextComp: 0,
+      countDatosPersonales: 0,
+      countProf: -1,
+      countExpLab: -1,
+      countRotacion: 0,
+
+      progressProfesional: -20,
+      progressExpLaboral: -20,
+      progressRotation: 0,
+
       datosPostulantes: [],
-      personalInformation:[
+
+      datosPersonalesPost: [
+
         {
           tipodoc: "",
           numdoc: "",
@@ -254,46 +185,71 @@ export default {
           nombre_social: " ",
           nacionalidad: "",
           estado_civil: "radio-1",
-          fecha_nac: false,
+          fecha_nac: null,
           genero: "",
           correo: "",
           telefono: null,
-          n_hijos: Number,
-          coordenadas_direccion: [,],
-          como_konecta: "",
-          referidos: "",
-          //datos profesionales
-          grado_formacion: "Universidad",
-          institucion: "Universidad de Lima",
-          estado_estudios: "Incompleta",
+
+          n_hijos: 0,
+          coordenadas_direccion: [1.23254, -2.00655],
+          como_konecta: null,
+          referidos: ""
+        }
+      ],
+      datosProfesionalesPost: [
+        {
+          grado_formacion: null,
+          institucion: "",
+          estado_estudios: "",
           rubro_carrera: "",
-          coord_estudio: [,], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+          coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
           text_dir_estudio: "",
-          horario_estudio: "TARDE",
+          horario_estudio: ""
+        }
+      ],
+      datosExperienciaPost: [
+        {
+          flag_se: 0,
+          flag_ec: 0,
+          flag_eo: 0,
 
-          //datos experiencia
-          experienciaPostulante: ["experienciaUno", "experienciaDos"],
+          se_p_redes: "",
+          se_p_ventas: "",
+          se_p_atc: "",
+          se_p_crosselling: "",
+          se_p_backof: "",
+          se_expect_salarial: [,],
+          se_expect_salarial_desde:0,
+          se_expect_salarial_hasta:0,
+          ec_empresa: "",
+          ec_cliente: "",
+          ec_rubro_cliente: "",
+          ec_segmento: "",
+          ec_tiempo_exp: 6,
+          ec_retribucion_basico: 1000,
+          ec_retribucion_comisiones: 300,
 
-          //datos rotacion
-          actividades: "Musica",
+
+          eo_empresa: "",
+          eo_rubro_empresa: "",
+          eo_puesto: "",
+          eo_tiempo_exp: 0,
+          eo_retribucion_basico: 0,
+          eo_retribucion_comisiones: 0
+        }
+      ],
+      datosRotacionPost: [
+        {
+          actividades: "",
           coord_actividad: [1.342, 2.332],
-          text_dir_actividad: "Jr. tarantula 889",
-          horario_actividad: "Noche",
-          fam_postulante: 2,
-          motivacion: "Viajar",
-          actividad_tiempo_libre: ["Cine", "Comer", "Familia"],
-          sede_preferencia: ["Fenix", "Sudameris", "Crillon"],
-
-          //datos familiares
-          familiares: ["familiar1", "familiar2"]
-        }],
-      nameRules: [v => !!v || "El nombre es requerido"],
-      lastName1Rules: [v => !!v || "Apellido paterno es requerido"],
-      lastName2Rules: [v => !!v || "Apellido materno es requerido"],
-
-      emailRules: [
-        v => !!v || "E-mail es requerido",
-        v => /.+@.+\..+/.test(v) || "El correo no es válido"
+          text_dir_actividad: "",
+          horario_actividad: "",
+          fam_postulante: 0,
+          motivacion: "",
+          actividad_tiempo_libre: [],
+          sede_preferencia: [],
+          familiares: []
+        }
       ]
     };
   },
@@ -437,6 +393,47 @@ export default {
             se_p_backof: "",
             se_expect_salarial: [0,0],
 
+      this.nextComponente = "componente5";
+      console.log(this.nextComponente);
+      this.datosPostulantes.push({
+        tipodoc: "dni",
+        numdoc: "456",
+        nombres: this.datosPersonalesPost.nombres,
+        apellido_p: this.datosPersonalesPost.apellido_p,
+        apellido_m: this.datosPersonalesPost.apellido_m,
+        nombre_social: this.datosPersonalesPost.nombre_social,
+        nacionalidad: this.datosPersonalesPost.nacionalidad,
+        estado_civil: this.datosPersonalesPost.estado_civil,
+        fecha_nac: this.datosPersonalesPost.fecha_nac,
+        genero: this.datosPersonalesPost.genero,
+        correo: this.datosPersonalesPost.correo,
+        telefono: this.datosPersonalesPost.telefono,
+        n_hijos: this.datosPersonalesPost.n_hijos,
+        coordenadas_direccion: [1.23254, -2.00655],
+        como_konecta: this.datosPersonalesPost.como_konecta,
+        referidos: this.datosPersonalesPost.referidos,
+        //datos profesionales
+        grado_formacion: this.datosProfesionalesPost.grado_formacion,
+        institucion: this.datosProfesionalesPost.institucion,
+        estado_estudios: this.datosProfesionalesPost.estado_estudios,
+        rubro_carrera: this.datosProfesionalesPost.rubro_carrera,
+        coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        text_dir_estudio: this.datosProfesionalesPost.text_dir_estudio,
+        horario_estudio: this.datosProfesionalesPost.horario_estudio,
+        experienciaPostulante: [
+          {
+            flag_se: this.datosExperienciaPost.flag_se,
+            flag_ec: this.datosExperienciaPost.flag_ec,
+            flag_eo: this.datosExperienciaPost.flag_eo,
+
+            se_p_redes: this.datosExperienciaPost.se_p_redes,
+            se_p_ventas: this.datosExperienciaPost.se_p_ventas,
+            se_p_atc: this.datosExperienciaPost.se_p_atc,
+            se_p_crosselling: this.datosExperienciaPost.se_p_crosselling,
+            se_p_backof: this.datosExperienciaPost.se_p_backof,
+            se_expect_salarial: [this.datosExperienciaPost.se_expect_salarial_desde,this.datosExperienciaPost.se_expect_salarial_hasta],
+
+
             ec_empresa: "ATENTO",
             ec_cliente: "Entel Chile",
             ec_rubro_cliente: "TELECOMUNICACIONES",
@@ -479,6 +476,7 @@ export default {
             eo_retribucion_basico: 850,
             eo_retribucion_comisiones: 200
           }
+
       ]
 
     this.postDatosExperiencia(postulateKey, datos_experiencia);
@@ -510,6 +508,111 @@ export default {
 
   },
 
+
+        ],
+        //datos rotacion
+        actividades: this.datosRotacionPost.actividades,
+        coord_actividad: [1.342, 2.332],
+        text_dir_actividad: this.datosRotacionPost.text_dir_estudio,
+        horario_actividad: this.datosRotacionPost.horario_actividad,
+        fam_postulante: this.datosRotacionPost.fam_postulante,
+        motivacion: this.datosRotacionPost.motivacion,
+        actividad_tiempo_libre: this.datosRotacionPost.actividad_tiempo_libre,
+        sede_preferencia: this.datosRotacionPost.sede_preferencia,
+        familiares: [{ parentesco: "Esposa", edad: 28, trabaja: true }]
+      });
+      this.datosPersonalesPost.nombres = "";
+      localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
+      console.log(this.datosPostulantes);
+      // this.nextComponente === 'componente5'
+    },
+    btnNextStep() {
+      // datos personales
+      if (this.progressDatosPersonales !== 100) {
+        this.hidden = true;
+        this.countDatosPersonales += 1;
+        this.progressDatosPersonales += 10;
+      }
+
+      if (this.progressDatosPersonales == 100) {
+        this.progressDatosPersonales += 0;
+        this.nextComp += 1;
+      }
+      // Datos profesionales
+      if (this.nextComp === 2) {
+        this.nextComponente = "componente2";
+      }
+      if (this.nextComponente === "componente2") {
+        this.countProf += 1;
+        this.progressProfesional += 20;
+      }
+      if (this.progressProfesional === 100) {
+        // this.countProf += 1;
+        this.progressProfesional += 0;
+      }
+      if (
+        this.countProf === 3 &&
+        this.datosProfesionalesPost.estado_estudios !== "En curso"
+      ) {
+        this.progressProfesional += 40;
+        this.countProf += 2;
+      }
+      // Experiencia Laboral
+      if (this.nextComp === 8) {
+        this.nextComponente = "componente3";
+        this.progressProfesional = 100;
+      }
+      if (this.nextComponente === "componente3") {
+        this.countExpLab += 1;
+        this.progressExpLaboral += 20;
+      }
+      if (this.progressExpLaboral === 100) {
+        this.countExpLab += 1;
+        this.progressExpLaboral += 0;
+      }
+      if (this.countExpLab === 7) {
+        this.progressExpLaboral = 100;
+      }
+      // Rotacion
+      if (this.nextComp === 15) {
+        this.nextComponente = "componente4";
+        this.progressExpLaboral = 100;
+      }
+      if (this.nextComponente === "componente4") {
+        this.countRotacion += 1;
+        this.progressRotation += 14;
+      }
+      if (this.progressRotation === 100) {
+        this.countRotacion += 1;
+        this.progressRotation += 0;
+      }
+
+      this.isNext = true;
+    },
+    btnPrevStep() {
+      if (this.countDatosPersonales !== 0) {
+        this.countDatosPersonales -= 1;
+        this.progressDatosPersonales -= 10;
+        this.countDatosPersonales === 0
+          ? (this.hidden = false)
+          : (this.hidden = true);
+      }
+
+      if (this.nextComponente === "componente2") {
+        this.countProf -= 1;
+        this.progressProfesional -= 20;
+      }
+      if (this.nextComponente === "componente3") {
+        this.countExpLab -= 1;
+        this.progressExpLaboral -= 20;
+      }
+      if (this.nextComponente === "componente4") {
+        this.countRotacion -= 1;
+        this.progressRotation -= 20;
+      }
+    }
+  }
+
 };
 </script>
 
@@ -518,5 +621,20 @@ export default {
   background: #e5e5e5;
   border-radius: 4px;
   font-size: 18px;
+}
+.v-btn--absolute.v-btn--right,
+.v-btn--fixed.v-btn--right {
+  right: 24px;
+}
+.v-btn--fab.v-size--large.v-btn--absolute.v-btn--bottom,
+.v-btn--absolute.v-btn--bottom {
+  bottom: 40px;
+}
+.v-btn--absolute.v-btn--left,
+.v-btn--fixed.v-btn--left {
+  left: 24px;
+}
+.v-application .title {
+  line-height: 23px !important;
 }
 </style>

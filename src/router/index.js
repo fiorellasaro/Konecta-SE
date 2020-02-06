@@ -18,16 +18,19 @@ const routes = [
   {
     path: '/login',
     name: 'login',
+    props:true,
     component: () => import('../components/login.vue')
   },
   {
     path: '/intro',
     name: 'intro',
+    props:true,
     component: () => import('../components/Intro.vue')
   },
   {
     path: '/selection',
     name: 'selection',
+    props:true,
     component: () => import('../components/Personal-information.vue')
   }
 ]
