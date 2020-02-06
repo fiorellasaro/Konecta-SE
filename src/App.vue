@@ -60,29 +60,17 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld";
-import Map from "./components/Map";
-// import VueGoogleAutocomplete from 'vue-google-autocomplete';
 
 export default {
   name: "App",
 
   components: {
     HelloWorld,
-    Map,
-    // VueGoogleAutocomplete,
   },
 
   data () {
     //
     return {
-      center: {lat: -12.130745, lng:-77.030030},
-      // markers: [
-      //   {
-      //     position: {lat: -12.130745, lng:-77.030030}
-      //   },
-      // ],
-    address: '',
-
     icons: [
       "fab fa-facebook",
       "fab fa-twitter",
