@@ -189,7 +189,7 @@
             v-model.number="datosExperienciaPost.se_expect_salarial_desde"
             prefix="S/."
             label="Desde"
-            color="teal"
+            color="teal" 
             required
           ></v-text-field></v-col>
         <v-col cols="6" md="4"><v-text-field
@@ -197,7 +197,7 @@
             prefix="S/."
             label="Hasta"
             color="teal"
-            required
+            required 
           ></v-text-field></v-col>
       </v-row>
     </div>

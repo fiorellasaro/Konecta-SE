@@ -268,7 +268,106 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
+agregarPersonalDate() {
+      this.nextComponente = "componente5";
+      console.log(this.nextComponente);
+      this.datosPostulantes.push({
+        tipodoc: "dni",
+        numdoc: "456",
+        nombres: this.datosPersonalesPost.nombres,
+        apellido_p: this.datosPersonalesPost.apellido_p,
+        apellido_m: this.datosPersonalesPost.apellido_m,
+        nombre_social: this.datosPersonalesPost.nombre_social,
+        nacionalidad: this.datosPersonalesPost.nacionalidad,
+        estado_civil: this.datosPersonalesPost.estado_civil,
+        fecha_nac: this.datosPersonalesPost.fecha_nac,
+        genero: this.datosPersonalesPost.genero,
+        correo: this.datosPersonalesPost.correo,
+        telefono: this.datosPersonalesPost.telefono,
+        n_hijos: this.datosPersonalesPost.n_hijos,
+        coordenadas_direccion: [1.23254, -2.00655],
+        como_konecta: this.datosPersonalesPost.como_konecta,
+        referidos: this.datosPersonalesPost.referidos,
+        //datos profesionales
+        grado_formacion: this.datosProfesionalesPost.grado_formacion,
+        institucion: this.datosProfesionalesPost.institucion,
+        estado_estudios: this.datosProfesionalesPost.estado_estudios,
+        rubro_carrera: this.datosProfesionalesPost.rubro_carrera,
+        coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        text_dir_estudio: this.datosProfesionalesPost.text_dir_estudio,
+        horario_estudio: this.datosProfesionalesPost.horario_estudio,
+        experienciaPostulante: [
+          {
+            flag_se: this.datosExperienciaPost.flag_se,
+            flag_ec: this.datosExperienciaPost.flag_ec,
+            flag_eo: this.datosExperienciaPost.flag_eo,
 
+            se_p_redes: this.datosExperienciaPost.se_p_redes,
+            se_p_ventas: this.datosExperienciaPost.se_p_ventas,
+            se_p_atc: this.datosExperienciaPost.se_p_atc,
+            se_p_crosselling: this.datosExperienciaPost.se_p_crosselling,
+            se_p_backof: this.datosExperienciaPost.se_p_backof,
+            se_expect_salarial: [this.datosExperienciaPost.se_expect_salarial_desde,this.datosExperienciaPost.se_expect_salarial_hasta],
+
+            ec_empresa: "ATENTO",
+            ec_cliente: "Movistar",
+            ec_rubro_cliente: "TELECOMUNICACIONES",
+            ec_segmento: "ATENCION AL CLIENTE",
+            ec_tiempo_exp: 6,
+            ec_retribucion_basico: 1000,
+            ec_retribucion_comisiones: 300,
+
+            eo_empresa: "",
+            eo_rubro_empresa: "",
+            eo_puesto: "",
+            eo_tiempo_exp: 0,
+            eo_retribucion_basico: 0,
+            eo_retribucion_comisiones: 0
+          },
+          {
+            flag_se: 0,
+            flag_ec: 0,
+            flag_eo: 1,
+
+            se_p_redes: "",
+            se_p_ventas: "",
+            se_p_atc: "",
+            se_p_crosselling: "",
+            se_p_backof: "",
+            se_expect_salarial: [,],
+
+            ec_empresa: "",
+            ec_cliente: "",
+            ec_rubro_cliente: "",
+            ec_segmento: "",
+            ec_tiempo_exp: 0,
+            ec_retribucion_basico: 0,
+            ec_retribucion_comisiones: 0,
+
+            eo_empresa: "prueba",
+            eo_rubro_empresa: "prueba",
+            eo_puesto: "Atencion al cliente",
+            eo_tiempo_exp: 8,
+            eo_retribucion_basico: 800,
+            eo_retribucion_comisiones: 300
+          }
+        ],
+        //datos rotacion
+        actividades: this.datosRotacionPost.actividades,
+        coord_actividad: [1.342, 2.332],
+        text_dir_actividad: this.datosRotacionPost.text_dir_estudio,
+        horario_actividad: this.datosRotacionPost.horario_actividad,
+        fam_postulante: this.datosRotacionPost.fam_postulante,
+        motivacion: this.datosRotacionPost.motivacion,
+        actividad_tiempo_libre: this.datosRotacionPost.actividad_tiempo_libre,
+        sede_preferencia: this.datosRotacionPost.sede_preferencia,
+        familiares: [{ parentesco: "Esposa", edad: 28, trabaja: true }]
+      });
+      this.datosPersonalesPost.nombres = "";
+      localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
+      console.log(this.datosPostulantes);
+      // this.nextComponente === 'componente5'
+    },
     postDatosExperiencia(id, experiencia){
       for(let i=0; i< experiencia.length; i++){
           const experienciaKey = firebase.database().ref("DATOS_EXPERIENCIA").push().key;
@@ -327,205 +426,6 @@ export default {
      
     },
 
-
-    agregarPersonalDate() {
-
-      let date = new Date();
-      let dateString = moment().format('L');
-      let hour = date.getHours() + ":" + date.getMinutes()+"";
-      const registerAt= {
-        date: dateString,
-        hour: hour
-      }
-
-      this.datosPostulantes = {
-        tipodoc: "DNI",
-        numdoc: "72722297",
-        nombres: this.personalInformation.nombres,
-        apellido_p: this.personalInformation.apellido_p,
-        apellido_m: this.personalInformation.apellido_m,
-        nombre_social: this.personalInformation.nombre_social,
-        nacionalidad: this.personalInformation.nacionalidad,
-        estado_civil: this.personalInformation.estado_civil,
-        fecha_nac: "1998-02-07",
-        genero: this.personalInformation.genero,
-        correo: this.personalInformation.correo,
-        telefono: this.personalInformation.telefono,
-        n_hijos: this.personalInformation.n_hijos,
-        coordenadas_direccion: [1.23254, -2.00655],
-        como_konecta: this.personalInformation.como_konecta,
-        referidos: this.personalInformation.referidos,
-
-        RegistradoDate: registerAt
-      };
-
-     localStorage.setItem("datos", JSON.stringify(this.datosPostulantes[0]));
-     let postulantes = JSON.parse( JSON.stringify(this.datosPostulantes) );
-      const postulateKey = firebase.database().ref("POSTULANTES").push().key;
-      firebase.database().ref("POSTULANTES").child(postulateKey).set(postulantes);
-
-      const profesionalesKey = firebase.database().ref("DATOS_PROFESIONALES").push().key;
-
-      const datos_profesionales = {
-        //datos profesionales
-        grado_formacion: "Universidad",
-        institucion: "UNMSM",
-        estado_estudios: "Incompleta",
-        rubro_carrera: "",
-        coord_estudio: [0,0], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
-        text_dir_estudio: "",
-        horario_estudio: "TARDE",
-        id_postulante: postulateKey
-      }
-      firebase.database().ref("DATOS_PROFESIONALES").child(profesionalesKey).set(datos_profesionales);
-
-
-      let datos_experiencia = [
-        {
-            flag_se: 0,
-            flag_ec: 1,
-            flag_eo: 0,
-
-            se_p_redes: "",
-            se_p_ventas: "",
-            se_p_atc: "",
-            se_p_crosselling: "",
-            se_p_backof: "",
-            se_expect_salarial: [0,0],
-
-      this.nextComponente = "componente5";
-      console.log(this.nextComponente);
-      this.datosPostulantes.push({
-        tipodoc: "dni",
-        numdoc: "456",
-        nombres: this.datosPersonalesPost.nombres,
-        apellido_p: this.datosPersonalesPost.apellido_p,
-        apellido_m: this.datosPersonalesPost.apellido_m,
-        nombre_social: this.datosPersonalesPost.nombre_social,
-        nacionalidad: this.datosPersonalesPost.nacionalidad,
-        estado_civil: this.datosPersonalesPost.estado_civil,
-        fecha_nac: this.datosPersonalesPost.fecha_nac,
-        genero: this.datosPersonalesPost.genero,
-        correo: this.datosPersonalesPost.correo,
-        telefono: this.datosPersonalesPost.telefono,
-        n_hijos: this.datosPersonalesPost.n_hijos,
-        coordenadas_direccion: [1.23254, -2.00655],
-        como_konecta: this.datosPersonalesPost.como_konecta,
-        referidos: this.datosPersonalesPost.referidos,
-        //datos profesionales
-        grado_formacion: this.datosProfesionalesPost.grado_formacion,
-        institucion: this.datosProfesionalesPost.institucion,
-        estado_estudios: this.datosProfesionalesPost.estado_estudios,
-        rubro_carrera: this.datosProfesionalesPost.rubro_carrera,
-        coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
-        text_dir_estudio: this.datosProfesionalesPost.text_dir_estudio,
-        horario_estudio: this.datosProfesionalesPost.horario_estudio,
-        experienciaPostulante: [
-          {
-            flag_se: this.datosExperienciaPost.flag_se,
-            flag_ec: this.datosExperienciaPost.flag_ec,
-            flag_eo: this.datosExperienciaPost.flag_eo,
-
-            se_p_redes: this.datosExperienciaPost.se_p_redes,
-            se_p_ventas: this.datosExperienciaPost.se_p_ventas,
-            se_p_atc: this.datosExperienciaPost.se_p_atc,
-            se_p_crosselling: this.datosExperienciaPost.se_p_crosselling,
-            se_p_backof: this.datosExperienciaPost.se_p_backof,
-            se_expect_salarial: [this.datosExperienciaPost.se_expect_salarial_desde,this.datosExperienciaPost.se_expect_salarial_hasta],
-
-
-            ec_empresa: "ATENTO",
-            ec_cliente: "Entel Chile",
-            ec_rubro_cliente: "TELECOMUNICACIONES",
-            ec_segmento: "ATENCION AL CLIENTE",
-            ec_tiempo_exp: 12,
-            ec_retribucion_basico: 800,
-            ec_retribucion_comisiones: 200,
-
-            eo_empresa: "",
-            eo_rubro_empresa: "",
-            eo_puesto: "",
-            eo_tiempo_exp: 0,
-            eo_retribucion_basico: 0,
-            eo_retribucion_comisiones: 0,
-          },
-          {
-            flag_se: 0,
-            flag_ec: 0,
-            flag_eo: 1,
-
-            se_p_redes: "",
-            se_p_ventas: "",
-            se_p_atc: "",
-            se_p_crosselling: "",
-            se_p_backof: "",
-            se_expect_salarial: [0,0],
-
-            ec_empresa: "",
-            ec_cliente: "",
-            ec_rubro_cliente: "",
-            ec_segmento: "",
-            ec_tiempo_exp: 0,
-            ec_retribucion_basico: 0,
-            ec_retribucion_comisiones: 0,
-
-            eo_empresa: "Ripley",
-            eo_rubro_empresa: "Retail",
-            eo_puesto: "Atencion al cliente",
-            eo_tiempo_exp: 6,
-            eo_retribucion_basico: 850,
-            eo_retribucion_comisiones: 200
-          }
-
-      ]
-
-    this.postDatosExperiencia(postulateKey, datos_experiencia);
-
-
-    let familiares= [{ parentesco: "Padre", edad: 50, trabaja: true }, { parentesco: "Hij@", edad: 4, trabaja: false }];
-    this.postDatosFamiliares(postulateKey, familiares);
-
-
-    //datos rotacion
-     let datos_rotacion={
-          actividades: "Deporte",
-          coord_actividad: [1.342, 2.332],
-          text_dir_actividad: "Jr. Ocoña 889",
-          horario_actividad: "Noche",
-          fam_postulante: 2,
-          motivacion: "Viajar",
-          actividad_tiempo_libre: ["Playa", "Cine", "Pasear"],
-          sede_preferencia: ["Sudameris", "Lima Cargo", "Surquillo"],
-          id_postulante: postulateKey
-     }     
-
-      const rotacionKey = firebase.database().ref("DATOS_ROTACION").push().key;
-      firebase.database().ref("DATOS_ROTACION").child(rotacionKey).set(datos_rotacion);
-
-
-    },
-
-
-  },
-
-
-        ],
-        //datos rotacion
-        actividades: this.datosRotacionPost.actividades,
-        coord_actividad: [1.342, 2.332],
-        text_dir_actividad: this.datosRotacionPost.text_dir_estudio,
-        horario_actividad: this.datosRotacionPost.horario_actividad,
-        fam_postulante: this.datosRotacionPost.fam_postulante,
-        motivacion: this.datosRotacionPost.motivacion,
-        actividad_tiempo_libre: this.datosRotacionPost.actividad_tiempo_libre,
-        sede_preferencia: this.datosRotacionPost.sede_preferencia,
-        familiares: [{ parentesco: "Esposa", edad: 28, trabaja: true }]
-      });
-      this.datosPersonalesPost.nombres = "";
-      localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
-      console.log(this.datosPostulantes);
-      // this.nextComponente === 'componente5'
-    },
     btnNextStep() {
       // datos personales
       if (this.progressDatosPersonales !== 100) {
@@ -610,7 +510,142 @@ export default {
         this.countRotacion -= 1;
         this.progressRotation -= 20;
       }
-    }
+    }, 
+
+    PostPostulante() {
+
+      let date = new Date();
+      let dateString = moment().format('L');
+      let hour = date.getHours() + ":" + date.getMinutes()+"";
+      const registerAt= {
+        date: dateString,
+        hour: hour
+      }
+
+      this.datosPostulantes = {
+        tipodoc: "DNI",
+        numdoc: "72722297",
+        nombres: this.personalInformation.nombres,
+        apellido_p: this.personalInformation.apellido_p,
+        apellido_m: this.personalInformation.apellido_m,
+        nombre_social: this.personalInformation.nombre_social,
+        nacionalidad: this.personalInformation.nacionalidad,
+        estado_civil: this.personalInformation.estado_civil,
+        fecha_nac: "1998-02-07",
+        genero: this.personalInformation.genero,
+        correo: this.personalInformation.correo,
+        telefono: this.personalInformation.telefono,
+        n_hijos: this.personalInformation.n_hijos,
+        coordenadas_direccion: [1.23254, -2.00655],
+        como_konecta: this.personalInformation.como_konecta,
+        referidos: this.personalInformation.referidos,
+
+        RegistradoDate: registerAt
+      };
+
+     localStorage.setItem("datos", JSON.stringify(this.datosPostulantes[0]));
+     let postulantes = JSON.parse( JSON.stringify(this.datosPostulantes) );
+      const postulateKey = firebase.database().ref("POSTULANTES").push().key;
+      firebase.database().ref("POSTULANTES").child(postulateKey).set(postulantes);
+
+      const profesionalesKey = firebase.database().ref("DATOS_PROFESIONALES").push().key;
+
+      const datos_profesionales = {
+        //datos profesionales
+        grado_formacion: "Universidad",
+        institucion: "UNMSM",
+        estado_estudios: "Incompleta",
+        rubro_carrera: "",
+        coord_estudio: [0,0], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        text_dir_estudio: "",
+        horario_estudio: "TARDE",
+        id_postulante: postulateKey
+      }
+      firebase.database().ref("DATOS_PROFESIONALES").child(profesionalesKey).set(datos_profesionales);
+
+
+      let datos_experiencia = [
+        {
+            flag_se: 0,
+            flag_ec: 1,
+            flag_eo: 0,
+
+            se_p_redes: "",
+            se_p_ventas: "",
+            se_p_atc: "",
+            se_p_crosselling: "",
+            se_p_backof: "",
+            se_expect_salarial: [0,0],
+
+            ec_empresa: "ATENTO",
+            ec_cliente: "Entel Chile",
+            ec_rubro_cliente: "TELECOMUNICACIONES",
+            ec_segmento: "ATENCION AL CLIENTE",
+            ec_tiempo_exp: 12,
+            ec_retribucion_basico: 800,
+            ec_retribucion_comisiones: 200,
+
+            eo_empresa: "",
+            eo_rubro_empresa: "",
+            eo_puesto: "",
+            eo_tiempo_exp: 0,
+            eo_retribucion_basico: 0,
+            eo_retribucion_comisiones: 0,
+          },
+          {
+            flag_se: 0,
+            flag_ec: 0,
+            flag_eo: 1,
+
+            se_p_redes: "",
+            se_p_ventas: "",
+            se_p_atc: "",
+            se_p_crosselling: "",
+            se_p_backof: "",
+            se_expect_salarial: [0,0],
+
+            ec_empresa: "",
+            ec_cliente: "",
+            ec_rubro_cliente: "",
+            ec_segmento: "",
+            ec_tiempo_exp: 0,
+            ec_retribucion_basico: 0,
+            ec_retribucion_comisiones: 0,
+
+            eo_empresa: "Ripley",
+            eo_rubro_empresa: "Retail",
+            eo_puesto: "Atencion al cliente",
+            eo_tiempo_exp: 6,
+            eo_retribucion_basico: 850,
+            eo_retribucion_comisiones: 200
+          }
+      ]
+
+    this.postDatosExperiencia(postulateKey, datos_experiencia);
+
+
+    let familiares= [{ parentesco: "Padre", edad: 50, trabaja: true }, { parentesco: "Hij@", edad: 4, trabaja: false }];
+    this.postDatosFamiliares(postulateKey, familiares);
+
+
+    //datos rotacion
+     let datos_rotacion={
+          actividades: "Deporte",
+          coord_actividad: [1.342, 2.332],
+          text_dir_actividad: "Jr. Ocoña 889",
+          horario_actividad: "Noche",
+          fam_postulante: 2,
+          motivacion: "Viajar",
+          actividad_tiempo_libre: ["Playa", "Cine", "Pasear"],
+          sede_preferencia: ["Sudameris", "Lima Cargo", "Surquillo"],
+          id_postulante: postulateKey
+     }     
+
+      const rotacionKey = firebase.database().ref("DATOS_ROTACION").push().key;
+      firebase.database().ref("DATOS_ROTACION").child(rotacionKey).set(datos_rotacion);
+
+
+    },
   }
 
 };
