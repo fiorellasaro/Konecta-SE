@@ -1,10 +1,10 @@
 <template>
   <div>
     <div>
-        <!-- <gmap-autocomplete class="input-google" 
+        <!-- <gmap-autocomplete class="input-google"
           @place_changed="setPlace" placeholder="Ingresa la dirección">
         </gmap-autocomplete> -->
-       
+
       <br/>
 
     <div class="input-google-container">
@@ -25,6 +25,7 @@
 
 </template>
 
+
 <script>
 
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -37,7 +38,7 @@ export default {
     return {
     starting_address: '',
     starting_address_obj: {},
-    inputAdress: [],  
+    inputAdress: [],
     center: {},
     markers: {},
     places: [],
@@ -81,14 +82,14 @@ export default {
 
 
        this.markers = position;
-        console.log(this.markers); 
+        console.log(this.markers);
        this.places.push(this.starting_address_obj.place);
         this.directionText = this.starting_address_obj.place.formatted_address;
         console.log(this.directionText);
         this.center = position;
         this.starting_address_obj.place = null;
       }
-      
+
       else{
         this.directionText = this.starting_address;
         console.log(this.directionText);

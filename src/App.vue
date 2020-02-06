@@ -31,8 +31,6 @@
       <!-- <HelloWorld /> -->
     </v-content>
 
-    <Map></Map>
-
 
     <!-- <v-footer color="blue darken-2" app>
       <span class="white--text">&copy; 2020</span>
