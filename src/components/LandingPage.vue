@@ -338,9 +338,9 @@ export default {
 .v-parallax__image {
   min-height: 80% !important;
 }
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
   body {
     background-color: lightblue;
   }
-}
+} */
 </style>

@@ -1,0 +1,312 @@
+<template>
+  <div>
+    <div id="step2" v-if="countRotacion == 1" class="px-1 pt-8">
+      <p
+        class="text-center title mb-0"
+      >¿Cuál de las siguientes actividades realizas con mayor frecuencia en la semanal?</p>
+      <v-radio-group
+        v-model="datosRotacionPost.actividades"
+        :mandatory="false"
+        required
+        :rules="[v => !!v || 'Selecciona una actividad']"
+        class="body-1"
+      >
+        <v-radio
+          label="Deportes de competencia"
+          value="Deportes de competencia"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio
+          label="Negocio propio o familiar"
+          value="Negocio propio o familiar"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio
+          label="Cuido a un familiar"
+          value="Cuido a un familiar"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio
+          label="Grupo de danza, música, arte."
+          value="Grupo de danza, música, arte."
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio
+          label="Voluntariado"
+          value="Voluntariado"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio
+          label="No realizo ninguna"
+          value="No realizo ninguna"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+      </v-radio-group>
+    </div>
+    <div id="step2" v-if="countRotacion == 2" class="px-1 pt-12">
+      <p class="text-center title mb-0">¿Dónde realizas esa actividad?</p>
+      <v-text-field v-model="datosRotacionPost.coord_actividad" class="pt-2" color="teal" placeholder="Calle 3 de febrero, 511, San Isidro"></v-text-field>
+    </div>
+    <div id="step2" v-if="countRotacion == 3" class="px-1 pt-12">
+      <p class="text-center title mb-0">¿En que horario realizas esa actividad?</p>
+      <v-select :items="horarioActividad" v-model="datosRotacionPost.horario_actividad" label="Seleccionar" color="teal"></v-select>
+    </div>
+    <!-- personas -->
+    <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
+      <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
+      <v-text-field v-model.number="datosRotacionPost.fam_postulante" class="pt-2" color="teal" placeholder="2"></v-text-field>
+      <!-- <span v-for="n in 5">{{ n }} </span> -->
+      <v-flex v-for="(famPostulante) in datosRotacionPost.fam_postulante" :key="famPostulante.id">
+        <v-card class="mx-auto mb-4" max-width="344">
+          <v-card-title class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center outlined">
+            <div>Familia - {{famPostulante}}</div>
+          </v-card-title>
+          <v-card-text>
+            <v-row class="mr-6">
+              <v-col cols="6" md="6" class="align-self-center pa-0">
+                <label for class="pt-0">Parentesco :</label>
+              </v-col>
+              <v-col cols="6" md="6" class="pa-0">
+                <v-select class="mt-0 pa-0 pt-2" :items="parentesco" color="teal"></v-select>
+              </v-col>
+            </v-row>
+            <v-row class="mr-6">
+              <v-col cols="6" md="6" class="align-self-center pa-0">
+                <label for>Edad :</label>
+              </v-col>
+              <v-col cols="6" md="6" class="pa-0">
+                <v-text-field color="teal" class="pa-0" placeholder="2"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row class="mr-6">
+              <v-col cols="6" md="6" class="align-self-center pa-0">
+                <label for>Trabaja :</label>
+              </v-col>
+              <v-col cols="6" md="6" class="pa-0">
+                <v-select :items="trabaja" color="teal" class="pa-0"></v-select>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </div>
+    <div id="step2" v-if="countRotacion == 5" class="px-1 pt-12">
+      <p
+        class="text-center title mb-0"
+      >¿Qué te motiva día a día?</p>
+      <v-radio-group v-model="datosRotacionPost.motivacion" :mandatory="false" required class="pt-4 body-1">
+        <v-radio label="Mi familia" value="Mi familia" color="teal" class="pa-2 radioStateCivil"></v-radio>
+        <v-radio
+          label="Mis estudios"
+          value="Mis estudios"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio
+          label="Negocio / proyecto personalr"
+          value="Negocio / proyecto personal"
+          color="teal"
+          class="pa-2 radioStateCivil"
+        ></v-radio>
+        <v-radio label="Viajar" value="Viajar" color="teal" class="pa-2 radioStateCivil"></v-radio>
+        <v-radio label="Otros" value="Otros" color="teal" class="pa-2 radioStateCivil"></v-radio>
+      </v-radio-group>
+    </div>
+    <div id="step2" v-if="countRotacion == 6" class="px-1 pt-12">
+      <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
+      <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Viajar"
+        value="Viajar"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Jugar Fútbol"
+        value="Jugar Fútbol"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Jugar videojuegos"
+        value="Jugar videojuegos"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Pintar/Dibujar"
+        value="Pintar/Dibujar"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Tomar fotografía"
+        value="Tomar fotografía"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Aprender idiomas"
+        value="Aprender idiomas"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Ir al cine"
+        value="Ir al cine"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Jugar voley"
+        value="Jugar voley"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Jugar basket"
+        value="Jugar basket"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Salir a comer"
+        value="Salir a comer"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Salir a bailar"
+        value="Salir a bailar"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.actividad_tiempo_libre"
+        label="Otros"
+        value="Otros"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+    </div>
+    <div id="step2" v-if="countRotacion == 7" class="px-1 pt-12">
+      <p class="text-center title mb-0">¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
+      <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
+      <v-checkbox
+        v-model="datosRotacionPost.sede_preferencia"
+        label="Lima - Crillón"
+        value="Lima - Crillón"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.sede_preferencia"
+        label="Lima - Fénix"
+        value="Lima - Fénix"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.sede_preferencia"
+        label="Lima - Sudameris"
+        value="Lima - Sudameris"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.sede_preferencia"
+        label="Lima - Surquillo"
+        value="Lima - Surquillo"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.sede_preferencia"
+        label="Callao - Lima Cargo"
+        value="Callao - Lima Cargo"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+      <v-checkbox
+        v-model="datosRotacionPost.sede_preferencia"
+        label="Chiclayo - Sede Chiclayo"
+        value="Chiclayo - Sede Chiclayo"
+        color="teal"
+        hide-details
+        class="pa-2 radioStateCivil"
+      ></v-checkbox>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    countRotacion: 0,
+    datosRotacionPost: {
+      type: Array,
+      required: true
+		},
+
+  },
+  data() {
+    return {
+      horarioActi: null,
+      horarioActividad: ["Mañana", "Tarde", "Noche", "Horario flexible"],
+      selected: [],
+      parentesco: [
+        "Padre",
+        "Madre",
+        "Hermano(a)",
+        "Hijo(a)",
+        "Pareja",
+        "Tio(a)",
+        "Sobrino(a)",
+        "Abuelo(a)",
+        "Suegro(a)",
+        "Otros"
+      ],
+      trabaja: ["Si", "No"]
+    };
+  }
+};
+</script>
+<style>
+.v-application .title {
+  line-height: 23px !important;
+}
+</style>
