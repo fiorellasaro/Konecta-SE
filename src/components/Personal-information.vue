@@ -69,6 +69,8 @@
             <datosPersonales
               :countDatosPersonales="countDatosPersonales"
               :datosPersonalesPost="datosPersonalesPost"
+              @child-address="addressValue"
+              @child-coords="coordsValue"
             />
           </div>
           <div v-if="progressDatosPersonales == 100 && nextComponente === 'componente2'">
@@ -156,6 +158,8 @@ export default {
 
   data() {
     return {
+      addressVP: '',
+      coordsVP: [0,0],
       hidden: false,
       progressDatosPersonales: 0,
       nextComponente: "componente1",
@@ -189,9 +193,11 @@ export default {
           telefono: null,
 
           n_hijos: 0,
-          coordenadas_direccion: [1.23254, -2.00655],
+          text_dir: "",
+          coordenadas_direccion: [0,0],
           como_konecta: null,
-          referidos: ""
+          referidos: "",
+          trabaja_k: "",
         }
       ],
       datosProfesionalesPost: [
@@ -200,7 +206,7 @@ export default {
           institucion: "",
           estado_estudios: "",
           rubro_carrera: "",
-          coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+          coord_estudio: [,], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
           text_dir_estudio: "",
           horario_estudio: ""
         }
@@ -223,9 +229,9 @@ export default {
           ec_cliente: "",
           ec_rubro_cliente: "",
           ec_segmento: "",
-          ec_tiempo_exp: 6,
-          ec_retribucion_basico: 1000,
-          ec_retribucion_comisiones: 300,
+          ec_tiempo_exp: 0,
+          ec_retribucion_basico: 0,
+          ec_retribucion_comisiones: 0,
 
           eo_empresa: "",
           eo_rubro_empresa: "",
@@ -238,7 +244,7 @@ export default {
       datosRotacionPost: [
         {
           actividades: "",
-          coord_actividad: [1.342, 2.332],
+          coord_actividad: [0,0],
           text_dir_actividad: "",
           horario_actividad: "",
           fam_postulante: 0,
@@ -281,15 +287,17 @@ export default {
         correo: this.datosPersonalesPost.correo,
         telefono: this.datosPersonalesPost.telefono,
         n_hijos: this.datosPersonalesPost.n_hijos,
-        coordenadas_direccion: [undefined, undefined],
+        text_dir: this.addressVP,
+        coordenadas_direccion: [this.coordsVP[0], this.coordsVP[1]],
         como_konecta: this.datosPersonalesPost.como_konecta,
         referidos: this.datosPersonalesPost.referidos,
+        trabaja_k: this.datosPersonalesPost.amigo_trabajaK,
         //datos profesionales
         grado_formacion: this.datosProfesionalesPost.grado_formacion,
         institucion: this.datosProfesionalesPost.institucion,
         estado_estudios: this.datosProfesionalesPost.estado_estudios,
         rubro_carrera: this.datosProfesionalesPost.rubro_carrera,
-        coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        coord_estudio: [0, 0], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
         text_dir_estudio: this.datosProfesionalesPost.text_dir_estudio,
         horario_estudio: this.datosProfesionalesPost.horario_estudio,
         experienciaPostulante: [
@@ -350,8 +358,8 @@ export default {
         ],
         //datos rotacion
         actividades: this.datosRotacionPost.actividades,
-        coord_actividad: [1.342, 2.332],
-        text_dir_actividad: this.datosRotacionPost.text_dir_estudio,
+        coord_actividad: [0, 0],
+        text_dir_actividad: this.datosRotacionPost.text_dir_actividad,
         horario_actividad: this.datosRotacionPost.horario_actividad,
         fam_postulante: this.datosRotacionPost.fam_postulante,
         motivacion: this.datosRotacionPost.motivacion,
@@ -363,7 +371,7 @@ export default {
       console.log(this.datosPostulantes);
       // this.nextComponente === 'componente5'
 
-      PostPostulante(this.datosPostulantes[0]);
+      this.PostPostulante(this.datosPostulantes[0]);
 
     },
 
@@ -575,15 +583,17 @@ export default {
         correo: personalInformation.correo,
         telefono: personalInformation.telefono,
         n_hijos: personalInformation.n_hijos,
-        coordenadas_direccion: [1.23254, -2.00655],
+        text_dir: personalInformation.text_dir,
+        coordenadas_direccion: personalInformation.coordenadas_direccion,
         como_konecta: personalInformation.como_konecta,
         referidos: personalInformation.referidos,
+        trabaja_k: personalInformation.amigo_trabajaK,
 
         RegistradoDate: registerAt
       };
 
     //localStorage.setItem("datos", JSON.stringify(this.datosPostulantes[0]));
-     let postulantes = JSON.parse( JSON.stringify(this.datosPostulantes) );
+     let postulantes = JSON.parse( JSON.stringify(datosPostulantes));
       const postulateKey = firebase.database().ref("POSTULANTES").push().key;
       firebase.database().ref("POSTULANTES").child(postulateKey).set(postulantes);
 
@@ -595,7 +605,7 @@ export default {
         institucion: personalInformation.institucion,
         estado_estudios: personalInformation.estado_estudios,
         rubro_carrera: personalInformation.rubro_carrera,
-        coord_estudio: [undefined, undefined], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        coord_estudio: personalInformation.coord_estudio, //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
         text_dir_estudio: personalInformation.text_dir_estudio,
         horario_estudio: personalInformation.horario_estudio,
         id_postulante: postulateKey
@@ -618,8 +628,8 @@ export default {
      let datos_rotacion={
         //datos rotacion
         actividades: personalInformation.actividades,
-        coord_actividad: [1.342, 2.332],
-        text_dir_actividad: personalInformation.text_dir_estudio,
+        coord_actividad: personalInformation.coord_actividad,
+        text_dir_actividad: personalInformation.text_dir_actividad,
         horario_actividad: personalInformation.horario_actividad,
         fam_postulante: personalInformation.fam_postulante,
         motivacion: personalInformation.motivacion,
@@ -634,6 +644,15 @@ export default {
 
 
     },
+
+    addressValue: function(params) {
+      this.addressVP = params;
+    },
+    coordsValue: function(params) {
+      this.coordsVP[0] = params[0];
+      this.coordsVP[1]=params[1];
+    },
+
   }
 };
 </script>

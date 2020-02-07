@@ -195,7 +195,9 @@
     <!-- step8 -->
     <div id="step8" v-if="countDatosPersonales === 8" class="px-3 pt-12">
       <p class="text-center black--text title mb-0">¿Dónde vives actualmente?</p>
-      <v-text-field v-model="datosPersonalesPost.coordenadas_direccion" required></v-text-field>
+      <!-- <v-text-field v-model="datosPersonalesPost.text_dir_estudio" required></v-text-field> -->
+      <Map @coordinatesMarker="coordinates" @markDirection="coordinatesMark" @address="addressText"></Map>
+      
     </div>
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">
@@ -240,6 +242,8 @@
   </div>
 </template>
 <script>
+import Map from "../components/Map.vue";
+
 export default {
 	name: 'datosPersonales',
   props: {
@@ -251,8 +255,13 @@ export default {
 		// nextComponente: ''
 		
   },
+  components: {
+    Map,
+  },
   data() {
     return {
+      addressText: "",
+      mapCood: [0,0],
 			hasSaved: false,
       isNext: null,
       model: null,
@@ -295,13 +304,34 @@ export default {
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-    }
+    },
+    address(){
+     this.$emit("child-address", this.addressText);
+    },
+    coordsChild(){
+     this.$emit("child-coords", this.mapCood);
+    },
 	},
 	methods: {
     save(fecha_nac) {
       this.$refs.menu.save(fecha_nac);
 		},
-	}
+  },
+  coordinates(coords){
+    this.mapCood[0] = coords.lat;
+    this.mapCood[1] = coords.lng;
+    console.log(this.mapCood[0] +","+this.mapCood[1]);
+  },
+    coordinatesMark(coords){
+    this.mapCood[0] = coords.lat;
+    this.mapCood[1] = coords.lng;
+    console.log(this.mapCood[0] +","+this.mapCood[1]);
+  },
+  addressText(address){
+    this.addressText=address;
+    console.log(address);
+  }
+
 };
 </script>
 <style>

@@ -9,7 +9,7 @@
 
     <div class="input-google-container">
         <v-text-field label="Dirección" placeholder="Ingresa la dirección" class="" v-model="starting_address" id="starting_address"></v-text-field>
-         <v-btn depressed color="primary" @click="addMarker">Buscar</v-btn>
+         <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn>
     </div>
 
     </div>
@@ -19,7 +19,7 @@
       :zoom="15"
       style="width:50%;  height: 400px;"
     >
-    <gmap-marker :position="markers" :draggable="true" @drag="updateCoordinates" />
+    <gmap-marker :position="markers" :draggable="true" v-on:drag="updateCoordinates" />
     </gmap-map>
   </div>
 
@@ -88,10 +88,13 @@ export default {
         console.log(this.directionText);
         this.center = position;
         this.starting_address_obj.place = null;
+        this.$emit('addressText', this.directionText);
+        this.$emit('markDirection', this.markers);
       }
 
       else{
         this.directionText = this.starting_address;
+        this.$emit('addressText', this.directionText);
         console.log(this.directionText);
       }
 
@@ -112,7 +115,9 @@ export default {
           lng: location.latLng.lng(),
       };
       console.log(this.coordinates);
-      return(this.coordinates);
+      //return 
+      this.$emit('coordinatesMarker', this.coordinates);
+     // return(this.coordinates);
     }
   },
 

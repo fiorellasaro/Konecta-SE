@@ -51,7 +51,7 @@
     </div>
     <div id="step2" v-if="countRotacion == 2" class="px-1 pt-12">
       <p class="text-center title mb-0">¿Dónde realizas esa actividad?</p>
-      <v-text-field v-model="datosRotacionPost.coord_actividad" class="pt-2" color="teal" placeholder="Calle 3 de febrero, 511, San Isidro"></v-text-field>
+      <v-text-field v-model="datosRotacionPost.text_dir_actividad" class="pt-2" color="teal" placeholder="Calle 3 de febrero, 511, San Isidro"></v-text-field>
     </div>
     <div id="step2" v-if="countRotacion == 3" class="px-1 pt-12">
       <p class="text-center title mb-0">¿En que horario realizas esa actividad?</p>
