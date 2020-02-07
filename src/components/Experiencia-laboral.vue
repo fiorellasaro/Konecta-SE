@@ -3,7 +3,7 @@
     <div id="stepExp1" v-if="countExpLab == 0" class="px-3 pt-10">
       <p class="text-center black--text title mb-0">¿Tienes experiencia laboral?</p>
       <v-radio-group
-        v-model.number="datosExperienciaPost.flag_se"
+        v-model="datosExperienciaPost.flag_se"
         :mandatory="false"
         class="body-1"
         :rules="[v => !!v || 'Selecciona']"
@@ -16,16 +16,21 @@
       <v-expand-transition>
         <div v-if="datosExperienciaPost.flag_se == 1" class="px-3 pt-4">
           <p class="text-center black--text title mb-0">¿Tipo de experiencia?</p>
-          <v-radio-group v-model.number="datosExperienciaPost.flag_ec" :mandatory="false" class="body-1" :rules="[v => !!v || 'Selecciona']">
+          <v-radio-group
+            v-model="datosExperienciaPost.flag_ec"
+            :mandatory="false"
+            class="body-1"
+            :rules="[v => !!v || 'Selecciona']"
+          >
             <v-radio
               label="En Call Center"
-              value="0"
+              value="rbtExtContact"
               color="teal"
               class="pa-2 radioStateCivil"
             ></v-radio>
             <v-radio
               label="En otro rubro"
-              value="1"
+              value="rbtExpOtros"
               color="teal"
               class="pa-2 radioStateCivil"
             ></v-radio>
@@ -34,7 +39,7 @@
       </v-expand-transition>
     </div>
     <!-- FLUJO NO EXPERIENCIA -->
-    <div id="step2" v-if="countExpLab == 1" class="px-1 pt-12">
+    <div id="step2" v-if="countExpLab == 1 && datosExperienciaPost.flag_ec !== 'rbtExpOtros' && datosExperienciaPost.flag_ec !== 'rbtExtContact'" class="px-1 pt-12">
       <p
         class="text-center title mb-0"
       >¿En una reunión familiar en casa te gusta atender a tus invitados y hacer que se sientan cómodos?</p>
@@ -50,9 +55,13 @@
         <p>Muy de acuerdo</p>
       </v-row>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 2" class="px-3 pt-12">
+    <div id="stepExp1" v-if="countExpLab == 2 && datosExperienciaPost.flag_ec !== 'rbtExpOtros' && datosExperienciaPost.flag_ec !== 'rbtExtContact'" class="px-3 pt-12">
       <p class="text-center black--text title mb-0">¿Cómo te desenvuelves en una fiesta o reunión?</p>
-      <v-radio-group v-model="datosExperienciaPost.se_p_crosselling" :mandatory="false" class="body-1">
+      <v-radio-group
+        v-model="datosExperienciaPost.se_p_crosselling"
+        :mandatory="false"
+        class="body-1"
+      >
         <v-radio
           label="Me gusta ser el alma de la fiesta y reunión."
           value="A"
@@ -79,7 +88,7 @@
         ></v-radio>
       </v-radio-group>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 3" class="px-3 pt-8">
+    <div id="stepExp1" v-if="countExpLab == 3 && datosExperienciaPost.flag_ec !== 'rbtExpOtros' && datosExperienciaPost.flag_ec !== 'rbtExtContact'" class="px-3 pt-8">
       <p
         class="text-center black--text title mb-0"
       >¿En una conversación con tu amigo sobre un tema en el que no estan de acuerdo?</p>
@@ -111,7 +120,7 @@
         ></v-radio>
       </v-radio-group>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 4" class="px-3 pt-8">
+    <div id="stepExp1" v-if="countExpLab == 4 && datosExperienciaPost.flag_ec !== 'rbtExpOtros' && datosExperienciaPost.flag_ec !== 'rbtExtContact'" class="px-3 pt-8">
       <p
         class="text-center black--text title mb-0"
       >¿Imagina que tus padres te pidieron coordinar un tramite cualquiera?</p>
@@ -143,7 +152,7 @@
         ></v-radio>
       </v-radio-group>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 5" class="px-3 pt-8">
+    <div id="stepExp1" v-if="countExpLab == 5 && datosExperienciaPost.flag_ec !== 'rbtExpOtros' && datosExperienciaPost.flag_ec !== 'rbtExtContact'" class="px-3 pt-8">
       <p
         class="text-center black--text title mb-2"
         style="font-size: 20px!important;"
@@ -157,19 +166,19 @@
         ></v-radio>
         <v-radio
           label="Le brindo una información pero no tan detallada, no me gusta mucho escribir textos largos."
-          value = "B"
+          value="B"
           color="teal"
           class="pa-2 mt-6 text-justify"
         ></v-radio>
         <v-radio
           label="Le respondo y le doy sólo los nombres, para que él se encargue de buscar."
-          value = "C"
+          value="C"
           color="teal"
           class="pa-2 mt-6 text-justify"
         ></v-radio>
         <v-radio
           label="Le pido su número y lo llamo es muy lento escribir."
-          value ="D"
+          value="D"
           color="teal"
           class="pa-2 mt-4 text-justify"
         ></v-radio>
@@ -181,26 +190,137 @@
         ></v-radio>
       </v-radio-group>
     </div>
-
-    <div id="stepExp1" v-if="countExpLab == 6" class="px-3 pt-12">
+    <div id="stepExp1" v-if="countExpLab == 6 && datosExperienciaPost.flag_ec !== 'rbtExpOtros' && datosExperienciaPost.flag_ec !== 'rbtExtContact'" class="px-3 pt-12">
       <p class="text-center black--text title mb-0">¿Cuál es tu expectativa salarial?</p>
-      <v-row>
-        <v-col cols="6" md="4"><v-text-field
+      <v-row class="pt-10">
+        <v-col cols="6" md="4">
+          <v-text-field
             v-model.number="datosExperienciaPost.se_expect_salarial_desde"
             prefix="S/."
             label="Desde"
             color="teal"
             required
-          ></v-text-field></v-col>
-        <v-col cols="6" md="4"><v-text-field
+          ></v-text-field>
+        </v-col>
+        <v-col cols="6" md="4">
+          <v-text-field
             v-model.number="datosExperienciaPost.se_expect_salarial_hasta"
             prefix="S/."
             label="Hasta"
             color="teal"
             required
-          ></v-text-field></v-col>
+          ></v-text-field>
+        </v-col>
       </v-row>
     </div>
+
+    <!-- FLUJO EXPERIENCIA OTRO RUBRO -->
+    <div id="step1" v-if="countExpLab === 1 && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-2 pt-4">¿En que empresa?</p>
+      <v-text-field class="pt-2" color="teal" placeholder="Nombre de la empresa"></v-text-field>
+
+      <p class="text-center black--text title mb-2 pt-4">¿Rubro de la empresa?</p>
+      <v-select
+        v-model="select"
+        :items="rubroEmpresa"
+        :rules="[v => !!v || 'Selecciona un rubro']"
+        placeholder="Seleccionar"
+        required
+      ></v-select>
+    </div>
+    <div id="step1" v-if="countExpLab === 2  && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4 pt-8">¿Cuál era el puesto o cargo que desempeñaste?</p>
+      <v-select
+        v-model="select"
+        :items="puesto"
+        color="teal"
+        :rules="[v => !!v || 'Selecciona un puesto']"
+        placeholder="Seleccionar"
+        required
+      ></v-select>
+    </div>
+    <div id="step1" v-if="countExpLab === 3  && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">¿Cuánto tiempo estuviste laborando?</p>
+      <v-text-field class="pt-2" color="teal" placeholder="6"></v-text-field>
+      <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
+    </div>
+    <div id="step1" v-if="countExpLab === 4  && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">¿Cuánto recibias de retribución aproximadamente?</p>
+      <v-text-field class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
+      <v-text-field class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
+    </div>
+    <div id="step1" v-if="countExpLab === 5 && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
+      <v-btn rounded color="#00B8AD" class="ma-2 white--text text-capitalize">
+        Añadir experiencia 
+        <v-icon right dark size="35">add_circle</v-icon>
+      </v-btn>
+      <v-row class="justify-end">
+        <v-btn
+          text
+          small
+          class="text-capitalize subtitle-2 mt-6"
+          color="#2D9CDB"
+          @click="countDatosPersonales += 1"
+        >Omitir</v-btn>
+      </v-row>
+    </div>
+    <!-- EXPERIENCIA EN CALL CENTER  countExpLabCC-->
+    <div id="step1" v-if="countExpLab === 1  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">¿En que empresa?</p>
+      <v-text-field class="pt-2" color="teal" placeholder="Nombre de la empresa"></v-text-field>
+      <p class="text-center black--text title mb-0 pt-6">¿Cliente?</p>
+      <v-text-field class="pt-2" color="teal" placeholder="Ejemplo : ”Movistar”"></v-text-field>
+    </div>
+    <div id="step1" v-if="countExpLab === 2  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">¿Rubro del Cliente?</p>
+      <v-select
+        v-model="select"
+        :items="rubroEmpresa"
+        :rules="[v => !!v || 'Selecciona un rubro']"
+        placeholder="Seleccionar"
+        required
+      ></v-select>
+    </div>
+    <div id="step1" v-if="countExpLab === 3  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">¿Segmento del Cliente?</p>
+      <v-select
+        v-model="select"
+        :items="segmento"
+        :rules="[v => !!v || 'Selecciona un segmento']"
+        placeholder="Seleccionar"
+        required
+      ></v-select>
+    </div>
+    <div id="step1" v-if="countExpLab === 4  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-0">¿Cuánto tiempo estuviste laborando?</p>
+      <v-text-field class="pt-2" color="teal" placeholder="6"></v-text-field>
+      <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
+    </div>
+    <div id="step1" v-if="countExpLab === 5  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">¿Cuánto recibias de retribución aproximadamente?</p>
+      <v-text-field class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
+      <v-text-field class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
+    </div>
+    <!-- AÑADIR OTRA EXPERIENCIA -->
+    <div id="step1" v-if="countExpLab === 6 && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+      <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
+      <v-btn rounded color="#00B8AD" class="ma-2 white--text text-capitalize">
+        Añadir experiencia 
+        <v-icon right dark size="35">add_circle</v-icon>
+      </v-btn>
+      <v-row class="justify-end">
+        <v-btn
+          text
+          small
+          class="text-capitalize subtitle-2 mt-6"
+          color="#2D9CDB"
+          @click="countDatosPersonales += 1"
+        >Omitir</v-btn>
+      </v-row>
+    </div>
+
+    <!-- FINAL -->
     <div id="step10" v-if="countExpLab == 7" class="px-3 pt-12">
       <p class="text-center black--text title">Para finalizar nos gustaria conocerte un poco más.</p>
       <v-img
@@ -219,12 +339,52 @@ export default {
     datosExperienciaPost: {
       type: Array,
       required: true
-		},
+    }
   },
   data() {
     return {
-      rdbExperiencia: "",
-      reuFamiliar: null
+      select: null,
+      rubroEmpresa: [
+        "Retail (Saga, Ripley, Paris,Oeshle, etc)",
+        "Banco",
+        "Telecomunicaciones",
+        "Salud",
+        "Negocio propio/familiar",
+        "Hoteles, restaurantes, comidas y bodegas",
+        "Sector Público",
+        "Educación",
+        "Entretenimiento y Diversión",
+        "Construcción, Energía y Minas",
+        "Derecho, Leyes, Política y Justicia",
+        "Comunicaciones, publicidad y Marketing",
+        "Fabricas Industriales"
+      ],
+      puesto: [
+        "Atención al cliente",
+        "Ventas",
+        "Impulsador de productos",
+        "Cajero",
+        "Reponedor",
+        "Almacén, Distribución y Reparto",
+        "Soporte Técnico",
+        "Atención en Salud",
+        "Administrativo y Tramites",
+        "Servicio de Transporte",
+        "Operario",
+        "Profesor",
+        "Desarrollo de contenido(audiovisual, escrito, edición",
+        "Community Manager y Redes Sociales",
+        "Asistente",
+        "Secretaria",
+        "Otros"
+      ],
+      segmento: [
+        "Atención al cliente",
+        "Ventas",
+        "Crosseling",
+        "Redes Sociales",
+        "Back Office"
+      ]
     };
   }
 };

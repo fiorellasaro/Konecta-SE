@@ -32,7 +32,6 @@
                 v-if="progressProfesional > 0"
               >{{ Math.ceil(value) }}%</strong>
             </template>
-
           </v-progress-linear>
           <v-progress-linear
             v-if="nextComponente !== 'componente5'"
@@ -139,10 +138,8 @@
 </template>
 
 <script>
-
-import firebase from 'firebase';
-import moment from 'moment';
-
+import firebase from "firebase";
+import moment from "moment";
 
 import datosPersonales from "../components/Datos-personales.vue";
 import datosProfesionales from "../components/Datos-profesionales.vue";
@@ -162,7 +159,9 @@ export default {
       hidden: false,
       progressDatosPersonales: 0,
       nextComponente: "componente1",
-      nextComp: 0,
+      nextComp2: 0,
+      nextComp3: 0,
+      nextComp4: 0,
       countDatosPersonales: 0,
       countProf: -1,
       countExpLab: -1,
@@ -175,7 +174,6 @@ export default {
       datosPostulantes: [],
 
       datosPersonalesPost: [
-
         {
           tipodoc: "",
           numdoc: "",
@@ -219,8 +217,8 @@ export default {
           se_p_crosselling: "",
           se_p_backof: "",
           se_expect_salarial: [,],
-          se_expect_salarial_desde:0,
-          se_expect_salarial_hasta:0,
+          se_expect_salarial_desde: 0,
+          se_expect_salarial_hasta: 0,
           ec_empresa: "",
           ec_cliente: "",
           ec_rubro_cliente: "",
@@ -228,7 +226,6 @@ export default {
           ec_tiempo_exp: 6,
           ec_retribucion_basico: 1000,
           ec_retribucion_comisiones: 300,
-
 
           eo_empresa: "",
           eo_rubro_empresa: "",
@@ -268,9 +265,8 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
-agregarPersonalDate() {
+    agregarPersonalDate() {
       this.nextComponente = "componente5";
-      console.log(this.nextComponente);
       this.datosPostulantes.push({
         tipodoc: "dni",
         numdoc: "456",
@@ -285,7 +281,7 @@ agregarPersonalDate() {
         correo: this.datosPersonalesPost.correo,
         telefono: this.datosPersonalesPost.telefono,
         n_hijos: this.datosPersonalesPost.n_hijos,
-        coordenadas_direccion: [1.23254, -2.00655],
+        coordenadas_direccion: [undefined, undefined],
         como_konecta: this.datosPersonalesPost.como_konecta,
         referidos: this.datosPersonalesPost.referidos,
         //datos profesionales
@@ -298,7 +294,7 @@ agregarPersonalDate() {
         horario_estudio: this.datosProfesionalesPost.horario_estudio,
         experienciaPostulante: [
           {
-            flag_se: this.datosExperienciaPost.flag_se,
+            flag_se: this.datosExperienciaPost.flag_se, 
             flag_ec: this.datosExperienciaPost.flag_ec,
             flag_eo: this.datosExperienciaPost.flag_eo,
 
@@ -344,13 +340,13 @@ agregarPersonalDate() {
             ec_retribucion_basico: 0,
             ec_retribucion_comisiones: 0,
 
-            eo_empresa: "prueba",
-            eo_rubro_empresa: "prueba",
-            eo_puesto: "Atencion al cliente",
-            eo_tiempo_exp: 8,
-            eo_retribucion_basico: 800,
-            eo_retribucion_comisiones: 300
-          }
+            eo_empresa: "",
+            eo_rubro_empresa: "",
+            eo_puesto: "",
+            eo_tiempo_exp: 0,
+            eo_retribucion_basico: 0,
+            eo_retribucion_comisiones: 0
+          },
         ],
         //datos rotacion
         actividades: this.datosRotacionPost.actividades,
@@ -363,7 +359,6 @@ agregarPersonalDate() {
         sede_preferencia: this.datosRotacionPost.sede_preferencia,
         familiares: [{ parentesco: "Esposa", edad: 28, trabaja: true }]
       });
-      this.datosPersonalesPost.nombres = "";
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
       // this.nextComponente === 'componente5'
@@ -371,62 +366,72 @@ agregarPersonalDate() {
       PostPostulante(this.datosPostulantes[0]);
 
     },
-    postDatosExperiencia(id, experiencia){
-      for(let i=0; i< experiencia.length; i++){
-          const experienciaKey = firebase.database().ref("DATOS_EXPERIENCIA").push().key;
 
-          let experiencia_table ={
-            flag_se: experiencia[i].flag_se,
-            flag_ec: experiencia[i].flag_ec,
-            flag_eo: experiencia[i].flag_eo,
+    postDatosExperiencia(id, experiencia) {
+      for (let i = 0; i < experiencia.length; i++) {
+        const experienciaKey = firebase
+          .database()
+          .ref("DATOS_EXPERIENCIA")
+          .push().key;
 
-            se_p_redes: experiencia[i].se_p_redes,
-            se_p_ventas: experiencia[i].se_p_ventas,
-            se_p_atc: experiencia[i].se_p_atc,
-            se_p_crosselling: experiencia[i].se_p_crosselling,
-            se_p_backof: experiencia[i].se_p_backof,
-            se_expect_salarial: [experiencia[i].se_expect_salarial[0], experiencia[i].se_expect_salarial[1]] ,
+        let experiencia_table = {
+          flag_se: experiencia[i].flag_se,
+          flag_ec: experiencia[i].flag_ec,
+          flag_eo: experiencia[i].flag_eo,
 
-            ec_empresa: experiencia[i].ec_empresa,
-            ec_cliente: experiencia[i].ec_cliente,
-            ec_rubro_cliente: experiencia[i].ec_rubro_cliente,
-            ec_segmento: experiencia[i].ec_segmento,
-            ec_tiempo_exp: experiencia[i].ec_tiempo_exp,
-            ec_retribucion_basico: experiencia[i].ec_retribucion_basico,
-            ec_retribucion_comisiones: experiencia[i].ec_retribucion_comisiones,
+          se_p_redes: experiencia[i].se_p_redes,
+          se_p_ventas: experiencia[i].se_p_ventas,
+          se_p_atc: experiencia[i].se_p_atc,
+          se_p_crosselling: experiencia[i].se_p_crosselling,
+          se_p_backof: experiencia[i].se_p_backof,
+          se_expect_salarial: [
+            experiencia[i].se_expect_salarial[0],
+            experiencia[i].se_expect_salarial[1]
+          ],
 
-            eo_empresa: experiencia[i].eo_empresa,
-            eo_rubro_empresa: experiencia[i].eo_rubro_empresa,
-            eo_puesto: experiencia[i].eo_puesto,
-            eo_tiempo_exp: experiencia[i].eo_tiempo_exp,
-            eo_retribucion_basico: experiencia[i].eo_retribucion_basico,
-            eo_retribucion_comisiones: experiencia[i].eo_retribucion_comisiones,
-            id_postulante: id
-          
-        }
-        firebase.database().ref("DATOS_EXPERIENCIA").child(experienciaKey).set(experiencia_table);
+          ec_empresa: experiencia[i].ec_empresa,
+          ec_cliente: experiencia[i].ec_cliente,
+          ec_rubro_cliente: experiencia[i].ec_rubro_cliente,
+          ec_segmento: experiencia[i].ec_segmento,
+          ec_tiempo_exp: experiencia[i].ec_tiempo_exp,
+          ec_retribucion_basico: experiencia[i].ec_retribucion_basico,
+          ec_retribucion_comisiones: experiencia[i].ec_retribucion_comisiones,
 
+          eo_empresa: experiencia[i].eo_empresa,
+          eo_rubro_empresa: experiencia[i].eo_rubro_empresa,
+          eo_puesto: experiencia[i].eo_puesto,
+          eo_tiempo_exp: experiencia[i].eo_tiempo_exp,
+          eo_retribucion_basico: experiencia[i].eo_retribucion_basico,
+          eo_retribucion_comisiones: experiencia[i].eo_retribucion_comisiones,
+          id_postulante: id
+        };
+        firebase
+          .database()
+          .ref("DATOS_EXPERIENCIA")
+          .child(experienciaKey)
+          .set(experiencia_table);
       }
-
-
-     
     },
 
+    postDatosFamiliares(id, familiares) {
+      for (let i = 0; i < familiares.length; i++) {
+        const familiaresKey = firebase
+          .database()
+          .ref("DATOS_FAMILIARES")
+          .push().key;
 
-    postDatosFamiliares(id, familiares){
-      for(let i=0; i< familiares.length; i++){
-          const familiaresKey = firebase.database().ref("DATOS_FAMILIARES").push().key;
-
-          let familiares_table ={
-            parentesco: familiares[i].parentesco,
-            edad: familiares[i].edad,
-            trabaja: familiares[i].trabaja,
-            id_postulante: id
-          }
-          firebase.database().ref("DATOS_FAMILIARES").child(familiaresKey).set(familiares_table);
-
+        let familiares_table = {
+          parentesco: familiares[i].parentesco,
+          edad: familiares[i].edad,
+          trabaja: familiares[i].trabaja,
+          id_postulante: id
+        };
+        firebase
+          .database()
+          .ref("DATOS_FAMILIARES")
+          .child(familiaresKey)
+          .set(familiares_table);
       }
-     
     },
 
     btnNextStep() {
@@ -437,21 +442,21 @@ agregarPersonalDate() {
         this.progressDatosPersonales += 10;
       }
 
-      if (this.progressDatosPersonales == 100) {
+      if (this.progressDatosPersonales === 100) {
         this.progressDatosPersonales += 0;
-        this.nextComp += 1;
+        this.hidden = false;
+        this.nextComp2 += 1;
       }
       // Datos profesionales
-      if (this.nextComp === 2) {
+      if (this.nextComp2 === 2) {
         this.nextComponente = "componente2";
       }
-      if (this.nextComponente === "componente2") {
+      if (this.nextComponente === "componente2" && this.progressProfesional !== 100) {
         this.countProf += 1;
+        this.countProf === 0
+          ? (this.hidden = false)
+          : (this.hidden = true);
         this.progressProfesional += 20;
-      }
-      if (this.progressProfesional === 100) {
-        // this.countProf += 1;
-        this.progressProfesional += 0;
       }
       if (
         this.countProf === 3 &&
@@ -459,59 +464,90 @@ agregarPersonalDate() {
       ) {
         this.progressProfesional += 40;
         this.countProf += 2;
+        this.hidden = false;
+      };
+      if (this.countProf === 5 && this.progressProfesional == 100) {
+        this.progressProfesional += 0;
+        this.hidden = false;
+        this.nextComp3 += 1;
       }
-      // Experiencia Laboral
-      if (this.nextComp === 8) {
+      // Experiencia Laboral sin Experiencia
+      if (this.nextComp3 == 2) {
         this.nextComponente = "componente3";
-        this.progressProfesional = 100;
       }
-      if (this.nextComponente === "componente3") {
+      if (this.nextComponente === "componente3" && this.countExpLab !== 7) {
         this.countExpLab += 1;
-        this.progressExpLaboral += 20;
-      }
-      if (this.progressExpLaboral === 100) {
-        this.countExpLab += 1;
-        this.progressExpLaboral += 0;
+        this.countExpLab === 0
+          ? (this.hidden = false)
+          : (this.hidden = true);
+        this.progressExpLaboral += 16;
       }
       if (this.countExpLab === 7) {
+        this.hidden = false
         this.progressExpLaboral = 100;
+        this.nextComp4 += 1;
+      }
+
+      if(this.countExpLab === 6  && this.datosExperienciaPost.flag_ec == 'rbtExpOtros'){
+        this.countExpLab += 1;
+        this.hidden = false
+        this.progressExpLaboral = 100;
+        console.log('this.progressExpLaboral',this.progressExpLaboral);
+        console.log('this.countExpLab',this.countExpLab);
       }
       // Rotacion
-      if (this.nextComp === 15) {
+      // // Rotacion
+      if (this.nextComp4 == 2) {
         this.nextComponente = "componente4";
-        this.progressExpLaboral = 100;
       }
-      if (this.nextComponente === "componente4") {
+      if (this.nextComponente === "componente4" && this.countRotacion !== 7) {
         this.countRotacion += 1;
+        this.countRotacion === 1
+          ? (this.hidden = false)
+          : (this.hidden = true);
         this.progressRotation += 14;
       }
-      if (this.progressRotation === 100) {
-        this.countRotacion += 1;
-        this.progressRotation += 0;
+      if (this.countRotacion === 7) {
+        this.hidden = true
+        this.progressRotation = 100;
       }
 
       this.isNext = true;
     },
     btnPrevStep() {
-      if (this.countDatosPersonales !== 0) {
+      if (
+        this.countDatosPersonales !== 0 &&
+        this.nextComponente === "componente1"
+      ) {
         this.countDatosPersonales -= 1;
         this.progressDatosPersonales -= 10;
-        this.countDatosPersonales === 0
+      }
+      this.countDatosPersonales === 0 || this.countDatosPersonales === 100
+        ? (this.hidden = false)
+        : (this.hidden = true);
+      if (this.nextComponente === "componente2") {
+        this.countProf -= 1;
+        this.progressProfesional -= 20;
+        this.countProf === 0 || this.progressProfesional === 100
+          ? (this.hidden = false)
+          : (this.hidden = true);
+      }
+      // Experiencia Laboral
+      if (this.nextComponente === "componente3") {
+        this.countExpLab -= 1;
+        this.progressExpLaboral -= 16;
+        this.countExpLab === 0 || this.progressExpLaboral === 100
           ? (this.hidden = false)
           : (this.hidden = true);
       }
 
-      if (this.nextComponente === "componente2") {
-        this.countProf -= 1;
-        this.progressProfesional -= 20;
-      }
-      if (this.nextComponente === "componente3") {
-        this.countExpLab -= 1;
-        this.progressExpLaboral -= 20;
-      }
+      //rotacion
       if (this.nextComponente === "componente4") {
         this.countRotacion -= 1;
-        this.progressRotation -= 20;
+        this.progressRotation -= 14;
+        this.countRotacion === 1 || this.progressRotation === 100
+          ? (this.hidden = false)
+          : (this.hidden = true);
       }
     }, 
 
@@ -599,7 +635,6 @@ agregarPersonalDate() {
 
     },
   }
-
 };
 </script>
 
