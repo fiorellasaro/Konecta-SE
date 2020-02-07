@@ -357,14 +357,11 @@ export default {
         motivacion: this.datosRotacionPost.motivacion,
         actividad_tiempo_libre: this.datosRotacionPost.actividad_tiempo_libre,
         sede_preferencia: this.datosRotacionPost.sede_preferencia,
-        familiares: [{ parentesco: "Esposa", edad: 28, trabaja: true }]
+        familiares: this.datosRotacionPost.familiares
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
-      // this.nextComponente === 'componente5'
-
-      PostPostulante(this.datosPostulantes[0]);
-
+      this.PostPostulante(this.datosPostulantes[0]);
     },
 
     postDatosExperiencia(id, experiencia) {
