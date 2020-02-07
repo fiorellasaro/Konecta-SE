@@ -217,11 +217,11 @@
     <!-- FLUJO EXPERIENCIA OTRO RUBRO -->
     <div id="step1" v-if="countExpLab === 1 && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-2 pt-4">¿En que empresa?</p>
-      <v-text-field class="pt-2" color="teal" placeholder="Nombre de la empresa"></v-text-field>
+      <v-text-field class="pt-2" color="teal" placeholder="Nombre de la empresa" v-model="datosExperienciaPost.eo_empresa"></v-text-field>
 
       <p class="text-center black--text title mb-2 pt-4">¿Rubro de la empresa?</p>
       <v-select
-        v-model="select"
+        v-model="datosExperienciaPost.eo_rubro_empresa"
         :items="rubroEmpresa"
         :rules="[v => !!v || 'Selecciona un rubro']"
         placeholder="Seleccionar"
@@ -231,7 +231,7 @@
     <div id="step1" v-if="countExpLab === 2  && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4 pt-8">¿Cuál era el puesto o cargo que desempeñaste?</p>
       <v-select
-        v-model="select"
+        v-model="datosExperienciaPost.eo_puesto"
         :items="puesto"
         color="teal"
         :rules="[v => !!v || 'Selecciona un puesto']"
@@ -241,13 +241,13 @@
     </div>
     <div id="step1" v-if="countExpLab === 3  && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">¿Cuánto tiempo estuviste laborando?</p>
-      <v-text-field class="pt-2" color="teal" placeholder="6"></v-text-field>
+      <v-text-field v-model.number="datosExperienciaPost.eo_tiempo_exp" class="pt-2" color="teal" placeholder="6"></v-text-field>
       <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
     </div>
     <div id="step1" v-if="countExpLab === 4  && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">¿Cuánto recibias de retribución aproximadamente?</p>
-      <v-text-field class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
-      <v-text-field class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
+      <v-text-field v-model.number="datosExperienciaPost.eo_retribucion_basico" class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
+      <v-text-field v-model.number="datosExperienciaPost.eo_retribucion_comisiones" class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
     </div>
     <div id="step1" v-if="countExpLab === 5 && datosExperienciaPost.flag_ec == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
@@ -268,14 +268,14 @@
     <!-- EXPERIENCIA EN CALL CENTER  countExpLabCC-->
     <div id="step1" v-if="countExpLab === 1  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">¿En que empresa?</p>
-      <v-text-field class="pt-2" color="teal" placeholder="Nombre de la empresa"></v-text-field>
+      <v-text-field v-model="datosExperienciaPost.ec_empresa" class="pt-2" color="teal" placeholder="Nombre de la empresa"></v-text-field>
       <p class="text-center black--text title mb-0 pt-6">¿Cliente?</p>
-      <v-text-field class="pt-2" color="teal" placeholder="Ejemplo : ”Movistar”"></v-text-field>
+      <v-text-field v-model="datosExperienciaPost.ec_cliente" class="pt-2" color="teal" placeholder="Ejemplo : ”Movistar”"></v-text-field>
     </div>
     <div id="step1" v-if="countExpLab === 2  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">¿Rubro del Cliente?</p>
       <v-select
-        v-model="select"
+        v-model="datosExperienciaPost.ec_rubro_cliente"
         :items="rubroEmpresa"
         :rules="[v => !!v || 'Selecciona un rubro']"
         placeholder="Seleccionar"
@@ -285,7 +285,7 @@
     <div id="step1" v-if="countExpLab === 3  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">¿Segmento del Cliente?</p>
       <v-select
-        v-model="select"
+        v-model="datosExperienciaPost.ec_segmento"
         :items="segmento"
         :rules="[v => !!v || 'Selecciona un segmento']"
         placeholder="Seleccionar"
@@ -294,13 +294,13 @@
     </div>
     <div id="step1" v-if="countExpLab === 4  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-0">¿Cuánto tiempo estuviste laborando?</p>
-      <v-text-field class="pt-2" color="teal" placeholder="6"></v-text-field>
+      <v-text-field v-model="datosExperienciaPost.ec_tiempo_exp" class="pt-2" color="teal" placeholder="6"></v-text-field>
       <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
     </div>
     <div id="step1" v-if="countExpLab === 5  && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">
       <p class="text-center black--text title mb-4">¿Cuánto recibias de retribución aproximadamente?</p>
-      <v-text-field class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
-      <v-text-field class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
+      <v-text-field v-model="datosExperienciaPost.ec_retribucion_basico" class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
+      <v-text-field v-model="datosExperienciaPost.ec_retribucion_comisiones" class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
     </div>
     <!-- AÑADIR OTRA EXPERIENCIA -->
     <div id="step1" v-if="countExpLab === 6 && datosExperienciaPost.flag_ec == 'rbtExtContact'" class="px-3 pt-12 mt-4">

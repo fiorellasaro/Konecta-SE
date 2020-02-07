@@ -55,18 +55,29 @@
     </div>
     <div id="step2" v-if="countRotacion == 3" class="px-1 pt-12">
       <p class="text-center title mb-0">¿En que horario realizas esa actividad?</p>
-      <v-select :items="horarioActividad" v-model="datosRotacionPost.horario_actividad" label="Seleccionar" color="teal"></v-select>
+      <v-select
+        :items="horarioActividad"
+        v-model="datosRotacionPost.horario_actividad"
+        label="Seleccionar"
+        color="teal"
+      ></v-select>
     </div>
     <!-- personas -->
     <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
       <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
-      <v-text-field v-model.number="datosRotacionPost.fam_postulante" class="pt-2" color="teal" placeholder="2"></v-text-field>
+      <v-text-field
+        v-model.number="datosRotacionPost.fam_postulante"
+        class="pt-2"
+        color="teal"
+        placeholder="2"
+        v-on:keyup.enter="createObjFamilia()"
+      ></v-text-field>
       <!-- <span v-for="n in 5">{{ n }} </span> -->
-      <v-flex v-for="(famPostulante) in datosRotacionPost.fam_postulante" :key="famPostulante.id">
+      <v-flex v-for="(famPostulante, index) in arrFamilia" :key="famPostulante.id">
         <v-card outlined class="mx-auto mb-4" max-width="344">
-          <v-card-title  class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center">
-            Familiar - {{famPostulante}}
-          </v-card-title>
+          <v-card-title
+            class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center"
+          >Familiar - {{index + 1}}</v-card-title>
           <v-divider></v-divider>
           <v-card-text>
             <v-row class="mr-6">
@@ -74,7 +85,12 @@
                 <label for class="pt-0">Parentesco :</label>
               </v-col>
               <v-col cols="6" md="6" class="pa-0">
-                <v-select class="mt-0 pa-0 pt-2" :items="parentesco" color="teal"></v-select>
+                <v-select
+                  class="mt-0 pa-0 pt-2"
+                  :items="parentesco" 
+                  v-model="arrFamilia[index].parentesco"
+                  color="teal"
+                ></v-select>
               </v-col>
             </v-row>
             <v-row class="mr-6">
@@ -82,7 +98,7 @@
                 <label for>Edad :</label>
               </v-col>
               <v-col cols="6" md="6" class="pa-0">
-                <v-text-field color="teal" class="pa-0" placeholder="2"></v-text-field>
+                <v-text-field v-model="arrFamilia[index].edad" color="teal" class="pa-0" placeholder="2"></v-text-field>
               </v-col>
             </v-row>
             <v-row class="mr-6">
@@ -90,7 +106,9 @@
                 <label for>Trabaja :</label>
               </v-col>
               <v-col cols="6" md="6" class="pa-0">
-                <v-select :items="trabaja" color="teal" class="pa-0"></v-select>
+                <v-select :items="trabaja" v-model="arrFamilia[index].trabaja" color="teal" label="Seleccionar" class="pa-0">
+                  <!-- <option v-for="option in options" :value="option.value">{{option.text}}</option> -->
+                </v-select>
               </v-col>
             </v-row>
           </v-card-text>
@@ -98,10 +116,13 @@
       </v-flex>
     </div>
     <div id="step2" v-if="countRotacion == 5" class="px-1 pt-12">
-      <p
-        class="text-center title mb-0"
-      >¿Qué te motiva día a día?</p>
-      <v-radio-group v-model="datosRotacionPost.motivacion" :mandatory="false" required class="pt-4 body-1">
+      <p class="text-center title mb-0">¿Qué te motiva día a día?</p>
+      <v-radio-group
+        v-model="datosRotacionPost.motivacion"
+        :mandatory="false"
+        required
+        class="pt-4 body-1"
+      >
         <v-radio label="Mi familia" value="Mi familia" color="teal" class="pa-2 radioStateCivil"></v-radio>
         <v-radio
           label="Mis estudios"
@@ -220,7 +241,9 @@
       ></v-checkbox>
     </div>
     <div id="step2" v-if="countRotacion == 7" class="px-1 pt-12">
-      <p class="text-center title mb-0">¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
+      <p
+        class="text-center title mb-0"
+      >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
       <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
       <v-checkbox
         v-model="datosRotacionPost.sede_preferencia"
@@ -281,8 +304,7 @@ export default {
     datosRotacionPost: {
       type: Array,
       required: true
-		},
-
+    }
   },
   data() {
     return {
@@ -301,9 +323,43 @@ export default {
         "Suegro(a)",
         "Otros"
       ],
-      
-      trabaja: ["Si", "No"],
+      // familiaPost: [{ parentesco: "", edad: 0, trabaja: false }],
+      arrFamilia:[],
+trabaja: [
+      {text: 'Si', value: true},
+      {text: 'No', value: false},
+    ],
+      // trabaja: ["Si", "No"],
     };
+  },
+  mounted(){
+     // invocar los métodos
+    // this.createObjFamilia();
+    },
+  methods: {
+    createObjFamilia() {
+      // debugger;
+      // if(this.datosRotacionPost.fam_postulante === undefined){
+      //   // let nroFam = 0;
+      //   this.arrFamilia.push({
+      //     parentesco: "",
+      //     edad: 0,
+      //     trabaja: '',
+      //   });
+      // } else{
+        let nroFam = this.datosRotacionPost.fam_postulante;
+        for (let i = 0; i < nroFam; i++) {
+        this.arrFamilia.push({
+          parentesco: "",
+          edad: null,
+          trabaja: null,
+        });
+        this.datosRotacionPost.familiares = this.arrFamilia;
+        console.log(this.arrFamilia);
+        console.log('familiares',this.datosRotacionPost.familiares );
+      }
+      }
+      // const array = [];
   }
 };
 </script>
