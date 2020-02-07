@@ -63,10 +63,11 @@
       <v-text-field v-model.number="datosRotacionPost.fam_postulante" class="pt-2" color="teal" placeholder="2"></v-text-field>
       <!-- <span v-for="n in 5">{{ n }} </span> -->
       <v-flex v-for="(famPostulante) in datosRotacionPost.fam_postulante" :key="famPostulante.id">
-        <v-card class="mx-auto mb-4" max-width="344">
-          <v-card-title class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center outlined">
-            <div>Familia - {{famPostulante}}</div>
+        <v-card outlined class="mx-auto mb-4" max-width="344">
+          <v-card-title  class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center">
+            Familiar - {{famPostulante}}
           </v-card-title>
+          <v-divider></v-divider>
           <v-card-text>
             <v-row class="mr-6">
               <v-col cols="6" md="6" class="align-self-center pa-0">
@@ -224,7 +225,7 @@
       <v-checkbox
         v-model="datosRotacionPost.sede_preferencia"
         label="Lima - Crillón"
-        value="Lima - Crillón"
+        value="A"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -300,7 +301,8 @@ export default {
         "Suegro(a)",
         "Otros"
       ],
-      trabaja: ["Si", "No"]
+      
+      trabaja: ["Si", "No"],
     };
   }
 };
