@@ -417,7 +417,7 @@ export default {
           .database()
           .ref("DATOS_EXPERIENCIA")
           .child(experienciaKey)
-          .set(experiencia_table);
+          .set(JSON.parse( JSON.stringify(experiencia_table)));
       }
     },
 
@@ -438,7 +438,7 @@ export default {
           .database()
           .ref("DATOS_FAMILIARES")
           .child(familiaresKey)
-          .set(familiares_table);
+          .set(JSON.parse( JSON.stringify(familiares_table)));
       }
     },
 
@@ -610,7 +610,8 @@ export default {
         horario_estudio: personalInformation.horario_estudio,
         id_postulante: postulateKey
       }
-      firebase.database().ref("DATOS_PROFESIONALES").child(profesionalesKey).set(datos_profesionales);
+
+      firebase.database().ref("DATOS_PROFESIONALES").child(profesionalesKey).set(JSON.parse( JSON.stringify(datos_profesionales)));
 
 
       let datos_experiencia = [];
@@ -640,7 +641,7 @@ export default {
      }     
 
       const rotacionKey = firebase.database().ref("DATOS_ROTACION").push().key;
-      firebase.database().ref("DATOS_ROTACION").child(rotacionKey).set(datos_rotacion);
+      firebase.database().ref("DATOS_ROTACION").child(rotacionKey).set(JSON.parse( JSON.stringify(datos_rotacion)));
 
 
     },
