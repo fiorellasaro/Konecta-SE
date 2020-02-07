@@ -219,7 +219,7 @@
             :rules="[v => !!v || 'Es obligatorio']"
           ></v-text-field>
 					<v-checkbox
-        v-model="amigo_trabajaK"
+        v-model="datosPersonalesPost.amigo_trabajaK"
         label="Mi Familar/ Amig@ trabaja en Konecta."
         value="Si"
         color="teal"

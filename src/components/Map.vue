@@ -32,6 +32,14 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 export default {
   name: "Map",
+  props: {
+    directionText:'',
+     markers: {
+      type: Array,
+      required: true
+     },
+		
+  },
 
 
   data(){
@@ -40,12 +48,12 @@ export default {
     starting_address_obj: {},
     inputAdress: [],
     center: {},
-    markers: {},
+   
     places: [],
     currentPlace: null,
     address: '',
     coordinates: {},
-    directionText:''
+    
     };
   },
 
@@ -114,6 +122,8 @@ export default {
           lat: location.latLng.lat(),
           lng: location.latLng.lng(),
       };
+
+      this.markers=this.coordinates;
       console.log(this.coordinates);
       //return 
       this.$emit('coordinatesMarker', this.coordinates);
