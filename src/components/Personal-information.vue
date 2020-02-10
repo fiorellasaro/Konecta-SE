@@ -69,14 +69,17 @@
             <datosPersonales
               :countDatosPersonales="countDatosPersonales"
               :datosPersonalesPost="datosPersonalesPost"
-              @child-address="addressValue"
-              @child-coords="coordsValue"
+              v-on:markerCoordinates="getCoordinates($event)"
+              v-on:addMarker="getDirection($event)"
+              :markersPersonal="markersPersonal"
+              :addressTextPersonal="addressTextPersonal"
             />
           </div>
           <div v-if="progressDatosPersonales == 100 && nextComponente === 'componente2'">
             <datosProfesionales
               :countProf="countProf"
               :datosProfesionalesPost="datosProfesionalesPost"
+
             />
           </div>
           <div v-if="nextComponente === 'componente3'">
@@ -158,8 +161,10 @@ export default {
 
   data() {
     return {
-      addressVP: '',
-      coordsVP: [0,0],
+      addressTextPersonal: "",
+      markersPersonal: {},
+      // addressVP: '',
+      // coordsVP: [0,0],
       hidden: false,
       progressDatosPersonales: 0,
       nextComponente: "componente1",
@@ -194,10 +199,10 @@ export default {
 
           n_hijos: 0,
           text_dir: "",
-          coordenadas_direccion: [0,0],
+          coordenadas_direccion: [0, 0],
           como_konecta: null,
           referidos: "",
-          trabaja_k: "",
+          trabaja_k: ""
         }
       ],
       datosProfesionalesPost: [
@@ -244,7 +249,7 @@ export default {
       datosRotacionPost: [
         {
           actividades: "",
-          coord_actividad: [0,0],
+          coord_actividad: [0, 0],
           text_dir_actividad: "",
           horario_actividad: "",
           fam_postulante: 0,
@@ -287,8 +292,11 @@ export default {
         correo: this.datosPersonalesPost.correo,
         telefono: this.datosPersonalesPost.telefono,
         n_hijos: this.datosPersonalesPost.n_hijos,
-        text_dir: this.addressVP,
-        coordenadas_direccion: [this.coordsVP[0], this.coordsVP[1]],
+        text_dir: this.addressTextPersonal,
+        coordenadas_direccion: [
+          this.markersPersonal.lat,
+          this.markersPersonal.lng
+        ],
         como_konecta: this.datosPersonalesPost.como_konecta,
         referidos: this.datosPersonalesPost.referidos,
         trabaja_k: this.datosPersonalesPost.amigo_trabajaK,
@@ -302,7 +310,7 @@ export default {
         horario_estudio: this.datosProfesionalesPost.horario_estudio,
         experienciaPostulante: [
           {
-            flag_se: this.datosExperienciaPost.flag_se, 
+            flag_se: this.datosExperienciaPost.flag_se,
             flag_ec: this.datosExperienciaPost.flag_ec,
             flag_eo: this.datosExperienciaPost.flag_eo,
 
@@ -311,7 +319,10 @@ export default {
             se_p_atc: this.datosExperienciaPost.se_p_atc,
             se_p_crosselling: this.datosExperienciaPost.se_p_crosselling,
             se_p_backof: this.datosExperienciaPost.se_p_backof,
-            se_expect_salarial: [this.datosExperienciaPost.se_expect_salarial_desde,this.datosExperienciaPost.se_expect_salarial_hasta],
+            se_expect_salarial: [
+              this.datosExperienciaPost.se_expect_salarial_desde,
+              this.datosExperienciaPost.se_expect_salarial_hasta
+            ],
 
             ec_empresa: "",
             ec_cliente: "",
@@ -354,7 +365,7 @@ export default {
             eo_tiempo_exp: 0,
             eo_retribucion_basico: 0,
             eo_retribucion_comisiones: 0
-          },
+          }
         ],
         //datos rotacion
         actividades: this.datosRotacionPost.actividades,
@@ -369,6 +380,8 @@ export default {
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
+      console.log(this.addressTextPersonal);
+     // console.log(this.markersPersonal);
       this.PostPostulante(this.datosPostulantes[0]);
     },
 
@@ -414,7 +427,7 @@ export default {
           .database()
           .ref("DATOS_EXPERIENCIA")
           .child(experienciaKey)
-          .set(JSON.parse( JSON.stringify(experiencia_table)));
+          .set(JSON.parse(JSON.stringify(experiencia_table)));
       }
     },
 
@@ -435,7 +448,7 @@ export default {
           .database()
           .ref("DATOS_FAMILIARES")
           .child(familiaresKey)
-          .set(JSON.parse( JSON.stringify(familiares_table)));
+          .set(JSON.parse(JSON.stringify(familiares_table)));
       }
     },
 
@@ -456,11 +469,12 @@ export default {
       if (this.nextComp2 === 2) {
         this.nextComponente = "componente2";
       }
-      if (this.nextComponente === "componente2" && this.progressProfesional !== 100) {
+      if (
+        this.nextComponente === "componente2" &&
+        this.progressProfesional !== 100
+      ) {
         this.countProf += 1;
-        this.countProf === 0
-          ? (this.hidden = false)
-          : (this.hidden = true);
+        this.countProf === 0 ? (this.hidden = false) : (this.hidden = true);
         this.progressProfesional += 20;
       }
       if (
@@ -470,7 +484,7 @@ export default {
         this.progressProfesional += 40;
         this.countProf += 2;
         this.hidden = false;
-      };
+      }
       if (this.countProf === 5 && this.progressProfesional == 100) {
         this.progressProfesional += 0;
         this.hidden = false;
@@ -482,23 +496,24 @@ export default {
       }
       if (this.nextComponente === "componente3" && this.countExpLab !== 7) {
         this.countExpLab += 1;
-        this.countExpLab === 0
-          ? (this.hidden = false)
-          : (this.hidden = true);
+        this.countExpLab === 0 ? (this.hidden = false) : (this.hidden = true);
         this.progressExpLaboral += 16;
       }
       if (this.countExpLab === 7) {
-        this.hidden = false
+        this.hidden = false;
         this.progressExpLaboral = 100;
         this.nextComp4 += 1;
       }
 
-      if(this.countExpLab === 6  && this.datosExperienciaPost.flag_ec == 'rbtExpOtros'){
+      if (
+        this.countExpLab === 6 &&
+        this.datosExperienciaPost.flag_ec == "rbtExpOtros"
+      ) {
         this.countExpLab += 1;
-        this.hidden = false
+        this.hidden = false;
         this.progressExpLaboral = 100;
-        console.log('this.progressExpLaboral',this.progressExpLaboral);
-        console.log('this.countExpLab',this.countExpLab);
+        console.log("this.progressExpLaboral", this.progressExpLaboral);
+        console.log("this.countExpLab", this.countExpLab);
       }
       // Rotacion
       // // Rotacion
@@ -507,13 +522,11 @@ export default {
       }
       if (this.nextComponente === "componente4" && this.countRotacion !== 7) {
         this.countRotacion += 1;
-        this.countRotacion === 1
-          ? (this.hidden = false)
-          : (this.hidden = true);
+        this.countRotacion === 1 ? (this.hidden = false) : (this.hidden = true);
         this.progressRotation += 14;
       }
       if (this.countRotacion === 7) {
-        this.hidden = true
+        this.hidden = true;
         this.progressRotation = 100;
       }
 
@@ -554,17 +567,16 @@ export default {
           ? (this.hidden = false)
           : (this.hidden = true);
       }
-    }, 
+    },
 
     PostPostulante(personalInformation) {
-
       let date = new Date();
-      let dateString = moment().format('L');
-      let hour = date.getHours() + ":" + date.getMinutes()+"";
-      const registerAt= {
+      let dateString = moment().format("L");
+      let hour = date.getHours() + ":" + date.getMinutes() + "";
+      const registerAt = {
         date: dateString,
         hour: hour
-      }
+      };
 
       let datosPostulantes = {
         tipodoc: "DNI",
@@ -589,12 +601,22 @@ export default {
         RegistradoDate: registerAt
       };
 
-    //localStorage.setItem("datos", JSON.stringify(this.datosPostulantes[0]));
-     let postulantes = JSON.parse( JSON.stringify(datosPostulantes));
-      const postulateKey = firebase.database().ref("POSTULANTES").push().key;
-      firebase.database().ref("POSTULANTES").child(postulateKey).set(postulantes);
+      //localStorage.setItem("datos", JSON.stringify(this.datosPostulantes[0]));
+      let postulantes = JSON.parse(JSON.stringify(datosPostulantes));
+      const postulateKey = firebase
+        .database()
+        .ref("POSTULANTES")
+        .push().key;
+      firebase
+        .database()
+        .ref("POSTULANTES")
+        .child(postulateKey)
+        .set(postulantes);
 
-      const profesionalesKey = firebase.database().ref("DATOS_PROFESIONALES").push().key;
+      const profesionalesKey = firebase
+        .database()
+        .ref("DATOS_PROFESIONALES")
+        .push().key;
 
       const datos_profesionales = {
         //datos profesionales
@@ -606,24 +628,24 @@ export default {
         text_dir_estudio: personalInformation.text_dir_estudio,
         horario_estudio: personalInformation.horario_estudio,
         id_postulante: postulateKey
-      }
+      };
 
-      firebase.database().ref("DATOS_PROFESIONALES").child(profesionalesKey).set(JSON.parse( JSON.stringify(datos_profesionales)));
-
+      firebase
+        .database()
+        .ref("DATOS_PROFESIONALES")
+        .child(profesionalesKey)
+        .set(JSON.parse(JSON.stringify(datos_profesionales)));
 
       let datos_experiencia = [];
       datos_experiencia = personalInformation.experienciaPostulante;
 
-    this.postDatosExperiencia(postulateKey, datos_experiencia);
+      this.postDatosExperiencia(postulateKey, datos_experiencia);
 
+      let familiares = [];
+      familiares = personalInformation.familiares;
+      this.postDatosFamiliares(postulateKey, familiares);
 
-    let familiares= [];
-    familiares = personalInformation.familiares;
-    this.postDatosFamiliares(postulateKey, familiares);
-
-
-    
-     let datos_rotacion={
+      let datos_rotacion = {
         //datos rotacion
         actividades: personalInformation.actividades,
         coord_actividad: personalInformation.coord_actividad,
@@ -635,22 +657,29 @@ export default {
         sede_preferencia: personalInformation.sede_preferencia,
 
         id_postulante: postulateKey
-     }     
+      };
 
-      const rotacionKey = firebase.database().ref("DATOS_ROTACION").push().key;
-      firebase.database().ref("DATOS_ROTACION").child(rotacionKey).set(JSON.parse( JSON.stringify(datos_rotacion)));
-
-
+      const rotacionKey = firebase
+        .database()
+        .ref("DATOS_ROTACION")
+        .push().key;
+      firebase
+        .database()
+        .ref("DATOS_ROTACION")
+        .child(rotacionKey)
+        .set(JSON.parse(JSON.stringify(datos_rotacion)));
     },
 
-    addressValue: function(params) {
-      this.addressVP = params;
+    getDirection: function(getDirection) {
+      this.addressTextPersonal = getDirection;
+      //this.$emit('getDirection', this.directionText); 
+      console.log(this.addressTextPersonal);
     },
-    coordsValue: function(params) {
-      this.coordsVP[0] = params[0];
-      this.coordsVP[1]=params[1];
-    },
-
+    getCoordinates: function(getCoordinates) {
+      this.markersPersonal = getCoordinates;
+      console.log(this.markersPersonal);
+      // this.$emit('getCoordinates', this.markers);
+    }
   }
 };
 </script>

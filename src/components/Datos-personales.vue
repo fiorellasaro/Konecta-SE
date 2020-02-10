@@ -31,7 +31,6 @@
           ></v-text-field>
         </v-col>
       </v-row>
-
     </div>
     <!-- step 1 -->
     <div id="step1" v-if="countDatosPersonales === 1" class="px-3 pt-12 mt-4">
@@ -61,11 +60,11 @@
 
     <!-- step 2 -->
     <div id="step2" v-if="countDatosPersonales === 2" class="px-3 pt-12 mt-12">
-      <p class="text-center black--text title ">¿Cuál es tu nacionalidad?</p>
+      <p class="text-center black--text title">¿Cuál es tu nacionalidad?</p>
       <v-text-field
         v-model="datosPersonalesPost.nacionalidad"
         class="pt-0"
-				placeholder="Peruana"
+        placeholder="Peruana"
         color="teal"
         required
         :rules="[v => !!v || 'Nacionalidad es requerida']"
@@ -158,7 +157,7 @@
       <p class="text-center black--text title mb-0 pt-4">¿Cuál es tu número de celular?</p>
       <v-text-field
         v-model="datosPersonalesPost.telefono"
-				placeholder="51+ 997251296"
+        placeholder="51+ 997251296"
         color="teal"
         required
         :rules="[v => !!v || 'número de celular es requerido']"
@@ -196,21 +195,63 @@
     <div id="step8" v-if="countDatosPersonales === 8" class="px-3 pt-12">
       <p class="text-center black--text title mb-0">¿Dónde vives actualmente?</p>
       <!-- <v-text-field v-model="datosPersonalesPost.text_dir_estudio" required></v-text-field> -->
-      <Map @coordinatesMarker="coordinates" @markDirection="coordinatesMark" @address="addressText"></Map>
-      
+
+      <!-- <Map
+        v-on:markerCoordinates="getCoordinates($event)"
+        v-on:addMarker="getDirection($event)"
+        :markers="markers"
+        :directionText="directionText"
+      ></Map>-->
+
+      <!--Map -->
+
+      <div class="google-maps">
+        <div>
+          <!-- <gmap-autocomplete class="input-google"
+          @place_changed="setPlace" placeholder="Ingresa la dirección">
+          </gmap-autocomplete>-->
+
+          <br />
+
+          <div class="input-google-container">
+            <v-text-field
+              label="Dirección"
+              placeholder="Ingresa la dirección"
+              v-model="starting_address"
+              id="starting_address"
+            ></v-text-field>
+            <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn>
+          </div>
+        </div>
+        <br />
+        <gmap-map
+          :center="{lat:this.center.lat, lng:this.center.lng}"
+          :zoom="15"
+          style="width:50%;  height: 400px;"
+        >
+          <gmap-marker :position="markersPersonal" :draggable="true" v-on:dragend="updateCoordinates" />
+        </gmap-map>
+      </div>
+
+      <p>{{this.addressTextPersonal}}</p>
+      <p>{{this.markersPersonal}}</p>
     </div>
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">
       <p class="text-center black--text title mb-0">¿Cuentanos cómo conociste a Konecta?</p>
-      <v-select v-model="datosPersonalesPost.como_konecta"
+      <v-select
+        v-model="datosPersonalesPost.como_konecta"
         :items="itemsComoKonecta"
         label="Selecciona"
         color="teal"
-        
       ></v-select>
 
-			<v-expand-transition>
-        <div id="step7" v-if="datosPersonalesPost.como_konecta === 'Familia/ Amigos'" class="px-3 pt-8">
+      <v-expand-transition>
+        <div
+          id="step7"
+          v-if="datosPersonalesPost.como_konecta === 'Familia/ Amigos'"
+          class="px-3 pt-8"
+        >
           <p class="text-center black--text body-1 mb-0">¿Cuál es su Nombre y Apellidos?</p>
           <v-text-field
             v-model="datosPersonalesPost.referidos"
@@ -218,14 +259,14 @@
             required
             :rules="[v => !!v || 'Es obligatorio']"
           ></v-text-field>
-					<v-checkbox
-        v-model="datosPersonalesPost.amigo_trabajaK"
-        label="Mi Familar/ Amig@ trabaja en Konecta."
-        value="Si"
-        color="teal"
-        hide-details
-        class="pa-2 pt-6 body-2 black--text"
-      ></v-checkbox>
+          <v-checkbox
+            v-model="datosPersonalesPost.amigo_trabajaK"
+            label="Mi Familar/ Amig@ trabaja en Konecta."
+            value="Si"
+            color="teal"
+            hide-details
+            class="pa-2 pt-6 body-2 black--text"
+          ></v-checkbox>
         </div>
       </v-expand-transition>
     </div>
@@ -242,27 +283,44 @@
   </div>
 </template>
 <script>
-import Map from "../components/Map.vue";
+//import Map from "../components/Map.vue";
+import * as VueGoogleMaps from "vue2-google-maps";
 
 export default {
-	name: 'datosPersonales',
+  name: "datosPersonales",
   props: {
-		countDatosPersonales: 0,
-		datosPersonalesPost: {
+
+    addressTextPersonal: String,
+    markersPersonal: Object,
+    countDatosPersonales: 0,
+    datosPersonalesPost: {
       type: Array,
       required: true
-		},
-		// nextComponente: ''
-		
+    }
+    // nextComponente: ''
   },
   components: {
-    Map,
+    Map
   },
   data() {
     return {
-      addressText: "",
-      mapCood: [0,0],
-			hasSaved: false,
+      //maps
+      
+      
+      addressTextPersonal: "",
+      markersPersonal: {},
+      // markers: {},
+      // directionText: "",
+      starting_address: "",
+      starting_address_obj: {},
+      inputAdress: [],
+      center: {},
+      places: [],
+      currentPlace: null,
+      address: "",
+      coordinates: {},
+
+      hasSaved: false,
       isNext: null,
       model: null,
       fecha_nac: null,
@@ -283,20 +341,35 @@ export default {
         "Programa Integra-Chiclayo",
         "Programa Pachacutec",
         "Volantes"
-			],
-			comoKonecta: null,
-			amigo_trabajaK: true,
+      ],
+      comoKonecta: null,
+      amigo_trabajaK: true,
       nameRules: [v => !!v || "El nombre es requerido"],
       lastName1Rules: [v => !!v || "Apellido paterno es requerido"],
       lastName2Rules: [v => !!v || "Apellido materno es requerido"],
       emailRules: [
         v => !!v || "E-mail es requerido",
         v => /.+@.+\..+/.test(v) || "El correo no es válido"
-			],
-		
+      ]
     };
-	},
-	  computed: {
+  },
+
+  mounted() {
+    this.geolocate();
+
+    let self = this;
+    let starting_address_input = document.getElementById("starting_address");
+    let starting_address_autocomplete = new google.maps.places.Autocomplete(
+      starting_address_input
+    );
+    starting_address_autocomplete.addListener("place_changed", function() {
+      let place = starting_address_autocomplete.getPlace();
+      self.starting_address_obj = {
+        place
+      };
+    });
+  },
+  computed: {
     computedDateFormatted() {
       return this.formatDate(this.datosPersonalesPost.fecha_nac);
     }
@@ -304,38 +377,99 @@ export default {
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-    },
-    address(){
-     this.$emit("child-address", this.addressText);
-    },
-    coordsChild(){
-     this.$emit("child-coords", this.mapCood);
-    },
-	},
-	methods: {
+    }
+  },
+  methods: {
     save(fecha_nac) {
       this.$refs.menu.save(fecha_nac);
-		},
-  },
-  coordinates(coords){
-    this.mapCood[0] = coords.lat;
-    this.mapCood[1] = coords.lng;
-    console.log(this.mapCood[0] +","+this.mapCood[1]);
-  },
-    coordinatesMark(coords){
-    this.mapCood[0] = coords.lat;
-    this.mapCood[1] = coords.lng;
-    console.log(this.mapCood[0] +","+this.mapCood[1]);
-  },
-  addressText(address){
-    this.addressText=address;
-    console.log(address);
-  }
+    },
+    // getDirection: function(getDirection) {
+    //   this.directionText = getDirection;
+    //   //this.$emit('getDirection', this.directionText);
+    //   console.log(getDirection);
+    // },
+    // getCoordinates: function(getCoordinates) {
+    //   console.log(getCoordinates);
+    //   this.markers = getCoordinates;
+    //   // this.$emit('getCoordinates', this.markers);
+    // },
+    initSearch: function(event) {
+      console.log("Shots fired!");
+    },
 
+    addMarker() {
+      if (this.starting_address_obj.place) {
+        const position = {
+          lat: this.starting_address_obj.place.geometry.location.lat(),
+          lng: this.starting_address_obj.place.geometry.location.lng()
+        };
+
+        this.markersPersonal = position;
+        console.log(this.markersPersonal);
+        this.places.push(this.starting_address_obj.place);
+        this.addressTextPersonal = this.starting_address_obj.place.formatted_address;
+        console.log(this.addressTextPersonal);
+        this.center = position;
+        this.starting_address_obj.place = null;
+        this.$emit("addMarker", this.addressTextPersonal);
+        this.markerCoordinates();
+        // this.$emit('markDirection', this.markers);
+      } else {
+        this.addressTextPersonal = this.starting_address;
+        this.$emit("addMarker", this.addressTextPersonal);
+        console.log(this.addressTextPersonal);
+      }
+    },
+    geolocate: function() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        this.markersPersonal = this.center;
+        this.markerCoordinates();
+      });
+    },
+    updateCoordinates(location) {
+      this.coordinates = {
+        lat: location.latLng.lat(),
+        lng: location.latLng.lng()
+      };
+
+      this.markersPersonal = this.coordinates;
+      console.log(this.coordinates);
+      //return
+      this.markerCoordinates();
+      //this.$emit('coordinatesMarker', this.coordinates);
+      // return(this.coordinates);
+    },
+
+    markerCoordinates() {
+      this.$emit("markerCoordinates", this.markersPersonal);
+    }
+  }
+  // coordinates(coords){
+  //   this.mapCood[0] = coords.lat;
+  //   this.mapCood[1] = coords.lng;
+  //   console.log(this.mapCood[0] +","+this.mapCood[1]);
+  // },
+  //   coordinatesMark(coords){
+  //   this.mapCood[0] = coords.lat;
+  //   this.mapCood[1] = coords.lng;
+  //   console.log(this.mapCood[0] +","+this.mapCood[1]);
+  // },
+  // addressText(address){
+  //   this.addressText=address;
+  //   console.log(address);
+  // }
 };
 </script>
 <style>
 .v-application .title {
   line-height: 23px !important;
+}
+
+.input-google-container {
+  width: 80%;
 }
 </style>

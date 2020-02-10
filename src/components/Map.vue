@@ -19,7 +19,7 @@
       :zoom="15"
       style="width:50%;  height: 400px;"
     >
-    <gmap-marker :position="markers" :draggable="true" v-on:drag="updateCoordinates" />
+    <gmap-marker :position="markers" :draggable="true" v-on:dragend="updateCoordinates" />
     </gmap-map>
   </div>
 
@@ -33,17 +33,15 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 export default {
   name: "Map",
   props: {
-    directionText:'',
-     markers: {
-      type: Array,
-      required: true
-     },
-		
+    markers: Object,
+    directionText: String
   },
 
 
   data(){
     return {
+    markers: {},
+    directionText: '',
     starting_address: '',
     starting_address_obj: {},
     inputAdress: [],
@@ -69,6 +67,7 @@ export default {
        place
       }
     });
+
 
   },
 
@@ -96,13 +95,14 @@ export default {
         console.log(this.directionText);
         this.center = position;
         this.starting_address_obj.place = null;
-        this.$emit('addressText', this.directionText);
-        this.$emit('markDirection', this.markers);
+        this.$emit('addMarker', this.directionText);
+        this.markerCoordinates();
+       // this.$emit('markDirection', this.markers);
       }
 
       else{
         this.directionText = this.starting_address;
-        this.$emit('addressText', this.directionText);
+        this.$emit('addMarker', this.directionText);
         console.log(this.directionText);
       }
 
@@ -114,7 +114,7 @@ export default {
           lng: position.coords.longitude
         };
         this.markers = this.center;
-
+        this.markerCoordinates();
       });
     },
     updateCoordinates(location) {
@@ -126,9 +126,15 @@ export default {
       this.markers=this.coordinates;
       console.log(this.coordinates);
       //return 
-      this.$emit('coordinatesMarker', this.coordinates);
+       this.markerCoordinates();
+      //this.$emit('coordinatesMarker', this.coordinates);
      // return(this.coordinates);
+    },
+
+    markerCoordinates(){
+      this.$emit('markerCoordinates', this.markers);
     }
+
   },
 
 
