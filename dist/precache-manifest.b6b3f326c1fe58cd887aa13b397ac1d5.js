@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "789ab2da36caf2a25e0f",
+    "revision": "e11db5a2215defd607ee",
     "url": "/konecta-se/css/app.f9bb66f0.css"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/css/chunk-50305503.4a061d10.css"
   },
   {
-    "revision": "fc25b6375c902e465109",
+    "revision": "c540b3d53c99db82b4ad",
     "url": "/konecta-se/css/chunk-52394aba.ffe20e1e.css"
   },
   {
@@ -84,12 +84,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/section-2.7ffa70fd.png"
   },
   {
-    "revision": "9b1d1db553bcd6ad3a659ccf4e1f8e62",
+    "revision": "9cf07279f46e2a54319806007b16a4db",
     "url": "/konecta-se/index.html"
   },
   {
-    "revision": "789ab2da36caf2a25e0f",
-    "url": "/konecta-se/js/app.d1d61a9c.js"
+    "revision": "e11db5a2215defd607ee",
+    "url": "/konecta-se/js/app.340829bd.js"
   },
   {
     "revision": "ca601a407a1cf02bbb58",
@@ -108,8 +108,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/js/chunk-50305503.9f738284.js"
   },
   {
-    "revision": "fc25b6375c902e465109",
-    "url": "/konecta-se/js/chunk-52394aba.d88408e5.js"
+    "revision": "c540b3d53c99db82b4ad",
+    "url": "/konecta-se/js/chunk-52394aba.7db767de.js"
   },
   {
     "revision": "7dd1f2b2bc11e509483c",
