@@ -12,7 +12,7 @@
             <p class="text-center black--text title mb-2 mt-6">Tipo de documento</p>
 
             <v-select
-              v-model="select"
+              v-model="selectDocumentType"
               :items="DocumentType"
               :rules="[v => !!v || 'el tipo de documento es requerido']"
               label="Seleccionar"
@@ -109,7 +109,7 @@ export default {
     content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.`,
 
     email: "",
-    select: null,
+    selectDocumentType: null,
     DocumentType: ["DNI", "Pasaporte", "Carnet de Extranjeria"],
     checkbox: false,
     lazy: false
@@ -117,9 +117,10 @@ export default {
 
   methods: {
     validate() {
+      // @click="$router.push({name: 'oportunidades', params:{ id:convocatoria.id, convocatoria:post[index]}})"
       if (this.$refs.form.validate()) {
         this.snackbar = true;
-        this.$router.replace({ name: "selection" });
+        this.$router.push({ name: "selection",  params:{ DocumentType:this.selectDocumentType, numeroDoc:this.numeroDoc}});
       }
     },
     isNumber: function(evt) {

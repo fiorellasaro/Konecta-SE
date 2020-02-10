@@ -233,8 +233,6 @@
         </gmap-map>
       </div>
 
-      <p>{{this.addressTextPersonal}}</p>
-      <p>{{this.markersPersonal}}</p>
     </div>
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">

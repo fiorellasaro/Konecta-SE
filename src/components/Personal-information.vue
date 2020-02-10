@@ -83,7 +83,11 @@
             />
           </div>
           <div v-if="nextComponente === 'componente3'">
-            <expLaboral :countExpLab="countExpLab" :datosExperienciaPost="datosExperienciaPost" />
+            <expLaboral
+              :countExpLab="countExpLab"
+              :datosExperienciaPost="datosExperienciaPost"
+              :agregarExperiencia="agregarExperiencia"
+            />
           </div>
           <div v-if="nextComponente === 'componente4'">
             <datosRotacion :countRotacion="countRotacion" :datosRotacionPost="datosRotacionPost" />
@@ -158,7 +162,10 @@ export default {
     expLaboral,
     datosRotacion
   },
-
+  props: {
+    DocumentType: null,
+    numeroDoc: ""
+  },
   data() {
     return {
       addressTextPersonal: "",
@@ -168,6 +175,7 @@ export default {
       hidden: false,
       progressDatosPersonales: 0,
       nextComponente: "componente1",
+      añadirExp: false,
       nextComp2: 0,
       nextComp3: 0,
       nextComp4: 0,
@@ -175,6 +183,7 @@ export default {
       countProf: -1,
       countExpLab: -1,
       countRotacion: 0,
+      countBtnAddExp: 0,
 
       progressProfesional: -20,
       progressExpLaboral: -20,
@@ -219,6 +228,7 @@ export default {
       datosExperienciaPost: [
         {
           flag_se: 0,
+          flag_conExp: 0,
           flag_ec: 0,
           flag_eo: 0,
 
@@ -246,6 +256,7 @@ export default {
           eo_retribucion_comisiones: 0
         }
       ],
+      allDatosExp: [],
       datosRotacionPost: [
         {
           actividades: "",
@@ -276,11 +287,75 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
+    agregarExperiencia() {
+      if (this.countBtnAddExp < 3) {
+        this.countExpLab = 0;
+        this.añadirExp = true;
+        this.countBtnAddExp += 1;
+      }
+    },
+    arrExperiencias() {
+      if (this.datosExperienciaPost.flag_conExp === "rbtExtContact") {
+        this.datosExperienciaPost.flag_ec = 1;
+        this.datosExperienciaPost.flag_eo = 0;
+      }
+      if (this.datosExperienciaPost.flag_conExp === "rbtExpOtros") {
+        this.datosExperienciaPost.flag_ec = 0;
+        this.datosExperienciaPost.flag_eo = 1;
+      }
+      console.log(this.datosExperienciaPost.flag_ec);
+      this.allDatosExp.push({
+        flag_se: this.datosExperienciaPost.flag_se,
+        flag_ec: this.datosExperienciaPost.flag_ec,
+        flag_eo: this.datosExperienciaPost.flag_eo,
+        se_p_redes: this.datosExperienciaPost.se_p_redes,
+        se_p_ventas: this.datosExperienciaPost.se_p_ventas,
+        se_p_atc: this.datosExperienciaPost.se_p_atc,
+        se_p_crosselling: this.datosExperienciaPost.se_p_crosselling,
+        se_p_backof: this.datosExperienciaPost.se_p_backof,
+        se_expect_salarial: [
+          this.datosExperienciaPost.se_expect_salarial_desde,
+          this.datosExperienciaPost.se_expect_salarial_hasta
+        ],
+
+        ec_empresa: this.datosExperienciaPost.ec_empresa,
+        ec_cliente: this.datosExperienciaPost.ec_cliente,
+        ec_rubro_cliente: this.datosExperienciaPost.ec_rubro_cliente,
+        ec_segmento: this.datosExperienciaPost.ec_segmento,
+        ec_tiempo_exp: this.datosExperienciaPost.ec_tiempo_exp,
+        ec_retribucion_basico: this.datosExperienciaPost.ec_retribucion_basico,
+        ec_retribucion_comisiones: this.datosExperienciaPost
+          .ec_retribucion_comisiones,
+
+        eo_empresa: this.datosExperienciaPost.eo_empresa,
+        eo_rubro_empresa: this.datosExperienciaPost.eo_rubro_empresa,
+        eo_puesto: this.datosExperienciaPost.eo_puesto,
+        eo_tiempo_exp: this.datosExperienciaPost.eo_tiempo_exp,
+        eo_retribucion_basico: this.datosExperienciaPost.eo_retribucion_basico,
+        eo_retribucion_comisiones: this.datosExperienciaPost
+          .eo_retribucion_comisiones
+      });
+      (this.datosExperienciaPost.ec_empresa = ""),
+        (this.datosExperienciaPost.ec_cliente = ""),
+        (this.datosExperienciaPost.ec_rubro_cliente = ""),
+        (this.datosExperienciaPost.ec_segmento = ""),
+        (this.datosExperienciaPost.ec_tiempo_exp = null),
+        (this.datosExperienciaPost.ec_retribucion_basico = null),
+        (this.datosExperienciaPost.ec_retribucion_comisiones = null),
+        (this.datosExperienciaPost.eo_empresa = ""),
+        (this.datosExperienciaPost.eo_rubro_empresa = ""),
+        (this.datosExperienciaPost.eo_puesto = ""),
+        (this.datosExperienciaPost.eo_tiempo_exp = null),
+        (this.datosExperienciaPost.eo_retribucion_basico = null),
+        (this.datosExperienciaPost.eo_retribucion_comisiones = null),
+        localStorage.setItem("datos", JSON.stringify(this.allDatosExp));
+      console.log(this.allDatosExp);
+    },
     agregarPersonalDate() {
       this.nextComponente = "componente5";
       this.datosPostulantes.push({
-        tipodoc: "dni",
-        numdoc: "456",
+        tipodoc: this.DocumentType,
+        numdoc: this.numeroDoc,
         nombres: this.datosPersonalesPost.nombres,
         apellido_p: this.datosPersonalesPost.apellido_p,
         apellido_m: this.datosPersonalesPost.apellido_m,
@@ -308,65 +383,8 @@ export default {
         coord_estudio: [0, 0], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
         text_dir_estudio: this.datosProfesionalesPost.text_dir_estudio,
         horario_estudio: this.datosProfesionalesPost.horario_estudio,
-        experienciaPostulante: [
-          {
-            flag_se: this.datosExperienciaPost.flag_se,
-            flag_ec: this.datosExperienciaPost.flag_ec,
-            flag_eo: this.datosExperienciaPost.flag_eo,
-
-            se_p_redes: this.datosExperienciaPost.se_p_redes,
-            se_p_ventas: this.datosExperienciaPost.se_p_ventas,
-            se_p_atc: this.datosExperienciaPost.se_p_atc,
-            se_p_crosselling: this.datosExperienciaPost.se_p_crosselling,
-            se_p_backof: this.datosExperienciaPost.se_p_backof,
-            se_expect_salarial: [
-              this.datosExperienciaPost.se_expect_salarial_desde,
-              this.datosExperienciaPost.se_expect_salarial_hasta
-            ],
-
-            ec_empresa: "",
-            ec_cliente: "",
-            ec_rubro_cliente: "",
-            ec_segmento: "",
-            ec_tiempo_exp: 0,
-            ec_retribucion_basico: 0,
-            ec_retribucion_comisiones: 0,
-
-            eo_empresa: "",
-            eo_rubro_empresa: "",
-            eo_puesto: "",
-            eo_tiempo_exp: 0,
-            eo_retribucion_basico: 0,
-            eo_retribucion_comisiones: 0
-          },
-          {
-            flag_se: 0,
-            flag_ec: 0,
-            flag_eo: 1,
-
-            se_p_redes: "",
-            se_p_ventas: "",
-            se_p_atc: "",
-            se_p_crosselling: "",
-            se_p_backof: "",
-            se_expect_salarial: [,],
-
-            ec_empresa: "",
-            ec_cliente: "",
-            ec_rubro_cliente: "",
-            ec_segmento: "",
-            ec_tiempo_exp: 0,
-            ec_retribucion_basico: 0,
-            ec_retribucion_comisiones: 0,
-
-            eo_empresa: "",
-            eo_rubro_empresa: "",
-            eo_puesto: "",
-            eo_tiempo_exp: 0,
-            eo_retribucion_basico: 0,
-            eo_retribucion_comisiones: 0
-          }
-        ],
+        //DATOS EXPERIENCIA
+        experienciaPostulante: this.allDatosExp,
         //datos rotacion
         actividades: this.datosRotacionPost.actividades,
         coord_actividad: [0, 0],
@@ -497,28 +515,49 @@ export default {
       if (this.nextComponente === "componente3" && this.countExpLab !== 7) {
         this.countExpLab += 1;
         this.countExpLab === 0 ? (this.hidden = false) : (this.hidden = true);
-        this.progressExpLaboral += 16;
+        this.añadirExp === false
+          ? (this.progressExpLaboral += 16)
+          : (this.progressExpLaboral += 0);
       }
       if (this.countExpLab === 7) {
         this.hidden = false;
         this.progressExpLaboral = 100;
         this.nextComp4 += 1;
+        // this.arrExperiencias();
+      }
+      //Agregar experiencia
+      if (
+        (this.countExpLab === 5 &&
+          this.datosExperienciaPost.flag_conExp == "rbtExpOtros") ||
+        (this.countExpLab === 6 &&
+          this.datosExperienciaPost.flag_conExp == "rbtExtContact")
+      ) {
+        this.arrExperiencias();
+        // alert("con experiencia");
+        this.hidden = false;
       }
 
       if (
         this.countExpLab === 6 &&
-        this.datosExperienciaPost.flag_ec == "rbtExpOtros"
+        this.datosExperienciaPost.flag_conExp == "rbtExpOtros"
       ) {
         this.countExpLab += 1;
         this.hidden = false;
         this.progressExpLaboral = 100;
-        console.log("this.progressExpLaboral", this.progressExpLaboral);
-        console.log("this.countExpLab", this.countExpLab);
+        // console.log("this.progressExpLaboral", this.progressExpLaboral);
+        // console.log("this.countExpLab", this.countExpLab);
       }
       // Rotacion
       // // Rotacion
       if (this.nextComp4 == 2) {
         this.nextComponente = "componente4";
+        if (
+          this.datosExperienciaPost.flag_conExp !== "rbtExpOtros" &&
+          this.datosExperienciaPost.flag_conExp !== "rbtExtContact"
+        ) {
+          this.arrExperiencias();
+          // alert("this.countExpLab == 7", this.countExpLab);
+        }
       }
       if (this.nextComponente === "componente4" && this.countRotacion !== 7) {
         this.countRotacion += 1;
@@ -553,7 +592,9 @@ export default {
       // Experiencia Laboral
       if (this.nextComponente === "componente3") {
         this.countExpLab -= 1;
-        this.progressExpLaboral -= 16;
+        this.añadirExp === false
+          ? (this.progressExpLaboral -= 16)
+          : (this.progressExpLaboral -= 0);
         this.countExpLab === 0 || this.progressExpLaboral === 100
           ? (this.hidden = false)
           : (this.hidden = true);
@@ -579,8 +620,8 @@ export default {
       };
 
       let datosPostulantes = {
-        tipodoc: "DNI",
-        numdoc: "72722297",
+        tipodoc: personalInformation.tipodoc,
+        numdoc: personalInformation.numdoc,
         nombres: personalInformation.nombres,
         apellido_p: personalInformation.apellido_p,
         apellido_m: personalInformation.apellido_m,

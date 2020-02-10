@@ -87,7 +87,7 @@
               <v-col cols="6" md="6" class="pa-0">
                 <v-select
                   class="mt-0 pa-0 pt-2"
-                  :items="parentesco" 
+                  :items="parentesco"
                   v-model="arrFamilia[index].parentesco"
                   color="teal"
                 ></v-select>
@@ -98,7 +98,12 @@
                 <label for>Edad :</label>
               </v-col>
               <v-col cols="6" md="6" class="pa-0">
-                <v-text-field v-model="arrFamilia[index].edad" color="teal" class="pa-0" placeholder="2"></v-text-field>
+                <v-text-field
+                  v-model="arrFamilia[index].edad"
+                  color="teal"
+                  class="pa-0"
+                  placeholder="2"
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-row class="mr-6">
@@ -106,7 +111,13 @@
                 <label for>Trabaja :</label>
               </v-col>
               <v-col cols="6" md="6" class="pa-0">
-                <v-select :items="trabaja" v-model="arrFamilia[index].trabaja" color="teal" label="Seleccionar" class="pa-0">
+                <v-select
+                  :items="trabaja"
+                  v-model="arrFamilia[index].trabaja"
+                  color="teal"
+                  label="Seleccionar"
+                  class="pa-0"
+                >
                   <!-- <option v-for="option in options" :value="option.value">{{option.text}}</option> -->
                 </v-select>
               </v-col>
@@ -143,50 +154,49 @@
     <div id="step2" v-if="countRotacion == 6" class="px-1 pt-12">
       <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
       <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
+      <!-- <p>{{ selected }}</p>
+      <p>{{ datosRotacionPost[0].actividad_tiempo_libre }}</p>-->
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Viajar"
-        value="Viajar"
+        value="A"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Jugar Fútbol"
-        value="Jugar Fútbol"
+        value="B"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Jugar videojuegos"
-        value="Jugar videojuegos"
+        value="C"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil"
+        class="pa-2 radioStateCivil only-one"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Pintar/Dibujar"
-        value="Pintar/Dibujar"
+        value="D"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil"
+        class="pa-2 radioStateCivil only-one"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Tomar fotografía"
-        value="Tomar fotografía"
+        value="E"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil"
+        class="pa-2 radioStateCivil only-one"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Aprender idiomas"
-        value="Aprender idiomas"
+        value="F"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -194,7 +204,7 @@
       <v-checkbox
         v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Ir al cine"
-        value="Ir al cine"
+        value="G"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -202,7 +212,7 @@
       <v-checkbox
         v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Jugar voley"
-        value="Jugar voley"
+        value="H"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -210,7 +220,7 @@
       <v-checkbox
         v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Jugar basket"
-        value="Jugar basket"
+        value="I"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -218,7 +228,7 @@
       <v-checkbox
         v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Salir a comer"
-        value="Salir a comer"
+        value="J"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -226,7 +236,7 @@
       <v-checkbox
         v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Salir a bailar"
-        value="Salir a bailar"
+        value="K"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -234,7 +244,7 @@
       <v-checkbox
         v-model="datosRotacionPost.actividad_tiempo_libre"
         label="Otros"
-        value="Otros"
+        value="L"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
@@ -311,6 +321,8 @@ export default {
       horarioActi: null,
       horarioActividad: ["Mañana", "Tarde", "Noche", "Horario flexible"],
       selected: [],
+      additional_grouped: [],
+      // datosRotacionPost.actividad_tiempo_libre: selected
       parentesco: [
         "Padre",
         "Madre",
@@ -323,19 +335,24 @@ export default {
         "Suegro(a)",
         "Otros"
       ],
-      // familiaPost: [{ parentesco: "", edad: 0, trabaja: false }],
-      arrFamilia:[],
-trabaja: [
-      {text: 'Si', value: true},
-      {text: 'No', value: false},
-    ],
+      familiaPost: [{ parentesco: "", edad: 0, trabaja: false }],
+      arrFamilia: [],
+      trabaja: [
+        { text: "Si", value: true },
+        { text: "No", value: false }
+      ]
       // trabaja: ["Si", "No"],
     };
   },
-  mounted(){
-     // invocar los métodos
+  mounted() {
+    // invocar los métodos
     // this.createObjFamilia();
-    },
+  },
+  computed: {
+    final: function() {
+      // return this.selected.concat(this.additional_grouped);
+    }
+  },
   methods: {
     createObjFamilia() {
       // debugger;
@@ -347,19 +364,16 @@ trabaja: [
       //     trabaja: '',
       //   });
       // } else{
-        let nroFam = this.datosRotacionPost.fam_postulante;
-        for (let i = 0; i < nroFam; i++) {
+      let nroFam = this.datosRotacionPost.fam_postulante;
+      for (let i = 0; i < nroFam; i++) {
         this.arrFamilia.push({
           parentesco: "",
           edad: null,
-          trabaja: null,
+          trabaja: null
         });
         this.datosRotacionPost.familiares = this.arrFamilia;
-        console.log(this.arrFamilia);
-        console.log('familiares',this.datosRotacionPost.familiares );
       }
-      }
-      // const array = [];
+    }
   }
 };
 </script>

@@ -12,8 +12,14 @@
       <v-layout column wrap class="my-12" align-center>
         <v-flex xs12 sm4 class="my-4">
           <div class="text-center">
-            <h2 class="headline">¿QUÉ TE OFRECEMOS?</h2>
-            <span class="subheading">Cultura Konecta</span>
+            <h2 class="headline font-weight-bold pb-2">Esto es Konecta Perú por dentro.</h2>
+            <span class="subheading subtitle-1 py-12">
+              Te invitamos a dar una vuelta por konecta. Hemos preparado una visita muy especial, eres nuestro invitado/a de honor,
+              ponte cómodo/a y disfruta.
+            </span>
+          </div>
+          <div class="text-center mt-4">
+            <h2 class="headline font-weight-bold pt-12 pb-0">Lo que nos Entusiasma</h2>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -22,37 +28,42 @@
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">mdi-scale</v-icon>
+                    <v-icon size="64" class="amber--text text--lighten-2">tag_faces</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Flexibilidad para ti</div>
+                    <div class="headline text-center">Primero: las personas</div>
                   </v-card-title>
-                  <v-card-text class="text-center">Pensamos en tu conciliación de vida laboral y familiar, es por ello que te ofrecemos 6 sedes en Lima y 1 en Chiclayo, con operaciones en turnos de madrugada, mañana y tarde.</v-card-text>
-                </v-card>
-              </v-flex>
-              <v-flex xs12 md4>
-                <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">mdi-run</v-icon>
-                  </v-card-text>
-                  <v-card-title primary-title class="layout justify-center">
-                    <div class="headline">Línea de carrera</div>
-                  </v-card-title>
-                  <v-card-text class="text-center">Tu crecimiento es nuestro crecimiento. Por eso nos preocupamos por darte las herramientas necesarias para tu desarrollo en espacios amigables, cómodos y seguros. 
+                    Hacer feliz a nuestra gente en su día a día
+                    es lo que realmente
+                    nos hace vibrar en nuestros asientos.
                   </v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">mdi-calendar-clock</v-icon>
+                    <v-icon size="64" class="blue--text text--lighten-2">star</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Puntualidad</div>
+                    <div class="headline">¡Viva la Excelencia!</div>
                   </v-card-title>
+                  <v-card-text
+                    class="text-center"
+                  >Somos muy pero muy fans de los pequeños detalles, de mejorar siempre y perseguir la excelencia hasta alcanzarla.</v-card-text>
+                </v-card>
+              </v-flex>
+              <v-flex xs12 md4>
+                <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    Sabemos lo importante que es, tanto para ti como para nosotros, recibir los pagos a tiempo, y es por eso que desde nuestros inicios hemos cumplido impecablemente con esta responsabilidad. Asimismo, ofrecemos pagos antes de fecha, bonos, comisiones y premios por tu desempeño.
+                    <v-icon size="64" class="red--text">favorite</v-icon>
                   </v-card-text>
+                  <v-card-title primary-title class="layout justify-center">
+                    <div class="headline text-center">Apasionamiento</div>
+                  </v-card-title>
+                  <v-card-text
+                    class="text-center"
+                  >Entre todos sabemos cómo hacer que las cosas sucedan. Somos creativos, inclusivos, diversos, equitativos y sobre todo, apasionados.</v-card-text>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -61,12 +72,20 @@
       </v-layout>
     </section>
 
-     <section>
+    <section>
       <v-parallax src="../assets/section-2.png" height="380">
         <v-layout column align-center justify-center>
-          <div class="headline white--text mb-4 text-center">Somos una familia de más de 14K personas</div>
+          <div
+            class="headline white--text mb-4 text-center"
+          >Somos una familia de más de 14K personas</div>
           <em>Tú también puedes ser parte</em>
-          <v-btn class="mt-12" color="teal lighten-2" dark large @click="$router.push('/login')">Quiero ser parte</v-btn>
+          <v-btn
+            class="mt-12"
+            color="teal lighten-2"
+            dark
+            large
+            @click="$router.push('/login')"
+          >Quiero ser parte</v-btn>
         </v-layout>
       </v-parallax>
     </section>
@@ -74,27 +93,35 @@
       <v-layout column wrap class="my-12" align-center>
         <v-flex xs12 sm4 class="my-4">
           <div class="text-center">
-            <h2 class="headline">BENEFICIOS PARA TI</h2>
+            <h2 class="headline font-weight-bold">BENEFICIOS PARA TI</h2>
             <!-- <span class="subheading">Cras facilisis mi vitae nunc</span> -->
           </div>
         </v-flex>
         <v-flex xs12>
           <v-container grid-list-xl>
-            <v-layout row wrap align-center>
-              <v-flex xs12 md4>
+            <v-layout row wrap>
+              <v-flex xs12 md6>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">mdi-school</v-icon>
+                    <v-icon size="64" class="blue--text ">home_work</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Convenios educativos </div>
+                    <div class="headline text-center">
+                      Encuentra tu Lugar para Trabajar con Nosotros
+                    </div>
                   </v-card-title>
-                  <v-card-text class="text-center">
-                    Contamos con convenios educativos en múltiples universidades e institutos, beneficios en el campo de salud y  descuentos para actividades y servicios recreativos.
-                  </v-card-text>
+                  <v-card-text
+                    class="text-center" style="list-style: none;"
+                  ><li>Sede Lima
+                    </li>
+                    <li>Sede Surquillo</li>
+                    <li>Sede Lima Cargo</li>
+                    <li>Sede Bellevista</li>
+                    <li>Sede Chiclayo</li>
+                    </v-card-text>
                 </v-card>
               </v-flex>
-              <v-flex xs12 md4>
+              <!-- <v-flex xs12 md4>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
                     <v-icon x-large class="blue--text text--lighten-2">pregnant_woman</v-icon>
@@ -102,22 +129,28 @@
                   <v-card-title primary-title class="layout justify-center">
                     <div class="headline">Licencias</div>
                   </v-card-title>
-                  <v-card-text class="text-center">
-                    Brindamos licencias para que puedan disfrutar plenamente de: matrimonio, paternidad y maternidad extendida, mudanza, humanitaria y por adopción. Queremos que tu vida laboral y personal se mantengan equilibradas.
-                  </v-card-text>
+                  <v-card-text
+                    class="text-center"
+                  >Brindamos licencias para que puedan disfrutar plenamente de: matrimonio, paternidad y maternidad extendida, mudanza, humanitaria y por adopción. Queremos que tu vida laboral y personal se mantengan equilibradas.</v-card-text>
                 </v-card>
-              </v-flex>
-              <v-flex xs12 md4>
+              </v-flex>-->
+              <v-flex xs12 md6>
                 <v-card flat class="transparent">
-                  <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">sentiment_very_satisfied</v-icon>
+                  <v-card-text class="text-center"> 
+                    <v-icon size="64" class="deep-purple--text text--lighten-2">schedule</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Ambiente laboral seguro</div>
+                    <div class="headline text-center">Elije tú el horario más conveniente
+</div>
                   </v-card-title>
-                  <v-card-text class="text-center">
-                    Nuestro ambiente laboral es seguro, saludable, libre de violencia y de discriminación. Todos merecemos el mismo trato y respeto y nuestro deber es asegurar que todos se sientan cómodos. 
-                  </v-card-text>
+                  <v-card-text
+                    class="text-center" style="list-style: none;"
+                  ><li>Horario 1
+                    </li>
+                    <li>Horario 2</li>
+                    <li>Horario 3</li>
+                    <li>Horario 4</li>
+                    <li>Horario 5</li></v-card-text>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -142,11 +175,9 @@
                     <v-icon x-large class="blue--text text--lighten-2">emoji_people</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Edison Altamirano </div>
+                    <div class="headline text-center">Edison Altamirano</div>
                   </v-card-title>
-                  <v-card-text>
-                    “Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”
-                  </v-card-text>
+                  <v-card-text>“Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”</v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4>
@@ -155,11 +186,9 @@
                     <v-icon x-large class="blue--text text--lighten-2">emoji_people</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline">Cynthia Peña </div>
+                    <div class="headline">Cynthia Peña</div>
                   </v-card-title>
-                  <v-card-text>
-                    “Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”
-                  </v-card-text>
+                  <v-card-text>“Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”</v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4>
@@ -170,9 +199,7 @@
                   <v-card-title primary-title class="layout justify-center">
                     <div class="headline text-center">Ariel Ñique</div>
                   </v-card-title>
-                  <v-card-text>
-                    “Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”
-                  </v-card-text>
+                  <v-card-text>“Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”</v-card-text>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -184,9 +211,17 @@
     <section>
       <v-parallax src="../assets/section-1.png" height="380">
         <v-layout column align-center justify-center>
-          <div class="headline white--text mb-4 text-center">Somos una familia de más de 14K personas</div>
+          <div
+            class="headline white--text mb-4 text-center"
+          >Somos una familia de más de 14K personas</div>
           <em>Tú también puedes ser parte</em>
-          <v-btn class="mt-12" color="teal lighten-2" dark large @click="$router.push('/login')">Quiero ser parte</v-btn>
+          <v-btn
+            class="mt-12"
+            color="teal lighten-2"
+            dark
+            large
+            @click="$router.push('/login')"
+          >Quiero ser parte</v-btn>
         </v-layout>
       </v-parallax>
     </section>
@@ -198,9 +233,7 @@
               <v-card-title primary-title class="layout justify-center">
                 <div class="headline">Konecta Perú</div>
               </v-card-title>
-              <v-card-text>
-                Konecta Perú es una empresa dedicada a prestar servicios de BPO y de contact center. Opera hace nueve años en el país y al 2020 cuenta con más de 13,500 colaboradores/as en las ciudades de Lima, Callao y Chiclayo. Buscamos maximizar la creación de valor compartido, tanto para la Compañía como para nuestros grupos de interés y las comunidades en las que desarrollamos operaciones, mediante la implantación de prácticas de gestión basadas en la rentabilidad, innovación, igualdad de oportunidades, ética y la sostenibilidad.
-              </v-card-text>
+              <v-card-text>Konecta Perú es una empresa dedicada a prestar servicios de BPO y de contact center. Opera hace nueve años en el país y al 2020 cuenta con más de 13,500 colaboradores/as en las ciudades de Lima, Callao y Chiclayo. Buscamos maximizar la creación de valor compartido, tanto para la Compañía como para nuestros grupos de interés y las comunidades en las que desarrollamos operaciones, mediante la implantación de prácticas de gestión basadas en la rentabilidad, innovación, igualdad de oportunidades, ética y la sostenibilidad.</v-card-text>
             </v-card>
           </v-flex>
           <v-flex xs12 sm4 offset-sm1>
@@ -223,8 +256,10 @@
                     <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
                   </v-list-item-action>
                   <v-list-item-content>
-                    <v-list-item-title style="white-space: normal!important;">Av. República de Panamá 4575 piso 5
-Lima, Peru</v-list-item-title>
+                    <v-list-item-title style="white-space: normal!important;">
+                      Av. República de Panamá 4575 piso 5
+                      Lima, Peru
+                    </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -232,7 +267,9 @@ Lima, Peru</v-list-item-title>
                     <v-icon class="blue--text text--lighten-2">mdi-email</v-icon>
                   </v-list-item-action>
                   <v-list-item-content>
-                    <v-list-item-title style="white-space: normal!important;">comunicacionesperu@grupokonecta.com</v-list-item-title>
+                    <v-list-item-title
+                      style="white-space: normal!important;"
+                    >comunicacionesperu@grupokonecta.com</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
