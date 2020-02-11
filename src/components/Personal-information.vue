@@ -90,7 +90,7 @@
             />
           </div>
           <div v-if="nextComponente === 'componente4'">
-            <datosRotacion :countRotacion="countRotacion" :datosRotacionPost="datosRotacionPost" />
+            <datosRotacion :countRotacion="countRotacion" :datosRotacionPost="datosRotacionPost" :actividad_libre="actividad_libre" />
           </div>
           <div v-if="nextComponente === 'componente5'" class="pt-12 px-4">
             <p class="title text-center headline">¡Gracias por tu postulación!</p>
@@ -266,10 +266,11 @@ export default {
           fam_postulante: 0,
           motivacion: "",
           actividad_tiempo_libre: [],
-          sede_preferencia: [],
+          sede_preferencia: ['B'],
           familiares: []
         }
-      ]
+      ],
+      actividad_libre: [],
     };
   },
   computed: {

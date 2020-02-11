@@ -51,7 +51,12 @@
     </div>
     <div id="step2" v-if="countRotacion == 2" class="px-1 pt-12">
       <p class="text-center title mb-0">¿Dónde realizas esa actividad?</p>
-      <v-text-field v-model="datosRotacionPost.text_dir_actividad" class="pt-2" color="teal" placeholder="Calle 3 de febrero, 511, San Isidro"></v-text-field>
+      <v-text-field
+        v-model="datosRotacionPost.text_dir_actividad"
+        class="pt-2"
+        color="teal"
+        placeholder="Calle 3 de febrero, 511, San Isidro"
+      ></v-text-field>
     </div>
     <div id="step2" v-if="countRotacion == 3" class="px-1 pt-12">
       <p class="text-center title mb-0">¿En que horario realizas esa actividad?</p>
@@ -72,7 +77,7 @@
         placeholder="2"
         v-on:keyup.enter="createObjFamilia()"
       ></v-text-field>
-      <!-- <span v-for="n in 5">{{ n }} </span> -->
+      <!-- Generar Datos Familiares -->
       <v-flex v-for="(famPostulante, index) in arrFamilia" :key="famPostulante.id">
         <v-card outlined class="mx-auto mb-4" max-width="344">
           <v-card-title
@@ -134,21 +139,16 @@
         required
         class="pt-4 body-1"
       >
-        <v-radio label="Mi familia" value="Mi familia" color="teal" class="pa-2 radioStateCivil"></v-radio>
-        <v-radio
-          label="Mis estudios"
-          value="Mis estudios"
-          color="teal"
-          class="pa-2 radioStateCivil"
-        ></v-radio>
+        <v-radio label="Mi familia" value="A" color="teal" class="pa-2 radioStateCivil"></v-radio>
+        <v-radio label="Mis estudios" value="B" color="teal" class="pa-2 radioStateCivil"></v-radio>
         <v-radio
           label="Negocio / proyecto personalr"
-          value="Negocio / proyecto personal"
+          value="C"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
-        <v-radio label="Viajar" value="Viajar" color="teal" class="pa-2 radioStateCivil"></v-radio>
-        <v-radio label="Otros" value="Otros" color="teal" class="pa-2 radioStateCivil"></v-radio>
+        <v-radio label="Viajar" value="D" color="teal" class="pa-2 radioStateCivil"></v-radio>
+        <v-radio label="Otros" value="E" color="teal" class="pa-2 radioStateCivil"></v-radio>
       </v-radio-group>
     </div>
     <div id="step2" v-if="countRotacion == 6" class="px-1 pt-12">
@@ -163,6 +163,7 @@
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
         v-model="selected"
@@ -171,6 +172,7 @@
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
         v-model="selected"
@@ -178,76 +180,89 @@
         value="C"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil only-one"
+        class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
+        v-model="selected"
         label="Pintar/Dibujar"
         value="D"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil only-one"
+        class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
+        v-model="selected"
         label="Tomar fotografía"
         value="E"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil only-one"
+        class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
+        v-model="selected"
         label="Aprender idiomas"
         value="F"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Ir al cine"
         value="G"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Jugar voley"
         value="H"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Jugar basket"
         value="I"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Salir a comer"
         value="J"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Salir a bailar"
         value="K"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.actividad_tiempo_libre"
+        v-model="selected"
         label="Otros"
         value="L"
         color="teal"
         hide-details
         class="pa-2 radioStateCivil"
+        :disabled="hasAdditional"
       ></v-checkbox>
     </div>
     <div id="step2" v-if="countRotacion == 7" class="px-1 pt-12">
@@ -256,51 +271,48 @@
       >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
       <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
       <v-checkbox
-        v-model="datosRotacionPost.sede_preferencia"
-        label="Lima - Crillón"
+        v-model="actividad_libre"
+        label="Sede Centro de Lima"
         value="A"
         color="teal"
         hide-details
+        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.sede_preferencia"
-        label="Lima - Fénix"
-        value="Lima - Fénix"
+        v-model="actividad_libre"
+        label="Sede Surquillo"
+        value="B"
         color="teal"
         hide-details
+        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.sede_preferencia"
-        label="Lima - Sudameris"
-        value="Lima - Sudameris"
+        v-model="actividad_libre"
+        label="Sede Callao - Lima Cargo"
+        value="C"
         color="teal"
         hide-details
+        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.sede_preferencia"
-        label="Lima - Surquillo"
-        value="Lima - Surquillo"
+        v-model="actividad_libre"
+        label="Sede Callao - Bellavista"
+        value="D"
         color="teal"
         hide-details
+        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
-        v-model="datosRotacionPost.sede_preferencia"
-        label="Callao - Lima Cargo"
-        value="Callao - Lima Cargo"
+        v-model="actividad_libre"
+        label="Sede Chiclayo"
+        value="E"
         color="teal"
         hide-details
-        class="pa-2 radioStateCivil"
-      ></v-checkbox>
-      <v-checkbox
-        v-model="datosRotacionPost.sede_preferencia"
-        label="Chiclayo - Sede Chiclayo"
-        value="Chiclayo - Sede Chiclayo"
-        color="teal"
-        hide-details
+        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
     </div>
@@ -314,13 +326,15 @@ export default {
     datosRotacionPost: {
       type: Array,
       required: true
-    }
+    },
+    actividad_libre: [],
   },
   data() {
     return {
       horarioActi: null,
       horarioActividad: ["Mañana", "Tarde", "Noche", "Horario flexible"],
       selected: [],
+      sede_preferencia: [],
       additional_grouped: [],
       // datosRotacionPost.actividad_tiempo_libre: selected
       parentesco: [
@@ -349,21 +363,15 @@ export default {
     // this.createObjFamilia();
   },
   computed: {
-    final: function() {
-      // return this.selected.concat(this.additional_grouped);
+    hasAdditional() {
+      return this.selected.length > 2;
+    },
+    hasSede() {
+      return this.actividad_libre.length > 2;
     }
   },
   methods: {
     createObjFamilia() {
-      // debugger;
-      // if(this.datosRotacionPost.fam_postulante === undefined){
-      //   // let nroFam = 0;
-      //   this.arrFamilia.push({
-      //     parentesco: "",
-      //     edad: 0,
-      //     trabaja: '',
-      //   });
-      // } else{
       let nroFam = this.datosRotacionPost.fam_postulante;
       for (let i = 0; i < nroFam; i++) {
         this.arrFamilia.push({
