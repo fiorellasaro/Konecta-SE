@@ -79,12 +79,14 @@
               :datosProfesionalesPost="datosProfesionalesPost"
               v-on:markerCoordinates="getCoordinatesStudy($event)"
               v-on:addMarker="getDirectionStudy($event)"
+              :datosPersonalesPost="datosPersonalesPost"
             />
           </div>
           <div v-if="nextComponente === 'componente3'">
             <expLaboral
               :countExpLab="countExpLab"
               :datosExperienciaPost="datosExperienciaPost"
+              :datosPersonalesPost="datosPersonalesPost"
               :agregarExperiencia="agregarExperiencia"
             />
           </div>
@@ -94,13 +96,32 @@
               :datosRotacionPost="datosRotacionPost"
               v-on:markerCoordinates="getCoordinatesActivity($event)"
               v-on:addMarker="getDirectionActivity($event)"
+              :datosPersonalesPost="datosPersonalesPost"
+              :actividad_libre ="actividad_libre"
             />
           </div>
-          <div v-if="nextComponente === 'componente5'" class="pt-12 px-4">
-            <p class="title text-center headline">¡Gracias por tu postulación!</p>
+          <div v-if="nextComponente === 'componente5'" class="pt-2 px-2">
             <p
-              class="title text-center headline pt-6"
-            >Nuestro equipo de Selección se comunicará contigo muy pronto</p>
+              class="title text-center title font-weight-medium pt-2"
+            >{{datosPersonalesPost.nombre_social}}, acabas de culminar la primera etapa de tu postulación!</p>
+            <img src="../assets/confetti.png" style="vertical-align: middle; width: 50px;" />
+            <p
+              class="pb-0 pt-4 body-2 text-justify"
+            >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
+
+            <p class="body-2 text-justify">Si tienes dudas escríbenos al WhatsApp :</p>
+            <v-row class="justify-center pb-4"><img src="../assets/logos_whatsapp.png" style="height: 35px;"/> <p class="primary--text pl-4 pt-1">984860149</p></v-row>
+            <v-btn
+              color="#00B8AD"
+              class="white--text"
+              rounded
+              @click="$router.push({name: 'home'})"
+            >Conócenos más</v-btn>
+            <p class="body-2 pt-4">Califica la experiencia de tu proceso :</p>
+            <div class="text-center teal--text">
+              <v-rating v-model="rating" color="teal" class="teal--text"></v-rating>
+            </div>
+            <v-text-field name="name" placeholder="Algún comentario" id="id"></v-text-field>
           </div>
         </div>
         <v-row v-if="nextComponente !== 'componente5'">
@@ -125,6 +146,7 @@
               v-if="countRotacion !== 7"
               fab
               large
+              :disabled="!datosPersonalesPost.datosValidPer"
               color="#00B8AD"
               class="white--text"
               absolute
@@ -178,6 +200,8 @@ export default {
       markersStudy: {},
       addressTextActivity: "",
       markersActivity: {},
+      rating: null,
+      
       // addressVP: '',
       // coordsVP: [0,0],
       hidden: false,
@@ -198,9 +222,10 @@ export default {
       progressRotation: 0,
 
       datosPostulantes: [],
-
+      
       datosPersonalesPost: [
         {
+          datosValidPer: true,
           tipodoc: "",
           numdoc: "",
           nombres: "",
@@ -224,6 +249,7 @@ export default {
       ],
       datosProfesionalesPost: [
         {
+          datosValidProf: true,
           grado_formacion: null,
           institucion: "",
           estado_estudios: "",
@@ -235,6 +261,7 @@ export default {
       ],
       datosExperienciaPost: [
         {
+          datosValidExp: true,
           flag_se: 0,
           flag_conExp: 0,
           flag_ec: 0,
@@ -277,7 +304,8 @@ export default {
           sede_preferencia: [],
           familiares: []
         }
-      ]
+      ],
+      actividad_libre: []
     };
   },
   computed: {
@@ -410,7 +438,6 @@ export default {
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
-      console.log(this.addressTextPersonal);
       // console.log(this.markersPersonal);
       this.PostPostulante(this.datosPostulantes[0]);
     },
@@ -484,6 +511,7 @@ export default {
 
     btnNextStep() {
       // datos personales
+      // if (this.$refs.form.validate()) {
       if (this.progressDatosPersonales !== 100) {
         this.hidden = true;
         this.countDatosPersonales += 1;
@@ -568,18 +596,24 @@ export default {
           this.datosExperienciaPost.flag_conExp !== "rbtExtContact"
         ) {
           this.arrExperiencias();
-          // alert("this.countExpLab == 7", this.countExpLab);
         }
       }
       if (this.nextComponente === "componente4" && this.countRotacion !== 7) {
         this.countRotacion += 1;
-        this.countRotacion === 1 ? (this.hidden = false) : (this.hidden = true);
         this.progressRotation += 14;
+        this.countRotacion === 1 ? (this.hidden = false) : (this.hidden = true);
+        
+        console.log(this.countRotacion);
       }
+        if(this.countRotacion === 2 && this.datosRotacionPost.actividades === 'F'){
+          this.countRotacion += 2;
+          this.progressRotation += 28;
+        }
       if (this.countRotacion === 7) {
         this.hidden = true;
         this.progressRotation = 100;
       }
+      // }
 
       this.isNext = true;
     },
@@ -619,7 +653,13 @@ export default {
         this.countRotacion === 1 || this.progressRotation === 100
           ? (this.hidden = false)
           : (this.hidden = true);
+          
       }
+       if(this.countRotacion === 3 && this.datosRotacionPost.actividades === 'F'){
+          this.countRotacion -= 2;
+          this.progressRotation -= 28;
+          this.hidden = false;
+        }
     },
 
     PostPostulante(personalInformation) {

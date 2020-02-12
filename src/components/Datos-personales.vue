@@ -1,12 +1,18 @@
 <template>
   <div>
     <div id="step0" v-if="countDatosPersonales === 0" class="px-3 pt-12 mt-6">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
+    
       <p class="text-center black--text title mb-0">¿Cuál es tu nombre?</p>
       <v-text-field
         :rules="nameRules"
         v-model="datosPersonalesPost.nombres"
         class="pt-0"
         color="teal"
+        maxlength="40"
         required
       ></v-text-field>
       <p class="text-center black--text title mb-0 mt-6">¿Cuáles son tus apellidos?</p>
@@ -17,6 +23,7 @@
             v-model="datosPersonalesPost.apellido_p"
             color="teal"
             label="Apellido Paterno"
+            maxlength="30"
             required
           ></v-text-field>
         </v-col>
@@ -27,10 +34,12 @@
             v-model="datosPersonalesPost.apellido_m"
             color="teal"
             label="Apellido Materno"
+            maxlength="30"
             required
           ></v-text-field>
         </v-col>
       </v-row>
+      </v-form>
     </div>
     <!-- step 1 -->
     <div id="step1" v-if="countDatosPersonales === 1" class="px-3 pt-12 mt-4">
@@ -42,6 +51,7 @@
         class="pt-2"
         color="teal"
         placeholder="Ejemplo : “Cami” , “ Lu”, “Mari”"
+        maxlength="20"
       ></v-text-field>
       <p
         class="grey--text subtitle-1 text-center pt-6"
@@ -60,19 +70,29 @@
 
     <!-- step 2 -->
     <div id="step2" v-if="countDatosPersonales === 2" class="px-3 pt-12 mt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title">¿Cuál es tu nacionalidad?</p>
       <v-text-field
         v-model="datosPersonalesPost.nacionalidad"
         class="pt-0"
         placeholder="Peruana"
         color="teal"
+        maxlength="30"
         required
         :rules="[v => !!v || 'Nacionalidad es requerida']"
       ></v-text-field>
+      </v-form>
     </div>
 
     <!-- step 3 -->
     <div id="step3" v-if="countDatosPersonales === 3" class="px-3 pt-10">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuál es tu estado civil?</p>
       <v-radio-group
         v-model="datosPersonalesPost.estado_civil"
@@ -93,9 +113,14 @@
         <v-radio label="Conviviente" value="Conviviente" color="teal" class="pa-2 radioStateCivil"></v-radio>
         <v-radio label="Viudo(a)" value="Viudo(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
       </v-radio-group>
+      </v-form>
     </div>
     <!-- step 4 -->
     <div id="step4" v-if="countDatosPersonales === 4" class="px-3 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuál es tu fecha de nacimiento?</p>
       <v-menu
         ref="menu"
@@ -126,10 +151,15 @@
           @change="save"
         ></v-date-picker>
       </v-menu>
+      </v-form>
     </div>
 
     <!-- step 5 -->
     <div id="step5" v-if="countDatosPersonales === 5" class="px-3 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuál es tu género?</p>
       <v-radio-group
         v-model="datosPersonalesPost.genero"
@@ -142,10 +172,15 @@
         <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
         <v-radio label="No Binario" value="No_binario" color="teal" class="pa-2 radioStateCivil"></v-radio>
       </v-radio-group>
+      </v-form>
     </div>
 
     <!-- step 6 -->
     <div id="step6" v-if="countDatosPersonales === 6" class="px-3 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuál es tu correo electrónico?</p>
       <v-text-field
         v-model="datosPersonalesPost.correo"
@@ -157,42 +192,58 @@
       <p class="text-center black--text title mb-0 pt-4">¿Cuál es tu número de celular?</p>
       <v-text-field
         v-model="datosPersonalesPost.telefono"
-        placeholder="51+ 997251296"
+        placeholder="997251296"
         color="teal"
         required
-        :rules="[v => !!v || 'número de celular es requerido']"
+        maxlength="9"
+        @keypress="isNumber($event)"
+        :rules="phoneRules"
       ></v-text-field>
+      </v-form>
     </div>
 
     <!-- hijos -->
     <!-- step7 -->
     <div id="step7" v-if="countDatosPersonales === 7" class="px-3 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Tienes hijos?</p>
       <v-radio-group
         v-model="rdbHijos"
         :mandatory="false"
         class="body-1"
-        :rules="[v => !!v || 'Selecciona']"
+        :rules="[v => !!v || 'Selecciona una opción']"
       >
         <v-radio label="Si" value="sihijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
         <v-radio label="No" value="nohijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
       </v-radio-group>
-
+      </v-form>
       <!-- step 8 -->
       <v-expand-transition>
         <div id="step7" v-if="rdbHijos == 'sihijos'" class="px-3 pt-8">
+          <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
           <p class="text-center black--text title mb-0">¿Cuántos hijos tienes?</p>
           <v-text-field
             v-model="datosPersonalesPost.n_hijos"
             color="teal"
             required
-            :rules="[v => !!v || 'Es obligatorio']"
+            :rules="[v => !!v || 'Número de hijos es obligatorio']"
           ></v-text-field>
+          </v-form>
         </div>
       </v-expand-transition>
     </div>
     <!-- step8 -->
     <div id="step8" v-if="countDatosPersonales === 8" class="px-3 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Dónde vives actualmente?</p>
 
       <!--Map -->
@@ -237,17 +288,23 @@
           />
         </gmap-map>
       </div>
+      </v-form>
     </div>
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuentanos cómo conociste a Konecta?</p>
       <v-select
         v-model="datosPersonalesPost.como_konecta"
         :items="itemsComoKonecta"
+        :rules="[v => !!v || 'Selecciona una opción']"
         label="Selecciona"
         color="teal"
       ></v-select>
-
+      </v-form>
       <v-expand-transition>
         <div
           id="step7"
@@ -259,7 +316,7 @@
             v-model="datosPersonalesPost.referidos"
             color="teal"
             required
-            :rules="[v => !!v || 'Es obligatorio']"
+            :rules="[v => !!v || 'Ingresa el nombre de tu Familia/ Amigos']"
           ></v-text-field>
           <v-checkbox
             v-model="datosPersonalesPost.amigo_trabajaK"
@@ -293,6 +350,7 @@ export default {
   name: "datosPersonales",
   props: {
     countDatosPersonales: 0,
+    // datosValid: Boolean,
     datosPersonalesPost: {
       type: Array,
       required: true
@@ -305,8 +363,15 @@ export default {
   data() {
     return {
       //maps
+<<<<<<< HEAD
       inputPrueba: {},
       address: "",
+=======
+      phoneRules: [
+        v => !!v || 'Ingresa el número de celular',
+        v => v.length >= 9 || 'El número debe ser de 9 dígitos',
+      ],
+>>>>>>> 59c3f5d042a4dc3452afb88cd1c7fb36303de985
       addressTextPersonal: "",
       markersPersonal: {},
       starting_address: "",
@@ -365,6 +430,20 @@ export default {
     }
   },
   methods: {
+    isNumber: function(evt) {
+      // this.testCollection = [];
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    },
     save(fecha_nac) {
       this.$refs.menu.save(fecha_nac);
     },
