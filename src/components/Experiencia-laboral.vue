@@ -2,27 +2,45 @@
   <div>
     <div id="stepExp1" v-if="countExpLab == 0" class="px-3 pt-10">
       <div>
+        <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
         <p class="text-center black--text title mb-0">¿Tienes experiencia laboral?</p>
-      <v-radio-group
-        v-model="datosExperienciaPost.flag_se"
-        :mandatory="false"
-        class="body-1"
-        :rules="[v => !!v || 'Selecciona']"
-      >
-        <v-radio label="Si" value="0" color="teal" class="pa-2 radioStateCivil"></v-radio>
-        <v-radio label="No" value="1" color="teal" class="pa-2 radioStateCivil" v-on:change="rbtSinExperiencia"></v-radio>
-      </v-radio-group>
+        <v-radio-group
+          v-model="datosExperienciaPost.flag_se"
+          :mandatory="false"
+          class="body-1"
+          :rules="[v => !!v || 'Selecciona una opción']"
+          required
+        >
+          <v-radio label="Si" value="0" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio
+            label="No"
+            value="1"
+            color="teal"
+            class="pa-2 radioStateCivil"
+            v-on:change="rbtSinExperiencia"
+          ></v-radio>
+        </v-radio-group>
+        </v-form>
       </div>
 
       <!-- step 8 -->
       <v-expand-transition>
+        
         <div v-if="datosExperienciaPost.flag_se == 0" class="px-3 pt-4">
+          <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
           <p class="text-center black--text title mb-0">¿Tipo de experiencia?</p>
           <v-radio-group
             v-model="datosExperienciaPost.flag_conExp"
             :mandatory="false"
             class="body-1"
-            :rules="[v => !!v || 'Selecciona']"
+            :rules="[v => !!v || 'Selecciona una opción']"
+            required
           >
             <v-radio
               label="En Call Center"
@@ -37,32 +55,56 @@
               class="pa-2 radioStateCivil"
             ></v-radio>
           </v-radio-group>
+          </v-form>
         </div>
       </v-expand-transition>
     </div>
     <!-- FLUJO NO EXPERIENCIA -->
-    <div id="step2" v-if="countExpLab == 1 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'" class="px-1 pt-12">
+    <div
+      id="step2"
+      v-if="countExpLab == 1 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
+      class="px-1 pt-12"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p
         class="text-center title mb-0"
       >¿En una reunión familiar en casa te gusta atender a tus invitados y hacer que se sientan cómodos?</p>
-      <v-radio-group v-model="datosExperienciaPost.se_p_atc" row class="pt-6">
+      <!-- <v-radio-group v-model="datosExperienciaPost.se_p_atc" row class="pt-6">
         <v-radio label="1" value="1" color="teal"></v-radio>
         <v-radio label="2" value="2" color="teal"></v-radio>
         <v-radio label="3" value="3" color="teal"></v-radio>
         <v-radio label="4" value="4" color="teal"></v-radio>
         <v-radio label="5" value="5" color="teal"></v-radio>
-      </v-radio-group>
-      <v-row class="justify-space-around">
-        <p>Nada de acuerdo</p>
-        <p>Muy de acuerdo</p>
+      </v-radio-group> -->
+      <v-chip-group v-model="selection" class="pt-6 d-flex justify-space-around" active-class="teal--text text--accent-4" mandatory>
+        <v-chip v-for="size in sizes" :key="size" :value="size">{{ size }}</v-chip>
+      </v-chip-group>
+
+      <v-row class="justify-space-between mx-3">
+        <p class="body-2 pt-2 text-start" style="width: 75px">Nada de acuerdo</p>
+        <p class="body-2 pt-2 text-end" style="width: 75px">Muy de acuerdo</p>
       </v-row>
+    </v-form>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 2 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'" class="px-3 pt-12">
+    <div
+      id="stepExp1"
+      v-if="countExpLab == 2 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
+      class="px-3 pt-12"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cómo te desenvuelves en una fiesta o reunión?</p>
       <v-radio-group
         v-model="datosExperienciaPost.se_p_crosselling"
         :mandatory="false"
         class="body-1"
+        :rules="[v => !!v || 'Selecciona una opción']"
+            required
       >
         <v-radio
           label="Me gusta ser el alma de la fiesta y reunión."
@@ -89,13 +131,23 @@
           class="pa-2 radioStateCivil"
         ></v-radio>
       </v-radio-group>
+    </v-form>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 3 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'" class="px-3 pt-8">
+    <div
+      id="stepExp1"
+      v-if="countExpLab == 3 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
+      class="px-3 pt-8"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p
         class="text-center black--text title mb-0"
       >¿En una conversación con tu amigo sobre un tema en el que no estan de acuerdo?</p>
 
-      <v-radio-group v-model="datosExperienciaPost.se_p_ventas" :mandatory="false" class="body-1">
+      <v-radio-group v-model="datosExperienciaPost.se_p_ventas" :mandatory="false" :rules="[v => !!v || 'Selecciona una opción']"
+            required class="body-1">
         <v-radio
           label="Doy mis argumentos y busco convencer."
           value="A"
@@ -121,13 +173,23 @@
           class="pa-2 radioStateCivil"
         ></v-radio>
       </v-radio-group>
+      </v-form>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 4 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'" class="px-3 pt-8">
+    <div
+      id="stepExp1"
+      v-if="countExpLab == 4 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
+      class="px-3 pt-8"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p
         class="text-center black--text title mb-0"
       >¿Imagina que tus padres te pidieron coordinar un tramite cualquiera?</p>
 
-      <v-radio-group v-model="datosExperienciaPost.se_p_backof" :mandatory="false" class="body-2">
+      <v-radio-group v-model="datosExperienciaPost.se_p_backof" :mandatory="false" class="body-2" :rules="[v => !!v || 'Selecciona una opción']"
+            >
         <v-radio
           label="Organizo todo, envio la información, hago seguimiento de que se cumpla y le explico los resultados a mis padres."
           value="A"
@@ -153,13 +215,23 @@
           class="pa-2 mt-6 text-justify caption"
         ></v-radio>
       </v-radio-group>
+    </v-form>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 5 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'" class="px-3 pt-8">
+    <div
+      id="stepExp1"
+      v-if="countExpLab == 5 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
+      class="px-3 pt-8"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p
         class="text-center black--text title mb-2"
         style="font-size: 20px!important;"
       >¿Imaginate que un amig@ que no ves hace muchos años te escribe un mensaje por (fb, wsp) y te pregunta sobre los mejores lugares para visitar en lima?</p>
-      <v-radio-group v-model="datosExperienciaPost.se_p_redes" :mandatory="false" class="body-2">
+      <v-radio-group v-model="datosExperienciaPost.se_p_redes" :mandatory="false" class="body-2" :rules="[v => !!v || 'Selecciona una opción']"
+            required>
         <v-radio
           label="Le brindo una respuesta rápida con toda la información, inclusive le hago un mapa."
           value="A"
@@ -191,17 +263,29 @@
           class="pa-2 mt-4 text-justify"
         ></v-radio>
       </v-radio-group>
+    </v-form>
     </div>
-    <div id="stepExp1" v-if="countExpLab == 6 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'" class="px-3 pt-12">
+    <div
+      id="stepExp1"
+      v-if="countExpLab == 6 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
+      class="px-3 pt-12"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuál es tu expectativa salarial?</p>
-      <v-row class="pt-10">
+      <v-row class="pt-10 justify-center">
         <v-col cols="6" md="4">
           <v-text-field
             v-model.number="datosExperienciaPost.se_expect_salarial_desde"
             prefix="S/."
             label="Desde"
+            maxlength="4"
             color="teal"
+            :rules="[v => !!v || 'Ingresa un monto']"
             required
+            @keypress="isNumber($event)"
           ></v-text-field>
         </v-col>
         <v-col cols="6" md="4">
@@ -209,17 +293,36 @@
             v-model.number="datosExperienciaPost.se_expect_salarial_hasta"
             prefix="S/."
             label="Hasta"
+            maxlength="4"
             color="teal"
+            :rules="[v => !!v || 'Ingresa un monto']"
             required
+            @keypress="isNumber($event)"
           ></v-text-field>
         </v-col>
       </v-row>
+    </v-form>
     </div>
 
     <!-- FLUJO EXPERIENCIA OTRO RUBRO -->
-    <div id="step1" v-if="countExpLab === 1 && datosExperienciaPost.flag_conExp == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 1 && datosExperienciaPost.flag_conExp == 'rbtExpOtros'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-2 pt-4">¿En que empresa?</p>
-      <v-text-field class="pt-2" color="teal" placeholder="Nombre de la empresa" v-model="datosExperienciaPost.eo_empresa"></v-text-field>
+      <v-text-field
+        class="pt-2"
+        color="teal"
+        placeholder="Nombre de la empresa"
+        v-model="datosExperienciaPost.eo_empresa"
+        :rules="[v => !!v || 'Ingresa el nombre de la empresa']"
+            required
+      ></v-text-field>
 
       <p class="text-center black--text title mb-2 pt-4">¿Rubro de la empresa?</p>
       <v-select
@@ -229,9 +332,20 @@
         placeholder="Seleccionar"
         required
       ></v-select>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 2  && datosExperienciaPost.flag_conExp == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
-      <p class="text-center black--text title mb-4 pt-8">¿Cuál era el puesto o cargo que desempeñaste?</p>
+    <div
+      id="step1"
+      v-if="countExpLab === 2  && datosExperienciaPost.flag_conExp == 'rbtExpOtros'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
+      <p
+        class="text-center black--text title mb-4 pt-8"
+      >¿Cuál era el puesto o cargo que desempeñaste?</p>
       <v-select
         v-model="datosExperienciaPost.eo_puesto"
         :items="puesto"
@@ -240,21 +354,81 @@
         placeholder="Seleccionar"
         required
       ></v-select>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 3  && datosExperienciaPost.flag_conExp == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 3  && datosExperienciaPost.flag_conExp == 'rbtExpOtros'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">¿Cuánto tiempo estuviste laborando?</p>
-      <v-text-field v-model.number="datosExperienciaPost.eo_tiempo_exp" class="pt-2" color="teal" placeholder="6"></v-text-field>
+      <v-text-field
+        v-model.number="datosExperienciaPost.eo_tiempo_exp"
+        class="pt-2"
+        color="teal"
+        placeholder="18"
+        maxlength="3"
+        @keypress="isNumber($event)"
+        :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
+            required
+      ></v-text-field>
       <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 4  && datosExperienciaPost.flag_conExp == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 4  && datosExperienciaPost.flag_conExp == 'rbtExpOtros'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">¿Cuánto recibias de retribución aproximadamente?</p>
-      <v-text-field v-model.number="datosExperienciaPost.eo_retribucion_basico" class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
-      <v-text-field v-model.number="datosExperienciaPost.eo_retribucion_comisiones" class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
+      <v-text-field
+        v-model.number="datosExperienciaPost.eo_retribucion_basico"
+       
+        class="pt-2"
+        color="teal"
+        label="Sueldo Básico:"
+        prefix="S/"
+         :rules="[v => !!v || 'Ingresa un monto']"
+            required
+            @keypress="isNumber($event)"
+      ></v-text-field>
+      <v-text-field
+        v-model.number="datosExperienciaPost.eo_retribucion_comisiones"
+        class="pt-8"
+        color="teal"
+        label="Comisiones / Incentivos / Bonos:"
+        prefix="S/"
+         :rules="[v => !!v || 'Ingresa un monto']"
+            required
+            @keypress="isNumber($event)"
+      ></v-text-field>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 5 && datosExperienciaPost.flag_conExp == 'rbtExpOtros'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 5 && datosExperienciaPost.flag_conExp == 'rbtExpOtros'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
-      <v-btn rounded color="#00B8AD" class="ma-2 white--text text-capitalize" @click="agregarExperiencia()">
-        Añadir experiencia 
+      <v-btn
+        rounded
+        color="#00B8AD"
+        class="ma-2 white--text text-capitalize"
+        @click="agregarExperiencia()"
+      >
+        Añadir experiencia
         <v-icon right dark size="35">add_circle</v-icon>
       </v-btn>
       <v-row class="justify-end">
@@ -266,15 +440,47 @@
           @click="countDatosPersonales += 1"
         >Omitir</v-btn>
       </v-row>
+    </v-form>
     </div>
     <!-- EXPERIENCIA EN CALL CENTER  countExpLabCC-->
-    <div id="step1" v-if="countExpLab === 1  && datosExperienciaPost.flag_conExp == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 1  && datosExperienciaPost.flag_conExp == 'rbtExtContact'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">¿En que empresa?</p>
-      <v-text-field v-model="datosExperienciaPost.ec_empresa" class="pt-2" color="teal" placeholder="Nombre de la empresa"></v-text-field>
+      <v-text-field
+        v-model="datosExperienciaPost.ec_empresa"
+        class="pt-2"
+        color="teal"
+        placeholder="Nombre de la empresa"
+         :rules="[v => !!v || 'Ingresa el nombre de la empresa']"
+            required
+      ></v-text-field>
       <p class="text-center black--text title mb-0 pt-6">¿Cliente?</p>
-      <v-text-field v-model="datosExperienciaPost.ec_cliente" class="pt-2" color="teal" placeholder="Ejemplo : ”Movistar”"></v-text-field>
+      <v-text-field
+        v-model="datosExperienciaPost.ec_cliente"
+        class="pt-2"
+        color="teal"
+        placeholder="Ejemplo : ”Movistar”"
+         :rules="[v => !!v || 'Ingresa el nombre de cliente']"
+            required
+      ></v-text-field>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 2  && datosExperienciaPost.flag_conExp == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 2  && datosExperienciaPost.flag_conExp == 'rbtExtContact'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">¿Rubro del Cliente?</p>
       <v-select
         v-model="datosExperienciaPost.ec_rubro_cliente"
@@ -283,8 +489,17 @@
         placeholder="Seleccionar"
         required
       ></v-select>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 3  && datosExperienciaPost.flag_conExp == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 3  && datosExperienciaPost.flag_conExp == 'rbtExtContact'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">¿Segmento del Cliente?</p>
       <v-select
         v-model="datosExperienciaPost.ec_segmento"
@@ -293,22 +508,81 @@
         placeholder="Seleccionar"
         required
       ></v-select>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 4  && datosExperienciaPost.flag_conExp == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 4  && datosExperienciaPost.flag_conExp == 'rbtExtContact'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-0">¿Cuánto tiempo estuviste laborando?</p>
-      <v-text-field v-model="datosExperienciaPost.ec_tiempo_exp" class="pt-2" color="teal" placeholder="6"></v-text-field>
+      <v-text-field
+        v-model="datosExperienciaPost.ec_tiempo_exp"
+        class="pt-2"
+        color="teal"
+        placeholder="36"
+        maxlength="3"
+        @keypress="isNumber($event)"
+         :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
+            required
+      ></v-text-field>
       <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
+    </v-form>
     </div>
-    <div id="step1" v-if="countExpLab === 5  && datosExperienciaPost.flag_conExp == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 5  && datosExperienciaPost.flag_conExp == 'rbtExtContact'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">¿Cuánto recibias de retribución aproximadamente?</p>
-      <v-text-field v-model="datosExperienciaPost.ec_retribucion_basico" class="pt-2" color="teal" label="Suelo Básico:" prefix="S/"></v-text-field>
-      <v-text-field v-model="datosExperienciaPost.ec_retribucion_comisiones" class="pt-8" color="teal" label="Comisiones / Incentivos / Bonos:" prefix="S/"></v-text-field>
+      <v-text-field
+        v-model="datosExperienciaPost.ec_retribucion_basico"
+        class="pt-2"
+        color="teal"
+        label="Sueldo Básico:"
+        prefix="S/"
+         :rules="[v => !!v || 'Ingresa un monto']"
+            required
+            @keypress="isNumber($event)"
+      ></v-text-field>
+      <v-text-field
+        v-model="datosExperienciaPost.ec_retribucion_comisiones"
+        class="pt-8"
+        color="teal"
+        label="Comisiones / Incentivos / Bonos:"
+        prefix="S/"
+         :rules="[v => !!v || 'Ingresa un monto']"
+            required
+            @keypress="isNumber($event)"
+      ></v-text-field>
+    </v-form>
     </div>
     <!-- AÑADIR OTRA EXPERIENCIA -->
-    <div id="step1" v-if="countExpLab === 6 && datosExperienciaPost.flag_conExp == 'rbtExtContact'" class="px-3 pt-12 mt-4">
+    <div
+      id="step1"
+      v-if="countExpLab === 6 && datosExperienciaPost.flag_conExp == 'rbtExtContact'"
+      class="px-3 pt-12 mt-4"
+    >
+    <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
-      <v-btn rounded color="#00B8AD" class="ma-2 white--text text-capitalize" v-on:click="agregarExperiencia">
-        Añadir experiencia 
+      <v-btn
+        rounded
+        color="#00B8AD"
+        class="ma-2 white--text text-capitalize"
+        v-on:click="agregarExperiencia"
+      >
+        Añadir experiencia
         <v-icon right dark size="35">add_circle</v-icon>
       </v-btn>
       <v-row class="justify-end">
@@ -320,6 +594,7 @@
           @click="countExpLab += 1"
         >Omitir</v-btn>
       </v-row>
+    </v-form>
     </div>
 
     <!-- FINAL -->
@@ -342,11 +617,17 @@ export default {
       type: Array,
       required: true
     },
-    agregarExperiencia: Function,
+    datosPersonalesPost: {
+      type: Array,
+      required: true
+    },
+    agregarExperiencia: Function
   },
   data() {
     return {
       select: null,
+      selection: "3",
+      sizes: ["1", "2", "3", "4", "5"],
       rubroEmpresa: [
         "Retail (Saga, Ripley, Paris,Oeshle, etc)",
         "Banco",
@@ -387,19 +668,36 @@ export default {
         "Crosseling",
         "Redes Sociales",
         "Back Office"
-      ]
+      ],
     };
   },
   methods: {
-    rbtSinExperiencia(){
+    rbtSinExperiencia() {
       this.datosExperienciaPost.flag_conExp = null;
-    }
+    },
+    isNumber: function(evt) {
+      // this.testCollection = [];
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    },
   }
-  
 };
 </script>
 <style>
 .v-application .title {
   line-height: 23px !important;
+}
+.v-chip-group .v-slide-group__content {
+    display: flex !important;
+    justify-content: space-around !important;
 }
 </style>

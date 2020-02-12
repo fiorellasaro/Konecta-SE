@@ -1,6 +1,10 @@
 <template>
   <div>
     <div id="step2" v-if="countRotacion == 1" class="px-1 pt-8">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p
         class="text-center title mb-0"
       >¿Cuál de las siguientes actividades realizas con mayor frecuencia en la semanal?</p>
@@ -13,72 +17,93 @@
       >
         <v-radio
           label="Deportes de competencia"
-          value="Deportes de competencia"
+          value="A"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
         <v-radio
           label="Negocio propio o familiar"
-          value="Negocio propio o familiar"
+          value="B"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
         <v-radio
           label="Cuido a un familiar"
-          value="Cuido a un familiar"
+          value="C"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
         <v-radio
           label="Grupo de danza, música, arte."
-          value="Grupo de danza, música, arte."
+          value="D"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
         <v-radio
           label="Voluntariado"
-          value="Voluntariado"
+          value="E"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
         <v-radio
           label="No realizo ninguna"
-          value="No realizo ninguna"
+          value="F"
           color="teal"
           class="pa-2 radioStateCivil"
         ></v-radio>
       </v-radio-group>
+      </v-form>
     </div>
-    <div id="step2" v-if="countRotacion == 2" class="px-1 pt-12">
+    <div id="step2" v-if="countRotacion == 2 && datosRotacionPost.actividades !== 'F'" class="px-1 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center title mb-0">¿Dónde realizas esa actividad?</p>
       <v-text-field
         v-model="datosRotacionPost.text_dir_actividad"
         class="pt-2"
         color="teal"
         placeholder="Calle 3 de febrero, 511, San Isidro"
+
       ></v-text-field>
+      </v-form>
     </div>
-    <div id="step2" v-if="countRotacion == 3" class="px-1 pt-12">
+    <div id="step2" v-if="countRotacion == 3 && datosRotacionPost.actividades !== 'F'" class="px-1 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center title mb-0">¿En que horario realizas esa actividad?</p>
       <v-select
         :items="horarioActividad"
         v-model="datosRotacionPost.horario_actividad"
         label="Seleccionar"
         color="teal"
+         :rules="[v => !!v || 'Selecciona un horario']"
+            required
       ></v-select>
+      </v-form>
     </div>
     <!-- personas -->
     <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
       <v-text-field
         v-model.number="datosRotacionPost.fam_postulante"
         class="pt-2"
         color="teal"
         placeholder="2"
+         :rules="[v => !!v || 'Ingresa el número de familiares']"
+            required
         v-on:keyup.enter="createObjFamilia()"
       ></v-text-field>
-      <!-- Generar Datos Familiares -->
-      <v-flex v-for="(famPostulante, index) in arrFamilia" :key="famPostulante.id">
+
+      <!-- Generar Datos Familiares arrFamilia -->
+      <v-flex v-for="(famPostulante, index) in datosRotacionPost.fam_postulante" :key="famPostulante.id">
         <v-card outlined class="mx-auto mb-4" max-width="344">
           <v-card-title
             class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center"
@@ -93,7 +118,7 @@
                 <v-select
                   class="mt-0 pa-0 pt-2"
                   :items="parentesco"
-                  v-model="arrFamilia[index].parentesco"
+                  
                   color="teal"
                 ></v-select>
               </v-col>
@@ -104,7 +129,7 @@
               </v-col>
               <v-col cols="6" md="6" class="pa-0">
                 <v-text-field
-                  v-model="arrFamilia[index].edad"
+            
                   color="teal"
                   class="pa-0"
                   placeholder="2"
@@ -118,7 +143,7 @@
               <v-col cols="6" md="6" class="pa-0">
                 <v-select
                   :items="trabaja"
-                  v-model="arrFamilia[index].trabaja"
+               
                   color="teal"
                   label="Seleccionar"
                   class="pa-0"
@@ -130,12 +155,18 @@
           </v-card-text>
         </v-card>
       </v-flex>
+      </v-form>
     </div>
     <div id="step2" v-if="countRotacion == 5" class="px-1 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center title mb-0">¿Qué te motiva día a día?</p>
       <v-radio-group
         v-model="datosRotacionPost.motivacion"
         :mandatory="false"
+        :rules="[v => !!v || 'Selecciona una opción']"
         required
         class="pt-4 body-1"
       >
@@ -150,8 +181,13 @@
         <v-radio label="Viajar" value="D" color="teal" class="pa-2 radioStateCivil"></v-radio>
         <v-radio label="Otros" value="E" color="teal" class="pa-2 radioStateCivil"></v-radio>
       </v-radio-group>
+      </v-form>
     </div>
     <div id="step2" v-if="countRotacion == 6" class="px-1 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
       <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
       <!-- <p>{{ selected }}</p>
@@ -264,8 +300,13 @@
         class="pa-2 radioStateCivil"
         :disabled="hasAdditional"
       ></v-checkbox>
+      </v-form>
     </div>
     <div id="step2" v-if="countRotacion == 7" class="px-1 pt-12">
+      <v-form
+      ref="form"
+      v-model="datosPersonalesPost.datosValidPer"
+    >
       <p
         class="text-center title mb-0"
       >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
@@ -276,7 +317,6 @@
         value="A"
         color="teal"
         hide-details
-        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
@@ -285,7 +325,6 @@
         value="B"
         color="teal"
         hide-details
-        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
@@ -294,7 +333,6 @@
         value="C"
         color="teal"
         hide-details
-        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
@@ -303,7 +341,6 @@
         value="D"
         color="teal"
         hide-details
-        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
       <v-checkbox
@@ -312,9 +349,9 @@
         value="E"
         color="teal"
         hide-details
-        :disabled="hasSede"
         class="pa-2 radioStateCivil"
       ></v-checkbox>
+      </v-form>
     </div>
   </div>
 </template>
@@ -324,10 +361,13 @@ export default {
   props: {
     countRotacion: 0,
     datosRotacionPost: {
+      type: Array
+    },
+    datosPersonalesPost: {
       type: Array,
       required: true
     },
-    actividad_libre: [],
+    actividad_libre: Array,
   },
   data() {
     return {
@@ -336,6 +376,7 @@ export default {
       selected: [],
       sede_preferencia: [],
       additional_grouped: [],
+      // actividad_libre: [],
       // datosRotacionPost.actividad_tiempo_libre: selected
       parentesco: [
         "Padre",
@@ -366,9 +407,9 @@ export default {
     hasAdditional() {
       return this.selected.length > 2;
     },
-    hasSede() {
-      return this.actividad_libre.length > 2;
-    }
+    // hasSede() {
+    //   return (this.datosRotacionPost.actividad_tiempo_libre).length > 2;
+    // }
   },
   methods: {
     createObjFamilia() {
