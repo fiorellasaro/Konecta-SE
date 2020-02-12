@@ -300,8 +300,8 @@ export default {
           horario_actividad: "",
           fam_postulante: 0,
           motivacion: "",
-          actividad_tiempo_libre: [],
-          sede_preferencia: [],
+          actividad_tiempo_libre: ['A','C','E'],
+          sede_preferencia: ['E','F','A'],
           familiares: []
         }
       ],

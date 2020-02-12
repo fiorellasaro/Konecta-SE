@@ -366,8 +366,8 @@ export default {
       inputPrueba: {},
       address: "",
       phoneRules: [
-        v => !!v || 'Ingresa el número de celular',
-        v => v.length >= 9 || 'El número debe ser de 9 dígitos',
+        v => !!v || 'Ingresa el número de celular'
+        // v => v.length >= 9 || 'El número debe ser de 9 dígitos',
       ],
       addressTextPersonal: "",
       markersPersonal: {},
