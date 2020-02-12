@@ -71,15 +71,14 @@
               :datosPersonalesPost="datosPersonalesPost"
               v-on:markerCoordinates="getCoordinates($event)"
               v-on:addMarker="getDirection($event)"
-              :markersPersonal="markersPersonal"
-              :addressTextPersonal="addressTextPersonal"
             />
           </div>
           <div v-if="progressDatosPersonales == 100 && nextComponente === 'componente2'">
             <datosProfesionales
               :countProf="countProf"
               :datosProfesionalesPost="datosProfesionalesPost"
-
+              v-on:markerCoordinates="getCoordinatesStudy($event)"
+              v-on:addMarker="getDirectionStudy($event)"
             />
           </div>
           <div v-if="nextComponente === 'componente3'">
@@ -90,7 +89,12 @@
             />
           </div>
           <div v-if="nextComponente === 'componente4'">
-            <datosRotacion :countRotacion="countRotacion" :datosRotacionPost="datosRotacionPost" />
+            <datosRotacion
+              :countRotacion="countRotacion"
+              :datosRotacionPost="datosRotacionPost"
+              v-on:markerCoordinates="getCoordinatesActivity($event)"
+              v-on:addMarker="getDirectionActivity($event)"
+            />
           </div>
           <div v-if="nextComponente === 'componente5'" class="pt-12 px-4">
             <p class="title text-center headline">¡Gracias por tu postulación!</p>
@@ -170,6 +174,10 @@ export default {
     return {
       addressTextPersonal: "",
       markersPersonal: {},
+      addressTextStudy: "",
+      markersStudy: {},
+      addressTextActivity: "",
+      markersActivity: {},
       // addressVP: '',
       // coordsVP: [0,0],
       hidden: false,
@@ -380,15 +388,19 @@ export default {
         institucion: this.datosProfesionalesPost.institucion,
         estado_estudios: this.datosProfesionalesPost.estado_estudios,
         rubro_carrera: this.datosProfesionalesPost.rubro_carrera,
-        coord_estudio: [0, 0], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
-        text_dir_estudio: this.datosProfesionalesPost.text_dir_estudio,
+        coord_estudio: [this.markersStudy.lat, this.markersStudy.lng],
+        text_dir_estudio: this.addressTextStudy,
+
         horario_estudio: this.datosProfesionalesPost.horario_estudio,
         //DATOS EXPERIENCIA
         experienciaPostulante: this.allDatosExp,
         //datos rotacion
         actividades: this.datosRotacionPost.actividades,
-        coord_actividad: [0, 0],
-        text_dir_actividad: this.datosRotacionPost.text_dir_actividad,
+        coord_actividad: [
+          this.markersActivity.lat,
+          this.markersActivity.lng
+          ],
+        text_dir_actividad: this.addressTextActivity,
         horario_actividad: this.datosRotacionPost.horario_actividad,
         fam_postulante: this.datosRotacionPost.fam_postulante,
         motivacion: this.datosRotacionPost.motivacion,
@@ -399,7 +411,7 @@ export default {
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
       console.log(this.addressTextPersonal);
-     // console.log(this.markersPersonal);
+      // console.log(this.markersPersonal);
       this.PostPostulante(this.datosPostulantes[0]);
     },
 
@@ -665,7 +677,7 @@ export default {
         institucion: personalInformation.institucion,
         estado_estudios: personalInformation.estado_estudios,
         rubro_carrera: personalInformation.rubro_carrera,
-        coord_estudio: personalInformation.coord_estudio, //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
+        coord_estudio: personalInformation.coord_estudio,
         text_dir_estudio: personalInformation.text_dir_estudio,
         horario_estudio: personalInformation.horario_estudio,
         id_postulante: postulateKey
@@ -713,13 +725,29 @@ export default {
 
     getDirection: function(getDirection) {
       this.addressTextPersonal = getDirection;
-      //this.$emit('getDirection', this.directionText); 
       console.log(this.addressTextPersonal);
     },
     getCoordinates: function(getCoordinates) {
       this.markersPersonal = getCoordinates;
       console.log(this.markersPersonal);
-      // this.$emit('getCoordinates', this.markers);
+    },
+
+    getDirectionStudy: function(getDirectionStudy) {
+      this.addressTextStudy = getDirectionStudy;
+      console.log(this.addressTextStudy);
+    },
+    getCoordinatesStudy: function(getCoordinatesStudy) {
+      this.markersStudy = getCoordinatesStudy;
+      console.log(this.markersStudy);
+    },
+
+    getDirectionActivity: function(getDirectionActivity) {
+      this.addressTextActivity = getDirectionActivity;
+      console.log(this.addressTextActivity);
+    },
+    getCoordinatesActivity: function(getCoordinatesActivity) {
+      this.markersActivity = getCoordinatesActivity;
+      console.log(this.markersActivity);
     }
   }
 };

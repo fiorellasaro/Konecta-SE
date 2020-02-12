@@ -11,6 +11,7 @@ Vue.use(VueGoogleMaps, {
     key: 'AIzaSyDsa4eEQ6WlPIObaddjAa7qAGKRi9NuYKY',
     libraries: 'places',
   },
+  installComponents: true
  
 
 })
