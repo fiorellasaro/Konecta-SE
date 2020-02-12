@@ -363,15 +363,12 @@ export default {
   data() {
     return {
       //maps
-<<<<<<< HEAD
       inputPrueba: {},
       address: "",
-=======
       phoneRules: [
         v => !!v || 'Ingresa el número de celular',
         v => v.length >= 9 || 'El número debe ser de 9 dígitos',
       ],
->>>>>>> 59c3f5d042a4dc3452afb88cd1c7fb36303de985
       addressTextPersonal: "",
       markersPersonal: {},
       starting_address: "",
