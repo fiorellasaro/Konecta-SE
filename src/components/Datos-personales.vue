@@ -245,26 +245,21 @@
       v-model="datosPersonalesPost.datosValidPer"
     >
       <p class="text-center black--text title mb-0">¿Dónde vives actualmente?</p>
-      <!-- <v-text-field v-model="datosPersonalesPost.text_dir_estudio" required></v-text-field> -->
-
-      <!-- <Map
-        v-on:markerCoordinates="getCoordinates($event)"
-        v-on:addMarker="getDirection($event)"
-        :markers="markers"
-        :directionText="directionText"
-      ></Map>-->
 
       <!--Map -->
+      <div class="input-google-container">
 
-      <div class="google-maps">
-        <div>
-          <!-- <gmap-autocomplete class="input-google"
-          @place_changed="setPlace" placeholder="Ingresa la dirección">
-          </gmap-autocomplete>-->
-
-          <br />
-
-          <div class="input-google-container">
+          <gmap-autocomplete
+           
+            ref="address"
+            id="starting_address"
+            class="input is-pulled-left input-autocomplete"
+            placeholder="Ingresa la dirección"
+            v-on:place_changed="getAddressData"
+            v-on:change="inputAutocomplete($event)"
+          />
+          <!-- <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn> -->
+          <!-- <div >
             <v-text-field
               label="Dirección"
               placeholder="Ingresa la dirección"
@@ -272,15 +267,25 @@
               id="starting_address"
             ></v-text-field>
             <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn>
-          </div>
-        </div>
+          </div>-->
+     
         <br />
+        <div class="text-marker-content">
+        <p class="text-center black--text title mb-3">Ahora marca</p> <img class="marker-image" src="../assets/marcador.png" alt="googlemarcador">
+         <p class="text-center black--text title mb-3">en el mapa tu dirección</p>
+        </div>
+
         <gmap-map
           :center="{lat:this.center.lat, lng:this.center.lng}"
           :zoom="15"
-          style="width:50%;  height: 400px;"
+          style="width:100%;  height: 400px;"
+          ref="map"
         >
-          <gmap-marker :position="markersPersonal" :draggable="true" v-on:dragend="updateCoordinates" />
+          <gmap-marker
+            :position="markersPersonal"
+            :draggable="true"
+            v-on:dragend="updateCoordinates"
+          />
         </gmap-map>
       </div>
       </v-form>
@@ -339,13 +344,11 @@
 <script>
 //import Map from "../components/Map.vue";
 import * as VueGoogleMaps from "vue2-google-maps";
+import VueGoogleAutocomplete from "vue-google-autocomplete";
 
 export default {
   name: "datosPersonales",
   props: {
-
-    addressTextPersonal: String,
-    markersPersonal: Object,
     countDatosPersonales: 0,
     // datosValid: Boolean,
     datosPersonalesPost: {
@@ -355,22 +358,21 @@ export default {
     // nextComponente: ''
   },
   components: {
-    Map
+    VueGoogleAutocomplete
   },
   data() {
     return {
       //maps
+      inputPrueba: {},
+      address: "",
       phoneRules: [
         v => !!v || 'Ingresa el número de celular',
         v => v.length >= 9 || 'El número debe ser de 9 dígitos',
       ],
       addressTextPersonal: "",
       markersPersonal: {},
-      // markers: {},
-      // directionText: "",
       starting_address: "",
       starting_address_obj: {},
-      inputAdress: [],
       center: {},
       places: [],
       currentPlace: null,
@@ -413,18 +415,6 @@ export default {
 
   mounted() {
     this.geolocate();
-
-    let self = this;
-    let starting_address_input = document.getElementById("starting_address");
-    let starting_address_autocomplete = new google.maps.places.Autocomplete(
-      starting_address_input
-    );
-    starting_address_autocomplete.addListener("place_changed", function() {
-      let place = starting_address_autocomplete.getPlace();
-      self.starting_address_obj = {
-        place
-      };
-    });
   },
   computed: {
     computedDateFormatted() {
@@ -454,42 +444,28 @@ export default {
     save(fecha_nac) {
       this.$refs.menu.save(fecha_nac);
     },
-    // getDirection: function(getDirection) {
-    //   this.directionText = getDirection;
-    //   //this.$emit('getDirection', this.directionText);
-    //   console.log(getDirection);
-    // },
-    // getCoordinates: function(getCoordinates) {
-    //   console.log(getCoordinates);
-    //   this.markers = getCoordinates;
-    //   // this.$emit('getCoordinates', this.markers);
-    // },
-    initSearch: function(event) {
-      console.log("Shots fired!");
-    },
-
     addMarker() {
-      if (this.starting_address_obj.place) {
+      // if (this.starting_address_obj.geometry){
         const position = {
-          lat: this.starting_address_obj.place.geometry.location.lat(),
-          lng: this.starting_address_obj.place.geometry.location.lng()
+          lat: this.starting_address_obj.geometry.location.lat(),
+          lng: this.starting_address_obj.geometry.location.lng()
         };
 
         this.markersPersonal = position;
         console.log(this.markersPersonal);
-        this.places.push(this.starting_address_obj.place);
-        this.addressTextPersonal = this.starting_address_obj.place.formatted_address;
+        this.places.push(this.starting_address_obj);
+        this.addressTextPersonal = this.starting_address_obj.formatted_address;
         console.log(this.addressTextPersonal);
         this.center = position;
-        this.starting_address_obj.place = null;
+        this.starting_address_obj = null;
         this.$emit("addMarker", this.addressTextPersonal);
         this.markerCoordinates();
         // this.$emit('markDirection', this.markers);
-      } else {
-        this.addressTextPersonal = this.starting_address;
-        this.$emit("addMarker", this.addressTextPersonal);
-        console.log(this.addressTextPersonal);
-      }
+      // } else {
+      //   this.addressTextPersonal = this.starting_address;
+      //   this.$emit("addMarker", this.addressTextPersonal);
+      //   //console.log(this.addressTextPersonal);
+      // }
     },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
@@ -517,22 +493,27 @@ export default {
 
     markerCoordinates() {
       this.$emit("markerCoordinates", this.markersPersonal);
+    },
+
+    getAddressData: function(addressData, placeResultData, id) {
+      this.address = addressData;
+      console.log(this.address);
+      if(!this.address.geometry){
+        this.addressTextPersonal = addressData.name;
+        this.$emit("addMarker", this.addressTextPersonal);
+        console.log(this.addressTextPersonal);
+      }else{
+      this.starting_address_obj = addressData;
+       console.log(this.starting_address_obj);
+      this.addMarker();
+      }
+
+    },
+
+    inputAutocomplete: function(objectInput){
+        this.inputPrueba = objectInput;
     }
   }
-  // coordinates(coords){
-  //   this.mapCood[0] = coords.lat;
-  //   this.mapCood[1] = coords.lng;
-  //   console.log(this.mapCood[0] +","+this.mapCood[1]);
-  // },
-  //   coordinatesMark(coords){
-  //   this.mapCood[0] = coords.lat;
-  //   this.mapCood[1] = coords.lng;
-  //   console.log(this.mapCood[0] +","+this.mapCood[1]);
-  // },
-  // addressText(address){
-  //   this.addressText=address;
-  //   console.log(address);
-  // }
 };
 </script>
 <style>
@@ -541,6 +522,32 @@ export default {
 }
 
 .input-google-container {
-  width: 80%;
+  width: 100%;
+  margin-top: 0.5em;
+}
+.input-autocomplete{
+  margin-bottom: 2em;
+  border-bottom: 2px solid #BDBDBD;
+  transition: border-bottom .5s ease, width .5s ease;
+  width: 100%;
+}
+
+.input-autocomplete:focus{
+  width: 100%;
+  border-bottom: 2px solid #168D86;
+  outline: none;
+
+}
+.text-marker-content{
+  display: flex;
+  margin-bottom: 1em;
+
+}
+
+.marker-image{
+  width:20px;
+  height: 30px;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 </style>
