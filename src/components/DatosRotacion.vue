@@ -99,13 +99,14 @@
         <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
         <v-row>
           <v-col cols="6" sm="6" class="justify-center">
+            <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" -->
             <v-text-field
               v-model.number="datosRotacionPost.fam_postulante"
               class="pt-2 text-center"
               color="teal"
               placeholder="2"
               maxlength="1"
-              :rules="[v => !!v || 'Ingresa el número de familiares']"
+              
               required
               v-on:keyup.enter="createObjFamilia()"
             ></v-text-field>
@@ -121,7 +122,7 @@
         </v-row>
 
         <!-- Generar Datos Familiares arrFamilia -->
-        <v-flex v-for="(famPostulante, index) in arrFamilia" :key="famPostulante.id">
+        <v-flex v-for="(famPostulante, index) in datosRotacionPost.fam_postulante" :key="famPostulante.id">
           <v-card outlined class="mx-auto mb-4" max-width="344">
             <v-card-title
               class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center"
@@ -208,7 +209,8 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
-        <!-- <p>{{ selected }}</p>
+        <!-- <p>{{ selected }}</p> -->
+        <!-- 
         <p>{{ datosRotacionPost[0].actividad_tiempo_libre }}</p>-->
         <v-checkbox
           v-model="selected"
@@ -217,7 +219,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -226,7 +227,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -235,7 +235,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -244,7 +243,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -253,7 +251,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -262,7 +259,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -271,7 +267,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -280,7 +275,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -289,7 +283,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -298,7 +291,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -307,7 +299,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="selected"
@@ -316,7 +307,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
       </v-form>
     </div>
@@ -333,7 +323,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="sedeSelected"
@@ -342,7 +331,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasAdditional"
         ></v-checkbox>
         <v-checkbox
           v-model="sedeSelected"
@@ -351,7 +339,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasSede"
         ></v-checkbox>
         <v-checkbox
           v-model="sedeSelected"
@@ -360,7 +347,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasSede"
         ></v-checkbox>
         <v-checkbox
           v-model="sedeSelected"
@@ -369,7 +355,6 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-          :disabled="hasSede"
         ></v-checkbox>
       </v-form>
     </div>
@@ -455,7 +440,8 @@ export default {
   methods: {
     createObjFamilia() {
       let nroFam = this.datosRotacionPost.fam_postulante;
-      for (let i = 0; i < nroFam; i++) {
+      if(nroFam > 0){
+        for (let i = 0; i < nroFam; i++) {
         this.arrFamilia.push({
           parentesco: "",
           edad: null,
@@ -463,6 +449,8 @@ export default {
         });
         this.datosRotacionPost.familiares = this.arrFamilia;
       }
+      }
+      
     },
 
     addMarker() {
