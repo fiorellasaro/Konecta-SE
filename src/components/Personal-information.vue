@@ -108,18 +108,18 @@
             >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
 
             <p class="body-2 text-justify">Si tienes dudas escríbenos al WhatsApp :</p>
-            <v-row class="justify-center pb-4"><img src="../assets/logos_whatsapp.png" style="height: 35px;"/> <p class="primary--text pl-4 pt-1">984860149</p></v-row>
+            <v-row class="justify-center pb-12"><img src="../assets/logos_whatsapp.png" style="height: 35px;"/> <p class="primary--text pl-4 pt-1">984860149</p></v-row>
             <v-btn
               color="#00B8AD"
               class="white--text"
               rounded
               @click="$router.push({name: 'home'})"
             >Conócenos más</v-btn>
-            <p class="body-2 pt-4">Califica la experiencia de tu proceso :</p>
+            <p class="body-2 pt-12 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
             <div class="text-center teal--text">
               <v-rating v-model="rating" color="teal" class="teal--text"></v-rating>
             </div>
-            <v-text-field name="name" placeholder="Algún comentario" id="id"></v-text-field>
+            <v-text-field name="name" placeholder="Algún comentario" id="id" class="pa-0"></v-text-field>
           </div>
         </div>
         <v-row v-if="nextComponente !== 'componente5'">
@@ -525,6 +525,12 @@ export default {
         this.countProf === 0 ? (this.hidden = false) : (this.hidden = true);
         this.progressProfesional += 20;
       }
+      if(this.countProf === 2 && this.datosProfesionalesPost.grado_formacion == "Secundaria"){
+          this.progressProfesional += 60;
+          this.countProf += 3
+          this.hidden = false;
+        }
+
       if (
         this.countProf === 3 &&
         this.datosProfesionalesPost.estado_estudios !== "En curso"
