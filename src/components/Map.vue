@@ -1,27 +1,28 @@
 <template>
   <div>
-    <div>
         <!-- <gmap-autocomplete class="input-google"
           @place_changed="setPlace" placeholder="Ingresa la dirección">
         </gmap-autocomplete> -->
 
-      <br/>
-
-    <div class="input-google-container">
+    <!-- <div class="input-google-container">
         <v-text-field label="Dirección" placeholder="Ingresa la dirección" class="" v-model="starting_address" id="starting_address"></v-text-field>
          <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn>
-    </div>
+    </div> -->
 
-    </div>
+
     <br>
-    <gmap-map
+    <!-- <gmap-map
       :center="{lat:this.center.lat, lng:this.center.lng}"
       :zoom="15"
       style="width:50%;  height: 400px;"
     >
     <gmap-marker :position="markers" :draggable="true" v-on:dragend="updateCoordinates" />
-    </gmap-map>
+    </gmap-map> -->
   </div>
+
+
+
+  
 
 </template>
 
