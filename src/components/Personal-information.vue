@@ -244,7 +244,8 @@ export default {
           coordenadas_direccion: [0, 0],
           como_konecta: null,
           referidos: "",
-          trabaja_k: ""
+          trabaja_k: "",
+          arrEjm:['s','s']
         }
       ],
       datosProfesionalesPost: [
@@ -300,7 +301,7 @@ export default {
           horario_actividad: "",
           fam_postulante: 0,
           motivacion: "",
-          actividad_tiempo_libre: ['A','C','E'],
+          actividad_tiempo_libre: [],
           sede_preferencia: ['E','F','A'],
           familiares: []
         }

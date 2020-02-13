@@ -7,7 +7,6 @@
         >¿Cuál de las siguientes actividades realizas con mayor frecuencia en la semanal?</p>
         <v-radio-group
           v-model="datosRotacionPost.actividades"
-          :mandatory="false"
           required
           :rules="[v => !!v || 'Selecciona una actividad']"
           class="body-1"
@@ -210,8 +209,8 @@
         <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
         <!-- <p>{{ selected }}</p> -->
-        <!-- 
-        <p>{{ datosRotacionPost[0].actividad_tiempo_libre }}</p>-->
+        
+        <!-- <p>acti- {{this.datosRotacionPost.actividad_tiempo_libre}}</p> -->
         <v-checkbox
           v-model="selected"
           label="Viajar"
@@ -427,7 +426,12 @@ export default {
   mounted() {
     this.geolocate();
     // invocar los métodos
-    // this.createObjFamilia();
+    this.createObjFamilia();
+    
+    this.datosRotacionPost.sede_preferencia = this.sedeSelected;
+  },
+  created(){
+ this.datosRotacionPost.actividad_tiempo_libre = this.selected;
   },
   computed: {
     hasAdditional() {
@@ -447,6 +451,7 @@ export default {
           edad: null,
           trabaja: null
         });
+        console.log(this.arrFamilia);
         this.datosRotacionPost.familiares = this.arrFamilia;
       }
       }

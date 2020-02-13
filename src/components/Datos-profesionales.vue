@@ -38,6 +38,7 @@
         placeholder="Seleccionar"
         :items="estadoFormacion"
         :rules="[v => !!v || 'Seleccione un estado de formación']"
+        required
       ></v-select>
       </v-form>
     </div>
@@ -173,7 +174,7 @@ export default {
       selectEstadoF: null,
       selectEspecialidadF: null,
       selectHorarioF: null,
-      gradoFormacion: ["Secundaria", "Técnica", "Univiersitaria"],
+      gradoFormacion: ["Secundaria", "Técnica", "Universitaria"],
       estadoFormacion: ["Completa", "En curso", "Tuve que dejarlo"],
       especialidadFormacion: [
         "Administración (Todas las afines). Ejemplo: Neg.Internacionales, bancaria,etc)",
