@@ -207,9 +207,7 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
-        <!-- <p>{{ selected }}</p> -->
-        
-        <!-- <p>acti- {{this.datosRotacionPost.actividad_tiempo_libre}}</p> -->
+      
         <v-checkbox
           v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Viajar"

@@ -1,6 +1,8 @@
 <template>
   <div>
     <div id="step0" v-if="countDatosPersonales === 0" class="px-3 pt-12 mt-6">
+    
+
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-0">¿Cuál es tu nombre?</p>
         <v-text-field
@@ -330,6 +332,7 @@ export default {
   data() {
     return {
       //maps
+
       expand: false,
       inputPrueba: {},
       address: "",
@@ -346,13 +349,13 @@ export default {
       currentPlace: null,
       address: "",
       coordinates: {},
-      rrselect: [],
       hasSaved: false,
       isNext: null,
       model: null,
       fecha_nac: null,
       menu: false,
       rdbHijos: "",
+       selected: ['John'],
       itemsComoKonecta: [
         "Familia/ Amigos",
         "Aptitus",
@@ -384,7 +387,7 @@ export default {
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.datosPersonalesPost.fecha_nac);
-    }
+    },
   },
   watch: {
     menu(val) {
@@ -395,6 +398,7 @@ export default {
     this.geolocate();
   },
   methods: {
+    
     rbtSinHijos() {
       this.rdbHijos = "nohijos";
       this.datosPersonalesPost.n_hijos = null;
