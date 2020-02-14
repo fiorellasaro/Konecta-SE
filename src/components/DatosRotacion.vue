@@ -211,7 +211,7 @@
         
         <!-- <p>acti- {{this.datosRotacionPost.actividad_tiempo_libre}}</p> -->
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Viajar"
           value="A"
           color="teal"
@@ -219,7 +219,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Jugar Fútbol"
           value="B"
           color="teal"
@@ -227,7 +227,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Jugar videojuegos"
           value="C"
           color="teal"
@@ -235,7 +235,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Pintar/Dibujar"
           value="D"
           color="teal"
@@ -243,7 +243,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Tomar fotografía"
           value="E"
           color="teal"
@@ -251,7 +251,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Aprender idiomas"
           value="F"
           color="teal"
@@ -259,7 +259,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Ir al cine"
           value="G"
           color="teal"
@@ -267,7 +267,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Jugar voley"
           value="H"
           color="teal"
@@ -275,7 +275,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Jugar basket"
           value="I"
           color="teal"
@@ -283,7 +283,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Salir a comer"
           value="J"
           color="teal"
@@ -291,7 +291,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Salir a bailar"
           value="K"
           color="teal"
@@ -299,7 +299,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="selected"
+          v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Otros"
           value="L"
           color="teal"
@@ -315,7 +315,7 @@
         >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
         <v-checkbox
-          v-model="sedeSelected"
+         v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Centro de Lima"
           value="A"
           color="teal"
@@ -323,7 +323,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="sedeSelected"
+          v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Surquillo"
           value="B"
           color="teal"
@@ -331,7 +331,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="sedeSelected"
+          v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Callao - Lima Cargo"
           value="C"
           color="teal"
@@ -339,7 +339,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="sedeSelected"
+          v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Callao - Bellavista"
           value="D"
           color="teal"
@@ -347,7 +347,7 @@
           class="pa-2 radioStateCivil"
         ></v-checkbox>
         <v-checkbox
-          v-model="sedeSelected"
+          v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Chiclayo"
           value="E"
           color="teal"
@@ -418,16 +418,6 @@ export default {
       trabaja: ['Si', 'No'
       ]
     };
-  },
-  mounted() {
-    this.geolocate();
-    // invocar los métodos
-    // this.createObjFamilia();
-    
-    this.datosRotacionPost.sede_preferencia = this.sedeSelected;
-  },
-  created(){
- this.datosRotacionPost.actividad_tiempo_libre = this.selected;
   },
   computed: {
     hasAdditional() {

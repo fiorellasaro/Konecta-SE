@@ -222,7 +222,6 @@ export default {
       progressRotation: 0,
 
       datosPostulantes: [],
-      
       datosPersonalesPost: [
         {
           datosValidPer: true,
@@ -245,7 +244,6 @@ export default {
           como_konecta: null,
           referidos: "",
           trabaja_k: "",
-          arrEjm: []
         }
       ],
       datosProfesionalesPost: [
@@ -302,7 +300,7 @@ export default {
           fam_postulante: 0,
           motivacion: "",
           actividad_tiempo_libre: [],
-          sede_preferencia: ['E','F','A'],
+          sede_preferencia: [],
           familiares: []
         }
       ],
@@ -433,12 +431,14 @@ export default {
         horario_actividad: this.datosRotacionPost.horario_actividad,
         fam_postulante: this.datosRotacionPost.fam_postulante,
         motivacion: this.datosRotacionPost.motivacion,
-        actividad_tiempo_libre: this.datosRotacionPost.actividad_tiempo_libre,
-        sede_preferencia: this.datosRotacionPost.sede_preferencia,
+        actividad_tiempo_libre: this.datosRotacionPost[0].actividad_tiempo_libre,
+        sede_preferencia: this.datosRotacionPost[0].sede_preferencia,
         familiares: this.datosRotacionPost.familiares
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
+      console.log('actividad tiempo libre',this.datosRotacionPost[0].actividad_tiempo_libre);
+      console.log('actividad tiempo libre',this.datosRotacionPost[0].sede_preferencia);
       // console.log(this.markersPersonal);
       this.PostPostulante(this.datosPostulantes[0]);
     },

@@ -388,8 +388,8 @@
           maxlength="4"
           label="Comisiones / Incentivos / Bonos:"
           prefix="S/"
-          :rules="[v => !!v || 'Ingresa un monto']"
-          required
+       
+         
           @keypress="isNumber($event)"
         ></v-text-field>
       
@@ -529,8 +529,6 @@
            maxlength="4"
           label="Comisiones / Incentivos / Bonos:"
           prefix="S/"
-          :rules="[v => !!v || 'Ingresa un monto']"
-          required
           @keypress="isNumber($event)"
         ></v-text-field>
       </v-form>

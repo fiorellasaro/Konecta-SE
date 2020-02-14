@@ -37,57 +37,23 @@
           </v-col>
         </v-row>
       </v-form>
-      <!-- da--{{datosPersonalesPost.arrEjm}} -- {{rrselect}}
-      <v-checkbox
-          v-model="datosPersonalesPost.arrEjm"
-          label="Viajar"
-          value="A"
-          color="teal"
-          hide-details
-          class="pa-2 radioStateCivil"
-        ></v-checkbox>
-        <v-checkbox
-          v-model="datosPersonalesPost.arrEjm"
-          label="Jugar Fútbol"
-          value="B"
-          color="teal"
-          hide-details
-          class="pa-2 radioStateCivil"
-        ></v-checkbox>
-
-        <v-checkbox
-          v-model="rrselect"
-          label="Viajar v"
-          value="C"
-          color="teal"
-          hide-details
-          class="pa-2 radioStateCivil"
-        ></v-checkbox>
-        <v-checkbox
-          v-model="rrselect"
-          label="Jugar Fútbol"
-          value="D"
-          color="teal"
-          hide-details
-          class="pa-2 radioStateCivil"
-      ></v-checkbox> -->
     </div>
     <!-- step 1 -->
     <div id="step1" v-if="countDatosPersonales === 1" class="px-3 pt-12 mt-4">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-      <p class="text-center black--text title mb-4">¿Cómo te gustaria que te llamemos?*</p>
-      <v-text-field
-        v-model="datosPersonalesPost.nombre_social"
-        class="pt-2"
-        color="teal"
-        :mandatory="false"
-        placeholder="Ejemplo : “Cami” , “ Lu”, “Mari”"
-        maxlength="20"
-      ></v-text-field>
-      <p
-        class="grey--text subtitle-1 text-center pt-6"
-      >Podremos emplear este nombre cuándo nos visites</p>
-      <p class="grey--text body-2 text-center pt-6">* Puedes omitir esta pregunta</p>
+        <p class="text-center black--text title mb-4">¿Cómo te gustaria que te llamemos?*</p>
+        <v-text-field
+          v-model="datosPersonalesPost.nombre_social"
+          class="pt-2"
+          color="teal"
+          :mandatory="false"
+          placeholder="Ejemplo : “Cami” , “ Lu”, “Mari”"
+          maxlength="20"
+        ></v-text-field>
+        <p
+          class="grey--text subtitle-1 text-center pt-6"
+        >Podremos emplear este nombre cuándo nos visites</p>
+        <p class="grey--text body-2 text-center pt-6">* Puedes omitir esta pregunta</p>
       </v-form>
     </div>
 
@@ -100,7 +66,6 @@
           class="body-1 pt-4"
           :mandatory="false"
           :rules="[v => !!v || 'Selecciona una nacionalidad']"
-          
         >
           <v-radio label="Peruana" value="Peruana" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Extranjero" value="Extranjero" color="teal" class="pa-2 radioStateCivil"></v-radio>
@@ -191,7 +156,12 @@
         >
           <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="No me identifico con ninguno" value="no-binario" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio
+            label="No me identifico con ninguno"
+            value="no-binario"
+            color="teal"
+            class="pa-2 radioStateCivil"
+          ></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -231,11 +201,16 @@
           :rules="[v => !!v || 'Selecciona una opción']"
         >
           <v-radio label="Si" value="sihijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="No" value="nohijos" color="teal" class="pa-2 radioStateCivil" v-on:change="rbtSinHijos"></v-radio>
+          <v-radio
+            label="No"
+            value="nohijos"
+            color="teal"
+            class="pa-2 radioStateCivil"
+            v-on:change="rbtSinHijos"
+          ></v-radio>
         </v-radio-group>
-      <v-expand-transition>
-        <div id="step7-1" v-if="rdbHijos === 'sihijos'" class="px-3 pt-8">
-          
+        <v-expand-transition>
+          <div id="step7-1" v-if="rdbHijos === 'sihijos'" class="px-3 pt-8">
             <p class="text-center black--text title mb-0">¿Cuántos hijos tienes?</p>
             <v-text-field
               v-model="datosPersonalesPost.n_hijos"
@@ -244,17 +219,17 @@
               :rules="[v => !!v || 'Número de hijos es obligatorio']"
               required
             ></v-text-field>
-          
-        </div>
-      </v-expand-transition></v-form>
+          </div>
+        </v-expand-transition>
+      </v-form>
     </div>
     <!-- step8 -->
     <div id="step8" v-if="countDatosPersonales === 8" class="px-3 pt-12">
-      <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-0">¿Dónde vives actualmente?</p>
+      <p class="text-center black--text title mb-0">¿Dónde vives actualmente?</p>
 
-        <!--Map -->
-        <div class="input-google-container">
+      <!--Map -->
+      <div class="input-google-container">
+        <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
           <gmap-autocomplete
             ref="address"
             id="starting_address"
@@ -262,41 +237,28 @@
             placeholder="Ingresa la dirección"
             v-on:place_changed="getAddressData"
             v-on:change="inputAutocomplete($event)"
-            :rules="[v => !!v || 'Ingresa la dirección']"
-            required
           />
-          <!-- <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn> -->
-          <!-- <div >
-            <v-text-field
-              label="Dirección"
-              placeholder="Ingresa la dirección"
-              v-model="starting_address"
-              id="starting_address"
-            ></v-text-field>
-            <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn>
-          </div>-->
-
-          <br />
-          <div class="text-marker-content">
-            <p class="text-center black--text title mb-3">Ahora marca</p>
-            <img class="marker-image" src="../assets/marcador.png" alt="googlemarcador" />
-            <p class="text-center black--text title mb-3">en el mapa tu dirección</p>
-          </div>
-
-          <gmap-map
-            :center="{lat:this.center.lat, lng:this.center.lng}"
-            :zoom="15"
-            style="width:100%;  height: 400px;"
-            ref="map"
-          >
-            <gmap-marker
-              :position="markersPersonal"
-              :draggable="true"
-              v-on:dragend="updateCoordinates"
-            />
-          </gmap-map>
+        </v-form>
+        <br />
+        <div class="text-marker-content">
+          <p class="text-center black--text title mb-3">Ahora marca</p>
+          <img class="marker-image" src="../assets/marcador.png" alt="googlemarcador" />
+          <p class="text-center black--text title mb-3">en el mapa tu dirección</p>
         </div>
-      </v-form>
+
+        <gmap-map
+          :center="{lat:this.center.lat, lng:this.center.lng}"
+          :zoom="15"
+          style="width:100%;  height: 400px;"
+          ref="map"
+        >
+          <gmap-marker
+            :position="markersPersonal"
+            :draggable="true"
+            v-on:dragend="updateCoordinates"
+          />
+        </gmap-map>
+      </div>
     </div>
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">
@@ -419,17 +381,6 @@ export default {
     };
   },
 
-  mounted() {
-    console.log(typeof(this.datosPersonalesPost.arrEjm));
-    console.log(typeof(this.datosPersonalesPost.referidos));
-    this.geolocate();
-  },
-  created() {
-    // Mutating the prop :(
-      this.datosPersonalesPost.arrEjm = this.rrselect;
-    
-  },
-
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.datosPersonalesPost.fecha_nac);
@@ -442,7 +393,7 @@ export default {
   },
   methods: {
     rbtSinHijos() {
-      this.rdbHijos = 'nohijos';
+      this.rdbHijos = "nohijos";
       this.datosPersonalesPost.n_hijos = null;
       this.datosPersonalesPost.datosValidPer = true;
     },
