@@ -229,7 +229,7 @@
 
       <!--Map -->
       <div class="input-google-container">
-        <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
+        <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
           <gmap-autocomplete
             ref="address"
             id="starting_address"
@@ -238,7 +238,7 @@
             v-on:place_changed="getAddressData"
             v-on:change="inputAutocomplete($event)"
           />
-        </v-form>
+        <!-- </v-form> -->
         <br />
         <div class="text-marker-content">
           <p class="text-center black--text title mb-3">Ahora marca</p>
@@ -390,6 +390,9 @@ export default {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     }
+  },
+   mounted() {
+    this.geolocate();
   },
   methods: {
     rbtSinHijos() {

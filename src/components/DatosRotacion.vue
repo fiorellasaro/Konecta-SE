@@ -427,6 +427,9 @@ export default {
       return this.sedeSelected.length > 2;
     }
   },
+   mounted() {
+    this.geolocate();
+  },
   methods: {
     isNumber: function(evt) {
       // this.testCollection = [];
