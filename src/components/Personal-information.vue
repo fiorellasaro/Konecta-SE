@@ -97,31 +97,56 @@
               v-on:markerCoordinates="getCoordinatesActivity($event)"
               v-on:addMarker="getDirectionActivity($event)"
               :datosPersonalesPost="datosPersonalesPost"
-              :actividad_libre ="actividad_libre"
+              :actividad_libre="actividad_libre"
             />
           </div>
           <div v-if="nextComponente === 'componente5'" class="pt-2 px-2">
-            <p
+            <p v-if="this.datosPersonalesPost.nombre_social!==undefined"
               class="title text-center title font-weight-medium pt-2"
-            >{{datosPersonalesPost.nombre_social}}, acabas de culminar la primera etapa de tu postulación!</p>
+            >{{this.datosPersonalesPost.nombre_social}}, acabas de culminar la primera etapa de tu postulación!</p>
+
+            <p v-else
+              class="title text-center title font-weight-medium pt-2"
+            >{{this.datosPersonalesPost.nombres}}, acabas de culminar la primera etapa de tu postulación!</p>
+
             <img src="../assets/confetti.png" style="vertical-align: middle; width: 50px;" />
             <p
               class="pb-0 pt-4 body-2 text-justify"
             >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
 
             <p class="body-2 text-justify">Si tienes dudas escríbenos al WhatsApp :</p>
-            <v-row class="justify-center pb-12"><img src="../assets/logos_whatsapp.png" style="height: 35px;"/> <p class="primary--text pl-4 pt-1">984860149</p></v-row>
-            <v-btn
-              color="#00B8AD"
-              class="white--text"
-              rounded
-              @click="$router.push({name: 'home'})"
-            >Conócenos más</v-btn>
+            <v-row class="justify-center pb-12">
+              <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
+              <p class="primary--text pl-4 pt-1">984860149</p>
+            </v-row>
+
             <p class="body-2 pt-12 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
             <div class="text-center teal--text">
               <v-rating v-model="rating" color="teal" class="teal--text"></v-rating>
             </div>
-            <v-text-field name="name" placeholder="Algún comentario" id="id" class="pa-0"></v-text-field>
+            <v-text-field
+              name="name"
+              v-model="ratingComment"
+              placeholder="Algún comentario"
+              id="id"
+              class="pa-0"
+            ></v-text-field>
+            <v-row class="justify-center">
+              <v-btn
+                color="#00B8AD"
+                class="white--text feedbackButton"
+                rounded
+                @click="sendFeedback()"
+              >Enviar</v-btn>
+            </v-row>
+            <v-row class="justify-center">
+              <v-btn
+                color="#00B8AD"
+                class="white--text mt-10"
+                rounded
+                @click="$router.push({name: 'home'})"
+              >Regresar a la página de inicio</v-btn>
+            </v-row>
           </div>
         </div>
         <v-row v-if="nextComponente !== 'componente5'">
@@ -201,7 +226,8 @@ export default {
       addressTextActivity: "",
       markersActivity: {},
       rating: null,
-      
+      ratingComment: "",
+
       // addressVP: '',
       // coordsVP: [0,0],
       hidden: false,
@@ -243,7 +269,7 @@ export default {
           coordenadas_direccion: [0, 0],
           como_konecta: null,
           referidos: "",
-          trabaja_k: "",
+          trabaja_k: ""
         }
       ],
       datosProfesionalesPost: [
@@ -423,22 +449,26 @@ export default {
         experienciaPostulante: this.allDatosExp,
         //datos rotacion
         actividades: this.datosRotacionPost.actividades,
-        coord_actividad: [
-          this.markersActivity.lat,
-          this.markersActivity.lng
-          ],
+        coord_actividad: [this.markersActivity.lat, this.markersActivity.lng],
         text_dir_actividad: this.addressTextActivity,
         horario_actividad: this.datosRotacionPost.horario_actividad,
         fam_postulante: this.datosRotacionPost.fam_postulante,
         motivacion: this.datosRotacionPost.motivacion,
-        actividad_tiempo_libre: this.datosRotacionPost[0].actividad_tiempo_libre,
+        actividad_tiempo_libre: this.datosRotacionPost[0]
+          .actividad_tiempo_libre,
         sede_preferencia: this.datosRotacionPost[0].sede_preferencia,
         familiares: this.datosRotacionPost.familiares
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
-      console.log('actividad tiempo libre',this.datosRotacionPost[0].actividad_tiempo_libre);
-      console.log('actividad tiempo libre',this.datosRotacionPost[0].sede_preferencia);
+      console.log(
+        "actividad tiempo libre",
+        this.datosRotacionPost[0].actividad_tiempo_libre
+      );
+      console.log(
+        "actividad tiempo libre",
+        this.datosRotacionPost[0].sede_preferencia
+      );
       // console.log(this.markersPersonal);
       this.PostPostulante(this.datosPostulantes[0]);
     },
@@ -517,7 +547,6 @@ export default {
         this.hidden = true;
         this.countDatosPersonales += 1;
         this.progressDatosPersonales += 10;
- 
       }
 
       if (this.progressDatosPersonales === 100) {
@@ -537,11 +566,14 @@ export default {
         this.countProf === 0 ? (this.hidden = false) : (this.hidden = true);
         this.progressProfesional += 20;
       }
-      if(this.countProf === 2 && this.datosProfesionalesPost.grado_formacion == "Secundaria"){
-          this.progressProfesional += 60;
-          this.countProf += 3
-          this.hidden = false;
-        }
+      if (
+        this.countProf === 2 &&
+        this.datosProfesionalesPost.grado_formacion == "Secundaria"
+      ) {
+        this.progressProfesional += 60;
+        this.countProf += 3;
+        this.hidden = false;
+      }
 
       if (
         this.countProf === 3 &&
@@ -610,13 +642,16 @@ export default {
         this.countRotacion += 1;
         this.progressRotation += 14;
         this.countRotacion === 1 ? (this.hidden = false) : (this.hidden = true);
-        
+
         console.log(this.countRotacion);
       }
-        if(this.countRotacion === 2 && this.datosRotacionPost.actividades === 'F'){
-          this.countRotacion += 2;
-          this.progressRotation += 28;
-        }
+      if (
+        this.countRotacion === 2 &&
+        this.datosRotacionPost.actividades === "F"
+      ) {
+        this.countRotacion += 2;
+        this.progressRotation += 28;
+      }
       if (this.countRotacion === 7) {
         this.hidden = true;
         this.progressRotation = 100;
@@ -662,13 +697,15 @@ export default {
         this.countRotacion === 1 || this.progressRotation === 100
           ? (this.hidden = false)
           : (this.hidden = true);
-          
       }
-       if(this.countRotacion === 3 && this.datosRotacionPost.actividades === 'F'){
-          this.countRotacion -= 2;
-          this.progressRotation -= 28;
-          this.hidden = false;
-        }
+      if (
+        this.countRotacion === 3 &&
+        this.datosRotacionPost.actividades === "F"
+      ) {
+        this.countRotacion -= 2;
+        this.progressRotation -= 28;
+        this.hidden = false;
+      }
     },
 
     PostPostulante(personalInformation) {
@@ -797,6 +834,23 @@ export default {
     getCoordinatesActivity: function(getCoordinatesActivity) {
       this.markersActivity = getCoordinatesActivity;
       console.log(this.markersActivity);
+    },
+    sendFeedback() {
+      let feedback = {
+        numDoc: this.numeroDoc,
+        rating: this.rating,
+        comment: this.ratingComment
+      };
+
+      const feedbackKey = firebase
+        .database()
+        .ref("FEEDBACK")
+        .push().key;
+      firebase
+        .database()
+        .ref("FEEDBACK")
+        .child(feedbackKey)
+        .set(JSON.parse(JSON.stringify(feedback)));
     }
   }
 };
@@ -822,5 +876,9 @@ export default {
 }
 .v-application .title {
   line-height: 23px !important;
+}
+
+.feedbackButton {
+  margin-bottom: 2em;
 }
 </style>
