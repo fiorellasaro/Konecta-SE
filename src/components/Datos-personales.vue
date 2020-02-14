@@ -1,8 +1,6 @@
 <template>
   <div>
     <div id="step0" v-if="countDatosPersonales === 0" class="px-3 pt-12 mt-6">
-    
-
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-0">¿Cuál es tu nombre?</p>
         <v-text-field
@@ -310,7 +308,6 @@
 //import Map from "../components/Map.vue";
 import * as VueGoogleMaps from "vue2-google-maps";
 import VueGoogleAutocomplete from "vue-google-autocomplete";
-
 export default {
   name: "datosPersonales",
   props: {
@@ -328,7 +325,6 @@ export default {
   data() {
     return {
       //maps
-
       expand: false,
       inputPrueba: {},
       address: "",
@@ -345,13 +341,13 @@ export default {
       currentPlace: null,
       address: "",
       coordinates: {},
+      rrselect: [],
       hasSaved: false,
       isNext: null,
       model: null,
       fecha_nac: null,
       menu: false,
       rdbHijos: "",
-       selected: ['John'],
       itemsComoKonecta: [
         "Familia/ Amigos",
         "Aptitus",
@@ -379,16 +375,14 @@ export default {
       ]
     };
   },
-
   mounted() {
     // this.datosPersonalesPost.arrEjm = this.rrselect;
     this.geolocate();
   },
-
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.datosPersonalesPost.fecha_nac);
-    },
+    }
   },
   watch: {
     menu(val) {
@@ -399,7 +393,6 @@ export default {
     this.geolocate();
   },
   methods: {
-    
     rbtSinHijos() {
       this.rdbHijos = "nohijos";
       this.datosPersonalesPost.n_hijos = null;
@@ -428,7 +421,6 @@ export default {
         lat: this.starting_address_obj.geometry.location.lat(),
         lng: this.starting_address_obj.geometry.location.lng()
       };
-
       this.markersPersonal = position;
       console.log(this.markersPersonal);
       this.places.push(this.starting_address_obj);
@@ -460,7 +452,6 @@ export default {
         lat: location.latLng.lat(),
         lng: location.latLng.lng()
       };
-
       this.markersPersonal = this.coordinates;
       console.log(this.coordinates);
       //return
@@ -468,11 +459,9 @@ export default {
       //this.$emit('coordinatesMarker', this.coordinates);
       // return(this.coordinates);
     },
-
     markerCoordinates() {
       this.$emit("markerCoordinates", this.markersPersonal);
     },
-
     getAddressData: function(addressData, placeResultData, id) {
       this.address = addressData;
       console.log(this.address);
@@ -486,7 +475,6 @@ export default {
         this.addMarker();
       }
     },
-
     inputAutocomplete: function(objectInput) {
       this.inputPrueba = objectInput;
     }
@@ -497,7 +485,6 @@ export default {
 .v-application .title {
   line-height: 23px !important;
 }
-
 .input-google-container {
   width: 100%;
   margin-top: 0.5em;
@@ -508,7 +495,6 @@ export default {
   transition: border-bottom 0.5s ease, width 0.5s ease;
   width: 100%;
 }
-
 .input-autocomplete:focus {
   width: 100%;
   border-bottom: 2px solid #168d86;
@@ -518,7 +504,6 @@ export default {
   display: flex;
   margin-bottom: 1em;
 }
-
 .marker-image {
   width: 20px;
   height: 30px;
