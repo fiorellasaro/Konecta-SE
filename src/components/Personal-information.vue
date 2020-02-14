@@ -517,6 +517,7 @@ export default {
         this.hidden = true;
         this.countDatosPersonales += 1;
         this.progressDatosPersonales += 10;
+ 
       }
 
       if (this.progressDatosPersonales === 100) {
@@ -623,6 +624,7 @@ export default {
       // }
 
       this.isNext = true;
+      // this.datosPersonalesPost.datosValidPer = true;
     },
     btnPrevStep() {
       if (
