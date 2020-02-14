@@ -245,7 +245,7 @@ export default {
           como_konecta: null,
           referidos: "",
           trabaja_k: "",
-          arrEjm:['s','s']
+          arrEjm: []
         }
       ],
       datosProfesionalesPost: [

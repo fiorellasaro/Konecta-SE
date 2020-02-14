@@ -21,17 +21,17 @@
             label="Negocio propio o familiar"
             value="B"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-2 mt-2 radioStateCivil"
           ></v-radio>
-          <v-radio label="Cuido a un familiar" value="C" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio label="Cuido a un familiar" value="C" color="teal" class="pa-2 mt-2 radioStateCivil"></v-radio>
           <v-radio
             label="Grupo de danza, música, arte."
             value="D"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-2 mt-2 radioStateCivil"
           ></v-radio>
-          <v-radio label="Voluntariado" value="E" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="No realizo ninguna" value="F" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio label="Voluntariado" value="E" color="teal" class="pa-2 mt-2 radioStateCivil"></v-radio>
+          <v-radio label="No realizo ninguna" value="F" color="teal" class="pa-2 mt-2 radioStateCivil"></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -92,22 +92,21 @@
         ></v-select>
       </v-form>
     </div>
-    <!-- personas -->
+   <!-- personas -->
     <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
         <v-row>
           <v-col cols="6" sm="6" class="justify-center">
-            <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" -->
+            <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" v-on:keyup.enter="createObjFamilia()" -->
             <v-text-field
               v-model.number="datosRotacionPost.fam_postulante"
               class="pt-2 text-center"
               color="teal"
               placeholder="2"
-              maxlength="1"
-              
               required
-              v-on:keyup.enter="createObjFamilia()"
+              max=20
+              @keypress="isNumber($event)"
             ></v-text-field>
           </v-col>
           <v-col cols="6" sm="6" class="align-self-center">
@@ -416,17 +415,14 @@ export default {
       ],
       familiaPost: [{ parentesco: "", edad: 0, trabaja: false }],
       arrFamilia: [],
-      trabaja: [
-        { text: "Si", value: true },
-        { text: "No", value: false }
+      trabaja: ['Si', 'No'
       ]
-      // trabaja: ["Si", "No"],
     };
   },
   mounted() {
     this.geolocate();
     // invocar los métodos
-    this.createObjFamilia();
+    // this.createObjFamilia();
     
     this.datosRotacionPost.sede_preferencia = this.sedeSelected;
   },
@@ -442,6 +438,20 @@ export default {
     }
   },
   methods: {
+    isNumber: function(evt) {
+      // this.testCollection = [];
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    },
     createObjFamilia() {
       let nroFam = this.datosRotacionPost.fam_postulante;
       if(nroFam > 0){
@@ -449,7 +459,7 @@ export default {
         this.arrFamilia.push({
           parentesco: "",
           edad: null,
-          trabaja: null
+          trabaja: ""
         });
         console.log(this.arrFamilia);
         this.datosRotacionPost.familiares = this.arrFamilia;

@@ -17,7 +17,7 @@
       <v-text-field
         v-model="datosProfesionalesPost.institucion"
         color="teal"
-        class="pt-0"
+        class="pt-2"
         placeholder="Nombre de la institución"
         required
         :rules="[v => !!v || 'Ingresa el Nombre de tu Institución']"

@@ -70,10 +70,11 @@
           color="teal"
           hide-details
           class="pa-2 radioStateCivil"
-      ></v-checkbox>-->
+      ></v-checkbox> -->
     </div>
     <!-- step 1 -->
     <div id="step1" v-if="countDatosPersonales === 1" class="px-3 pt-12 mt-4">
+      <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
       <p class="text-center black--text title mb-4">¿Cómo te gustaria que te llamemos?*</p>
       <v-text-field
         v-model="datosPersonalesPost.nombre_social"
@@ -86,7 +87,8 @@
       <p
         class="grey--text subtitle-1 text-center pt-6"
       >Podremos emplear este nombre cuándo nos visites</p>
-      <p class="grey--text body-2 text-center pt-6 font-italic">* Puedes omitir esta pregunta</p>
+      <p class="grey--text body-2 text-center pt-6">* Puedes omitir esta pregunta</p>
+      </v-form>
     </div>
 
     <!-- step 2 -->
@@ -189,7 +191,7 @@
         >
           <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="LGTBIQ+" value="No_binario" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio label="No me identifico con ninguno" value="no-binario" color="teal" class="pa-2 radioStateCivil"></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -229,23 +231,22 @@
           :rules="[v => !!v || 'Selecciona una opción']"
         >
           <v-radio label="Si" value="sihijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="No" value="nohijos" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio label="No" value="nohijos" color="teal" class="pa-2 radioStateCivil" v-on:change="rbtSinHijos"></v-radio>
         </v-radio-group>
-      </v-form>
-      <!-- step 8 -->
       <v-expand-transition>
-        <div id="step7" v-if="rdbHijos == 'sihijos'" class="px-3 pt-8">
-          <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
+        <div id="step7-1" v-if="rdbHijos === 'sihijos'" class="px-3 pt-8">
+          
             <p class="text-center black--text title mb-0">¿Cuántos hijos tienes?</p>
             <v-text-field
               v-model="datosPersonalesPost.n_hijos"
               color="teal"
-              required
+              @keypress="isNumber($event)"
               :rules="[v => !!v || 'Número de hijos es obligatorio']"
+              required
             ></v-text-field>
-          </v-form>
+          
         </div>
-      </v-expand-transition>
+      </v-expand-transition></v-form>
     </div>
     <!-- step8 -->
     <div id="step8" v-if="countDatosPersonales === 8" class="px-3 pt-12">
@@ -261,6 +262,8 @@
             placeholder="Ingresa la dirección"
             v-on:place_changed="getAddressData"
             v-on:change="inputAutocomplete($event)"
+            :rules="[v => !!v || 'Ingresa la dirección']"
+            required
           />
           <!-- <v-btn depressed color="primary" v-on:click="addMarker">Buscar</v-btn> -->
           <!-- <div >
@@ -365,6 +368,7 @@ export default {
   data() {
     return {
       //maps
+      expand: false,
       inputPrueba: {},
       address: "",
       phoneRules: [
@@ -416,11 +420,13 @@ export default {
   },
 
   mounted() {
-    // this.datosPersonalesPost.arrEjm = this.rrselect;
+    console.log(typeof(this.datosPersonalesPost.arrEjm));
+    console.log(typeof(this.datosPersonalesPost.referidos));
     this.geolocate();
   },
   created() {
     // Mutating the prop :(
+      this.datosPersonalesPost.arrEjm = this.rrselect;
     
   },
 
@@ -435,7 +441,11 @@ export default {
     }
   },
   methods: {
-    
+    rbtSinHijos() {
+      this.rdbHijos = 'nohijos';
+      this.datosPersonalesPost.n_hijos = null;
+      this.datosPersonalesPost.datosValidPer = true;
+    },
     isNumber: function(evt) {
       // this.testCollection = [];
       evt = evt ? evt : window.event;

@@ -1,8 +1,8 @@
 <template>
   <div>
     <div id="stepExp1" v-if="countExpLab == 0" class="px-3 pt-10">
+      <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
       <div>
-        <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
           <p class="text-center black--text title mb-0">¿Tienes experiencia laboral?</p>
           <v-radio-group
             v-model="datosExperienciaPost.flag_se"
@@ -10,22 +10,22 @@
             :rules="[v => !!v || 'Selecciona una opción']"
             required
           >
-            <v-radio label="Si" value="0" color="teal" class="pa-2 radioStateCivil"></v-radio>
+            <v-radio label="Si" value="0" color="teal" class="pa-2 radioExp"></v-radio>
             <v-radio
               label="No"
               value="1"
               color="teal"
-              class="pa-2 radioStateCivil"
+              class="pa-2 radioExp"
               v-on:change="rbtSinExperiencia"
             ></v-radio>
           </v-radio-group>
-        </v-form>
+        <!-- </v-form> -->
       </div>
 
       <!-- step 8 -->
       <v-expand-transition>
         <div v-if="datosExperienciaPost.flag_se == 0" class="px-3 pt-4">
-          <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
+          <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
             <p class="text-center black--text title mb-0">¿Tipo de experiencia?</p>
             <v-radio-group
               v-model="datosExperienciaPost.flag_conExp"
@@ -37,18 +37,18 @@
                 label="En Call Center"
                 value="rbtExtContact"
                 color="teal"
-                class="pa-2 radioStateCivil"
+                class="pa-2 radioExp"
               ></v-radio>
               <v-radio
                 label="En otro rubro"
                 value="rbtExpOtros"
                 color="teal"
-                class="pa-2 radioStateCivil"
+                class="pa-2 radioExp"
               ></v-radio>
             </v-radio-group>
-          </v-form>
+          
         </div>
-      </v-expand-transition>
+      </v-expand-transition></v-form>
     </div>
     <!-- FLUJO NO EXPERIENCIA -->
     <div
@@ -99,25 +99,25 @@
             label="Me gusta ser el alma de la fiesta y reunión."
             value="A"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 text-justify radioExp"
           ></v-radio>
           <v-radio
             label="Me gusta conocer personas nuevas y conversar."
             value="B"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 text-justify radioExp"
           ></v-radio>
           <v-radio
             label="Sólo converso con las personas que conozco."
             value="C"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 text-justify radioExp"
           ></v-radio>
           <v-radio
             label="No converso mucho y me voy temprano."
             value="D"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 text-justify radioExp"
           ></v-radio>
         </v-radio-group>
       </v-form>
@@ -143,25 +143,25 @@
             label="Planteo mis argumentos e intento convencerlo."
             value="A"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 mb-3 radioExp"
           ></v-radio>
           <v-radio
             label="Explico mis ideas y mis motivos para tenerlas"
             value="B"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 mb-3 radioExp"
           ></v-radio>
           <v-radio
             label="Brindo mi opinión personal sobre el tema sin mayor explicación"
             value="C"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-5 mb-3 radioExp"
           ></v-radio>
           <v-radio
             label="Escucho la opinión, las ideas y los argumentos de mi amigo."
             value="D"
             color="teal"
-            class="pa-2 radioStateCivil"
+            class="pa-3 mb-3 radioExp"
           ></v-radio>
         </v-radio-group>
       </v-form>
@@ -178,7 +178,7 @@
 
         <v-radio-group
           v-model="datosExperienciaPost.se_p_backof"
-          class="body-2"
+          
           :rules="[v => !!v || 'Selecciona una opción']"
           required
         >
@@ -186,25 +186,25 @@
             label="Organizas todo, envías la información y realizas el seguimiento correspondiente. Al final les explicas el resultado a tus padres."
             value="A"
             color="teal"
-            class="pa-2 mt-4 text-justify caption"
+            class="py-11 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Organizas todo, envías la información y realizas el seguimiento correspondiente. Les dices a tus padres que el trámite ya está hecho sin mayor explicación."
             value="B"
             color="teal"
-            class="pa-2 mt-12 mb-4 align-content-space-aroundtext-justify caption"
+            class="py-12 px-2 mt-2  text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Organizas todo y envías la información. Pero dejas de lado el seguimiento porque no es tan importante. Les dices a tus padres que el trámite ya está hecho sin mayor explicación."
             value="C"
             color="teal"
-            class="pa-2 mt-12 text-justify caption"
+            class="py-12 px-2 mt-3 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="No te gusta realizar trámites que no son tuyos."
             value="D"
             color="teal"
-            class="pa-2 mt-6 text-justify caption"
+            class="py-4 px-2 mt-3 text-justify pr-4 caption radioExp"
           ></v-radio>
         </v-radio-group>
       </v-form>
@@ -229,31 +229,31 @@
             label="Un mensaje conciso con toda la información que pude recopilar. También le adjunto un mapa."
             value="A"
             color="teal"
-            class="pa-2 mt-2 text-justify"
+             class="py-8 px-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Un mensaje con lo primero que se me viene a la mente. No me gusta escribir textos muy largos."
             value="B"
             color="teal"
-            class="pa-2 mt-6 text-justify"
+             class="py-8 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Le brindo los nombres de los lugares para que él se encargue de buscar. "
             value="C"
             color="teal"
-            class="pa-2 mt-6 text-justify"
+             class="py-6 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Le pido su número y lo llamo. Escribir toma mucho tiempo."
             value="D"
             color="teal"
-            class="pa-2 mt-4 text-justify"
+             class="py-4 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="No le contesto. Igual, hace mucho que no nos vemos."
             value="E"
             color="teal"
-            class="pa-2 mt-4 text-justify"
+             class="py-4 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
         </v-radio-group>
       </v-form>
@@ -315,6 +315,7 @@
         <v-select
           v-model="datosExperienciaPost.eo_rubro_empresa"
           :items="rubroEmpresa"
+          color="teal"
           :rules="[v => !!v || 'Selecciona un rubro']"
           placeholder="Seleccionar"
           required
@@ -373,23 +374,25 @@
           v-model.number="datosExperienciaPost.eo_retribucion_basico"
           class="pt-2"
           color="teal"
+          maxlength="4"
           label="Sueldo Básico:"
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
           @keypress="isNumber($event)"
-        ></v-text-field>
+        ></v-text-field></v-form>
         <v-text-field
           v-model.number="datosExperienciaPost.eo_retribucion_comisiones"
           class="pt-8"
           color="teal"
+          maxlength="4"
           label="Comisiones / Incentivos / Bonos:"
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
           @keypress="isNumber($event)"
         ></v-text-field>
-      </v-form>
+      
     </div>
     <div
       id="step1"
@@ -407,7 +410,8 @@
           Añadir experiencia
           <v-icon right dark size="35">add_circle</v-icon>
         </v-btn>
-        <v-row class="justify-end">
+         <p class="grey--text body-2 text-center pt-6">* Puedes omitir este paso</p>
+        <!-- <v-row class="justify-end">
           <v-btn
             text
             small
@@ -415,7 +419,7 @@
             color="#2D9CDB"
             @click="countDatosPersonales += 1"
           >Omitir</v-btn>
-        </v-row>
+        </v-row> -->
       </v-form>
     </div>
     <!-- EXPERIENCIA EN CALL CENTER  countExpLabCC-->
@@ -512,6 +516,7 @@
           class="pt-2"
           color="teal"
           label="Sueldo Básico:"
+           maxlength="4"
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
@@ -521,6 +526,7 @@
           v-model="datosExperienciaPost.ec_retribucion_comisiones"
           class="pt-8"
           color="teal"
+           maxlength="4"
           label="Comisiones / Incentivos / Bonos:"
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
@@ -546,7 +552,8 @@
           Añadir experiencia
           <v-icon right dark size="35">add_circle</v-icon>
         </v-btn>
-        <v-row class="justify-end">
+        <p class="grey--text body-2 text-center pt-6">* Puedes omitir este paso</p>
+        <!-- <v-row class="justify-end">
           <v-btn
             text
             small
@@ -554,7 +561,7 @@
             color="#2D9CDB"
             @click="countExpLab += 1"
           >Omitir</v-btn>
-        </v-row>
+        </v-row> -->
       </v-form>
     </div>
 
@@ -635,6 +642,7 @@ export default {
   methods: {
     rbtSinExperiencia() {
       this.datosExperienciaPost.flag_conExp = null;
+      this.datosPersonalesPost.datosValidPer = true;
     },
     isNumber: function(evt) {
       // this.testCollection = [];
@@ -654,6 +662,14 @@ export default {
 };
 </script>
 <style>
+.radioExp {
+  background: #e5e5e5;
+  border-radius: 4px;
+  /* font-size: 15px!important; */
+}
+.v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label {
+    font-size: 15px!important;
+}
 .v-application .title {
   line-height: 23px !important;
 }
