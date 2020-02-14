@@ -11,8 +11,9 @@
           class="pt-0"
           color="teal"
           maxlength="40"
-          :mandatory="false"
-          required
+        
+         
+         
         ></v-text-field>
         <p class="text-center black--text title mb-0 mt-6">¿Cuáles son tus apellidos?</p>
         <v-row>
@@ -23,7 +24,7 @@
               color="teal"
               label="Apellido Paterno"
               maxlength="30"
-              required
+              
             ></v-text-field>
           </v-col>
 
@@ -34,7 +35,7 @@
               color="teal"
               label="Apellido Materno"
               maxlength="30"
-              required
+            
             ></v-text-field>
           </v-col>
         </v-row>
@@ -61,7 +62,7 @@
 
     <!-- step 2 -->
     <div id="step2" v-if="countDatosPersonales === 2" class="px-3 pt-12 mt-12">
-      <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
+      <v-form ref="formNac" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title">¿Cuál es tu nacionalidad?</p>
         <v-radio-group
           v-model="datosPersonalesPost.nacionalidad"
@@ -77,14 +78,9 @@
 
     <!-- step 3 -->
     <div id="step3" v-if="countDatosPersonales === 3" class="px-3 pt-10">
-      <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
+      <v-form ref="formEstado" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-0">¿Cuál es tu estado civil?</p>
-        <v-radio-group
-          v-model="datosPersonalesPost.estado_civil"
-          :mandatory="false"
-          :rules="[v => !!v || 'Selecciona un estado civil']"
-          class="body-1"
-        >
+        <v-radio-group v-model="datosPersonalesPost.estado_civil"  class="body-1">
           <v-radio label="Soltero(a)" value="Soltero(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Casado(a)" value="Casado(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio
@@ -382,6 +378,11 @@ export default {
         v => /.+@.+\..+/.test(v) || "El correo no es válido"
       ]
     };
+  },
+
+  mounted() {
+    // this.datosPersonalesPost.arrEjm = this.rrselect;
+    this.geolocate();
   },
 
   computed: {

@@ -37,7 +37,7 @@
         color="teal"
         placeholder="Seleccionar"
         :items="estadoFormacion"
-        :rules="[v => !!v || 'Seleccione un estado de formación']"
+        :rules="[f => !!f || 'Seleccione un estado de formación']"
         required
       ></v-select>
       </v-form>
