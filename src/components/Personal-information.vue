@@ -104,12 +104,12 @@
             <p
               v-if="this.datosPersonalesPost.nombre_social!==undefined"
               class="title text-center title font-weight-medium pt-2"
-            >{{this.datosPersonalesPost.nombre_social}}, acabas de culminar la primera etapa de tu postulación!</p>
+            >¡{{this.datosPersonalesPost.nombre_social}}!, acabas de culminar la primera etapa de tu postulación!</p>
 
             <p
               v-else
               class="title text-center title font-weight-medium pt-2"
-            >{{this.datosPersonalesPost.nombres}}, acabas de culminar la primera etapa de tu postulación!</p>
+            >¡{{this.datosPersonalesPost.nombres}}!, acabas de culminar la primera etapa de tu postulación!</p>
 
             <img src="../assets/confetti.png" style="vertical-align: middle; width: 50px;" />
             <p
@@ -373,7 +373,6 @@ export default {
         this.datosExperienciaPost.flag_ec = 0;
         this.datosExperienciaPost.flag_eo = 1;
       }
-      console.log(this.datosExperienciaPost.flag_ec);
       this.allDatosExp.push({
         flag_se: this.datosExperienciaPost.flag_se,
         flag_ec: this.datosExperienciaPost.flag_ec,
@@ -612,7 +611,6 @@ export default {
         this.hidden = false;
         this.progressExpLaboral = 100;
         this.nextComp4 += 1;
-        // this.arrExperiencias();
       }
       //Agregar experiencia
       if (

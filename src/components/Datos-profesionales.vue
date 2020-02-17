@@ -13,7 +13,7 @@
         :items="gradoFormacion"
         :rules="[v => !!v || 'Selecciona un grado de formación']"
       ></v-select>
-      <p class="text-center black--text title mb-0 pt-10">Nombre de tu Institución:</p>
+      <p class="text-center black--text title mb-0 pt-10">Nombre de tu institución:</p>
       <v-text-field
         v-model="datosProfesionalesPost.institucion"
         color="teal"
@@ -177,7 +177,7 @@ export default {
       gradoFormacion: ["Secundaria", "Técnica", "Universitaria"],
       estadoFormacion: ["Completa", "En curso", "Tuve que dejarlo"],
       especialidadFormacion: [
-        "Administración (Todas las afines). Ejemplo: Neg.Internacionales, bancaria,etc)",
+        "Administración (Todas las afines)",
         "Ciencia de la Comunicación",
         "Computación e Informática",
         "Derecho y Ciencias Políticas",
@@ -195,7 +195,8 @@ export default {
         "Psicología",
         "Redes Sociales",
         "Secretariado",
-        "Turismo y Aviación Comercial"
+        "Turismo y Aviación Comercial",
+        "Otros"
       ],
       HorarioEstudios: ["Mañana", "Tarde", "Noche"]
     };

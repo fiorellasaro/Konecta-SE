@@ -26,7 +26,7 @@
       <v-expand-transition>
         <div v-if="datosExperienciaPost.flag_se == 0" class="px-3 pt-4">
           <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
-            <p class="text-center black--text title mb-0">¿Tipo de experiencia?</p>
+            <p class="text-center black--text title mb-0">Tipo de experiencia</p>
             <v-radio-group
               v-model="datosExperienciaPost.flag_conExp"
               class="body-1"
@@ -68,7 +68,7 @@
         <v-radio label="5" value="5" color="teal"></v-radio>
         </v-radio-group>-->
         <v-chip-group
-          v-model="selection"
+          v-model="datosExperienciaPost.se_p_atc"
           class="pt-6 d-flex justify-space-around"
           active-class="teal--text text--accent-4"
           mandatory
@@ -565,7 +565,7 @@
 
     <!-- FINAL -->
     <div id="step10" v-if="countExpLab == 7" class="px-3 pt-12">
-      <p class="text-center black--text title">Para finalizar nos gustaria conocerte un poco más.</p>
+      <p class="text-center black--text title">Para finalizar nos gustaría conocerte un poco más.</p>
       <v-img
         src="../assets/profesionales.png"
         aspect-ratio="1.7"
@@ -607,7 +607,8 @@ export default {
         "Construcción, Energía y Minas",
         "Derecho, Leyes, Política y Justicia",
         "Comunicaciones, publicidad y Marketing",
-        "Fabricas Industriales"
+        "Fabricas Industriales",
+        "Otros"
       ],
       puesto: [
         "Atención al cliente",
@@ -636,6 +637,9 @@ export default {
         "Back Office"
       ]
     };
+  },
+   mounted() {
+     console.log(this.datosExperienciaPost.se_p_atc);
   },
   methods: {
     rbtSinExperiencia() {
