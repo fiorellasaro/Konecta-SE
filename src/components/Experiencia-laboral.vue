@@ -68,7 +68,7 @@
         <v-radio label="5" value="5" color="teal"></v-radio>
         </v-radio-group>-->
         <v-chip-group
-          v-model="selection"
+          v-model="datosExperienciaPost.se_p_atc"
           class="pt-6 d-flex justify-space-around"
           active-class="teal--text text--accent-4"
           mandatory
@@ -636,6 +636,9 @@ export default {
         "Back Office"
       ]
     };
+  },
+   mounted() {
+     console.log(this.datosExperienciaPost.se_p_atc);
   },
   methods: {
     rbtSinExperiencia() {

@@ -2,24 +2,48 @@
   <div>
     <v-carousel cycle height="600" hide-delimiter-background show-arrows-on-hover>
       <v-carousel-item v-for="(slide, i) in slide" :key="i" :src="slide.bannerImg">
-        <v-row class="fill-height" align="center" justify="center">
-          <!-- <h1 class="primary--text mb-2 display-1 text-end">{{ slide.text }} Slide</h1> -->
+        <v-row class="fill-height pb-10" align="end" justify="center">
+          <v-row class="opasity justify-center">
+            <v-col cols="12" md="12" class="pb-0 mb-0">
+              <h1
+                class="white--text mb-0 display-1 text-center pt-0 font-weight-bold"
+              >WOOW felizmente llegaste,</h1>
+            </v-col>
+            <v-col cols="12" md="12" class="py-0 mb-0">
+              <h3 class="white--text headline text-center pt-0 mb-0">te estábamos esperando</h3>
+            </v-col>
+            <v-col cols="12" md="12" class="py-0 mb-2">
+              <h4
+                class="white--text mb-2 headline text-center pt-0 mt-0"
+              >Ven a conocernos tenemos un lugar para ti</h4>
+            </v-col>
+          </v-row>
         </v-row>
       </v-carousel-item>
     </v-carousel>
 
     <section>
-      <v-layout column wrap class="my-12" align-center>
+      <v-layout column wrap class="my-10" align-center>
         <v-flex xs12 sm4 class="my-4">
-          <div class="text-center">
-            <h2 class="headline font-weight-bold pb-2">Esto es Konecta Perú por dentro.</h2>
-            <span class="subheading subtitle-1 py-12">
+          <div class="text-center konecta-text">
+            <h2 class="display-1 font-weight-bold pb-4">Esto es Konecta Perú por dentro.</h2>
+            <span class="subheading headline my-10">
               Te invitamos a dar una vuelta por konecta. Hemos preparado una visita muy especial, eres nuestro invitado/a de honor,
               ponte cómodo/a y disfruta.
             </span>
           </div>
+          <div class="text-center pt-10">
+            <video
+              class="video"
+              src="../assets/video/KONECTA_FIN_AÑO_VERSION_CORTA.mp4"
+              autoplay
+              loop
+              width="1340"
+              height="680"
+            ></video>
+          </div>
           <div class="text-center mt-4">
-            <h2 class="headline font-weight-bold pt-12 pb-0">Lo que nos Entusiasma</h2>
+            <h2 class="display-1 font-weight-bold pt-12 pb-0">Lo que nos Entusiasma</h2>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -72,7 +96,7 @@
       </v-layout>
     </section>
 
-    <section>
+    <!-- <section>
       <v-parallax src="../assets/section-2.png" height="380">
         <v-layout column align-center justify-center>
           <div
@@ -88,82 +112,14 @@
           >Quiero ser parte</v-btn>
         </v-layout>
       </v-parallax>
-    </section>
+    </section>-->
+
     <section>
       <v-layout column wrap class="my-12" align-center>
         <v-flex xs12 sm4 class="my-4">
           <div class="text-center">
-            <h2 class="headline font-weight-bold">BENEFICIOS PARA TI</h2>
-            <!-- <span class="subheading">Cras facilisis mi vitae nunc</span> -->
-          </div>
-        </v-flex>
-        <v-flex xs12>
-          <v-container grid-list-xl>
-            <v-layout row wrap>
-              <v-flex xs12 md6>
-                <v-card flat class="transparent">
-                  <v-card-text class="text-center">
-                    <v-icon size="64" class="blue--text ">home_work</v-icon>
-                  </v-card-text>
-                  <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">
-                      Encuentra tu Lugar para Trabajar con Nosotros
-                    </div>
-                  </v-card-title>
-                  <v-card-text
-                    class="text-center" style="list-style: none;"
-                  ><li>Sede Lima
-                    </li>
-                    <li>Sede Surquillo</li>
-                    <li>Sede Lima Cargo</li>
-                    <li>Sede Bellevista</li>
-                    <li>Sede Chiclayo</li>
-                    </v-card-text>
-                </v-card>
-              </v-flex>
-              <!-- <v-flex xs12 md4>
-                <v-card flat class="transparent">
-                  <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">pregnant_woman</v-icon>
-                  </v-card-text>
-                  <v-card-title primary-title class="layout justify-center">
-                    <div class="headline">Licencias</div>
-                  </v-card-title>
-                  <v-card-text
-                    class="text-center"
-                  >Brindamos licencias para que puedan disfrutar plenamente de: matrimonio, paternidad y maternidad extendida, mudanza, humanitaria y por adopción. Queremos que tu vida laboral y personal se mantengan equilibradas.</v-card-text>
-                </v-card>
-              </v-flex>-->
-              <v-flex xs12 md6>
-                <v-card flat class="transparent">
-                  <v-card-text class="text-center"> 
-                    <v-icon size="64" class="deep-purple--text text--lighten-2">schedule</v-icon>
-                  </v-card-text>
-                  <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Elije tú el horario más conveniente
-</div>
-                  </v-card-title>
-                  <v-card-text
-                    class="text-center" style="list-style: none;"
-                  ><li>Horario 1
-                    </li>
-                    <li>Horario 2</li>
-                    <li>Horario 3</li>
-                    <li>Horario 4</li>
-                    <li>Horario 5</li></v-card-text>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-flex>
-      </v-layout>
-    </section>
-    <section>
-      <v-layout column wrap class="my-12" align-center>
-        <v-flex xs12 sm4 class="my-4">
-          <div class="text-center">
-            <h2 class="headline">EXPERIENCIAS KONECTA</h2>
-            <span class="subheading">Testimonios</span>
+            <h2 class="display-1">No lo decimos nosotros</h2>
+            <span class="subheading">Lo dicen nuestros colaboradores</span>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -172,34 +128,42 @@
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">emoji_people</v-icon>
+                    <v-avatar size="220">
+                      <img src="../assets/testimonios/IMG_7899.jpeg" alt="Mary" />
+                    </v-avatar>
+                    <!-- <v-icon x-large class="blue--text text--lighten-2">emoji_people</v-icon> -->
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Edison Altamirano</div>
+                    <div class="headline text-center">Mary Auccaise</div>
                   </v-card-title>
-                  <v-card-text>“Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”</v-card-text>
+                  <v-card-text>“Konecta, mi primera experiencia laboral, se convirtió en mi inspiración para crecer en tanto en lo profesional como personal. En estos 9 años pasé de Representante de Opreraciones a Líder de Selección, y pude cumplir uno de mis proyectos personales: emprender mi propia empresa de moda.”</v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
                   <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">emoji_people</v-icon>
+                    <v-avatar size="225">
+                      <!-- style="transform: rotate(90deg);" -->
+                      <img src="../assets/testimonios/IMG_7927.jpeg" alt="Daniel" />
+                    </v-avatar>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline">Cynthia Peña</div>
+                    <div class="headline">Jaime Daniel Tello</div>
                   </v-card-title>
-                  <v-card-text>“Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”</v-card-text>
+                  <v-card-text>“Llegué a Konecta hace casi 3 años como Representante. Gracias a sus oportunidades y mi desempeño hoy me desarrollo como Analista Senior de Capacitación. Las interacciones de cada día nos taren nuevos aprendizajes y constante crecimiento.”</v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
-                  <v-card-text class="text-center">
-                    <v-icon x-large class="blue--text text--lighten-2">emoji_people</v-icon>
+                  <v-card-text class="text-center pt-0">
+                    <v-avatar size="220">
+                      <img src="../assets/testimonios/IMG_7920.jpeg" alt="Briana" />
+                    </v-avatar>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline text-center">Ariel Ñique</div>
+                    <div class="headline text-center">Briana Pinday</div>
                   </v-card-title>
-                  <v-card-text>“Vine Konecta hace un año, pensando que era un trabajo más pero hoy puedo decir que he crecido como persona y profesional. Soy líder de un equipo y día a día esto es un reto para mí”</v-card-text>
+                  <v-card-text>“Hace 5 años aterricé en Konecta. Como todos, ingresé con ganas de crecer laboralmente. Ahora formo parte del equipo de Formación impartiendo mis conocimientos, ayudando a los demás y aprendiendo constantemente de las situaciones fortuitas”</v-card-text>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -208,6 +172,7 @@
       </v-layout>
     </section>
     <!-- aqui -->
+
     <section>
       <v-parallax src="../assets/section-1.png" height="380">
         <v-layout column align-center justify-center>
@@ -375,9 +340,37 @@ export default {
 .v-parallax__image {
   min-height: 80% !important;
 }
-/* @media only screen and (max-width: 600px) {
-  body {
-    background-color: lightblue;
+.opasity {
+  opacity: 0.8;
+  background-color: rgb(0, 0, 0);
+  /* height: 2em; */
+  /* width: 150px; */
+  /* position: absolute; */
+  top: 10px;
+  text-align: center;
+  /* padding-top: 1em; */
+}
+@media screen and (max-width: 600px) {
+  .video {
+    width: 350px!important;
+    height: 300px !important;
   }
-} */
+  .konecta-text{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+}
+.video {
+    width: 1340px;
+    height:680px;
+  }
+  .konecta-text{
+    padding-right: 48px ;
+    padding-left: 48px ;
+    margin-right: 48px ;
+    margin-left: 48px ;
+  }
+
 </style>

@@ -311,7 +311,7 @@
         <p
           class="text-center title mb-0"
         >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
-        <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
+        <!-- <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p> -->
         <v-checkbox
          v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Centro de Lima"
