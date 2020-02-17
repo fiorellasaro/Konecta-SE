@@ -145,7 +145,7 @@
             </v-row>
             <v-row class="justify-center">
               <p v-if="countFeedback" class="feedback-message"> ¡Gracias por tu calificación/comentarios!</p>
-              <p v-else></p>
+              <p v-else class="message-blank">¡Gracias por tu calificación/comentarios!</p>
             </v-row>
             <v-row class="justify-center">
               <v-btn
@@ -899,5 +899,8 @@ export default {
 
 .feedback-message{
   color: #00B8AD !important;
+}
+.message-blank{
+visibility: hidden;
 }
 </style>
