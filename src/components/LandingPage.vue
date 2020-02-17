@@ -34,12 +34,11 @@
           </div>
           <div class="text-center pt-10">
             <video
+            controls
               class="video"
               src="../assets/video/VIDEO.mp4"
               autoplay
               loop
-              width="1340"
-              height="680"
             ></video>
           </div>
           <div class="text-center mt-4 mx-1">
