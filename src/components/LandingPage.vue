@@ -7,15 +7,15 @@
             <v-col cols="12" md="12" class="pb-0 mb-0">
               <h1
                 class="white--text mb-0 display-1 text-center pt-0 font-weight-bold"
-              >WOOW felizmente llegaste,</h1>
+              >{{slide.text1}}</h1>
             </v-col>
             <v-col cols="12" md="12" class="py-0 mb-0">
-              <h3 class="white--text headline text-center pt-0 mb-0">te estábamos esperando</h3>
+              <h3 class="white--text headline text-center pt-0 mb-0">{{slide.text2}}</h3>
             </v-col>
             <v-col cols="12" md="12" class="py-0 mb-2">
               <h4
-                class="white--text mb-2 headline text-center pt-0 mt-0"
-              >Ven a conocernos tenemos un lugar para ti</h4>
+                class="white--text mb-2 mx-4 headline text-center pt-0 mt-0"
+              >{{slide.text}}</h4>
             </v-col>
           </v-row>
         </v-row>
@@ -28,7 +28,7 @@
           <div class="text-center konecta-text">
             <h2 class="display-1 font-weight-bold pb-4">Esto es Konecta Perú por dentro.</h2>
             <span class="subheading headline my-10">
-              Te invitamos a dar una vuelta por konecta. Hemos preparado una visita muy especial, eres nuestro invitado/a de honor,
+              Te invitamos a dar una vuelta por Konecta. Hemos preparado una visita muy especial, eres nuestro invitado/a de honor,
               ponte cómodo/a y disfruta.
             </span>
           </div>
@@ -41,8 +41,8 @@
               loop
             ></video>
           </div>
-          <div class="text-center mt-4 mx-1">
-            <h2 class="display-1 font-weight-bold pt-12 pb-0">Lo que nos Entusiasma</h2>
+          <div class="text-center mt-8 mx-1">
+            <h2 class="display-1 font-weight-bold pt-4 pb-0">Lo que nos entusiasma</h2>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -69,7 +69,7 @@
                     <v-icon size="64" class="blue--text text--lighten-2">star</v-icon>
                   </v-card-text>
                   <v-card-title primary-title class="layout justify-center">
-                    <div class="headline">¡Viva la Excelencia!</div>
+                    <div class="headline">¡Viva la excelencia!</div>
                   </v-card-title>
                   <v-card-text
                     class="text-center"
@@ -115,13 +115,13 @@
 
     <section>
       <v-layout column wrap class="my-12" align-center>
-        <v-flex xs12 sm4 class="my-4">
+        <v-flex xs12 sm4 class="my-4 mx-2">
           <div class="text-center">
             <h2 class="display-1">No lo decimos nosotros</h2>
             <span class="subheading">Lo dicen nuestros colaboradores</span>
           </div>
         </v-flex>
-        <v-flex xs12>
+        <v-flex xs12 md4>
           <v-container grid-list-xl>
             <v-layout row wrap align-center>
               <v-flex xs12 md4>
@@ -138,9 +138,9 @@
                   <v-card-text>“Konecta, mi primera experiencia laboral, se convirtió en mi inspiración para crecer en tanto en lo profesional como personal. En estos 9 años pasé de Representante de Opreraciones a Líder de Selección, y pude cumplir uno de mis proyectos personales: emprender mi propia empresa de moda.”</v-card-text>
                 </v-card>
               </v-flex>
-              <v-flex xs12 md4>
+              <v-flex xs12 md4 class="pt-0">
                 <v-card flat class="transparent">
-                  <v-card-text class="text-center">
+                  <v-card-text class="text-center pt-0">
                     <v-avatar size="225">
                       <!-- style="transform: rotate(90deg);" -->
                       <img src="../assets/testimonios/IMG_7927.jpeg" alt="Daniel" />
@@ -154,7 +154,7 @@
               </v-flex>
               <v-flex xs12 md4>
                 <v-card flat class="transparent">
-                  <v-card-text class="text-center pt-0">
+                  <v-card-text class="text-center">
                     <v-avatar size="220">
                       <img src="../assets/testimonios/IMG_7920.jpeg" alt="Briana" />
                     </v-avatar>
@@ -306,31 +306,61 @@ export default {
       {
         id: 0,
         // bannerImg: require("../assets/bannersMobile/mobile.png"),
-        bannerImg: require("../assets/Banners/banneop1.jpg"),
-        text: "Web development has never been easier"
+        bannerImg: require("../assets/Banners/05.png"),
+        text1: "¡WOOW felizmente llegaste!",
+        text2:"Te estábamos esperando,",
+        text:"ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
-        bannerImg: require("../assets/Banners/06.png"),
-        text: "Web development has never been easier 2"
+        bannerImg: require("../assets/Banners/Campeonato-1024x480.jpg"),
+        text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       },
       {
         id: 2,
-        bannerImg: require("../assets/Banners/05.png"),
-        text: "Web development has never been easier 3"
+        bannerImg: require("../assets/Banners/01.png"),
+        text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
-        bannerImg: require("../assets/Banners/01.png"),
-        text: "Web development has never been easier 3"
+        bannerImg: require("../assets/Banners/Copa-1024x480.jpg"),
+        text: "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
-        bannerImg: require("../assets/Banners/02.png"),
-        text: "Web development has never been easier 3"
+        bannerImg: require("../assets/Banners/06.png"),
+        text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       }
     ],
-    slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+    slide_mob:[{
+        id: 0,
+        // bannerImg: require("../assets/bannersMobile/mobile.png"),
+        bannerImg: require("../assets/Banners/Call-600x360.jpg"),
+        text1: "¡WOOW felizmente llegaste!",
+        text2:"Te estábamos esperando,",
+        text:"ven a conocernos tenemos un lugar para ti."
+      },
+      {
+        id: 1,
+        bannerImg: require("../assets/Banners/Campeonato-600x360.jpg"),
+        text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
+      },
+      {
+        id: 2,
+        bannerImg: require("../assets/Banners/Teleoperador2-600x360.jpg"),
+        
+        text: "Nos preocupamos por ti y por tu desarrollo profesional"
+      },
+      {
+        id: 3,
+        bannerImg: require("../assets/Banners/Copa-600x360.jpg"),
+        text: "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
+      },
+      {
+        id: 4,
+        bannerImg: require("../assets/Banners/06.png"),
+        text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
+      }]
   })
 };
 </script>
@@ -360,6 +390,14 @@ export default {
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
+  .v-image__image v-image__image--cover{
+    width: 600px!important;
+    height: 360!important;
+  }
+  /* .carousel-img{
+    width: 600px!important;
+    height: 360!important;
+  } */
 }
 .video {
     width: 1340px;
