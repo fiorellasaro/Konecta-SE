@@ -23,7 +23,7 @@
     </v-carousel>
 
     <section>
-      <v-layout column wrap class="my-10" align-center>
+      <v-layout column wrap class="my-10 mx-2" align-center>
         <v-flex xs12 sm4 class="my-4">
           <div class="text-center konecta-text">
             <h2 class="display-1 font-weight-bold pb-4">Esto es Konecta Perú por dentro.</h2>
@@ -35,14 +35,14 @@
           <div class="text-center pt-10">
             <video
               class="video"
-              src="../assets/video/KONECTA_FIN_AÑO_VERSION_CORTA.mp4"
+              src="../assets/video/VIDEO.mp4"
               autoplay
               loop
               width="1340"
               height="680"
             ></video>
           </div>
-          <div class="text-center mt-4">
+          <div class="text-center mt-4 mx-1">
             <h2 class="display-1 font-weight-bold pt-12 pb-0">Lo que nos Entusiasma</h2>
           </div>
         </v-flex>
