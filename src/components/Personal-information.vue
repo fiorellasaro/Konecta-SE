@@ -101,11 +101,13 @@
             />
           </div>
           <div v-if="nextComponente === 'componente5'" class="pt-2 px-2">
-            <p v-if="this.datosPersonalesPost.nombre_social!==undefined"
+            <p
+              v-if="this.datosPersonalesPost.nombre_social!==undefined"
               class="title text-center title font-weight-medium pt-2"
             >¡{{this.datosPersonalesPost.nombre_social}}!, acabas de culminar la primera etapa de tu postulación!</p>
 
-            <p v-else
+            <p
+              v-else
               class="title text-center title font-weight-medium pt-2"
             >¡{{this.datosPersonalesPost.nombres}}!, acabas de culminar la primera etapa de tu postulación!</p>
 
@@ -122,9 +124,10 @@
 
             <p class="body-2 pt-12 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
             <div class="text-center teal--text">
-              <v-rating v-model="rating" color="teal" class="teal--text"></v-rating>
+              <v-rating v-model="rating" color="teal" class="teal--text" v-on:input="buttonFeedbackStatus()"></v-rating>
             </div>
             <v-text-field
+              v-on:input="buttonFeedbackStatus()"
               name="name"
               v-model="ratingComment"
               placeholder="Algún comentario"
@@ -133,11 +136,16 @@
             ></v-text-field>
             <v-row class="justify-center">
               <v-btn
+                :disabled="this.countFeedback"
                 color="#00B8AD"
                 class="white--text feedbackButton"
                 rounded
                 @click="sendFeedback()"
               >Enviar</v-btn>
+            </v-row>
+            <v-row class="justify-center">
+              <p v-if="countFeedback" class="feedback-message"> ¡Gracias por tu calificación/comentarios!</p>
+              <p v-else class="message-blank">¡Gracias por tu calificación/comentarios!</p>
             </v-row>
             <v-row class="justify-center">
               <v-btn
@@ -227,6 +235,7 @@ export default {
       markersActivity: {},
       rating: null,
       ratingComment: "",
+      countFeedback: false,
 
       // addressVP: '',
       // coordsVP: [0,0],
@@ -849,6 +858,12 @@ export default {
         .ref("FEEDBACK")
         .child(feedbackKey)
         .set(JSON.parse(JSON.stringify(feedback)));
+
+    this.countFeedback=true;
+
+    },
+    buttonFeedbackStatus(){
+      this.countFeedback=false;
     }
   }
 };
@@ -878,5 +893,12 @@ export default {
 
 .feedbackButton {
   margin-bottom: 2em;
+}
+
+.feedback-message{
+  color: #00B8AD !important;
+}
+.message-blank{
+visibility: hidden;
 }
 </style>
