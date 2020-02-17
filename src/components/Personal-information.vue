@@ -611,7 +611,7 @@ export default {
           this.datosExperienciaPost.flag_conExp == "rbtExtContact")
       ) {
         this.arrExperiencias();
-        // alert("con experiencia");
+         alert("con experiencia");
         this.hidden = false;
       }
 
