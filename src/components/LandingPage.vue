@@ -390,8 +390,8 @@ export default {
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
-  .v-image__image v-image__image--cover{
-    width: 600px!important;
+  .v-image__image--cover{
+    width: 550px!important;
     height: 360!important;
   }
   /* .carousel-img{

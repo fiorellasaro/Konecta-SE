@@ -42,7 +42,7 @@
     <!-- step 1 -->
     <div id="step1" v-if="countDatosPersonales === 1" class="px-3 pt-12 mt-4">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-4">¿Cómo te gustaria que te llamemos?*</p>
+        <p class="text-center black--text title mb-4">¿Cómo te gustaría que te llamemos?*</p>
         <v-text-field
           v-model="datosPersonalesPost.nombre_social"
           class="pt-2"
@@ -69,7 +69,7 @@
           :rules="[v => !!v || 'Selecciona una nacionalidad']"
         >
           <v-radio label="Peruana" value="Peruana" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="Extranjero" value="Extranjero" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio label="Extranjera" value="Extranjera" color="teal" class="pa-2 radioStateCivil"></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -259,7 +259,7 @@
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-0">¿Cuéntanos cómo conociste a Konecta?</p>
+        <p class="text-center black--text title mb-0">Cuentanos cómo conociste a Konecta</p>
         <v-select
           v-model="datosPersonalesPost.como_konecta"
           :items="itemsComoKonecta"

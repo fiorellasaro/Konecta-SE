@@ -4,7 +4,7 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p
           class="text-center title mb-0"
-        >¿Cuál de las siguientes actividades realizas con mayor frecuencia en la semanal?</p>
+        >¿Cuál de las siguientes actividades realizas con mayor frecuencia en la semana?</p>
         <v-radio-group
           v-model="datosRotacionPost.actividades"
           required
@@ -193,7 +193,7 @@
           <v-radio label="Mi familia" value="A" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Mis estudios" value="B" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio
-            label="Negocio / proyecto personalr"
+            label="Negocio / Proyecto personal"
             value="C"
             color="teal"
             class="pa-2 radioStateCivil"
@@ -205,7 +205,7 @@
     </div>
     <div id="step2" v-if="countRotacion == 6" class="px-1 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempo libres?</p>
+        <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempos libres?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
       
         <v-checkbox
