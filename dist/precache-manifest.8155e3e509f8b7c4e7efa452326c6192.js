@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3d162fc33f9c3942b1bf",
+    "revision": "53b5c5572a5394682fff",
     "url": "/konecta-se/css/app.f9bb66f0.css"
   },
   {
@@ -8,12 +8,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/css/chunk-1eb5b039.4ce56d4c.css"
   },
   {
-    "revision": "0f31795c39e1d6ef0452",
-    "url": "/konecta-se/css/chunk-266e7543.45013104.css"
+    "revision": "c520aa42da55541580a8",
+    "url": "/konecta-se/css/chunk-356d6da5.45013104.css"
   },
   {
-    "revision": "229d97fd5cc8d86a03e3",
-    "url": "/konecta-se/css/chunk-3b964552.36329367.css"
+    "revision": "65cddb50edb635fc68cd",
+    "url": "/konecta-se/css/chunk-4409cfaa.6e927b5f.css"
   },
   {
     "revision": "ccf30492a15de777c35d",
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/css/chunk-727f4cd0.89c30f82.css"
   },
   {
-    "revision": "ece0c5d3318f56541535",
+    "revision": "f17f94478ba155be440a",
     "url": "/konecta-se/css/chunk-cc74140e.9e6787c1.css"
   },
   {
@@ -88,6 +88,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/Copa-600x360.4edf6a57.jpg"
   },
   {
+    "revision": "2de82ac5750af70573b5b9aeed81df6d",
+    "url": "/konecta-se/img/Hackatom-1024x480.2de82ac5.jpg"
+  },
+  {
     "revision": "f1ec17170b372fd783868354865ee84b",
     "url": "/konecta-se/img/IMG_7899.f1ec1717.jpeg"
   },
@@ -124,28 +128,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/section-2.7ffa70fd.png"
   },
   {
-    "revision": "c9f543fe3710fff0c055432ef2b29641",
+    "revision": "29da0df78da97d19132b95168473303c",
     "url": "/konecta-se/index.html"
   },
   {
-    "revision": "3d162fc33f9c3942b1bf",
-    "url": "/konecta-se/js/app.bbf44b95.js"
+    "revision": "53b5c5572a5394682fff",
+    "url": "/konecta-se/js/app.fdd54950.js"
   },
   {
     "revision": "8a30a77becbfa4736437",
     "url": "/konecta-se/js/chunk-1eb5b039.753e90a9.js"
   },
   {
-    "revision": "0f31795c39e1d6ef0452",
-    "url": "/konecta-se/js/chunk-266e7543.80f4b56f.js"
-  },
-  {
     "revision": "da159860c7b4aca6cfc5",
     "url": "/konecta-se/js/chunk-2d22d746.ade41f10.js"
   },
   {
-    "revision": "229d97fd5cc8d86a03e3",
-    "url": "/konecta-se/js/chunk-3b964552.5a6f0dd7.js"
+    "revision": "c520aa42da55541580a8",
+    "url": "/konecta-se/js/chunk-356d6da5.5bc741e8.js"
+  },
+  {
+    "revision": "65cddb50edb635fc68cd",
+    "url": "/konecta-se/js/chunk-4409cfaa.c96a49ae.js"
   },
   {
     "revision": "ccf30492a15de777c35d",
@@ -156,8 +160,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/js/chunk-727f4cd0.214d0aac.js"
   },
   {
-    "revision": "ece0c5d3318f56541535",
-    "url": "/konecta-se/js/chunk-cc74140e.d50375f2.js"
+    "revision": "f17f94478ba155be440a",
+    "url": "/konecta-se/js/chunk-cc74140e.37a9e2e8.js"
   },
   {
     "revision": "c6f2b3c731c94028c82c",
