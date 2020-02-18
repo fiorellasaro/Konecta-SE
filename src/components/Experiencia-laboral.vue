@@ -2,7 +2,7 @@
   <div>
     <div id="stepExp1" v-if="countExpLab == 0" class="px-3 pt-10">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-      <div>
+        <div>
           <p class="text-center black--text title mb-0">¿Tienes experiencia laboral?</p>
           <v-radio-group
             v-model="datosExperienciaPost.flag_se"
@@ -19,13 +19,13 @@
               v-on:change="rbtSinExperiencia"
             ></v-radio>
           </v-radio-group>
-        <!-- </v-form> -->
-      </div>
+          <!-- </v-form> -->
+        </div>
 
-      <!-- step 8 -->
-      <v-expand-transition>
-        <div v-if="datosExperienciaPost.flag_se == 0" class="px-3 pt-4">
-          <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
+        <!-- step 8 -->
+        <v-expand-transition>
+          <div v-if="datosExperienciaPost.flag_se == 0" class="px-3 pt-4">
+            <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
             <p class="text-center black--text title mb-0">Tipo de experiencia</p>
             <v-radio-group
               v-model="datosExperienciaPost.flag_conExp"
@@ -39,16 +39,11 @@
                 color="teal"
                 class="pa-2 radioExp"
               ></v-radio>
-              <v-radio
-                label="En otro rubro"
-                value="rbtExpOtros"
-                color="teal"
-                class="pa-2 radioExp"
-              ></v-radio>
+              <v-radio label="En otro rubro" value="rbtExpOtros" color="teal" class="pa-2 radioExp"></v-radio>
             </v-radio-group>
-          
-        </div>
-      </v-expand-transition></v-form>
+          </div>
+        </v-expand-transition>
+      </v-form>
     </div>
     <!-- FLUJO NO EXPERIENCIA -->
     <div
@@ -134,7 +129,6 @@
 
         <v-radio-group
           v-model="datosExperienciaPost.se_p_ventas"
-          
           class="body-2"
           :rules="[v => !!v || 'Selecciona una opción']"
           required
@@ -174,11 +168,10 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p
           class="text-center black--text title mb-0"
-        >Tus padres te piden coordinar un trámite cualquiera, tú: </p>
+        >Tus padres te piden coordinar un trámite cualquiera, tú:</p>
 
         <v-radio-group
           v-model="datosExperienciaPost.se_p_backof"
-          
           :rules="[v => !!v || 'Selecciona una opción']"
           required
         >
@@ -192,7 +185,7 @@
             label="Organizas todo, envías la información y realizas el seguimiento correspondiente. Les dices a tus padres que el trámite ya está hecho sin mayor explicación."
             value="B"
             color="teal"
-            class="py-12 px-2 mt-2  text-justify pr-4 caption radioExp"
+            class="py-12 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Organizas todo y envías la información. Pero dejas de lado el seguimiento porque no es tan importante. Les dices a tus padres que el trámite ya está hecho sin mayor explicación."
@@ -229,31 +222,31 @@
             label="Un mensaje conciso con toda la información que pude recopilar. También le adjunto un mapa."
             value="A"
             color="teal"
-             class="py-8 px-2 text-justify pr-4 caption radioExp"
+            class="py-8 px-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Un mensaje con lo primero que se me viene a la mente. No me gusta escribir textos muy largos."
             value="B"
             color="teal"
-             class="py-8 px-2 mt-2 text-justify pr-4 caption radioExp"
+            class="py-8 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Le brindo los nombres de los lugares para que él se encargue de buscar. "
             value="C"
             color="teal"
-             class="py-6 px-2 mt-2 text-justify pr-4 caption radioExp"
+            class="py-6 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="Le pido su número y lo llamo. Escribir toma mucho tiempo."
             value="D"
             color="teal"
-             class="py-4 px-2 mt-2 text-justify pr-4 caption radioExp"
+            class="py-4 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
           <v-radio
             label="No le contesto. Igual, hace mucho que no nos vemos."
             value="E"
             color="teal"
-             class="py-4 px-2 mt-2 text-justify pr-4 caption radioExp"
+            class="py-4 px-2 mt-2 text-justify pr-4 caption radioExp"
           ></v-radio>
         </v-radio-group>
       </v-form>
@@ -380,19 +373,17 @@
           :rules="[v => !!v || 'Ingresa un monto']"
           required
           @keypress="isNumber($event)"
-        ></v-text-field></v-form>
-        <v-text-field
-          v-model.number="datosExperienciaPost.eo_retribucion_comisiones"
-          class="pt-8"
-          color="teal"
-          maxlength="4"
-          label="Comisiones / Incentivos / Bonos:"
-          prefix="S/"
-       
-         
-          @keypress="isNumber($event)"
         ></v-text-field>
-      
+      </v-form>
+      <v-text-field
+        v-model.number="datosExperienciaPost.eo_retribucion_comisiones"
+        class="pt-8"
+        color="teal"
+        maxlength="4"
+        label="Comisiones / Incentivos / Bonos:"
+        prefix="S/"
+        @keypress="isNumber($event)"
+      ></v-text-field>
     </div>
     <div
       id="step1"
@@ -401,6 +392,23 @@
     >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
+        <div>
+          <v-list disabled>
+            <v-list-item-group v-model="allDatosExp" color="primary">
+              <v-list-item v-for="(item, i) in allDatosExp" :key="i" class="mb-2" style="background-color: whitesmoke;">
+                <v-list-item-icon class="text-end mr-3 mb-0 mt-3">
+                  <v-list-item-title v-text="i+1 + ':'"></v-list-item-title>
+                </v-list-item-icon>
+                <v-list-item-content class="text-start" v-if="item.flag_ec === 1">
+                  <v-list-item-title v-text="item.ec_empresa"></v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-content class="text-start"  v-if="item.flag_eo=== 1">
+                  <v-list-item-title v-text="item.eo_empresa"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </div>
         <v-btn
           rounded
           color="#00B8AD"
@@ -410,7 +418,7 @@
           Añadir experiencia
           <v-icon right dark size="35">add_circle</v-icon>
         </v-btn>
-         <p class="grey--text body-2 text-center pt-6">* Puedes omitir este paso</p>
+        <p class="grey--text body-2 text-center pt-6">* Puedes omitir este paso</p>
         <!-- <v-row class="justify-end">
           <v-btn
             text
@@ -419,7 +427,7 @@
             color="#2D9CDB"
             @click="countDatosPersonales += 1"
           >Omitir</v-btn>
-        </v-row> -->
+        </v-row>-->
       </v-form>
     </div>
     <!-- EXPERIENCIA EN CALL CENTER  countExpLabCC-->
@@ -516,7 +524,7 @@
           class="pt-2"
           color="teal"
           label="Sueldo Básico:"
-           maxlength="4"
+          maxlength="4"
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
@@ -526,7 +534,7 @@
           v-model="datosExperienciaPost.ec_retribucion_comisiones"
           class="pt-8"
           color="teal"
-           maxlength="4"
+          maxlength="4"
           label="Comisiones / Incentivos / Bonos:"
           prefix="S/"
           @keypress="isNumber($event)"
@@ -541,11 +549,28 @@
     >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-4">Puedes añadir una experiencia laboral</p>
+        <div>
+          <v-list disabled>
+            <v-list-item-group v-model="allDatosExp" color="primary">
+              <v-list-item v-for="(item, i) in allDatosExp" :key="i" class="mb-2" style="background-color: whitesmoke;">
+                <v-list-item-icon class="text-end mr-3 mb-0 mt-3">
+                  <v-list-item-title v-text="i+1 + ':'"></v-list-item-title>
+                </v-list-item-icon>
+                <v-list-item-content class="text-start" v-if="item.flag_ec === 1">
+                  <v-list-item-title v-text="item.ec_empresa"></v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-content class="text-start"  v-if="item.flag_eo=== 1">
+                  <v-list-item-title v-text="item.eo_empresa"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </div>
         <v-btn
           rounded
           color="#00B8AD"
           class="ma-2 white--text text-capitalize"
-          v-on:click="agregarExperiencia"
+          v-on:click="agregarExperiencia()"
         >
           Añadir experiencia
           <v-icon right dark size="35">add_circle</v-icon>
@@ -559,7 +584,7 @@
             color="#2D9CDB"
             @click="countExpLab += 1"
           >Omitir</v-btn>
-        </v-row> -->
+        </v-row>-->
       </v-form>
     </div>
 
@@ -587,6 +612,7 @@ export default {
       type: Array,
       required: true
     },
+    allDatosExp: Array,
     agregarExperiencia: Function
   },
   data() {
@@ -639,8 +665,8 @@ export default {
       ]
     };
   },
-   mounted() {
-     console.log(this.datosExperienciaPost.se_p_atc);
+  mounted() {
+    console.log(this.datosExperienciaPost.se_p_atc);
   },
   methods: {
     rbtSinExperiencia() {
@@ -670,8 +696,9 @@ export default {
   border-radius: 4px;
   /* font-size: 15px!important; */
 }
-.v-input--selection-controls .v-input__slot > .v-label, .v-input--selection-controls .v-radio > .v-label {
-    font-size: 15px!important;
+.v-input--selection-controls .v-input__slot > .v-label,
+.v-input--selection-controls .v-radio > .v-label {
+  font-size: 15px !important;
 }
 .v-application .title {
   line-height: 23px !important;

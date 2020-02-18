@@ -42,43 +42,22 @@
       <!-- <HelloWorld /> -->
     </v-content>
 
-
-    <!-- <v-footer color="blue darken-2" app>
-      <span class="white--text">&copy; 2020</span>
-    </v-footer>-->
-    <v-footer v-if="$route.name == 'home'" color="teal">
-      <v-card flat tile class="white--text text-center" color="teal">
-        <v-card-text>
-          <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
-            <v-icon size="24px">{{ icon }}</v-icon>
+    <v-footer v-if="$route.name == 'home'" color="#4db6ac" padless>
+      <v-row justify="center" no-gutters>
+        <v-btn class="mx-4 white--text" icon href="https://co.linkedin.com/company/konecta-peru">
+            <v-icon size="24px">mdi-linkedin-box</v-icon>
           </v-btn>
-        </v-card-text>
-
-        <v-card-text class="white--text pt-0">
-          Reconocimientos:
-          <br />2013:
-          Premio Contacto a la Excelencia, APECCO (Mejor Contribución en Responsabilidad Social)
-          Premio Soy Capaz, por la contribución al empleo formal de personas con discapacidad
-          <br />2015
-          CODESPA, finalistas en la categoría Inclusión de los jóvenes de Pachacútec al mundo laboral
-          <br />2016
-          APECCO: Mejor operación Call Center "Premio Contacto a la Excelencia"
-          APECCO: Mejor contribución Responsabilidad Social "Premio Contacto a la Excelencia"
-          <br />2017
-          Ranking Equidad de Género. Entre 141 empresas Konecta Perú obtuvo el 5to puesto de ranking PAR (elaborado por Aequales)
-          Premiación ABE, "Mejor Programa de Desarrollo del Entorno por la formación e inserción laboral de jóvenes con y sin discapacidad de Pachacútec"
-          Premio IMPLICACCIÓN, por la labor realizada en materia de Responsabilidad Social.
-          EMPRESAS SOS, Reconocimiento otorgado por el Ministerio de Trabajo a través de Perú Responsable por el apoyo brindado a los damnificados del Niño Costero.
-          EMPRESA SEGURA, premio "Sello Empresa Segura libre de Violencia y Discriminación Contra la Mujer" la máxima distinción que otorga el Ministerio de la Mujer y Poblaciones Vulnerables.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-text class="white--text">
+          <v-btn class="mx-4 white--text" icon href="https://twitter.com/gkonecta">
+            <v-icon size="24px">mdi-twitter</v-icon>
+          </v-btn>
+          <v-btn class="mx-4 white--text" icon href="https://www.instagram.com/konectaperu/?hl=es-la">
+            <v-icon size="24px">mdi-instagram </v-icon>
+          </v-btn>
+        <v-col class="teal py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} —
-          <strong>Konecta</strong>
-        </v-card-text>
-      </v-card>
+          <strong>Konecta Perú</strong>
+        </v-col>
+      </v-row>
     </v-footer>
   </v-app>
 </template>
@@ -90,27 +69,21 @@ export default {
   name: "App",
 
   components: {
-    HelloWorld,
+    HelloWorld
   },
 
-  data () {
+  data() {
     //
     return {
-    icons: [
-      "mdi-facebook-box",
-      "mdi-twitter",
-      // "fab fa-google-plus",
-      "mdi-linkedin-box"
-      // "fab fa-instagram"
-    ]
+      icons: [
+        "mdi-facebook-box",
+        "mdi-twitter",
+        // "fab fa-google-plus",
+        "mdi-linkedin-box"
+        // "fab fa-instagram"
+      ]
     };
-
-    
-
-  },
-
-
-
+  }
 };
 </script>
 <style>

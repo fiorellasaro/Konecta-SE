@@ -197,7 +197,7 @@
               <v-card-title primary-title class="layout justify-center">
                 <div class="headline">Konecta Perú</div>
               </v-card-title>
-              <v-card-text>Konecta Perú es una empresa dedicada a prestar servicios de BPO y de contact center. Opera hace nueve años en el país y al 2020 cuenta con más de 13,500 colaboradores/as en las ciudades de Lima, Callao y Chiclayo. Buscamos maximizar la creación de valor compartido, tanto para la Compañía como para nuestros grupos de interés y las comunidades en las que desarrollamos operaciones, mediante la implantación de prácticas de gestión basadas en la rentabilidad, innovación, igualdad de oportunidades, ética y la sostenibilidad.</v-card-text>
+              <v-card-text class="text-justify">Somos una empresa de relacionamiento con clientes, apoyados en el mejor talento humano y en las nuevas tecnologías. <br> Operamos desde hace 9 años en el país y al 2020 contamos con más de 13,500 colaboradores/as en las ciudades de Lima, Callao y Chiclayo.</v-card-text>
             </v-card>
           </v-flex>
           <v-flex xs12 sm4 offset-sm1>

@@ -88,6 +88,7 @@
               :datosExperienciaPost="datosExperienciaPost"
               :datosPersonalesPost="datosPersonalesPost"
               :agregarExperiencia="agregarExperiencia"
+              :allDatosExp="allDatosExp"
             />
           </div>
           <div v-if="nextComponente === 'componente4'">
@@ -124,7 +125,12 @@
 
             <p class="body-2 pt-12 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
             <div class="text-center teal--text">
-              <v-rating v-model="rating" color="teal" class="teal--text" v-on:input="buttonFeedbackStatus()"></v-rating>
+              <v-rating
+                v-model="rating"
+                color="teal"
+                class="teal--text"
+                v-on:input="buttonFeedbackStatus()"
+              ></v-rating>
             </div>
             <v-text-field
               v-on:input="buttonFeedbackStatus()"
@@ -144,7 +150,10 @@
               >Enviar</v-btn>
             </v-row>
             <v-row class="justify-center">
-              <p v-if="countFeedback" class="feedback-message"> ¡Gracias por tu calificación/comentarios!</p>
+              <p
+                v-if="countFeedback"
+                class="feedback-message"
+              >¡Gracias por tu calificación/comentarios!</p>
               <p v-else class="message-blank">¡Gracias por tu calificación/comentarios!</p>
             </v-row>
             <v-row class="justify-center">
@@ -200,6 +209,17 @@
             >Finalizar</v-btn>
           </v-col>
         </v-row>
+
+        <v-dialog v-model="dialog" max-width="290">
+          <v-card>
+            <!-- <v-card-title class="headline">Se registro tu experiencia laboral</v-card-title> -->
+            <v-row class="justify-center pt-6 pb-4"><v-icon color="teal" size="48">work</v-icon></v-row>
+            <v-card-text class="subtitle-1	black--text text-center">Se registro tu experiencia laboral</v-card-text>
+            <v-card-actions class="justify-center">
+              <v-btn color="teal" text @click="dialog = false">Aceptar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-flex>
     </v-layout>
   </v-container>
@@ -227,6 +247,7 @@ export default {
   },
   data() {
     return {
+      dialog: false,
       addressTextPersonal: "",
       markersPersonal: {},
       addressTextStudy: "",
@@ -358,7 +379,7 @@ export default {
       this.$refs.menu.save(date);
     },
     agregarExperiencia() {
-      if (this.countBtnAddExp < 3) {
+      if (this.countBtnAddExp < 2) {
         this.countExpLab = 0;
         this.añadirExp = true;
         this.countBtnAddExp += 1;
@@ -620,7 +641,8 @@ export default {
           this.datosExperienciaPost.flag_conExp == "rbtExtContact")
       ) {
         this.arrExperiencias();
-         alert("con experiencia");
+        this.dialog = true
+        // alert("con experiencia");
         this.hidden = false;
       }
 
@@ -859,11 +881,10 @@ export default {
         .child(feedbackKey)
         .set(JSON.parse(JSON.stringify(feedback)));
 
-    this.countFeedback=true;
-
+      this.countFeedback = true;
     },
-    buttonFeedbackStatus(){
-      this.countFeedback=false;
+    buttonFeedbackStatus() {
+      this.countFeedback = false;
     }
   }
 };
@@ -895,10 +916,10 @@ export default {
   margin-bottom: 2em;
 }
 
-.feedback-message{
-  color: #00B8AD !important;
+.feedback-message {
+  color: #00b8ad !important;
 }
-.message-blank{
-visibility: hidden;
+.message-blank {
+  visibility: hidden;
 }
 </style>
