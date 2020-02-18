@@ -345,8 +345,8 @@ export default {
       },
       {
         id: 4,
-        bannerImg: require("../assets/Banners/06.png"),
-        text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
+        bannerImg: require("../assets/Banners/Hackatom-1024x480.jpg"),
+        text: "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
     ],
     slide_mob: [

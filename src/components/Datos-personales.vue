@@ -153,8 +153,8 @@
           <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio
-            label="No me identifico con ninguno"
-            value="no-binario"
+            label="Otro"
+            value="Otro"
             color="teal"
             class="pa-2 radioStateCivil"
           ></v-radio>
@@ -190,7 +190,7 @@
     <!-- step7 -->
     <div id="step7" v-if="countDatosPersonales === 7" class="px-3 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-0">¿Tienes hijos?</p>
+        <p class="text-center black--text title mb-0">¿Tienes hijos/as?</p>
         <v-radio-group
           v-model="rdbHijos"
           class="body-1"
