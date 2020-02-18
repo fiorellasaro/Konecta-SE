@@ -634,7 +634,8 @@ export default {
         "Ventas",
         "Crosseling",
         "Redes Sociales",
-        "Back Office"
+        "Back Office",
+        "Otros"
       ]
     };
   },
