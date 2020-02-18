@@ -75,13 +75,6 @@ export default {
   data() {
     //
     return {
-      icons: [
-        "mdi-facebook-box",
-        "mdi-twitter",
-        // "fab fa-google-plus",
-        "mdi-linkedin-box"
-        // "fab fa-instagram"
-      ]
     };
   }
 };

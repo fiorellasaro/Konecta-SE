@@ -6,16 +6,14 @@
           <v-row class="opasity justify-center">
             <v-col cols="12" md="12" class="pb-0 mb-0">
               <h1
-                class="white--text mb-0 display-1 text-center pt-0 font-weight-bold"
+                class="white--text mb-0 display-text text-center pt-0 font-weight-bold"
               >{{slide.text1}}</h1>
             </v-col>
             <v-col cols="12" md="12" class="py-0 mb-0">
-              <h3 class="white--text headline text-center pt-0 mb-0">{{slide.text2}}</h3>
+              <h3 class="white--text headline-text text-center pt-0 mb-0">{{slide.text2}}</h3>
             </v-col>
             <v-col cols="12" md="12" class="py-0 mb-2">
-              <h4
-                class="white--text mb-2 mx-4 headline text-center pt-0 mt-0"
-              >{{slide.text}}</h4>
+              <h4 class="white--text mb-2 mx-4 headline-text text-center pt-0 mt-0">{{slide.text}}</h4>
             </v-col>
           </v-row>
         </v-row>
@@ -26,13 +24,27 @@
       <v-layout column wrap class="my-10 mx-2" align-center>
         <v-flex xs12 sm4 class="my-4">
           <div class="text-center konecta-text">
-            <h2 class="display-1 font-weight-bold pb-4">Esto es Konecta Perú por dentro.</h2>
-            <span class="subheading headline my-10">
+            <h2 class="display-text font-weight-bold pb-4">Esto es Konecta Perú por dentro.</h2>
+            <span class="subheading headline-text my-10">
               Te invitamos a dar una vuelta por Konecta. Hemos preparado una visita muy especial, eres nuestro invitado/a de honor,
               ponte cómodo/a y disfruta.
             </span>
           </div>
-          <div class="text-center pt-10">
+          <!-- src="https://www.youtube.com/embed/enZ1OsUuoHw?rel=0&amp;autoplay=1&loop=1" -->
+          <!-- src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"  width="640" height="360"-->
+          <v-row class="justify-center pt-4 px-10">
+            <iframe
+              width="640"
+              height="360"
+              src="https://www.youtube.com/embed/enZ1OsUuoHw?loop=1&playlist=enZ1OsUuoHw&autoplay=1"
+              
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </v-row>
+
+          <!-- <div class="text-center pt-10">
             <video
             controls
               class="video"
@@ -40,11 +52,12 @@
               autoplay
               loop
             ></video>
-          </div>
+          </div>-->
           <div class="text-center mt-8 mx-1">
-            <h2 class="display-1 font-weight-bold pt-4 pb-0">Lo que nos entusiasma</h2>
+            <h2 class="display-text font-weight-bold pt-4 pb-0">Lo que nos entusiasma</h2>
           </div>
         </v-flex>
+
         <v-flex xs12>
           <v-container grid-list-xl>
             <v-layout row wrap align-center>
@@ -117,7 +130,7 @@
       <v-layout column wrap class="my-12" align-center>
         <v-flex xs12 sm4 class="my-4 mx-2">
           <div class="text-center">
-            <h2 class="display-1">No lo decimos nosotros</h2>
+            <h2 class="display-text font-weight-bold">No lo decimos nosotros</h2>
             <span class="subheading">Lo dicen nuestros colaboradores</span>
           </div>
         </v-flex>
@@ -197,7 +210,10 @@
               <v-card-title primary-title class="layout justify-center">
                 <div class="headline">Konecta Perú</div>
               </v-card-title>
-              <v-card-text class="text-justify">Somos una empresa de relacionamiento con clientes, apoyados en el mejor talento humano y en las nuevas tecnologías. <br> Operamos desde hace 9 años en el país y al 2020 contamos con más de 13,500 colaboradores/as en las ciudades de Lima, Callao y Chiclayo.</v-card-text>
+              <v-card-text class="text-justify">
+                Somos una empresa de relacionamiento con clientes, apoyados en el mejor talento humano y en las nuevas tecnologías.
+                <br />Operamos desde hace 9 años en el país y al 2020 contamos con más de 13,500 colaboradores/as en las ciudades de Lima, Callao y Chiclayo.
+              </v-card-text>
             </v-card>
           </v-flex>
           <v-flex xs12 sm4 offset-sm1>
@@ -232,7 +248,7 @@
                   </v-list-item-action>
                   <v-list-item-content>
                     <v-list-item-title
-                      style="white-space: normal!important;"
+                      style="white-space: normal!important; font-size: 15px!important;"
                     >comunicacionesperu@grupokonecta.com</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
@@ -308,8 +324,8 @@ export default {
         // bannerImg: require("../assets/bannersMobile/mobile.png"),
         bannerImg: require("../assets/Banners/05.png"),
         text1: "¡WOOW felizmente llegaste!",
-        text2:"Te estábamos esperando,",
-        text:"ven a conocernos tenemos un lugar para ti."
+        text2: "Te estábamos esperando,",
+        text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
@@ -324,7 +340,8 @@ export default {
       {
         id: 3,
         bannerImg: require("../assets/Banners/Copa-1024x480.jpg"),
-        text: "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
+        text:
+          "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
@@ -332,13 +349,14 @@ export default {
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       }
     ],
-    slide_mob:[{
+    slide_mob: [
+      {
         id: 0,
         // bannerImg: require("../assets/bannersMobile/mobile.png"),
         bannerImg: require("../assets/Banners/Call-600x360.jpg"),
         text1: "¡WOOW felizmente llegaste!",
-        text2:"Te estábamos esperando,",
-        text:"ven a conocernos tenemos un lugar para ti."
+        text2: "Te estábamos esperando,",
+        text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
@@ -348,19 +366,21 @@ export default {
       {
         id: 2,
         bannerImg: require("../assets/Banners/Teleoperador2-600x360.jpg"),
-        
+
         text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
         bannerImg: require("../assets/Banners/Copa-600x360.jpg"),
-        text: "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
+        text:
+          "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
         bannerImg: require("../assets/Banners/06.png"),
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
-      }]
+      }
+    ]
   })
 };
 </script>
@@ -381,33 +401,44 @@ export default {
 }
 @media screen and (max-width: 600px) {
   .video {
-    width: 350px!important;
+    width: 350px !important;
     height: 300px !important;
   }
-  .konecta-text{
+  .konecta-text {
     padding-right: 0px !important;
     padding-left: 0px !important;
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
-  .v-image__image--cover{
-    width: 550px!important;
-    height: 360!important;
+  .v-image__image--cover {
+    width: 550px !important;
+    height: 300 !important;
+  }
+  .display-text {
+    font-size: 24px !important;
+  }
+  .headline-text {
+    font-size: 20px !important;
   }
   /* .carousel-img{
     width: 600px!important;
     height: 360!important;
   } */
 }
+.display-text {
+  font-size: 34px;
+}
+.headline-text {
+  font-size: 24px;
+}
 .video {
-    width: 1340px;
-    height:680px;
-  }
-  .konecta-text{
-    padding-right: 48px ;
-    padding-left: 48px ;
-    margin-right: 48px ;
-    margin-left: 48px ;
-  }
-
+  width: 1340px;
+  height: 680px;
+}
+.konecta-text {
+  padding-right: 48px;
+  padding-left: 48px;
+  margin-right: 48px;
+  margin-left: 48px;
+}
 </style>
