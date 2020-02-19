@@ -103,6 +103,7 @@
             />
           </div>
           <div v-if="nextComponente === 'componente5'" class="pt-2 px-2">
+            <p class="title text-center title font-weight-medium mt-0">¡Felicidades!</p>
             <p
               v-if="this.datosPersonalesPost.nombre_social!==undefined"
               class="title text-center title font-weight-medium pt-2"
@@ -118,17 +119,17 @@
               class="pb-0 pt-4 body-2 text-justify"
             >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
 
-            <p class="body-2 text-justify">Si tienes dudas escríbenos al WhatsApp :</p>
+            <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
             <v-row class="justify-center pb-12">
               <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
               <p class="primary--text pl-4 pt-1">984860149</p>
             </v-row>
 
-            <p class="body-2 pt-12 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
+            <p class="body-2 pt-4 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
             <div class="text-center teal--text">
               <v-rating
                 v-model="rating"
-                color="teal"
+                color="#FDD835"
                 class="teal--text"
                 v-on:input="buttonFeedbackStatus()"
               ></v-rating>
@@ -141,7 +142,7 @@
               id="id"
               class="pa-0"
             ></v-text-field>
-            <v-row class="justify-center">
+            <v-row class="justify-center mb-0">
               <v-btn
                 :disabled="this.countFeedback"
                 color="#00B8AD"
@@ -160,7 +161,7 @@
             <v-row class="justify-center">
               <v-btn
                 color="#00B8AD"
-                class="white--text mt-10"
+                class="white--text mt-4"
                 rounded
                 @click="$router.push({name: 'home'})"
               >Regresar a la página de inicio</v-btn>
@@ -214,8 +215,12 @@
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
             <!-- <v-card-title class="headline">Se registro tu experiencia laboral</v-card-title> -->
-            <v-row class="justify-center pt-6 pb-4"><v-icon color="teal" size="48">work</v-icon></v-row>
-            <v-card-text class="subtitle-1	black--text text-center">Se registro tu experiencia laboral</v-card-text>
+            <v-row class="justify-center pt-6 pb-4">
+              <v-icon color="teal" size="48">work</v-icon>
+            </v-row>
+            <v-card-text
+              class="subtitle-1 black--text text-center"
+            >Se registro tu experiencia laboral</v-card-text>
             <v-card-actions class="justify-center">
               <v-btn color="teal" text @click="dialog = false">Aceptar</v-btn>
             </v-card-actions>
@@ -379,6 +384,7 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
+   
     agregarExperiencia() {
       if (this.countBtnAddExp < 2) {
         this.countExpLab = 0;
@@ -642,7 +648,7 @@ export default {
           this.datosExperienciaPost.flag_conExp == "rbtExtContact")
       ) {
         this.arrExperiencias();
-        this.dialog = true
+        this.dialog = true;
         // alert("con experiencia");
         this.hidden = false;
       }

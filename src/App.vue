@@ -12,6 +12,11 @@
         />
       </div>
       <div class="d-flex align-center" v-if="$route.name !== 'home'">
+        <v-btn
+        @click="$router.push('/')"
+       target="_blank"
+        text
+      >
         <v-img
           alt="Konecta logo"
           class="shrink mt-1"
@@ -20,6 +25,7 @@
           src="../src/assets/konecta-b.png"
           width="100"
         />
+        </v-btn>
       </div>
       <v-spacer></v-spacer> 
       <v-btn
@@ -53,13 +59,16 @@
     <v-footer v-if="$route.name == 'home'" color="#4db6ac" padless>
       <v-row justify="center" no-gutters>
         <v-btn class="mx-4 white--text" icon href="https://co.linkedin.com/company/konecta-peru">
-            <v-icon size="24px">mdi-linkedin-box</v-icon>
+            <v-icon size="25px">mdi-linkedin-box</v-icon>
           </v-btn>
           <v-btn class="mx-4 white--text" icon href="https://twitter.com/gkonecta">
-            <v-icon size="24px">mdi-twitter</v-icon>
+            <v-icon size="25px">mdi-twitter</v-icon>
           </v-btn>
           <v-btn class="mx-4 white--text" icon href="https://www.instagram.com/konectaperu/?hl=es-la">
-            <v-icon size="24px">mdi-instagram </v-icon>
+            <v-icon size="25px">mdi-instagram </v-icon>
+          </v-btn>
+          <v-btn class="mx-4 white--text" icon href="https://www.facebook.com/KonectaPeruOficial/">
+            <v-icon size="25px">mdi-facebook </v-icon>
           </v-btn>
         <v-col class="teal py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} —

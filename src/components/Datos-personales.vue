@@ -130,7 +130,7 @@
             locale="es"
             ref="picker"
             v-model="datosPersonalesPost.fecha_nac"
-            :max="new Date().toISOString().substr(0, 10)"
+            :max="dateMayorEdad()"
             min="1950-01-01"
             
             @change="save"
@@ -151,7 +151,7 @@
         >
           <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="Otro" value="Otro" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio label="Prefiero no responder" value="Prefiero no responder" color="teal" class="pa-2 radioStateCivil"></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -184,7 +184,7 @@
     <!-- step7 -->
     <div id="step7" v-if="countDatosPersonales === 7" class="px-3 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-0">¿Tienes hijos/as?</p>
+        <p class="text-center black--text title mb-0">¿Tienes hij@s?</p>
         <v-radio-group
           v-model="rdbHijos"
           class="body-1"
@@ -201,7 +201,7 @@
         </v-radio-group>
         <v-expand-transition>
           <div id="step7-1" v-if="rdbHijos === 'sihijos'" class="px-3 pt-8">
-            <p class="text-center black--text title mb-0">¿Cuántos hijos/as tienes?</p>
+            <p class="text-center black--text title mb-0">¿Cuántos hij@s tienes?</p>
             <!-- :rules="[v => !!v || 'Número de hijos es obligatorio', v => (v && v != 0) || 'El número de hijos debe ser mayor a cero',]" -->
             <v-text-field
               v-model.number="datosPersonalesPost.n_hijos"
@@ -390,7 +390,12 @@ export default {
     }
   },
   methods: {
-
+ dateMayorEdad() {
+      let date1 = new Date();
+      date1.setMonth(date1.getMonth() - 216);
+      let finalDate = date1.getFullYear()+ "-" + (date1.getMonth() + 1)+ "-" + date1.getDate();
+      return finalDate;
+    },
     rbtSinHijos() {
       this.rdbHijos = "nohijos";
       this.datosPersonalesPost.n_hijos = null;

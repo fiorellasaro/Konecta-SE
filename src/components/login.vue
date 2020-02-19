@@ -21,7 +21,7 @@
             ></v-select>
             <p class="text-center black--text title mb-2 mt-2">Número de documento</p>
             <v-text-field
-            v-if="selectDocumentType !=='Pasaporte'"
+            v-if="selectDocumentType !=='Pasaporte' && selectDocumentType!=='Permiso Temporal de Trabajo'"
               v-model="numeroDoc"
               maxlength="8"
               solo

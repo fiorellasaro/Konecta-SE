@@ -260,7 +260,7 @@
                     <v-icon class="blue--text text--lighten-2">mdi-phone</v-icon>
                   </v-list-item-action>
                   <v-list-item-content>
-                    <v-list-item-title>016346070</v-list-item-title>
+                    <v-list-item-title>7081100</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -269,8 +269,7 @@
                   </v-list-item-action>
                   <v-list-item-content>
                     <v-list-item-title style="white-space: normal!important;">
-                      Av. República de Panamá 4575 piso 5
-                      Lima, Peru
+                      Jirón Carabaya 933, Cercado de Lima
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
