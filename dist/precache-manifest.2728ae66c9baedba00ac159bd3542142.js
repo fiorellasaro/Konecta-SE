@@ -1,15 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "53b5c5572a5394682fff",
+    "revision": "afd7cd14784e4ddff209",
     "url": "/konecta-se/css/app.f9bb66f0.css"
   },
   {
-    "revision": "8a30a77becbfa4736437",
+    "revision": "5d7f4274a48ac06a7ffc",
     "url": "/konecta-se/css/chunk-1eb5b039.4ce56d4c.css"
   },
   {
-    "revision": "c520aa42da55541580a8",
-    "url": "/konecta-se/css/chunk-356d6da5.45013104.css"
+    "revision": "b7dfbad0c19c659c56c7",
+    "url": "/konecta-se/css/chunk-2c906116.9e6787c1.css"
+  },
+  {
+    "revision": "2910110c38762c7667fe",
+    "url": "/konecta-se/css/chunk-311d6e7c.cd945329.css"
   },
   {
     "revision": "65cddb50edb635fc68cd",
@@ -22,10 +26,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fc8271ae9be3c297e9bf",
     "url": "/konecta-se/css/chunk-727f4cd0.89c30f82.css"
-  },
-  {
-    "revision": "f17f94478ba155be440a",
-    "url": "/konecta-se/css/chunk-cc74140e.9e6787c1.css"
   },
   {
     "revision": "c6f2b3c731c94028c82c",
@@ -68,24 +68,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/06.354eb7d9.png"
   },
   {
-    "revision": "0474e4102d8dbddd9fdd07ddfc3b824a",
-    "url": "/konecta-se/img/Call-600x360.0474e410.jpg"
-  },
-  {
     "revision": "e27a2ab90d0bc63dd40cdbac51698b4d",
     "url": "/konecta-se/img/Campeonato-1024x480.e27a2ab9.jpg"
-  },
-  {
-    "revision": "3429812c8c929440381dd7e993331140",
-    "url": "/konecta-se/img/Campeonato-600x360.3429812c.jpg"
   },
   {
     "revision": "3e69ab9386a5f1c8f9ee5d863525f7b6",
     "url": "/konecta-se/img/Copa-1024x480.3e69ab93.jpg"
   },
   {
-    "revision": "4edf6a57e4121c7cd4e470bb5b58a4dd",
-    "url": "/konecta-se/img/Copa-600x360.4edf6a57.jpg"
+    "revision": "64fee492bf0a50608d8d080bbcf0fcfa",
+    "url": "/konecta-se/img/FOTO_TK.64fee492.png"
+  },
+  {
+    "revision": "635affe8e7622ae422ef108826a9053d",
+    "url": "/konecta-se/img/HACKA_MOB.635affe8.png"
   },
   {
     "revision": "2de82ac5750af70573b5b9aeed81df6d",
@@ -104,12 +100,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/IMG_7927.ed203ece.jpeg"
   },
   {
-    "revision": "71c8dfb9e2113dac15dfdc7614fe479e",
-    "url": "/konecta-se/img/Teleoperador2-600x360.71c8dfb9.jpg"
+    "revision": "fcac0b0d9a985827794a1de6cd1b122d",
+    "url": "/konecta-se/img/Teleoperador_mob.fcac0b0d.png"
+  },
+  {
+    "revision": "87d6914b7a7a000889aa539b9239e3ed",
+    "url": "/konecta-se/img/campeonato_mob.87d6914b.png"
   },
   {
     "revision": "36fdda7e156a523b9d78cf1892669695",
     "url": "/konecta-se/img/confetti.36fdda7e.png"
+  },
+  {
+    "revision": "2a31fb73f45458168f8ebb31733c2721",
+    "url": "/konecta-se/img/copa_mob.2a31fb73.png"
   },
   {
     "revision": "81e28f7397caa0af5dd3af937df9bfe0",
@@ -128,24 +132,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/section-2.7ffa70fd.png"
   },
   {
-    "revision": "29da0df78da97d19132b95168473303c",
+    "revision": "57ad8ca849fb4b2cee79a326a0accdd6",
     "url": "/konecta-se/index.html"
   },
   {
-    "revision": "53b5c5572a5394682fff",
-    "url": "/konecta-se/js/app.fdd54950.js"
+    "revision": "afd7cd14784e4ddff209",
+    "url": "/konecta-se/js/app.f2a126ea.js"
   },
   {
-    "revision": "8a30a77becbfa4736437",
-    "url": "/konecta-se/js/chunk-1eb5b039.753e90a9.js"
+    "revision": "5d7f4274a48ac06a7ffc",
+    "url": "/konecta-se/js/chunk-1eb5b039.afd66772.js"
+  },
+  {
+    "revision": "b7dfbad0c19c659c56c7",
+    "url": "/konecta-se/js/chunk-2c906116.470a519a.js"
   },
   {
     "revision": "da159860c7b4aca6cfc5",
     "url": "/konecta-se/js/chunk-2d22d746.ade41f10.js"
   },
   {
-    "revision": "c520aa42da55541580a8",
-    "url": "/konecta-se/js/chunk-356d6da5.5bc741e8.js"
+    "revision": "2910110c38762c7667fe",
+    "url": "/konecta-se/js/chunk-311d6e7c.217aad77.js"
   },
   {
     "revision": "65cddb50edb635fc68cd",
@@ -158,10 +166,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "fc8271ae9be3c297e9bf",
     "url": "/konecta-se/js/chunk-727f4cd0.214d0aac.js"
-  },
-  {
-    "revision": "f17f94478ba155be440a",
-    "url": "/konecta-se/js/chunk-cc74140e.37a9e2e8.js"
   },
   {
     "revision": "c6f2b3c731c94028c82c",
