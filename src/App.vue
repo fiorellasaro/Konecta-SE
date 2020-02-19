@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app color="teal" dark>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center" v-if="$route.name == 'home'">
         <v-img
           alt="Konecta logo"
           class="shrink mt-1 hidden-sm-and-down"

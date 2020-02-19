@@ -406,7 +406,7 @@
           </v-list>
         </div>
         <v-btn
-        v-if="countExpLab !==2"
+        v-if="countBtnAddExp !==2"
           rounded
           color="#00B8AD"
           class="ma-2 white--text text-capitalize"

@@ -201,7 +201,7 @@
         </v-radio-group>
         <v-expand-transition>
           <div id="step7-1" v-if="rdbHijos === 'sihijos'" class="px-3 pt-8">
-            <p class="text-center black--text title mb-0">¿Cuántos hijos tienes?</p>
+            <p class="text-center black--text title mb-0">¿Cuántos hijos/as tienes?</p>
             <!-- :rules="[v => !!v || 'Número de hijos es obligatorio', v => (v && v != 0) || 'El número de hijos debe ser mayor a cero',]" -->
             <v-text-field
               v-model.number="datosPersonalesPost.n_hijos"
@@ -357,11 +357,11 @@ export default {
         "Computrabajo",
         "Indeed",
         "Ministerio de Trabajo",
-        "Programa Aymimundo",
-        "Programa Forge",
-        "Programa Integralia",
-        "Programa Integra-Chiclayo",
-        "Programa Pachacutec",
+        "Inkluye Aymimundo",
+        "Inkluye Forge",
+        "Inkluye Integralia",
+        "Inkluye Integra-Chiclayo",
+        "Inkluye Pachacutec",
         "Volantes"
       ],
       comoKonecta: null,
@@ -390,6 +390,7 @@ export default {
     }
   },
   methods: {
+
     rbtSinHijos() {
       this.rdbHijos = "nohijos";
       this.datosPersonalesPost.n_hijos = null;
