@@ -5,35 +5,33 @@
         <p class="text-center black--text title mb-0">¿Cuál es tu nombre?</p>
         <v-text-field
           :rules="nameRules"
+          @keypress="isLetters($event)"
           v-model="datosPersonalesPost.nombres"
           class="pt-0"
           color="teal"
           maxlength="40"
-        
-         
-         
         ></v-text-field>
         <p class="text-center black--text title mb-0 mt-6">¿Cuáles son tus apellidos?</p>
         <v-row>
           <v-col cols="6" sm="6">
             <v-text-field
               :rules="lastName1Rules"
+              @keypress="isLetters($event)"
               v-model="datosPersonalesPost.apellido_p"
               color="teal"
               label="Apellido Paterno"
               maxlength="30"
-              
             ></v-text-field>
           </v-col>
 
           <v-col cols="6" sm="6">
             <v-text-field
               :rules="lastName2Rules"
+              @keypress="isLetters($event)"
               v-model="datosPersonalesPost.apellido_m"
               color="teal"
               label="Apellido Materno"
               maxlength="30"
-            
             ></v-text-field>
           </v-col>
         </v-row>
@@ -78,7 +76,7 @@
     <div id="step3" v-if="countDatosPersonales === 3" class="px-3 pt-10">
       <v-form ref="formEstado" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-0">¿Cuál es tu estado civil?</p>
-        <v-radio-group v-model="datosPersonalesPost.estado_civil"  class="body-1">
+        <v-radio-group v-model="datosPersonalesPost.estado_civil" class="body-1">
           <v-radio label="Soltero(a)" value="Soltero(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Casado(a)" value="Casado(a)" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio
@@ -134,6 +132,7 @@
             v-model="datosPersonalesPost.fecha_nac"
             :max="new Date().toISOString().substr(0, 10)"
             min="1950-01-01"
+            
             @change="save"
           ></v-date-picker>
         </v-menu>
@@ -152,12 +151,7 @@
         >
           <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio
-            label="Otro"
-            value="Otro"
-            color="teal"
-            class="pa-2 radioStateCivil"
-          ></v-radio>
+          <v-radio label="Otro" value="Otro" color="teal" class="pa-2 radioStateCivil"></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -208,9 +202,11 @@
         <v-expand-transition>
           <div id="step7-1" v-if="rdbHijos === 'sihijos'" class="px-3 pt-8">
             <p class="text-center black--text title mb-0">¿Cuántos hijos tienes?</p>
+            <!-- :rules="[v => !!v || 'Número de hijos es obligatorio', v => (v && v != 0) || 'El número de hijos debe ser mayor a cero',]" -->
             <v-text-field
-              v-model="datosPersonalesPost.n_hijos"
+              v-model.number="datosPersonalesPost.n_hijos"
               color="teal"
+              maxlength="2"
               @keypress="isNumber($event)"
               :rules="[v => !!v || 'Número de hijos es obligatorio']"
               required
@@ -226,14 +222,14 @@
       <!--Map -->
       <div class="input-google-container">
         <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
-          <gmap-autocomplete
-            ref="address"
-            id="starting_address"
-            class="input is-pulled-left input-autocomplete"
-            placeholder="Ingresa la dirección"
-            v-on:place_changed="getAddressData"
-            v-on:change="inputAutocomplete($event)"
-          />
+        <gmap-autocomplete
+          ref="address"
+          id="starting_address"
+          class="input is-pulled-left input-autocomplete"
+          placeholder="Ingresa la dirección"
+          v-on:place_changed="getAddressData"
+          v-on:change="inputAutocomplete($event)"
+        />
         <!-- </v-form> -->
         <br />
         <div class="text-marker-content">
@@ -267,30 +263,33 @@
           label="Selecciona"
           color="teal"
         ></v-select>
+        <!-- </v-form> -->
+        <v-expand-transition>
+          <div
+            id="step7"
+            v-if="datosPersonalesPost.como_konecta === 'Familia/ Amigos'"
+            class="px-3 pt-8"
+          >
+            <p class="text-center black--text body-1 mb-0">¿Cuál es su Nombre y Apellidos?</p>
+            <v-text-field
+              v-model="datosPersonalesPost.referidos"
+              color="teal"
+              @keypress="isLetters($event)"
+              required
+              :rules="[v => !!v || 'Ingresa el nombre de tu Familia/ Amigos']"
+            ></v-text-field>
+            <v-checkbox
+              v-model="datosPersonalesPost.amigo_trabajaK"
+              label="Mi Familar/ Amig@ trabaja en Konecta."
+              value="Si"
+              color="teal"
+              hide-details
+              required
+              class="pa-2 pt-6 body-2 black--text"
+            ></v-checkbox>
+          </div>
+        </v-expand-transition>
       </v-form>
-      <v-expand-transition>
-        <div
-          id="step7"
-          v-if="datosPersonalesPost.como_konecta === 'Familia/ Amigos'"
-          class="px-3 pt-8"
-        >
-          <p class="text-center black--text body-1 mb-0">¿Cuál es su Nombre y Apellidos?</p>
-          <v-text-field
-            v-model="datosPersonalesPost.referidos"
-            color="teal"
-            required
-            :rules="[v => !!v || 'Ingresa el nombre de tu Familia/ Amigos']"
-          ></v-text-field>
-          <v-checkbox
-            v-model="datosPersonalesPost.amigo_trabajaK"
-            label="Mi Familar/ Amig@ trabaja en Konecta."
-            value="Si"
-            color="teal"
-            hide-details
-            class="pa-2 pt-6 body-2 black--text"
-          ></v-checkbox>
-        </div>
-      </v-expand-transition>
     </div>
     <!-- Envio de datos -->
     <div id="step10" v-if="countDatosPersonales === 10" class="px-3 pt-12 mt-6">
@@ -329,7 +328,8 @@ export default {
       inputPrueba: {},
       address: "",
       phoneRules: [
-        v => !!v || "Ingresa el número de celular"
+        v => !!v || "Ingresa el número de celular",
+        v => (v && v.length >= 9) || "El número debe ser de 9 dígitos"
         // v => v.length >= 9 || 'El número debe ser de 9 dígitos',
       ],
       addressTextPersonal: "",
@@ -389,32 +389,37 @@ export default {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     }
   },
-   mounted() {
-    this.geolocate();
-  },
   methods: {
     rbtSinHijos() {
       this.rdbHijos = "nohijos";
       this.datosPersonalesPost.n_hijos = null;
       this.datosPersonalesPost.datosValidPer = true;
     },
-    isNumber: function(evt) {
-      // this.testCollection = [];
+    isLetters: function(evt) {
       evt = evt ? evt : window.event;
       var charCode = evt.which ? evt.which : evt.keyCode;
       if (
-        charCode > 31 &&
-        (charCode < 48 || charCode > 57) &&
-        charCode !== 46
+        (event.charCode > 64 && event.charCode < 91) ||
+        (event.charCode > 96 && event.charCode < 123)
       ) {
-        evt.preventDefault();
-      } else {
         return true;
+      } else {
+        evt.preventDefault();
       }
     },
+
+    isNumber($event) {
+      let keyCode = $event.keyCode ? $event.keyCode : $event.which;
+      if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
+        // 46 is dot
+        $event.preventDefault();
+      }
+    },
+
     save(fecha_nac) {
       this.$refs.menu.save(fecha_nac);
     },
+    allowedYears: val => parseInt(val.split('-')[1], 10) % 2 === 0,
     addMarker() {
       // if (this.starting_address_obj.geometry){
       const position = {
@@ -430,12 +435,6 @@ export default {
       this.starting_address_obj = null;
       this.$emit("addMarker", this.addressTextPersonal);
       this.markerCoordinates();
-      // this.$emit('markDirection', this.markers);
-      // } else {
-      //   this.addressTextPersonal = this.starting_address;
-      //   this.$emit("addMarker", this.addressTextPersonal);
-      //   //console.log(this.addressTextPersonal);
-      // }
     },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
@@ -456,8 +455,6 @@ export default {
       console.log(this.coordinates);
       //return
       this.markerCoordinates();
-      //this.$emit('coordinatesMarker', this.coordinates);
-      // return(this.coordinates);
     },
     markerCoordinates() {
       this.$emit("markerCoordinates", this.markersPersonal);

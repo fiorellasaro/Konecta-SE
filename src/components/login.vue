@@ -21,23 +21,38 @@
             ></v-select>
             <p class="text-center black--text title mb-2 mt-2">Número de documento</p>
             <v-text-field
+            v-if="selectDocumentType !=='Pasaporte'"
               v-model="numeroDoc"
-              maxlength="12"
+              maxlength="8"
               solo
               @keypress="isNumber($event)"
-              :rules="nameRules"
+              :rules="dniRules"
               placeholder="Ingrese el número"
               required
             ></v-text-field>
-            <!-- <v-checkbox
-              v-model="checkbox"
-              :rules="[v => !!v || 'You must agree to continue!']"
-              label="Acepto los Términos y Condiciones"
+            <v-text-field
+            v-if="selectDocumentType ==='Pasaporte'"
+              v-model="numeroDoc"
+              maxlength="11"
+              solo
+              @keypress="isNumber($event)"
+              :rules="pasaporteRules"
+              placeholder="Ingrese el número"
               required
-            ></v-checkbox>-->
+            ></v-text-field>
+            <v-text-field
+            v-if="selectDocumentType ==='Permiso Temporal de Trabajo'"
+              v-model="numeroDoc"
+              maxlength="9"
+              solo
+              @keypress="isNumber($event)"
+              :rules="ptpteRules"
+              placeholder="Ingrese el número"
+              required
+            ></v-text-field>
             <v-checkbox
               v-model="checkbox"
-              :rules="[v => !!v || 'You must agree to continue!']"
+              :rules="[v => !!v || 'Acepta la política de Privacidad!']"
               required
               color="teal"
             >
@@ -110,16 +125,23 @@ export default {
     valid: true,
     numeroDoc: "",
     terms: false,
-    nameRules: [
-      v => !!v || "El número de documento es requerido"
-      // v => (v && v.length > 7) || "El número debe ser de 8 carácteres"
+    dniRules: [
+      v => !!v || "El número de documento es requerido",
+      v => (v && v.length >= 8) || "El número debe ser de 8 carácteres"
+    ],
+    pasaporteRules: [
+      v => !!v || "El número de documento es requerido",
+      v => (v && v.length >= 11) || "El número debe ser de 11 carácteres"
+    ],
+    ptpteRules: [
+      v => !!v || "El número de documento es requerido",
+      v => (v && v.length >= 9) || "El número debe ser de 9 carácteres"
     ],
     conditions: false,
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.`,
 
     email: "",
     selectDocumentType: null,
-    DocumentType: ["DNI", "Pasaporte", "Carnet de Extranjeria"],
+    DocumentType: ["DNI", "Pasaporte", "Carnet de Extranjeria", 'Permiso Temporal de Trabajo'],
     checkbox: false,
     lazy: false
   }),

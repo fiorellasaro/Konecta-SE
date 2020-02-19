@@ -55,18 +55,14 @@
         <p
           class="text-center title mb-0"
         >¿En una reunión familiar en casa te gusta atender a tus invitados y hacer que se sientan cómodos?</p>
-        <!-- <v-radio-group v-model="datosExperienciaPost.se_p_atc" row class="pt-6">
-        <v-radio label="1" value="1" color="teal"></v-radio>
-        <v-radio label="2" value="2" color="teal"></v-radio>
-        <v-radio label="3" value="3" color="teal"></v-radio>
-        <v-radio label="4" value="4" color="teal"></v-radio>
-        <v-radio label="5" value="5" color="teal"></v-radio>
-        </v-radio-group>-->
+        
         <v-chip-group
           v-model="datosExperienciaPost.se_p_atc"
           class="pt-6 d-flex justify-space-around"
           active-class="teal--text text--accent-4"
           mandatory
+          :rules="[v => !!v || 'Selecciona una opción']"
+              required
         >
           <v-chip v-for="size in sizes" :key="size" :value="size">{{ size }}</v-chip>
         </v-chip-group>
@@ -396,7 +392,7 @@
           <v-list disabled>
             <v-list-item-group v-model="allDatosExp" color="primary">
               <v-list-item v-for="(item, i) in allDatosExp" :key="i" class="mb-2" style="background-color: whitesmoke;">
-                <v-list-item-icon class="text-end mr-3 mb-0 mt-3">
+                <v-list-item-icon class="text-end mr-3 mb-0 mt-4">
                   <v-list-item-title v-text="i+1 + ':'"></v-list-item-title>
                 </v-list-item-icon>
                 <v-list-item-content class="text-start" v-if="item.flag_ec === 1">
@@ -410,6 +406,7 @@
           </v-list>
         </div>
         <v-btn
+        v-if="countExpLab !==2"
           rounded
           color="#00B8AD"
           class="ma-2 white--text text-capitalize"
@@ -553,7 +550,7 @@
           <v-list disabled>
             <v-list-item-group v-model="allDatosExp" color="primary">
               <v-list-item v-for="(item, i) in allDatosExp" :key="i" class="mb-2" style="background-color: whitesmoke;">
-                <v-list-item-icon class="text-end mr-3 mb-0 mt-3">
+                <v-list-item-icon class="text-end mr-4 mb-0 mt-3">
                   <v-list-item-title v-text="i+1 + ':'"></v-list-item-title>
                 </v-list-item-icon>
                 <v-list-item-content class="text-start" v-if="item.flag_ec === 1">
@@ -567,6 +564,7 @@
           </v-list>
         </div>
         <v-btn
+        v-if="countBtnAddExp !==2"
           rounded
           color="#00B8AD"
           class="ma-2 white--text text-capitalize"
@@ -604,6 +602,7 @@
 export default {
   props: {
     countExpLab: 0,
+    countBtnAddExp:0,
     datosExperienciaPost: {
       type: Array,
       required: true
@@ -618,7 +617,6 @@ export default {
   data() {
     return {
       select: null,
-      selection: "3",
       sizes: ["1", "2", "3", "4", "5"],
       rubroEmpresa: [
         "Retail (Saga, Ripley, Paris,Oeshle, etc)",
@@ -649,7 +647,7 @@ export default {
         "Servicio de Transporte",
         "Operario",
         "Profesor",
-        "Desarrollo de contenido(audiovisual, escrito, edición",
+        "Desarrollo de contenido(audiovisual, escrito, edición)",
         "Community Manager y Redes Sociales",
         "Asistente",
         "Secretaria",

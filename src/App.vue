@@ -3,7 +3,7 @@
     <v-app-bar app color="teal" dark>
       <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Name"
+          alt="Konecta logo"
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="100"
@@ -11,9 +11,17 @@
           width="100"
         />
       </div>
-
-      <v-spacer></v-spacer>
-
+      <div class="d-flex align-center" v-if="$route.name !== 'home'">
+        <v-img
+          alt="Konecta logo"
+          class="shrink mt-1"
+          contain
+          min-width="100"
+          src="../src/assets/konecta-b.png"
+          width="100"
+        />
+      </div>
+      <v-spacer></v-spacer> 
       <v-btn
         v-if="$route.name == 'home'"
         href="https://www.grupokonecta.com/somos-globales/peru/"

@@ -386,31 +386,31 @@ export default {
       {
         id: 0,
         // bannerImg: require("../assets/bannersMobile/mobile.png"),
-        bannerImg: require("../assets/Banners/Call-600x360.jpg"),
+        bannerImg: require("../assets/Banners/FOTO_TK.png"),
         text1: "¡WOOW felizmente llegaste!",
         text2: "Te estábamos esperando,",
         text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
-        bannerImg: require("../assets/Banners/Campeonato-600x360.jpg"),
+        bannerImg: require("../assets/Banners/campeonato_mob.png"),
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       },
       {
         id: 2,
-        bannerImg: require("../assets/Banners/Teleoperador2-600x360.jpg"),
+        bannerImg: require("../assets/Banners/Teleoperador_mob.png"),
 
         text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
-        bannerImg: require("../assets/Banners/Copa-600x360.jpg"),
+        bannerImg: require("../assets/Banners/copa_mob.png"),
         text:
           "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
-        bannerImg: require("../assets/Banners/Hackatom-600x360.jpg"),
+        bannerImg: require("../assets/Banners/HACKA_MOB.png"),
         text:
           "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
@@ -444,10 +444,10 @@ export default {
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
-  .v-image__image--cover {
+  /* .v-image__image--cover {
     width: 550px !important;
     height: 300 !important;
-  }
+  } */
   .display-text {
     font-size: 24px !important;
   }

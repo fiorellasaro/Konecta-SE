@@ -101,6 +101,7 @@
             <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" v-on:keyup.enter="createObjFamilia()" -->
             <v-text-field
               v-model.number="datosRotacionPost.fam_postulante"
+              
               class="pt-2 text-center"
               color="teal"
               placeholder="2"

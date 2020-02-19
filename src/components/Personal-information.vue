@@ -88,6 +88,7 @@
               :datosExperienciaPost="datosExperienciaPost"
               :datosPersonalesPost="datosPersonalesPost"
               :agregarExperiencia="agregarExperiencia"
+              :countBtnAddExp="countBtnAddExp"
               :allDatosExp="allDatosExp"
             />
           </div>
@@ -324,7 +325,7 @@ export default {
 
           se_p_redes: "",
           se_p_ventas: "",
-          se_p_atc: "",
+          se_p_atc: null,
           se_p_crosselling: "",
           se_p_backof: "",
           se_expect_salarial: [,],
@@ -353,7 +354,7 @@ export default {
           coord_actividad: [0, 0],
           text_dir_actividad: "",
           horario_actividad: "",
-          fam_postulante: 0,
+          fam_postulante: null,
           motivacion: "",
           actividad_tiempo_libre: [],
           sede_preferencia: [],
