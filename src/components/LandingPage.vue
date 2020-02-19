@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-carousel cycle height="600" hide-delimiter-background show-arrows-on-hover>
+    <v-carousel
+      id="desk-size"
+      cycle
+      height="600"
+      hide-delimiter-background
+      show-arrows-on-hover
+      style="display: block;"
+    >
       <v-carousel-item v-for="(slide, i) in slide" :key="i" :src="slide.bannerImg">
         <v-row class="fill-height pb-10" align="end" justify="center">
           <v-row class="opasity justify-center">
@@ -20,6 +27,32 @@
       </v-carousel-item>
     </v-carousel>
 
+    <v-carousel
+      id="mob-size"
+      cycle
+      height="500"
+      hide-delimiter-background
+      show-arrows-on-hover
+      style="display: none;"
+    >
+      <v-carousel-item v-for="(slideM, i) in slide_mob" :key="i" :src="slideM.bannerImg">
+        <v-row class="fill-height pb-10" align="end" justify="center">
+          <v-row class="opasity justify-center">
+            <v-col cols="12" md="12" class="pb-0 mb-0">
+              <h1
+                class="white--text mb-0 display-text text-center pt-0 font-weight-bold"
+              >{{slideM.text1}}</h1>
+            </v-col>
+            <v-col cols="12" md="12" class="py-0 mb-0">
+              <h3 class="white--text headline-text text-center pt-0 mb-0">{{slideM.text2}}</h3>
+            </v-col>
+            <v-col cols="12" md="12" class="py-0 mb-2">
+              <h4 class="white--text mb-2 mx-4 headline-text text-center pt-0 mt-0">{{slideM.text}}</h4>
+            </v-col>
+          </v-row>
+        </v-row>
+      </v-carousel-item>
+    </v-carousel>
     <section>
       <v-layout column wrap class="my-10 mx-2" align-center>
         <v-flex xs12 sm4 class="my-4">
@@ -37,7 +70,6 @@
               width="640"
               height="360"
               src="https://www.youtube.com/embed/enZ1OsUuoHw?loop=1&playlist=enZ1OsUuoHw&autoplay=1"
-              
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -346,7 +378,8 @@ export default {
       {
         id: 4,
         bannerImg: require("../assets/Banners/Hackatom-1024x480.jpg"),
-        text: "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
+        text:
+          "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
     ],
     slide_mob: [
@@ -377,8 +410,9 @@ export default {
       },
       {
         id: 4,
-        bannerImg: require("../assets/Banners/06.png"),
-        text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
+        bannerImg: require("../assets/Banners/Hackatom-600x360.jpg"),
+        text:
+          "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
     ]
   })
@@ -419,6 +453,13 @@ export default {
   }
   .headline-text {
     font-size: 20px !important;
+  }
+  #mob-size {
+    /* content: url("../assets/Banners/Call-600x360.jpg") */
+    display: block!important;
+  }
+  #desk-size {
+    display: none!important;
   }
   /* .carousel-img{
     width: 600px!important;
