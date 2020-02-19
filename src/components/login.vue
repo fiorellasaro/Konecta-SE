@@ -78,10 +78,10 @@
               >Enviar</v-btn>
             </v-row>
           </v-form>
-          <v-dialog v-model="terms" width="87%">
+          <v-dialog v-model="terms" width="600px">
             <v-card>
-              <v-card-title class="subtitle-2">POLÍTICA DE PRIVACIDAD PARA POSTULANTES</v-card-title>
               <v-card-text class="pb-0 body-2" style="font-size: 13px!important;">
+                <p class="body-1 font-weight-bold text-justify pt-4">POLÍTICA DE PRIVACIDAD PARA POSTULANTES</p>
                 <p class="text-justify">La presente “Política de Privacidad para Postulantes” se aplica a <strong>Konecta Perú</strong>, que ejerce sus actividades a través de sus razones sociales: Konecta BTO S.L. Sucursal en Perú (RUC N° 20546992986), Allus Spain S.L. Sucursal del Perú (RUC N° 20523273851) y Stratton Perú S.A.C. (RUC N° 20520596233), todas con domicilio ubicado en Av. Carabaya 933, Cercado de Lima, Lima, Perú; quienes son responsables de recabar sus datos personales, el uso que se le dé a los mismos y su protección.</p>
                 <p class="text-justify"><strong>Konecta Perú</strong>, es una empresa dedicada a brindar servicios de Contact Center y a la externalización de procesos de negocio (BPO), abarcando desde la planificación y ejecución de tareas internas de front office y back office hasta el control de actividades de agentes externos. La compañía se adapta constantemente a las necesidades del mercado mediante:</p>
                 <ul>

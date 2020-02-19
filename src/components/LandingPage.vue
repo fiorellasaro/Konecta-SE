@@ -47,7 +47,7 @@
               <h3 class="white--text headline-text text-center pt-0 mb-0">{{slideM.text2}}</h3>
             </v-col>
             <v-col cols="12" md="12" class="py-0 mb-2">
-              <h4 class="white--text mb-2 mx-4 headline-text text-center pt-0 mt-0">{{slideM.text}}</h4>
+              <h4 class="white--text mb-2 mx-5 headline-text text-center pt-0 mt-0">{{slideM.text}}</h4>
             </v-col>
           </v-row>
         </v-row>
@@ -180,7 +180,7 @@
                   <v-card-title primary-title class="layout justify-center">
                     <div class="headline text-center">Mary Auccaise</div>
                   </v-card-title>
-                  <v-card-text>“Konecta, mi primera experiencia laboral, se convirtió en mi inspiración para crecer en tanto en lo profesional como personal. En estos 9 años pasé de Representante de Opreraciones a Líder de Selección, y pude cumplir uno de mis proyectos personales: emprender mi propia empresa de moda.”</v-card-text>
+                  <v-card-text>“Konecta, mi primera experiencia laboral, se convirtió en mi inspiración para crecer en tanto en lo profesional como personal. En estos 9 años pasé de Representante de Operaciones a Líder de Selección, y pude cumplir uno de mis proyectos personales: emprender mi propia empresa de moda.”</v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4 class="pt-0">
@@ -194,7 +194,7 @@
                   <v-card-title primary-title class="layout justify-center">
                     <div class="headline">Jaime Daniel Tello</div>
                   </v-card-title>
-                  <v-card-text>“Llegué a Konecta hace casi 3 años como Representante. Gracias a sus oportunidades y mi desempeño hoy me desarrollo como Analista Senior de Capacitación. Las interacciones de cada día nos taren nuevos aprendizajes y constante crecimiento.”</v-card-text>
+                  <v-card-text>“Llegué a Konecta hace casi 3 años como Representante. Gracias a sus oportunidades y mi desempeño hoy me desarrollo como Analista Senior de Capacitación. Las interacciones de cada día nos traen nuevos aprendizajes y constante crecimiento.”</v-card-text>
                 </v-card>
               </v-flex>
               <v-flex xs12 md4>
