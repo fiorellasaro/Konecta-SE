@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/konecta-se/precache-manifest.97f6f9d180b0cf11f2846423daa06e7a.js"
+  "/konecta-se/precache-manifest.610ed67ea323e8b73dc3dc450824d210.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "konecta-se"});
