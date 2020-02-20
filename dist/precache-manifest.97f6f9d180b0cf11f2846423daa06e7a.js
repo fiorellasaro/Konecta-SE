@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e03b1db56cc935a90281",
+    "revision": "4bac6a66ee105d16bc6e",
     "url": "/konecta-se/css/app.f9bb66f0.css"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/css/chunk-311d6e7c.cd945329.css"
   },
   {
-    "revision": "f347411e4e3a89b85d20",
+    "revision": "a4c20a10536c50251b59",
     "url": "/konecta-se/css/chunk-57d80a14.68cbbb9f.css"
   },
   {
-    "revision": "dc5919f060bc6033cfad",
+    "revision": "186e64885607c47d7e7b",
     "url": "/konecta-se/css/chunk-67fd676f.076ea886.css"
   },
   {
@@ -128,12 +128,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/section-2.7ffa70fd.png"
   },
   {
-    "revision": "96e939640690fcac65511acd74e40ffc",
+    "revision": "97661356f8e73ee2d5db1ef9533c1ef4",
     "url": "/konecta-se/index.html"
   },
   {
-    "revision": "e03b1db56cc935a90281",
-    "url": "/konecta-se/js/app.7f510e65.js"
+    "revision": "4bac6a66ee105d16bc6e",
+    "url": "/konecta-se/js/app.b40775f2.js"
   },
   {
     "revision": "da159860c7b4aca6cfc5",
@@ -144,12 +144,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/js/chunk-311d6e7c.9166f189.js"
   },
   {
-    "revision": "f347411e4e3a89b85d20",
-    "url": "/konecta-se/js/chunk-57d80a14.b47efae9.js"
+    "revision": "a4c20a10536c50251b59",
+    "url": "/konecta-se/js/chunk-57d80a14.f08aef7e.js"
   },
   {
-    "revision": "dc5919f060bc6033cfad",
-    "url": "/konecta-se/js/chunk-67fd676f.b7baacca.js"
+    "revision": "186e64885607c47d7e7b",
+    "url": "/konecta-se/js/chunk-67fd676f.d5758c57.js"
   },
   {
     "revision": "6f03ec1ffd434ff6d475",
