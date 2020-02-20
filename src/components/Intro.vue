@@ -72,7 +72,7 @@
                       <v-select
                         class="mt-0 pa-0 pt-2"
                         :items="parentesco"
-                        v-model="arrFamilia[index].parentesco"
+                        v-model="parentescoModel"
                         color="teal"
                         :rules="[v => !!v || 'Selecciona el parentesco']"
                         required
@@ -85,7 +85,7 @@
                     </v-col>
                     <v-col cols="6" md="6" class="pa-0">
                       <v-text-field
-                        v-model="arrFamilia[index].edad"
+                        v-model="edad"
                         color="teal"
                         class="pa-0"
                         placeholder="2"
@@ -101,7 +101,7 @@
                     <v-col cols="6" md="6" class="pa-0">
                       <v-select
                         :items="trabaja"
-                        v-model="arrFamilia[index].trabaja"
+                        v-model="trabajaModel"
                         color="teal"
                         label="Seleccionar"
                         class="pa-0"
@@ -137,6 +137,22 @@ export default {
     fam_postulante: null,
     arrFamilia: [],
     familiares: [],
+    parentescoModel: '',
+    parentesco: [
+        "Padre",
+        "Madre",
+        "Hermano(a)",
+        "Hijo(a)",
+        "Pareja",
+        "Tio(a)",
+        "Sobrino(a)",
+        "Abuelo(a)",
+        "Suegro(a)",
+        "Otros"
+      ],
+      trabaja: ['Si', 'No'],
+    edad: null,
+    trabajaModel:'',
   }),
    mounted() {
     // this.datosPersonalesPost.arrEjm = this.rrselect;

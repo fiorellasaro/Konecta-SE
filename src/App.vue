@@ -61,7 +61,7 @@
         <v-btn class="mx-4 white--text" icon href="https://co.linkedin.com/company/konecta-peru">
             <v-icon size="25px">mdi-linkedin-box</v-icon>
           </v-btn>
-          <v-btn class="mx-4 white--text" icon href="https://twitter.com/gkonecta">
+          <v-btn class="mx-4 white--text" icon href="https://twitter.com/konecta_peru?lang=es">
             <v-icon size="25px">mdi-twitter</v-icon>
           </v-btn>
           <v-btn class="mx-4 white--text" icon href="https://www.instagram.com/konectaperu/?hl=es-la">

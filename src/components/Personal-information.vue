@@ -107,12 +107,12 @@
             <p
               v-if="this.datosPersonalesPost.nombre_social!==undefined"
               class="title text-center title font-weight-medium pt-2"
-            >¡{{this.datosPersonalesPost.nombre_social}}!, acabas de culminar la primera etapa de tu postulación!</p>
+            >{{this.datosPersonalesPost.nombre_social}}, ¡acabas de culminar la primera etapa de tu postulación!</p>
 
             <p
               v-else
               class="title text-center title font-weight-medium pt-2"
-            >¡{{this.datosPersonalesPost.nombres}}!, acabas de culminar la primera etapa de tu postulación!</p>
+            >{{this.datosPersonalesPost.nombres}}, ¡acabas de culminar la primera etapa de tu postulación!</p>
 
             <img src="../assets/confetti.png" style="vertical-align: middle; width: 50px;" />
             <p
@@ -122,7 +122,7 @@
             <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
             <v-row class="justify-center pb-12">
               <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
-              <p class="primary--text pl-4 pt-1">984860149</p>
+              <p class="primary--text pl-4 pt-1">945787170</p>
             </v-row>
 
             <p class="body-2 pt-4 pb-0 mb-0">Califica la experiencia de tu proceso :</p>

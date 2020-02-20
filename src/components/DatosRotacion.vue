@@ -414,8 +414,7 @@ export default {
       ],
       familiaPost: [{ parentesco: "", edad: 0, trabaja: false }],
       arrFamilia: [],
-      trabaja: ['Si', 'No'
-      ]
+      trabaja: ['Si', 'No']
     };
   },
   computed: {
