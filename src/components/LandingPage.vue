@@ -352,31 +352,31 @@ export default {
     slide: [
       {
         id: 0,
-        // bannerImg: require("../assets/bannersMobile/mobile.png"),
-        bannerImg: require("../assets/Banners/05.png"),
+        bannerImg: "https://drive.google.com/uc?export=view&id=1MBMA3N1r99EDFCYOGHkUyj2zDZArglzJ",
         text1: "¡WOOW felizmente llegaste!",
         text2: "Te estábamos esperando,",
         text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
-        bannerImg: require("../assets/Banners/Campeonato-1024x480.jpg"),
+        bannerImg: "https://drive.google.com/uc?export=view&id=1XMZX5uRWlRdChR0xRdLZCt_Y_MD2wK5U",
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       },
       {
         id: 2,
-        bannerImg: require("../assets/Banners/01.png"),
+        bannerImg: "https://drive.google.com/uc?export=view&id=1yI6nvUviTM7eTnmnnYEMaKAhQXhAWy2a",
         text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
-        bannerImg: require("../assets/Banners/Copa-1024x480.jpg"),
+        bannerImg: "https://drive.google.com/uc?export=view&id=1VrV7y_W9Kj2HFcyIYbzcvOVkefesJhlI",
         text:
           "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
-        bannerImg: require("../assets/Banners/Hackatom-1024x480.jpg"),
+        
+        bannerImg:"https://drive.google.com/uc?export=view&id=1en8kBAMSe04dqi0eTO7YSwA7HpyDWkv1",
         text:
           "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
@@ -385,31 +385,30 @@ export default {
       {
         id: 0,
         // bannerImg: require("../assets/bannersMobile/mobile.png"),
-        bannerImg: require("../assets/Banners/FOTO_TK.png"),
+        bannerImg: 'https://drive.google.com/uc?export=view&id=13Kzz8tWei2MDmJqSHUxCppFLk5Qpa6Bu',
         text1: "¡WOOW felizmente llegaste!",
         text2: "Te estábamos esperando,",
         text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
-        bannerImg: require("../assets/Banners/campeonato_mob.png"),
+        bannerImg: "https://drive.google.com/uc?export=view&id=1E3qkWQETPLO_M_rBidVi343Yb2FOzswn",
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       },
       {
         id: 2,
-        bannerImg: require("../assets/Banners/Teleoperador_mob.png"),
-
+        bannerImg:"https://drive.google.com/uc?export=view&id=1StKOl311bzIHDVzxqGFOkR427YxR-SUx",
         text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
-        bannerImg: require("../assets/Banners/copa_mob.png"),
+        bannerImg:"https://drive.google.com/uc?export=view&id=1ZLBgYoGnzh1ur48HBwal9TMceU-7GWCE",
         text:
           "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
-        bannerImg: require("../assets/Banners/HACKA_MOB.png"),
+        bannerImg:"https://drive.google.com/uc?export=view&id=1H3EW9_JSRA5W5AbAfssTn6cVMPyPGJIn",
         text:
           "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }

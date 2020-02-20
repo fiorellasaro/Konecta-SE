@@ -155,8 +155,9 @@ export default {
     trabajaModel:'',
   }),
    mounted() {
-    // this.datosPersonalesPost.arrEjm = this.rrselect;
-    this.createObjFamilia();
+   this.createObjFamilia();
+   this.returnTrue();
+    console.log(this.createObjFamilia());
   },
   methods: {
     isNumber: function(evt) {
@@ -173,14 +174,18 @@ export default {
         return true;
       }
     },
-    createObjFamilia() {
+    returnTrue(){
+      return true;
+    },
+    
+    createObjFamilia: function() {
       let nroFam = this.fam_postulante;
       if (nroFam > 0) {
         for (let i = 0; i < nroFam; i++) {
           this.arrFamilia.push({
-            parentesco: "",
-            edad: null,
-            trabaja: ""
+            parentesco: "ds",
+            edad: 2,
+            trabaja: "ds"
           });
           console.log(this.arrFamilia);
           return this.arrFamilia;
