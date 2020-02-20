@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4bac6a66ee105d16bc6e",
+    "revision": "0308b1f5da6882a9e6fa",
     "url": "/konecta-se/css/app.f9bb66f0.css"
   },
   {
-    "revision": "56fc7b6b2d5ac5966495",
-    "url": "/konecta-se/css/chunk-311d6e7c.cd945329.css"
+    "revision": "d4fc33003c918a1363d2",
+    "url": "/konecta-se/css/chunk-57325970.cd945329.css"
   },
   {
     "revision": "a4c20a10536c50251b59",
     "url": "/konecta-se/css/chunk-57d80a14.68cbbb9f.css"
   },
   {
-    "revision": "186e64885607c47d7e7b",
+    "revision": "416c01c8212925aee9c4",
     "url": "/konecta-se/css/chunk-67fd676f.076ea886.css"
   },
   {
@@ -64,26 +64,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/06.354eb7d9.png"
   },
   {
-    "revision": "e27a2ab90d0bc63dd40cdbac51698b4d",
-    "url": "/konecta-se/img/Campeonato-1024x480.e27a2ab9.jpg"
-  },
-  {
-    "revision": "3e69ab9386a5f1c8f9ee5d863525f7b6",
-    "url": "/konecta-se/img/Copa-1024x480.3e69ab93.jpg"
-  },
-  {
-    "revision": "64fee492bf0a50608d8d080bbcf0fcfa",
-    "url": "/konecta-se/img/FOTO_TK.64fee492.png"
-  },
-  {
-    "revision": "635affe8e7622ae422ef108826a9053d",
-    "url": "/konecta-se/img/HACKA_MOB.635affe8.png"
-  },
-  {
-    "revision": "2de82ac5750af70573b5b9aeed81df6d",
-    "url": "/konecta-se/img/Hackatom-1024x480.2de82ac5.jpg"
-  },
-  {
     "revision": "f1ec17170b372fd783868354865ee84b",
     "url": "/konecta-se/img/IMG_7899.f1ec1717.jpeg"
   },
@@ -96,20 +76,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/IMG_7927.ed203ece.jpeg"
   },
   {
-    "revision": "fcac0b0d9a985827794a1de6cd1b122d",
-    "url": "/konecta-se/img/Teleoperador_mob.fcac0b0d.png"
-  },
-  {
-    "revision": "87d6914b7a7a000889aa539b9239e3ed",
-    "url": "/konecta-se/img/campeonato_mob.87d6914b.png"
-  },
-  {
     "revision": "36fdda7e156a523b9d78cf1892669695",
     "url": "/konecta-se/img/confetti.36fdda7e.png"
-  },
-  {
-    "revision": "2a31fb73f45458168f8ebb31733c2721",
-    "url": "/konecta-se/img/copa_mob.2a31fb73.png"
   },
   {
     "revision": "81e28f7397caa0af5dd3af937df9bfe0",
@@ -128,28 +96,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/konecta-se/img/section-2.7ffa70fd.png"
   },
   {
-    "revision": "97661356f8e73ee2d5db1ef9533c1ef4",
+    "revision": "c23dd6ffba4dca360a1d53e881f4313f",
     "url": "/konecta-se/index.html"
   },
   {
-    "revision": "4bac6a66ee105d16bc6e",
-    "url": "/konecta-se/js/app.b40775f2.js"
+    "revision": "0308b1f5da6882a9e6fa",
+    "url": "/konecta-se/js/app.7d083f0b.js"
   },
   {
     "revision": "da159860c7b4aca6cfc5",
     "url": "/konecta-se/js/chunk-2d22d746.ade41f10.js"
   },
   {
-    "revision": "56fc7b6b2d5ac5966495",
-    "url": "/konecta-se/js/chunk-311d6e7c.9166f189.js"
+    "revision": "d4fc33003c918a1363d2",
+    "url": "/konecta-se/js/chunk-57325970.4af810e4.js"
   },
   {
     "revision": "a4c20a10536c50251b59",
     "url": "/konecta-se/js/chunk-57d80a14.f08aef7e.js"
   },
   {
-    "revision": "186e64885607c47d7e7b",
-    "url": "/konecta-se/js/chunk-67fd676f.d5758c57.js"
+    "revision": "416c01c8212925aee9c4",
+    "url": "/konecta-se/js/chunk-67fd676f.09e240a3.js"
   },
   {
     "revision": "6f03ec1ffd434ff6d475",
