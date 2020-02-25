@@ -25,6 +25,7 @@
               v-model="numeroDoc"
               maxlength="8"
               solo
+              pattern="[0-9]*"
               @keypress="isNumber($event)"
               :rules="dniRules"
               placeholder="Ingrese el número"
@@ -35,6 +36,7 @@
               v-model="numeroDoc"
               maxlength="11"
               solo
+              pattern="[0-9]*"
               @keypress="isNumber($event)"
               :rules="pasaporteRules"
               placeholder="Ingrese el número"
@@ -45,6 +47,7 @@
               v-model="numeroDoc"
               maxlength="9"
               solo
+              pattern="[0-9]*"
               @keypress="isNumber($event)"
               :rules="ptpteRules"
               placeholder="Ingrese el número"

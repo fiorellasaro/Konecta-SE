@@ -207,6 +207,7 @@
               v-model.number="datosPersonalesPost.n_hijos"
               color="teal"
               maxlength="2"
+              pattern="[0-9]*"
               @keypress="isNumber($event)"
               :rules="[v => !!v || 'Número de hijos es obligatorio']"
               required

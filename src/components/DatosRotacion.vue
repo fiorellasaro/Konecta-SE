@@ -23,7 +23,12 @@
             color="teal"
             class="pa-2 mt-2 radioStateCivil"
           ></v-radio>
-          <v-radio label="Cuido a un familiar" value="C" color="teal" class="pa-2 mt-2 radioStateCivil"></v-radio>
+          <v-radio
+            label="Cuido a un familiar"
+            value="C"
+            color="teal"
+            class="pa-2 mt-2 radioStateCivil"
+          ></v-radio>
           <v-radio
             label="Grupo de danza, música, arte."
             value="D"
@@ -31,7 +36,12 @@
             class="pa-2 mt-2 radioStateCivil"
           ></v-radio>
           <v-radio label="Voluntariado" value="E" color="teal" class="pa-2 mt-2 radioStateCivil"></v-radio>
-          <v-radio label="No realizo ninguna" value="F" color="teal" class="pa-2 mt-2 radioStateCivil"></v-radio>
+          <v-radio
+            label="No realizo ninguna"
+            value="F"
+            color="teal"
+            class="pa-2 mt-2 radioStateCivil"
+          ></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -92,93 +102,100 @@
         ></v-select>
       </v-form>
     </div>
-   <!-- personas -->
+    <!-- personas -->
     <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
-        <v-row>
-          <v-col cols="6" sm="6" class="justify-center">
-            <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" v-on:keyup.enter="createObjFamilia()" -->
-            <v-text-field
-              v-model.number="datosRotacionPost.fam_postulante"
-              maxlength="2"
-              class="pt-2 text-center"
-              color="teal"
-              placeholder="2"
-              required
-              max=20
-              @keypress="isNumber($event)"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" sm="6" class="align-self-center">
+        <v-row class="justify-center">
+          <!-- <v-col cols="6" sm="6" class="justify-center"> -->
+          <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" v-on:keyup.enter="createObjFamilia()" -->
+          <v-text-field
+            v-model.number="datosRotacionPost.fam_postulante"
+            maxlength="2"
+            :rules="[v => !!v || 'Ingrese el número de personas']"
+            class="pt-2 text-center"
+            color="teal"
+            placeholder="2"
+            required
+            max="20"
+            @keypress="isNumber($event)"
+          ></v-text-field>
+          <!-- </v-col> -->
+          <!-- <v-col cols="6" sm="6" class="align-self-center">
             <v-btn
               small
               color="teal"
               class="white--text body-2 text-capitalize"
               @click="createObjFamilia()"
             >Registrar</v-btn>
-          </v-col>
+          </v-col>-->
         </v-row>
 
         <!-- Generar Datos Familiares arrFamilia -->
-        <v-flex v-for="(famPostulante, index) in datosRotacionPost.fam_postulante" :key="famPostulante.id">
-          <v-card outlined class="mx-auto mb-4" max-width="344">
-            <v-card-title
-              class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center"
-            >Familiar - {{index + 1}}</v-card-title>
-            <v-divider></v-divider>
-            <v-card-text>
-              <v-row class="mr-6">
-                <v-col cols="6" md="6" class="align-self-center pa-0">
-                  <label for class="pt-0">Parentesco :</label>
-                </v-col>
-                <v-col cols="6" md="6" class="pa-0">
-                  <v-select
-                    class="mt-0 pa-0 pt-2"
-                    :items="parentesco"
-                    v-model="arrFamilia[index].parentesco"
-                    color="teal"
-                    :rules="[v => !!v || 'Selecciona el parentesco']"
-                    required
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <v-row class="mr-6">
-                <v-col cols="6" md="6" class="align-self-center pa-0">
-                  <label for>Edad :</label>
-                </v-col>
-                <v-col cols="6" md="6" class="pa-0">
-                  <v-text-field
-                    v-model="arrFamilia[index].edad"
-                    color="teal"
-                    class="pa-0"
-                    placeholder="2"
-                    :rules="[v => !!v || 'Ingresa la edad']"
-                    required
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row class="mr-6">
-                <v-col cols="6" md="6" class="align-self-center pa-0">
-                  <label for>Trabaja :</label>
-                </v-col>
-                <v-col cols="6" md="6" class="pa-0">
-                  <v-select
-                    :items="trabaja"
-                    v-model="arrFamilia[index].trabaja"
-                    color="teal"
-                    label="Seleccionar"
-                    class="pa-0"
-                    :rules="[v => !!v || 'Selecciona una opción']"
-                    required
-                  >
-                    <!-- <option v-for="option in options" :value="option.value">{{option.text}}</option> -->
-                  </v-select>
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </v-flex>
+        <div v-if="datosRotacionPost.fam_postulante > 0">
+          <v-flex
+            v-for="(famPostulante, index) in datosRotacionPost.fam_postulante"
+            :key="famPostulante.id"
+          >
+            <v-card outlined class="mx-auto mb-4" max-width="344">
+              <v-card-title
+                class="color: teal lighten-2 white--text subtitle-1 py-3 justify-center"
+              >Familiar - {{index + 1}}</v-card-title>
+              <v-divider></v-divider>
+              <v-card-text>
+                <v-row class="mr-6">
+                  <v-col cols="6" md="6" class="align-self-center pa-0">
+                    <label for class="pt-0">Parentesco :</label>
+                  </v-col>
+                  <v-col cols="6" md="6" class="pa-0">
+                    <v-select
+                      class="mt-0 pa-0 pt-2"
+                      :items="parentesco"
+                      v-model="arrFamilia[index].parentesco"
+                      color="teal"
+                      :rules="[v => !!v || 'Selecciona el parentesco']"
+                      required
+                    ></v-select>
+                  </v-col>
+                </v-row>
+                <v-row class="mr-6">
+                  <v-col cols="6" md="6" class="align-self-center pa-0">
+                    <label for>Edad :</label>
+                  </v-col>
+                  <v-col cols="6" md="6" class="pa-0">
+                    <v-text-field
+                      v-model="arrFamilia[index].edad"
+                      @keypress="isNumber($event)"
+                      color="teal"
+                      class="pa-0"
+                      placeholder="2"
+                      :rules="[v => !!v || 'Ingresa la edad']"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row class="mr-6">
+                  <v-col cols="6" md="6" class="align-self-center pa-0">
+                    <label for>Trabaja :</label>
+                  </v-col>
+                  <v-col cols="6" md="6" class="pa-0">
+                    <v-select
+                      :items="trabaja"
+                      v-model="arrFamilia[index].trabaja"
+                      color="teal"
+                      label="Seleccionar"
+                      class="pa-0"
+                      :rules="[v => !!v || 'Selecciona una opción']"
+                      required
+                    >
+                      <!-- <option v-for="option in options" :value="option.value">{{option.text}}</option> -->
+                    </v-select>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </div>
       </v-form>
     </div>
     <div id="step2" v-if="countRotacion == 5" class="px-1 pt-12">
@@ -208,7 +225,7 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempos libres?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
-      
+
         <v-checkbox
           v-model="datosRotacionPost[0].actividad_tiempo_libre"
           label="Viajar"
@@ -314,7 +331,7 @@
         >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
         <!-- <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p> -->
         <v-checkbox
-         v-model="datosRotacionPost[0].sede_preferencia"
+          v-model="datosRotacionPost[0].sede_preferencia"
           label="Sede Centro de Lima"
           value="A"
           color="teal"
@@ -395,7 +412,7 @@ export default {
       horarioActi: null,
       horarioActividad: ["Mañana", "Tarde", "Noche", "Horario flexible"],
       selected: [],
-      sedeSelected:[],
+      sedeSelected: [],
       sede_preferencia: [],
       additional_grouped: [],
       // actividad_libre: [],
@@ -414,7 +431,7 @@ export default {
       ],
       familiaPost: [{ parentesco: "", edad: 0, trabaja: false }],
       arrFamilia: [],
-      trabaja: ['Si', 'No']
+      trabaja: ["Si", "No"]
     };
   },
   computed: {
@@ -425,8 +442,9 @@ export default {
       return this.sedeSelected.length > 2;
     }
   },
-   mounted() {
+  mounted() {
     this.geolocate();
+    this.createObjFamilia();
   },
   methods: {
     isNumber: function(evt) {
@@ -444,21 +462,16 @@ export default {
       }
     },
     createObjFamilia() {
-      let nroFam = this.datosRotacionPost.fam_postulante;
-      if(nroFam > 0){
-        for (let i = 0; i < nroFam; i++) {
+      for (let i = 1; i <= 20; i++) {
         this.arrFamilia.push({
           parentesco: "",
           edad: null,
           trabaja: ""
         });
-        console.log(this.arrFamilia);
-        this.datosRotacionPost.familiares = this.arrFamilia;
+         this.datosRotacionPost.arrFamiliares = this.arrFamilia;
+        // console.log("array familiares ", this.datosRotacionPost.arrFamiliares);
       }
-      }
-      
     },
-
     addMarker() {
       const position = {
         lat: this.starting_address_obj.geometry.location.lat(),

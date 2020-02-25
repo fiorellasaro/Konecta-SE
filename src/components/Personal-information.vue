@@ -207,7 +207,7 @@
               absolute
               bottom
               right
-              @click="agregarPersonalDate()"
+              @click="arrDatosFamiliares(),agregarPersonalDate()"
             >Finalizar</v-btn>
           </v-col>
         </v-row>
@@ -363,10 +363,12 @@ export default {
           motivacion: "",
           actividad_tiempo_libre: [],
           sede_preferencia: [],
-          familiares: []
+          arrFamiliares:[],
+          familiares: [],
         }
       ],
-      actividad_libre: []
+      actividad_libre: [],
+      familia:[]
     };
   },
   computed: {
@@ -393,6 +395,7 @@ export default {
       }
     },
     arrExperiencias() {
+
       if (this.datosExperienciaPost.flag_conExp === "rbtExtContact") {
         this.datosExperienciaPost.flag_ec = 1;
         this.datosExperienciaPost.flag_eo = 0;
@@ -446,7 +449,22 @@ export default {
         (this.datosExperienciaPost.eo_retribucion_basico = null),
         (this.datosExperienciaPost.eo_retribucion_comisiones = null),
         localStorage.setItem("datos", JSON.stringify(this.allDatosExp));
-      console.log(this.allDatosExp);
+      // console.log(this.allDatosExp);
+    },
+    arrDatosFamiliares() {
+      // var fam_rotacion = [];
+      this.datosRotacionPost.arrFamiliares.forEach(element => {
+        if(element.parentesco !== ''){
+          this.familia.push({
+            parentesco: element.parentesco,
+            edad: element.edad,
+            trabaja: element.trabaja
+            });
+        }
+      });
+      console.log('arrFamiliares',this.datosRotacionPost.arrFamiliares);
+      console.log('array familia',this.familia);
+      console.log('rotacion', this.datosRotacionPost.familiares);
     },
     agregarPersonalDate() {
       this.nextComponente = "componente5";
@@ -493,20 +511,12 @@ export default {
         actividad_tiempo_libre: this.datosRotacionPost[0]
           .actividad_tiempo_libre,
         sede_preferencia: this.datosRotacionPost[0].sede_preferencia,
-        familiares: this.datosRotacionPost.familiares
+        familiares: this.familia
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
-      console.log(
-        "actividad tiempo libre",
-        this.datosRotacionPost[0].actividad_tiempo_libre
-      );
-      console.log(
-        "actividad tiempo libre",
-        this.datosRotacionPost[0].sede_preferencia
-      );
-      // console.log(this.markersPersonal);
-      this.PostPostulante(this.datosPostulantes[0]);
+      console.log(this.familiares);
+      // this.PostPostulante(this.datosPostulantes[0]);
     },
 
     postDatosExperiencia(id, experiencia) {
@@ -660,8 +670,6 @@ export default {
         this.countExpLab += 1;
         this.hidden = false;
         this.progressExpLaboral = 100;
-        // console.log("this.progressExpLaboral", this.progressExpLaboral);
-        // console.log("this.countExpLab", this.countExpLab);
       }
       // Rotacion
       // // Rotacion
@@ -679,7 +687,6 @@ export default {
         this.progressRotation += 14;
         this.countRotacion === 1 ? (this.hidden = false) : (this.hidden = true);
 
-        console.log(this.countRotacion);
       }
       if (
         this.countRotacion === 2 &&
@@ -691,6 +698,10 @@ export default {
       if (this.countRotacion === 7) {
         this.hidden = true;
         this.progressRotation = 100;
+      }
+      if(this.countRotacion === 5){
+        this.arrDatosFamiliares();
+        console.log('numero count rotacion', this.countRotacion);
       }
       // }
 
@@ -741,6 +752,12 @@ export default {
         this.countRotacion -= 2;
         this.progressRotation -= 28;
         this.hidden = false;
+      }
+      if(this.countRotacion === 4){
+        // this.datosRotacionPost.arrFamiliares = [];
+        this.familia = [];
+        console.log('limpiando array',this.datosRotacionPost.arrFamiliares);
+        console.log('this familia', this.familia);
       }
     },
 
