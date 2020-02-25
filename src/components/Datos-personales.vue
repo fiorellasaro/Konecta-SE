@@ -5,6 +5,7 @@
         <p class="text-center black--text title mb-0">¿Cuál es tu nombre?</p>
         <v-text-field
           :rules="nameRules"
+          pattern="[a-zA-Z]*"
           @keypress="isLetters($event)"
           v-model="datosPersonalesPost.nombres"
           class="pt-0"
@@ -16,6 +17,7 @@
           <v-col cols="6" sm="6">
             <v-text-field
               :rules="lastName1Rules"
+              pattern="[a-zA-Z]*"
               @keypress="isLetters($event)"
               v-model="datosPersonalesPost.apellido_p"
               color="teal"
@@ -28,6 +30,7 @@
             <v-text-field
               :rules="lastName2Rules"
               @keypress="isLetters($event)"
+              pattern="[a-zA-Z]*"
               v-model="datosPersonalesPost.apellido_m"
               color="teal"
               label="Apellido Materno"

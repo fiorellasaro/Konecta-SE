@@ -8,6 +8,7 @@
             class="text-center subtitle-2 py-4"
             style="color: #042B54; font-size: 16px!important;"
           >A ser parte de la familia de Konecta</p>
+          <input type="number" pattern="[0-9]*" placeholder="number">
           <v-form ref="form" v-model="valid" :lazy-validation="lazy">
             <p class="text-center black--text title mb-2 mt-6">Tipo de documento</p>
 
@@ -42,6 +43,7 @@
               placeholder="Ingrese el número"
               required
             ></v-text-field>
+            
             <v-text-field
             v-if="selectDocumentType ==='Permiso Temporal de Trabajo'"
               v-model="numeroDoc"
