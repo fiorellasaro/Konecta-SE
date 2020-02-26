@@ -342,7 +342,7 @@
       class="px-3 pt-12 mt-4"
     >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-4">¿Cuánto tiempo estuviste laborando?</p>
+        <p class="text-center black--text title mb-4">¿Cuánto tiempo (meses) estuviste laborando?</p>
         <v-text-field
           v-model.number="datosExperienciaPost.eo_tiempo_exp"
           class="pt-2"
@@ -356,7 +356,7 @@
           :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
           required
         ></v-text-field>
-        <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
+        <p class="pt-6 body-2 gray--text">Considera el tiempo en meses.</p>
       </v-form>
     </div>
     <div
@@ -508,7 +508,7 @@
       class="px-3 pt-12 mt-4"
     >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-0">¿Cuánto tiempo estuviste laborando?</p>
+        <p class="text-center black--text title mb-0">¿Cuánto tiempo (meses) estuviste laborando?</p>
         <v-text-field
           v-model.number="datosExperienciaPost.ec_tiempo_exp"
           class="pt-2"
@@ -522,7 +522,7 @@
           :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
           required
         ></v-text-field>
-        <p class="pt-6 body-2 gray--text">El tiempo será considerado en meses.</p>
+        <p class="pt-6 body-2 gray--text">Considera el tiempo en meses.</p>
       </v-form>
     </div>
     <div
