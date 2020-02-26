@@ -124,7 +124,7 @@
       <!-- </v-form> -->
 
         <!-- Generar Datos Familiares arrFamilia -->
-        <div v-if="datosRotacionPost.fam_postulante !== 0">
+        <div v-if="datosRotacionPost.fam_postulante !== 0 && datosRotacionPost.fam_postulante <= 20">
            <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
           <v-flex
             v-for="(famPostulante, index) in  (datosRotacionPost.fam_postulante)"
