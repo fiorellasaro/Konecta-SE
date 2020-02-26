@@ -5,8 +5,8 @@
         <p class="text-center black--text title mb-0">¿Cuál es tu nombre?</p>
         <v-text-field
           :rules="nameRules"
-          pattern="[a-zA-Z]*"
           type="text"
+          pattern="[a-zA-Z]*"
           @keypress="isLetters($event)"
           v-model="datosPersonalesPost.nombres"
           class="pt-0"

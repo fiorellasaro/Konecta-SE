@@ -174,15 +174,15 @@ export default {
     terms: false,
     dniRules: [
       v => !!v || "El número de documento es requerido",
-      v => (v && v.length >= 8) || "El número debe ser de 8 carácteres"
+      v => (v && v.length === 8) || "El número debe ser de 8 carácteres"
     ],
     pasaporteRules: [
       v => !!v || "El número de documento es requerido",
-      v => (v && v.length >= 11) || "El número debe ser de 11 carácteres"
+      v => (v && v.length === 11) || "El número debe ser de 11 carácteres"
     ],
     ptpteRules: [
       v => !!v || "El número de documento es requerido",
-      v => (v && v.length >= 9) || "El número debe ser de 9 carácteres"
+      v => (v && v.length === 9) || "El número debe ser de 9 carácteres"
     ],
     conditions: false,
 
