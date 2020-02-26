@@ -359,7 +359,7 @@ export default {
           coord_actividad: [0, 0],
           text_dir_actividad: "",
           horario_actividad: "",
-          fam_postulante: null,
+          fam_postulante: 0,
           motivacion: "",
           actividad_tiempo_libre: [],
           sede_preferencia: [],

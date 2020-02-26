@@ -6,6 +6,7 @@
         <v-text-field
           :rules="nameRules"
           pattern="[a-zA-Z]*"
+          type="text"
           @keypress="isLetters($event)"
           v-model="datosPersonalesPost.nombres"
           class="pt-0"
@@ -18,6 +19,7 @@
             <v-text-field
               :rules="lastName1Rules"
               pattern="[a-zA-Z]*"
+          type="text"
               @keypress="isLetters($event)"
               v-model="datosPersonalesPost.apellido_p"
               color="teal"
@@ -31,6 +33,7 @@
               :rules="lastName2Rules"
               @keypress="isLetters($event)"
               pattern="[a-zA-Z]*"
+              type="text"
               v-model="datosPersonalesPost.apellido_m"
               color="teal"
               label="Apellido Materno"
@@ -177,6 +180,9 @@
           color="teal"
           required
           maxlength="9"
+          type="number"
+          pattern="[0-9]*"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
           :rules="phoneRules"
         ></v-text-field>
@@ -211,6 +217,7 @@
               color="teal"
               maxlength="2"
               pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
               :rules="[v => !!v || 'Número de hijos es obligatorio']"
               required
@@ -278,6 +285,8 @@
             <v-text-field
               v-model="datosPersonalesPost.referidos"
               color="teal"
+              pattern="[a-zA-Z]*"
+          type="text"
               @keypress="isLetters($event)"
               required
               :rules="[v => !!v || 'Ingresa el nombre de tu Familia/ Amigos']"

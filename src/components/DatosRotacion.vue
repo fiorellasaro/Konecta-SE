@@ -104,35 +104,28 @@
     </div>
     <!-- personas -->
     <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
-      <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
-        <v-row class="justify-center">
-          <!-- <v-col cols="6" sm="6" class="justify-center"> -->
-          <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" v-on:keyup.enter="createObjFamilia()" -->
-          <v-text-field
-            v-model.number="datosRotacionPost.fam_postulante"
-            maxlength="2"
-            :rules="[v => !!v || 'Ingrese el número de personas']"
-            class="pt-2 text-center"
-            color="teal"
-            placeholder="2"
-            required
-            max="20"
-            @keypress="isNumber($event)"
-          ></v-text-field>
-          <!-- </v-col> -->
-          <!-- <v-col cols="6" sm="6" class="align-self-center">
-            <v-btn
-              small
-              color="teal"
-              class="white--text body-2 text-capitalize"
-              @click="createObjFamilia()"
-            >Registrar</v-btn>
-          </v-col>-->
-        </v-row>
+
+        <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
+        <p class="text-center black--text title mb-4">¿Cuántas personas viven contigo?</p>
+        <v-text-field
+          v-model="datosRotacionPost.fam_postulante"
+          class="pt-2"
+          color="teal"
+          placeholder="3"
+          maxlength="2"
+          type="number"
+          pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          @keypress="isNumber($event)"
+          :rules="[v => !!v || 'Ingresa el número de personas']"
+          required
+        ></v-text-field>
+        
+      <!-- </v-form> -->
 
         <!-- Generar Datos Familiares arrFamilia -->
-        <div v-if="datosRotacionPost.fam_postulante > 0">
+        <div v-if="datosRotacionPost.fam_postulante !== '0'">
+           <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
           <v-flex
             v-for="(famPostulante, index) in datosRotacionPost.fam_postulante"
             :key="famPostulante.id"
@@ -165,6 +158,10 @@
                   <v-col cols="6" md="6" class="pa-0">
                     <v-text-field
                       v-model="arrFamilia[index].edad"
+                      pattern="[0-9]*"
+                      maxlength="3"
+                      type="number"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                       @keypress="isNumber($event)"
                       color="teal"
                       class="pa-0"
@@ -396,6 +393,9 @@ export default {
   },
   data() {
     return {
+      numeroPersonas: [
+        v => !!v || 'Ingrese el número de personas',
+      ],
       //maps
       inputPrueba: {},
       address: "",
@@ -465,7 +465,7 @@ export default {
       for (let i = 1; i <= 20; i++) {
         this.arrFamilia.push({
           parentesco: "",
-          edad: null,
+          edad: 0,
           trabaja: ""
         });
          this.datosRotacionPost.arrFamiliares = this.arrFamilia;

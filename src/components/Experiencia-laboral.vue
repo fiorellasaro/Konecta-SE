@@ -260,10 +260,13 @@
               v-model.number="datosExperienciaPost.se_expect_salarial_desde"
               prefix="S/."
               label="Desde"
+              type="number"
               maxlength="4"
               color="teal"
               :rules="[v => !!v || 'Ingresa un monto']"
               required
+              pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
             ></v-text-field>
           </v-col>
@@ -273,9 +276,12 @@
               prefix="S/."
               label="Hasta"
               maxlength="4"
+              type="number"
               color="teal"
               :rules="[v => !!v || 'Ingresa un monto']"
               required
+              pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
             ></v-text-field>
           </v-col>
@@ -343,6 +349,9 @@
           color="teal"
           placeholder="18"
           maxlength="3"
+          type="number"
+          pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
           :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
           required
@@ -364,10 +373,13 @@
           class="pt-2"
           color="teal"
           maxlength="4"
+          type="number"
           label="Sueldo Básico:"
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
+          pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
         ></v-text-field>
       </v-form>
@@ -376,6 +388,9 @@
         class="pt-8"
         color="teal"
         maxlength="4"
+        type="number"
+        pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         label="Comisiones / Incentivos / Bonos:"
         prefix="S/"
         @keypress="isNumber($event)"
@@ -500,6 +515,9 @@
           color="teal"
           placeholder="36"
           maxlength="3"
+          type="number"
+           pattern="[0-9]*"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
           :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
           required
@@ -525,6 +543,7 @@
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
+          type="number"
           @keypress="isNumber($event)"
         ></v-text-field>
         <v-text-field
@@ -532,6 +551,7 @@
           class="pt-8"
           color="teal"
           maxlength="4"
+          type="number"
           label="Comisiones / Incentivos / Bonos:"
           prefix="S/"
           @keypress="isNumber($event)"
