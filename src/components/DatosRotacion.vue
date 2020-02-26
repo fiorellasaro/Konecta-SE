@@ -108,7 +108,7 @@
         <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-4">¿Cuántas personas viven contigo?</p>
         <v-text-field
-          v-model="datosRotacionPost.fam_postulante"
+          v-model.number="datosRotacionPost.fam_postulante"
           class="pt-2"
           color="teal"
           placeholder="3"
@@ -117,17 +117,17 @@
           pattern="[0-9]*"
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
-          :rules="[v => !!v || 'Ingresa el número de personas']"
+          :rules="familyRules"
           required
         ></v-text-field>
         
       <!-- </v-form> -->
 
         <!-- Generar Datos Familiares arrFamilia -->
-        <div v-if="datosRotacionPost.fam_postulante !== '0'">
+        <div v-if="datosRotacionPost.fam_postulante !== 0">
            <!-- <v-form ref="form" v-model="datosPersonalesPost.datosValidPer"> -->
           <v-flex
-            v-for="(famPostulante, index) in datosRotacionPost.fam_postulante"
+            v-for="(famPostulante, index) in  (datosRotacionPost.fam_postulante)"
             :key="famPostulante.id"
           >
             <v-card outlined class="mx-auto mb-4" max-width="344">
@@ -393,9 +393,6 @@ export default {
   },
   data() {
     return {
-      numeroPersonas: [
-        v => !!v || 'Ingrese el número de personas',
-      ],
       //maps
       inputPrueba: {},
       address: "",
@@ -408,13 +405,20 @@ export default {
       currentPlace: null,
       address: "",
       coordinates: {},
-
+      // this.numeroFamy = parseInt(this.datosRotacionPost.fam_postulante);
+      numeroFamy: 0,
       horarioActi: null,
       horarioActividad: ["Mañana", "Tarde", "Noche", "Horario flexible"],
       selected: [],
       sedeSelected: [],
       sede_preferencia: [],
       additional_grouped: [],
+      
+      familyRules: [
+          // v => (v && v.length <= 1 || v ===0) || "Ingresa el número de personas",
+      //  v => v >= 0 || 'Min 0',
+        v => v <= 21 || 'El máximo es 20',
+      ],
       // actividad_libre: [],
       // datosRotacionPost.actividad_tiempo_libre: selected
       parentesco: [
@@ -445,6 +449,7 @@ export default {
   mounted() {
     this.geolocate();
     this.createObjFamilia();
+    console.log(this.numeroFamy);
   },
   methods: {
     isNumber: function(evt) {
@@ -460,6 +465,9 @@ export default {
       } else {
         return true;
       }
+    },
+    isfamily: function(){
+     this.numeroFamy = parseInt(this.datosRotacionPost.fam_postulante)
     },
     createObjFamilia() {
       for (let i = 1; i <= 20; i++) {

@@ -176,7 +176,7 @@
         <p class="text-center black--text title mb-0 pt-4">¿Cuál es tu número de celular?</p>
         <v-text-field
           v-model="datosPersonalesPost.telefono"
-          placeholder="997251296"
+          placeholder="555555555"
           color="teal"
           required
           maxlength="9"

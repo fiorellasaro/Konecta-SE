@@ -369,7 +369,7 @@
           class="text-center black--text title mb-4"
         >¿Cuánto recibias de retribución aproximadamente?</p>
         <v-text-field
-          v-model.number="datosExperienciaPost.eo_retribucion_basico"
+          v-model="datosExperienciaPost.eo_retribucion_basico"
           class="pt-2"
           color="teal"
           maxlength="4"
@@ -510,7 +510,7 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-0">¿Cuánto tiempo estuviste laborando?</p>
         <v-text-field
-          v-model="datosExperienciaPost.ec_tiempo_exp"
+          v-model.number="datosExperienciaPost.ec_tiempo_exp"
           class="pt-2"
           color="teal"
           placeholder="36"

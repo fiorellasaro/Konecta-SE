@@ -181,8 +181,9 @@ export default {
       v => (v && v.length === 11) || "El número debe ser de 11 carácteres"
     ],
     ptpteRules: [
-      v => !!v || "El número de documento es requerido",
+       v => !!v || "El número de documento es requerido",
       v => (v && v.length === 9) || "El número debe ser de 9 carácteres"
+      
     ],
     conditions: false,
 

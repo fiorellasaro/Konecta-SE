@@ -317,7 +317,7 @@ export default {
           rubro_carrera: "",
           coord_estudio: [,], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
           text_dir_estudio: "",
-          horario_estudio: ""
+          horario_estudio: "",
         }
       ],
       datosExperienciaPost: [
@@ -516,7 +516,7 @@ export default {
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
       console.log(this.familiares);
-      // this.PostPostulante(this.datosPostulantes[0]);
+      this.PostPostulante(this.datosPostulantes[0]);
     },
 
     postDatosExperiencia(id, experiencia) {
