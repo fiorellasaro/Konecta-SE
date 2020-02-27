@@ -566,23 +566,25 @@ export default {
     },
 
     postDatosFamiliares(id, familiares) {
-      for (let i = 0; i < familiares.length; i++) {
-        const familiaresKey = firebase
-          .database()
-          .ref("DATOS_FAMILIARES")
-          .push().key;
+     if (familiares != undefined) {
+        for (let i = 0; i < familiares.length; i++) {
+          const familiaresKey = firebase
+            .database()
+            .ref("DATOS_FAMILIARES")
+            .push().key;
 
-        let familiares_table = {
-          parentesco: familiares[i].parentesco,
-          edad: familiares[i].edad,
-          trabaja: familiares[i].trabaja,
-          id_postulante: id
-        };
-        firebase
-          .database()
-          .ref("DATOS_FAMILIARES")
-          .child(familiaresKey)
-          .set(JSON.parse(JSON.stringify(familiares_table)));
+          let familiares_table = {
+            parentesco: familiares[i].parentesco,
+            edad: familiares[i].edad,
+            trabaja: familiares[i].trabaja,
+            id_postulante: id
+          };
+          firebase
+            .database()
+            .ref("DATOS_FAMILIARES")
+            .child(familiaresKey)
+            .set(JSON.parse(JSON.stringify(familiares_table)));
+        }
       }
     },
 
