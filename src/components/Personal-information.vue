@@ -207,7 +207,7 @@
               absolute
               bottom
               right
-              @click="arrDatosFamiliares(),agregarPersonalDate()"
+              @click="agregarPersonalDate()"
             >Finalizar</v-btn>
           </v-col>
         </v-row>
@@ -462,6 +462,7 @@ export default {
             });
         }
       });
+      // this.familia = [];
       console.log('arrFamiliares',this.datosRotacionPost.arrFamiliares);
       console.log('array familia',this.familia);
       console.log('rotacion', this.datosRotacionPost.familiares);
