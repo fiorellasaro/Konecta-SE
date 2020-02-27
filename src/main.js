@@ -24,14 +24,14 @@ Vue.config.productionTip = false
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyB1PtbrxIC7pfT5Vy1R3MPAEyOCjuQa6B8",
-  authDomain: "konectase-522d7.firebaseapp.com",
-  databaseURL: "https://konectase-522d7.firebaseio.com",
-  projectId: "konectase-522d7",
-  storageBucket: "konectase-522d7.appspot.com",
-  messagingSenderId: "1088807972190",
-  appId: "1:1088807972190:web:f8a9f09e09e06a075973cf",
-  measurementId: "G-ZGG15E1TFG"
+  apiKey: "AIzaSyB5Ap0VYAT3-rkIxVGu9eBp6oEf9VJZyas",
+  authDomain: "konectase-desa.firebaseapp.com",
+  databaseURL: "https://konectase-desa.firebaseio.com",
+  projectId: "konectase-desa",
+  storageBucket: "konectase-desa.appspot.com",
+  messagingSenderId: "962491687547",
+  appId: "1:962491687547:web:a0fcbee16feb4ad0a9b8de",
+  measurementId: "G-ZWE6D4HTXB"
 };
 firebase.initializeApp(firebaseConfig);
 
