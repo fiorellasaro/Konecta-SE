@@ -4,8 +4,8 @@ module.exports = {
   ]
 }
 
-module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-     ? '/konecta-se/'
-    : '/'
-}
+// module.exports = {
+//   publicPath: process.env.NODE_ENV === 'production'
+//      ? '/konecta-se/'
+//     : '/'
+// }
