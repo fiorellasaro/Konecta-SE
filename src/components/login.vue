@@ -14,7 +14,7 @@
             <p class="text-center black--text title mb-2 mt-6">Tipo de documento</p>
 
             <v-select
-              v-model="selectDocumentType"
+              v-model="loginData.selectDocumentType"
               :items="DocumentType"
               :rules="[v => !!v || 'el tipo de documento es requerido']"
               label="Seleccionar"
@@ -24,7 +24,7 @@
             <p class="text-center black--text title mb-2 mt-2">Número de documento</p>
             <v-text-field
               v-if="selectDocumentType !=='Pasaporte' && selectDocumentType!=='Permiso Temporal de Trabajo'"
-              v-model="numeroDoc"
+              v-model="loginData.numeroDoc"
               type="number"
               maxlength="8"
               solo
@@ -37,7 +37,7 @@
             ></v-text-field>
             <v-text-field
               v-if="selectDocumentType ==='Pasaporte'"
-              v-model="numeroDoc"
+              v-model="loginData.numeroDoc"
               maxlength="11"
               solo
               type="number"
@@ -51,7 +51,7 @@
 
             <v-text-field
               v-if="selectDocumentType ==='Permiso Temporal de Trabajo'"
-              v-model="numeroDoc"
+              v-model="loginData.numeroDoc"
               maxlength="9"
               solo
               type="number"
@@ -168,6 +168,14 @@
 </template>
 <script>
 export default {
+  name: "login",
+  props: {
+    loginData: {
+      type: Array,
+      required: true
+    },
+    // userState: false, 
+  },
   data: () => ({
     valid: true,
     numeroDoc: "",
@@ -186,8 +194,9 @@ export default {
       
     ],
     conditions: false,
-
-    email: "",
+  
+  userState: false,
+    
     selectDocumentType: null,
     DocumentType: [
       "DNI",
@@ -196,23 +205,26 @@ export default {
       "Permiso Temporal de Trabajo"
     ],
     checkbox: false,
-    lazy: false
+    lazy: false,
+    
   }),
+
 
   methods: {
     validate() {
-      // @click="$router.push({name: 'oportunidades', params:{ id:convocatoria.id, convocatoria:post[index]}})"
       if (this.$refs.form.validate()) {
-        this.snackbar = true;
-        this.$router.push({
-          name: "selection",
-          params: {
-            DocumentType: this.selectDocumentType,
-            numeroDoc: this.numeroDoc
-          }
-        });
+        // this.snackbar = true;
+        this.$emit('child-hide-event');
+        // this.$router.push({
+        //   name: "selection",
+        //   params: {
+        //     DocumentType: this.selectDocumentType,
+        //     numeroDoc: this.numeroDoc
+        //   }
+        // });
       }
     },
+    
     isNumber: function(evt) {
       // this.testCollection = [];
       evt = evt ? evt : window.event;

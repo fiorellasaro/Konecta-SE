@@ -216,6 +216,7 @@
               v-model.number="datosPersonalesPost.n_hijos"
               color="teal"
               maxlength="2"
+              type="number"
               pattern="[0-9]*"
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
@@ -266,7 +267,7 @@
     <!-- step9 -->
     <div id="step9" v-if="countDatosPersonales === 9" class="px-3 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-0">Cuentanos cómo conociste a Konecta</p>
+        <p class="text-center black--text title mb-0">Cuéntanos, ¿cómo conociste a Konecta?</p>
         <v-select
           v-model="datosPersonalesPost.como_konecta"
           :items="itemsComoKonecta"
@@ -419,8 +420,7 @@ export default {
       var charCode = evt.which ? evt.which : evt.keyCode;
       if (
         (event.charCode > 64 && event.charCode < 91) ||
-        (event.charCode > 96 && event.charCode < 123)
-      ) {
+        (event.charCode > 96 && event.charCode < 123) || event.charCode === 32 || event.charCode === 209 || event.charCode ===241) {
         return true;
       } else {
         evt.preventDefault();
@@ -429,7 +429,7 @@ export default {
 
     isNumber($event) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
-      if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
+      if ((keyCode < 48 || keyCode > 57) && keyCode !== 46 ) {
         // 46 is dot
         $event.preventDefault();
       }
