@@ -45,7 +45,7 @@
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
               :rules="pasaporteRules"
-              placeholder="Ingrese el número pasaporte"
+              placeholder="Ingrese el número de pasaporte"
               required
             ></v-text-field>
 

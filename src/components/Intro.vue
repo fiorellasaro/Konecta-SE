@@ -29,8 +29,17 @@
         <div id="step2" class="px-1 pt-12">
           <v-form ref="form">
             <p class="text-center title mb-0">¿Cuántas personas viven contigo?</p>
+            <v-row class="justify-center">
+                <v-icon large color="teal">share</v-icon>
+                <a class="pt-1 pl-2" color="red"
+                   href="https://api.whatsapp.com/send?text=¿Quieres ser parte? Postula a nuestro proceso de selección https://vivekonecta.pe"
+                >Compartir Proceso</a>
+              </v-row>
             <v-row>
               <v-col cols="6" sm="6" class="justify-center">
+                <a class="pt-1 pl-2"
+                  href="https://api.whatsapp.com/send?text=¿Quieres ser parte? Postula a nuestro proceso de selección https://vivekonecta.pe"
+                >Compartir Proceso</a>
                 <!-- :rules="[v => !!v || 'Ingresa el número de familiares']" v-on:keyup.enter="createObjFamilia()" -->
                 <!-- @keyup="createObjFamilia()" -->
                 <v-text-field
@@ -216,3 +225,10 @@ export default {
   }
 };
 </script>
+
+<style >
+.v-application a {
+    color:  #000000;
+    text-decoration: none;
+}
+</style>

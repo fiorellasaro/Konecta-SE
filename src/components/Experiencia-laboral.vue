@@ -477,6 +477,7 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-4">¿Rubro del Cliente?</p>
         <v-select
+        color="teal"
           v-model="datosExperienciaPost.ec_rubro_cliente"
           :items="rubroEmpresa"
           :rules="[v => !!v || 'Selecciona un rubro']"

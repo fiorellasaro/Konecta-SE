@@ -124,7 +124,7 @@
               >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
 
               <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
-              <v-row class="justify-center pb-12">
+              <v-row class="justify-center pb-2">
                 <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
                 <p class="primary--text pl-4 pt-1">945787170</p>
               </v-row>
@@ -162,10 +162,16 @@
                 >¡Gracias por tu calificación/comentarios!</p>
                 <p v-else class="message-blank">¡Gracias por tu calificación/comentarios!</p>
               </v-row>
+              <v-row class="justify-center mb-1">
+                <v-icon large color="teal">share</v-icon>
+                <a class="pt-1 pl-2"
+                  href="https://api.whatsapp.com/send?text=¿Quieres ser parte? Postula a nuestro proceso de selección: https://vivekonecta.pe"
+                >Compartir Proceso</a>
+              </v-row>
               <v-row class="justify-center">
                 <v-btn
                   color="#00B8AD"
-                  class="white--text mt-4"
+                  class="white--text mt-2"
                   rounded
                   @click="$router.push({name: 'home'})"
                 >Regresar a la página de inicio</v-btn>
@@ -932,7 +938,7 @@ export default {
     buttonFeedbackStatus() {
       this.countFeedback = false;
     }
-  },
+  }
   // mounted() {
   //   this.callFunctionReload();
   // }
@@ -970,5 +976,9 @@ export default {
 }
 .message-blank {
   visibility: hidden;
+}
+.v-application a {
+    color:  #000000;
+    text-decoration: none;
 }
 </style>
