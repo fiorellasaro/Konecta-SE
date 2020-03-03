@@ -164,14 +164,14 @@
               </v-row>
               <v-row class="justify-center mb-1">
                 <v-icon large color="teal">share</v-icon>
-                <a class="pt-1 pl-2"
+                <a class="pt-2 pl-2"
                   href="https://api.whatsapp.com/send?text=¿Quieres ser parte? Postula a nuestro proceso de selección: https://vivekonecta.pe"
                 >Compartir Proceso</a>
               </v-row>
               <v-row class="justify-center">
                 <v-btn
                   color="#00B8AD"
-                  class="white--text mt-2"
+                  class="white--text mt-8"
                   rounded
                   @click="$router.push({name: 'home'})"
                 >Regresar a la página de inicio</v-btn>
@@ -978,7 +978,7 @@ export default {
   visibility: hidden;
 }
 .v-application a {
-    color:  #000000;
+    color:  #00B8AD;
     text-decoration: none;
 }
 </style>
