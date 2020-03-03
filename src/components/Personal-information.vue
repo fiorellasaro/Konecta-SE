@@ -1,6 +1,6 @@
 <template>
   <v-container>
-     <div  v-show='!childVisible'>
+    <div v-show="!childVisible">
       <v-layout pa-2 align-center class="d-flex flex-column">
         <v-flex xs12 md6 xl3 pa-2 style="width: 100%;">
           <div class="d-flex align-content-space-around">
@@ -232,9 +232,9 @@
           </v-dialog>
         </v-flex>
       </v-layout>
-     </div> 
+    </div>
     <!-- <div v-show='!loginData.userState'> -->
-      <login :loginData="loginData"  @child-hide-event="childHide" v-if="childVisible"/>
+    <login :loginData="loginData" @child-hide-event="childHide" v-if="childVisible" />
     <!-- </div> -->
   </v-container>
 </template>
@@ -296,7 +296,7 @@ export default {
       progressRotation: 0,
 
       datosPostulantes: [],
-      
+
       datosPersonalesPost: [
         {
           datosValidPer: true,
@@ -399,13 +399,19 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
-     childHide () {
-      this.childVisible = false
+    childHide() {
+      this.childVisible = false;
     },
-    childShow () {
-      this.childVisible = true
+    childShow() {
+      this.childVisible = true;
     },
-
+    callFunctionReload: function() {
+      setTimeout(function() {
+        alert(gff);
+        // this.$router.push
+        this.$router.push({ path: "/" });
+      }, 200);
+    },
     agregarExperiencia() {
       if (this.countBtnAddExp < 2) {
         this.countExpLab = 0;
@@ -926,6 +932,9 @@ export default {
     buttonFeedbackStatus() {
       this.countFeedback = false;
     }
+  },
+  mounted() {
+    this.callFunctionReload();
   }
 };
 </script>

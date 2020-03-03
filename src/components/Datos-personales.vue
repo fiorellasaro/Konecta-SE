@@ -376,7 +376,9 @@ export default {
         "Inkluye Integralia",
         "Inkluye Integra-Chiclayo",
         "Inkluye Pachacutec",
-        "Volantes"
+        "Volantes",
+        "Facebook Konecta",
+        "Otros"
       ],
       comoKonecta: null,
       amigo_trabajaK: true,
