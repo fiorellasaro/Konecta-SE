@@ -50,8 +50,8 @@
         <v-text-field
           v-model="datosPersonalesPost.nombre_social"
           class="pt-2"
+          @keypress="isLetters($event)"
           color="teal"
-          :mandatory="false"
           placeholder="Ejemplo : “Cami” , “ Lu”, “Mari”"
           maxlength="20"
         ></v-text-field>
