@@ -19,7 +19,7 @@
             <v-text-field
               :rules="lastName1Rules"
               pattern="[a-zA-Z]*"
-          type="text"
+              type="text"
               @keypress="isLetters($event)"
               v-model="datosPersonalesPost.apellido_p"
               color="teal"
@@ -50,7 +50,7 @@
         <v-text-field
           v-model="datosPersonalesPost.nombre_social"
           class="pt-2"
-          @keypress="isLetters($event)"
+          @keypress="isletterAndroid($event)"
           color="teal"
           placeholder="Ejemplo : “Cami” , “ Lu”, “Mari”"
           maxlength="20"
@@ -138,7 +138,6 @@
             v-model="datosPersonalesPost.fecha_nac"
             :max="dateMayorEdad()"
             min="1950-01-01"
-            
             @change="save"
           ></v-date-picker>
         </v-menu>
@@ -157,7 +156,12 @@
         >
           <v-radio label="Masculino" value="Masculino" color="teal" class="pa-2 radioStateCivil"></v-radio>
           <v-radio label="Femenino" value="Femenino" color="teal" class="pa-2 radioStateCivil"></v-radio>
-          <v-radio label="Prefiero no responder" value="Prefiero no responder" color="teal" class="pa-2 radioStateCivil"></v-radio>
+          <v-radio
+            label="Prefiero no responder"
+            value="Prefiero no responder"
+            color="teal"
+            class="pa-2 radioStateCivil"
+          ></v-radio>
         </v-radio-group>
       </v-form>
     </div>
@@ -287,7 +291,7 @@
               v-model="datosPersonalesPost.referidos"
               color="teal"
               pattern="[a-zA-Z]*"
-          type="text"
+              type="text"
               @keypress="isLetters($event)"
               required
               :rules="[v => !!v || 'Ingresa el nombre de tu Familia/ Amigos']"
@@ -406,10 +410,15 @@ export default {
     }
   },
   methods: {
- dateMayorEdad() {
+    dateMayorEdad() {
       let date1 = new Date();
       date1.setMonth(date1.getMonth() - 216);
-      let finalDate = date1.getFullYear()+ "-" + (date1.getMonth() + 1)+ "-" + date1.getDate();
+      let finalDate =
+        date1.getFullYear() +
+        "-" +
+        (date1.getMonth() + 1) +
+        "-" +
+        date1.getDate();
       return finalDate;
     },
     rbtSinHijos() {
@@ -422,7 +431,27 @@ export default {
       var charCode = evt.which ? evt.which : evt.keyCode;
       if (
         (event.charCode > 64 && event.charCode < 91) ||
-        (event.charCode > 96 && event.charCode < 123) || event.charCode === 32 || event.charCode === 209 || event.charCode ===241) {
+        (event.charCode > 96 && event.charCode < 123) ||
+        event.charCode === 32 ||
+        event.charCode === 209 ||
+        event.charCode === 241
+      ) {
+        return true;
+      } else {
+        evt.preventDefault();
+      }
+    },
+    isletterAndroid: function(evt){
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.fromCharCode;
+      // var res = String.fromCharCode(72, 69, 76, 76, 79);
+      if (
+        (event.charCode > 64 && event.charCode < 91) ||
+        (event.charCode > 96 && event.charCode < 123) ||
+        event.charCode === 32 ||
+        event.charCode === 209 ||
+        event.charCode === 241
+      ) {
         return true;
       } else {
         evt.preventDefault();
@@ -431,7 +460,7 @@ export default {
 
     isNumber($event) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
-      if ((keyCode < 48 || keyCode > 57) && keyCode !== 46 ) {
+      if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
         // 46 is dot
         $event.preventDefault();
       }
@@ -440,7 +469,7 @@ export default {
     save(fecha_nac) {
       this.$refs.menu.save(fecha_nac);
     },
-    allowedYears: val => parseInt(val.split('-')[1], 10) % 2 === 0,
+    allowedYears: val => parseInt(val.split("-")[1], 10) % 2 === 0,
     addMarker() {
       // if (this.starting_address_obj.geometry){
       const position = {
