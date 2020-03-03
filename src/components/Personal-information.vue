@@ -405,13 +405,13 @@ export default {
     childShow() {
       this.childVisible = true;
     },
-    callFunctionReload: function() {
-      setTimeout(function() {
-        alert(gff);
-        // this.$router.push
-        this.$router.push({ path: "/" });
-      }, 200);
-    },
+    // callFunctionReload: function() {
+    //   setTimeout(function() {
+    //     alert(gff);
+    //     // this.$router.push
+    //     this.$router.push({ path: "/" });
+    //   }, 200);
+    // },
     agregarExperiencia() {
       if (this.countBtnAddExp < 2) {
         this.countExpLab = 0;
@@ -933,9 +933,9 @@ export default {
       this.countFeedback = false;
     }
   },
-  mounted() {
-    this.callFunctionReload();
-  }
+  // mounted() {
+  //   this.callFunctionReload();
+  // }
 };
 </script>
 
