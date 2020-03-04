@@ -41,8 +41,8 @@
         v-if="$route.name == 'home'"
         @click="$router.push('/selection')"
         target="_blank"
-        class="ml-6"
-        outlined
+        class="ml-6 teal--text"
+        color="white"
       >
         <span class="mr-2">Postula</span>
         <v-icon>mdi-open-in-new</v-icon>

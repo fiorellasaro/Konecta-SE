@@ -352,6 +352,7 @@ export default {
       ],
       addressTextPersonal: "",
       markersPersonal: {},
+      initialLocate: {},
       starting_address: "",
       starting_address_obj: {},
       center: {},
@@ -485,6 +486,7 @@ export default {
       this.starting_address_obj = null;
       this.$emit("addMarker", this.addressTextPersonal);
       this.markerCoordinates();
+      this.initialCoordinates();
     },
     geolocate: function() {
       navigator.geolocation.getCurrentPosition(position => {
@@ -493,7 +495,9 @@ export default {
           lng: position.coords.longitude
         };
         this.markersPersonal = this.center;
+        this.initialLocate = this.center;
         this.markerCoordinates();
+        this.initialCoordinates();
       });
     },
     updateCoordinates(location) {
@@ -508,6 +512,9 @@ export default {
     },
     markerCoordinates() {
       this.$emit("markerCoordinates", this.markersPersonal);
+    },
+    initialCoordinates(){
+      this.$emit("initialCoordinates", this.initialLocate);
     },
     getAddressData: function(addressData, placeResultData, id) {
       this.address = addressData;
