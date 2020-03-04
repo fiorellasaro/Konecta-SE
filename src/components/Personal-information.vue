@@ -74,6 +74,7 @@
                 :countDatosPersonales="countDatosPersonales"
                 :datosPersonalesPost="datosPersonalesPost"
                 v-on:markerCoordinates="getCoordinates($event)"
+                v-on:initialCoordinates="getCoordinatesInitial($event)"
                 v-on:addMarker="getDirection($event)"
               />
             </div>
@@ -274,6 +275,7 @@ export default {
       dialog: false,
       addressTextPersonal: "",
       markersPersonal: {},
+      markerInitialLocate: {},
       addressTextStudy: "",
       markersStudy: {},
       addressTextActivity: "",
@@ -614,6 +616,32 @@ export default {
         }
       }
     },
+    allPostulantsLocation (id) {
+     let date = new Date();
+      let dateString = moment().format("L");
+      let hour = date.getHours() + ":" + date.getMinutes() + "";
+      const registerAt = {
+        date: dateString,
+        hour: hour
+      };
+
+      let datosUbicacionInicial = {
+        coordenadas_ubicacion:[this.initialCoordinates.lat, this.initialCoordinates.lng],
+        RegistradoDate: registerAt,
+        id_postulante: id
+      };
+      let ubicacionInicialPost = JSON.parse(JSON.stringify(datosUbicacionInicial));
+       const ubicacionInicialKey = firebase
+        .database()
+        .ref("UBICACION_INICIAL")
+        .push().key;
+      firebase
+        .database()
+        .ref("UBICACION_INICIAL")
+        .child(ubicacionInicialKey)
+        .set(ubicacionInicialPost);
+      
+    },
 
     btnNextStep() {
       // datos personales
@@ -864,6 +892,7 @@ export default {
       let familiares = [];
       familiares = personalInformation.familiares;
       this.postDatosFamiliares(postulateKey, familiares);
+      this.allPostulantsLocation(postulateKey);
 
       let datos_rotacion = {
         //datos rotacion
@@ -895,8 +924,13 @@ export default {
       console.log(this.addressTextPersonal);
     },
     getCoordinates: function(getCoordinates) {
-      this.markersPersonal = getCoordinates;
+      this.markersPersonal = getCoordinates; 
       console.log(this.markersPersonal);
+    },
+
+  getCoordinatesInitial: function(getCoordinatesInitial) {
+      this.initialCoordinates = getCoordinatesInitial; 
+      console.log('initial coordinates',this.initialCoordinates);
     },
 
     getDirectionStudy: function(getDirectionStudy) {
