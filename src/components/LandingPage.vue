@@ -268,9 +268,9 @@
                     <v-icon class="blue--text text--lighten-2">mdi-map-marker</v-icon>
                   </v-list-item-action>
                   <v-list-item-content>
-                    <v-list-item-title style="white-space: normal!important;">
-                      Jirón Carabaya 933, Cercado de Lima
-                    </v-list-item-title>
+                    <v-list-item-title
+                      style="white-space: normal!important;"
+                    >Jirón Carabaya 933, Cercado de Lima</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -352,31 +352,36 @@ export default {
     slide: [
       {
         id: 0,
-        bannerImg: "https://drive.google.com/uc?export=view&id=1MBMA3N1r99EDFCYOGHkUyj2zDZArglzJ",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1MBMA3N1r99EDFCYOGHkUyj2zDZArglzJ",
         text1: "¡WOOW felizmente llegaste!",
         text2: "Te estábamos esperando,",
         text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
-        bannerImg: "https://drive.google.com/uc?export=view&id=1XMZX5uRWlRdChR0xRdLZCt_Y_MD2wK5U",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1XMZX5uRWlRdChR0xRdLZCt_Y_MD2wK5U",
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       },
       {
         id: 2,
-        bannerImg: "https://drive.google.com/uc?export=view&id=1yI6nvUviTM7eTnmnnYEMaKAhQXhAWy2a",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1yI6nvUviTM7eTnmnnYEMaKAhQXhAWy2a",
         text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
-        bannerImg: "https://drive.google.com/uc?export=view&id=1VrV7y_W9Kj2HFcyIYbzcvOVkefesJhlI",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1VrV7y_W9Kj2HFcyIYbzcvOVkefesJhlI",
         text:
           "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
-        
-        bannerImg:"https://drive.google.com/uc?export=view&id=1en8kBAMSe04dqi0eTO7YSwA7HpyDWkv1",
+
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1en8kBAMSe04dqi0eTO7YSwA7HpyDWkv1",
         text:
           "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
@@ -385,30 +390,35 @@ export default {
       {
         id: 0,
         // bannerImg: require("../assets/bannersMobile/mobile.png"),
-        bannerImg: 'https://drive.google.com/uc?export=view&id=13Kzz8tWei2MDmJqSHUxCppFLk5Qpa6Bu',
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=13Kzz8tWei2MDmJqSHUxCppFLk5Qpa6Bu",
         text1: "¡WOOW felizmente llegaste!",
         text2: "Te estábamos esperando,",
         text: "ven a conocernos tenemos un lugar para ti."
       },
       {
         id: 1,
-        bannerImg: "https://drive.google.com/uc?export=view&id=1E3qkWQETPLO_M_rBidVi343Yb2FOzswn",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1E3qkWQETPLO_M_rBidVi343Yb2FOzswn",
         text: "Tenemos el mejor clima, el mejor lugar para que te diviertas"
       },
       {
         id: 2,
-        bannerImg:"https://drive.google.com/uc?export=view&id=1StKOl311bzIHDVzxqGFOkR427YxR-SUx",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1StKOl311bzIHDVzxqGFOkR427YxR-SUx",
         text: "Nos preocupamos por ti y por tu desarrollo profesional"
       },
       {
         id: 3,
-        bannerImg:"https://drive.google.com/uc?export=view&id=1ZLBgYoGnzh1ur48HBwal9TMceU-7GWCE",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1ZLBgYoGnzh1ur48HBwal9TMceU-7GWCE",
         text:
           "Pensamos siempre en ti, y hacemos todo lo necesario para que vivas la cultura Konecta"
       },
       {
         id: 4,
-        bannerImg:"https://drive.google.com/uc?export=view&id=1H3EW9_JSRA5W5AbAfssTn6cVMPyPGJIn",
+        bannerImg:
+          "https://drive.google.com/uc?export=view&id=1H3EW9_JSRA5W5AbAfssTn6cVMPyPGJIn",
         text:
           "Tenemos el mejor talento que se encarga de crear lo mejor para ti"
       }
@@ -454,10 +464,10 @@ export default {
   }
   #mob-size {
     /* content: url("../assets/Banners/Call-600x360.jpg") */
-    display: block!important;
+    display: block !important;
   }
   #desk-size {
-    display: none!important;
+    display: none !important;
   }
   /* .carousel-img{
     width: 600px!important;
