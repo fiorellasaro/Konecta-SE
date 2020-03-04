@@ -473,7 +473,7 @@ export default {
       for (let i = 1; i <= 20; i++) {
         this.arrFamilia.push({
           parentesco: "",
-          edad: 0,
+          edad: null,
           trabaja: ""
         });
          this.datosRotacionPost.arrFamiliares = this.arrFamilia;

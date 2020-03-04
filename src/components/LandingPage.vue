@@ -229,7 +229,7 @@
             color="teal lighten-2"
             dark
             large
-            @click="$router.push('/login')"
+            @click="$router.push('/selection')"
           >Quiero ser parte</v-btn>
         </v-layout>
       </v-parallax>

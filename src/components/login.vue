@@ -14,7 +14,7 @@
             <p class="text-center black--text title mb-2 mt-6">Tipo de documento</p>
 
             <v-select
-              v-model="selectDocumentType"
+              v-model="loginData.selectDocumentType"
               :items="DocumentType"
               :rules="[v => !!v || 'el tipo de documento es requerido']"
               label="Seleccionar"
@@ -23,8 +23,8 @@
             ></v-select>
             <p class="text-center black--text title mb-2 mt-2">Número de documento</p>
             <v-text-field
-              v-if="selectDocumentType !=='Pasaporte' && selectDocumentType!=='Permiso Temporal de Trabajo'"
-              v-model="numeroDoc"
+              v-if="loginData.selectDocumentType !=='Pasaporte' && loginData.selectDocumentType!=='Permiso Temporal de Permanencia' && loginData.selectDocumentType!=='Carnet de Extranjeria'"
+              v-model="loginData.numeroDoc"
               type="number"
               maxlength="8"
               solo
@@ -36,8 +36,8 @@
               required
             ></v-text-field>
             <v-text-field
-              v-if="selectDocumentType ==='Pasaporte'"
-              v-model="numeroDoc"
+              v-if="loginData.selectDocumentType ==='Pasaporte'"
+              v-model="loginData.numeroDoc"
               maxlength="11"
               solo
               type="number"
@@ -45,13 +45,13 @@
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
               :rules="pasaporteRules"
-              placeholder="Ingrese el número"
+              placeholder="Ingrese el número de pasaporte"
               required
             ></v-text-field>
 
             <v-text-field
-              v-if="selectDocumentType ==='Permiso Temporal de Trabajo'"
-              v-model="numeroDoc"
+              v-if="loginData.selectDocumentType ==='Permiso Temporal de Permanencia' || loginData.selectDocumentType ==='Carnet de Extranjeria'"
+              v-model="loginData.numeroDoc"
               maxlength="9"
               solo
               type="number"
@@ -59,7 +59,7 @@
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
               @keypress="isNumber($event)"
               :rules="ptpteRules"
-              placeholder="Ingrese el número"
+              placeholder="Ingrese el número de documento"
               required
             ></v-text-field>
             <v-checkbox
@@ -168,6 +168,14 @@
 </template>
 <script>
 export default {
+  name: "login",
+  props: {
+    loginData: {
+      type: Array,
+      required: true
+    },
+    // userState: false, 
+  },
   data: () => ({
     valid: true,
     numeroDoc: "",
@@ -186,33 +194,37 @@ export default {
       
     ],
     conditions: false,
-
-    email: "",
+  
+  userState: false,
+    
     selectDocumentType: null,
     DocumentType: [
       "DNI",
       "Pasaporte",
       "Carnet de Extranjeria",
-      "Permiso Temporal de Trabajo"
+      "Permiso Temporal de Permanencia"
     ],
     checkbox: false,
-    lazy: false
+    lazy: false,
+    
   }),
+
 
   methods: {
     validate() {
-      // @click="$router.push({name: 'oportunidades', params:{ id:convocatoria.id, convocatoria:post[index]}})"
       if (this.$refs.form.validate()) {
-        this.snackbar = true;
-        this.$router.push({
-          name: "selection",
-          params: {
-            DocumentType: this.selectDocumentType,
-            numeroDoc: this.numeroDoc
-          }
-        });
+         this.snackbar = true;
+        this.$emit('child-hide-event');
+        // this.$router.push({
+        //   name: "selection",
+        //   params: {
+        //     DocumentType: this.selectDocumentType,
+        //     numeroDoc: this.numeroDoc
+        //   }
+        // });
       }
     },
+    
     isNumber: function(evt) {
       // this.testCollection = [];
       evt = evt ? evt : window.event;

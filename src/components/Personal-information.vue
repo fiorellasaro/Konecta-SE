@@ -1,233 +1,247 @@
 <template>
   <v-container>
-    <v-layout pa-2 align-center class="d-flex flex-column">
-      <v-flex xs12 md6 xl3 pa-2 style="width: 100%;">
-        <div class="d-flex align-content-space-around">
-          <v-progress-linear
-            :value="progressDatosPersonales"
-            color="teal"
-            height="20"
-            style="border-radius: 100px;"
-            v-if="nextComponente !== 'componente5'"
-          >
-            <template v-slot="{ value }">
-              <strong
-                class="white--text body-2"
-                v-if="progressDatosPersonales > 0"
-              >{{ Math.ceil(value) }}%</strong>
-            </template>
-          </v-progress-linear>
-          <v-progress-linear
-            :value="progressProfesional"
-            class="ml-4"
-            color="teal"
-            height="20"
-            style="border-radius: 100px;"
-            reactive
-            v-if="nextComponente !== 'componente5'"
-          >
-            <template v-slot="{ value }">
-              <strong
-                class="white--text body-2"
-                v-if="progressProfesional > 0"
-              >{{ Math.ceil(value) }}%</strong>
-            </template>
-          </v-progress-linear>
-          <v-progress-linear
-            v-if="nextComponente !== 'componente5'"
-            :value="progressExpLaboral"
-            class="ml-4"
-            color="teal"
-            height="20"
-            style="border-radius: 100px;"
-            reactive
-          >
-            <template v-slot="{ value }">
-              <strong
-                class="white--text body-2"
-                v-if="progressExpLaboral > 0"
-              >{{ Math.ceil(value) }}%</strong>
-            </template>
-          </v-progress-linear>
-          <v-progress-linear
-            v-if="nextComponente !== 'componente5'"
-            :value="progressRotation"
-            class="ml-4"
-            color="teal"
-            height="20"
-            style="border-radius: 100px;"
-            reactive
-          >
-            <template v-slot="{ value }">
-              <strong class="white--text body-2" v-if="progressRotation > 0">{{ Math.ceil(value) }}%</strong>
-            </template>
-          </v-progress-linear>
-        </div>
-
-        <div class="justify-center text-center" style="margin-bottom: 70px;">
-          <div v-if="nextComponente === 'componente1'">
-            <datosPersonales
-              :countDatosPersonales="countDatosPersonales"
-              :datosPersonalesPost="datosPersonalesPost"
-              v-on:markerCoordinates="getCoordinates($event)"
-              v-on:addMarker="getDirection($event)"
-            />
+    <div v-show="!childVisible">
+      <v-layout pa-2 align-center class="d-flex flex-column">
+        <v-flex xs12 md6 xl3 pa-2 style="width: 100%;">
+          <div class="d-flex align-content-space-around">
+            <v-progress-linear
+              :value="progressDatosPersonales"
+              color="teal"
+              height="20"
+              style="border-radius: 100px;"
+              v-if="nextComponente !== 'componente5'"
+            >
+              <template v-slot="{ value }">
+                <strong
+                  class="white--text body-2"
+                  v-if="progressDatosPersonales > 0"
+                >{{ Math.ceil(value) }}%</strong>
+              </template>
+            </v-progress-linear>
+            <v-progress-linear
+              :value="progressProfesional"
+              class="ml-4"
+              color="teal"
+              height="20"
+              style="border-radius: 100px;"
+              reactive
+              v-if="nextComponente !== 'componente5'"
+            >
+              <template v-slot="{ value }">
+                <strong
+                  class="white--text body-2"
+                  v-if="progressProfesional > 0"
+                >{{ Math.ceil(value) }}%</strong>
+              </template>
+            </v-progress-linear>
+            <v-progress-linear
+              v-if="nextComponente !== 'componente5'"
+              :value="progressExpLaboral"
+              class="ml-4"
+              color="teal"
+              height="20"
+              style="border-radius: 100px;"
+              reactive
+            >
+              <template v-slot="{ value }">
+                <strong
+                  class="white--text body-2"
+                  v-if="progressExpLaboral > 0"
+                >{{ Math.ceil(value) }}%</strong>
+              </template>
+            </v-progress-linear>
+            <v-progress-linear
+              v-if="nextComponente !== 'componente5'"
+              :value="progressRotation"
+              class="ml-4"
+              color="teal"
+              height="20"
+              style="border-radius: 100px;"
+              reactive
+            >
+              <template v-slot="{ value }">
+                <strong
+                  class="white--text body-2"
+                  v-if="progressRotation > 0"
+                >{{ Math.ceil(value) }}%</strong>
+              </template>
+            </v-progress-linear>
           </div>
-          <div v-if="progressDatosPersonales == 100 && nextComponente === 'componente2'">
-            <datosProfesionales
-              :countProf="countProf"
-              :datosProfesionalesPost="datosProfesionalesPost"
-              v-on:markerCoordinates="getCoordinatesStudy($event)"
-              v-on:addMarker="getDirectionStudy($event)"
-              :datosPersonalesPost="datosPersonalesPost"
-            />
-          </div>
-          <div v-if="nextComponente === 'componente3'">
-            <expLaboral
-              :countExpLab="countExpLab"
-              :datosExperienciaPost="datosExperienciaPost"
-              :datosPersonalesPost="datosPersonalesPost"
-              :agregarExperiencia="agregarExperiencia"
-              :countBtnAddExp="countBtnAddExp"
-              :allDatosExp="allDatosExp"
-            />
-          </div>
-          <div v-if="nextComponente === 'componente4'">
-            <datosRotacion
-              :countRotacion="countRotacion"
-              :datosRotacionPost="datosRotacionPost"
-              v-on:markerCoordinates="getCoordinatesActivity($event)"
-              v-on:addMarker="getDirectionActivity($event)"
-              :datosPersonalesPost="datosPersonalesPost"
-              :actividad_libre="actividad_libre"
-            />
-          </div>
-          <div v-if="nextComponente === 'componente5'" class="pt-2 px-2">
-            <p class="title text-center title font-weight-medium mt-0">¡Felicidades!</p>
-            <p
-              v-if="this.datosPersonalesPost.nombre_social!==undefined"
-              class="title text-center title font-weight-medium pt-2"
-            >{{this.datosPersonalesPost.nombre_social}}, ¡acabas de culminar la primera etapa de tu postulación!</p>
 
-            <p
-              v-else
-              class="title text-center title font-weight-medium pt-2"
-            >{{this.datosPersonalesPost.nombres}}, ¡acabas de culminar la primera etapa de tu postulación!</p>
-
-            <img src="../assets/confetti.png" style="vertical-align: middle; width: 50px;" />
-            <p
-              class="pb-0 pt-4 body-2 text-justify"
-            >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
-
-            <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
-            <v-row class="justify-center pb-12">
-              <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
-              <p class="primary--text pl-4 pt-1">945787170</p>
-            </v-row>
-
-            <p class="body-2 pt-4 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
-            <div class="text-center teal--text">
-              <v-rating
-                v-model="rating"
-                color="#FDD835"
-                class="teal--text"
-                v-on:input="buttonFeedbackStatus()"
-              ></v-rating>
+          <div class="justify-center text-center" style="margin-bottom: 70px;">
+            <div v-if="nextComponente === 'componente1'">
+              <datosPersonales
+                :countDatosPersonales="countDatosPersonales"
+                :datosPersonalesPost="datosPersonalesPost"
+                v-on:markerCoordinates="getCoordinates($event)"
+                v-on:addMarker="getDirection($event)"
+              />
             </div>
-            <v-text-field
-              v-on:input="buttonFeedbackStatus()"
-              name="name"
-              v-model="ratingComment"
-              placeholder="Algún comentario"
-              id="id"
-              class="pa-0"
-            ></v-text-field>
-            <v-row class="justify-center mb-0">
-              <v-btn
-                :disabled="this.countFeedback"
-                color="#00B8AD"
-                class="white--text feedbackButton"
-                rounded
-                @click="sendFeedback()"
-              >Enviar</v-btn>
-            </v-row>
-            <v-row class="justify-center">
+            <div v-if="progressDatosPersonales == 100 && nextComponente === 'componente2'">
+              <datosProfesionales
+                :countProf="countProf"
+                :datosProfesionalesPost="datosProfesionalesPost"
+                v-on:markerCoordinates="getCoordinatesStudy($event)"
+                v-on:addMarker="getDirectionStudy($event)"
+                :datosPersonalesPost="datosPersonalesPost"
+              />
+            </div>
+            <div v-if="nextComponente === 'componente3'">
+              <expLaboral
+                :countExpLab="countExpLab"
+                :datosExperienciaPost="datosExperienciaPost"
+                :datosPersonalesPost="datosPersonalesPost"
+                :agregarExperiencia="agregarExperiencia"
+                :countBtnAddExp="countBtnAddExp"
+                :allDatosExp="allDatosExp"
+              />
+            </div>
+            <div v-if="nextComponente === 'componente4'">
+              <datosRotacion
+                :countRotacion="countRotacion"
+                :datosRotacionPost="datosRotacionPost"
+                v-on:markerCoordinates="getCoordinatesActivity($event)"
+                v-on:addMarker="getDirectionActivity($event)"
+                :datosPersonalesPost="datosPersonalesPost"
+                :actividad_libre="actividad_libre"
+              />
+            </div>
+            <div v-if="nextComponente === 'componente5'" class="pt-2 px-2">
+              <p class="title text-center title font-weight-medium mt-0">¡Felicidades!</p>
               <p
-                v-if="countFeedback"
-                class="feedback-message"
-              >¡Gracias por tu calificación/comentarios!</p>
-              <p v-else class="message-blank">¡Gracias por tu calificación/comentarios!</p>
-            </v-row>
-            <v-row class="justify-center">
+                v-if="this.datosPersonalesPost.nombre_social!==undefined"
+                class="title text-center title font-weight-medium pt-2"
+              >{{this.datosPersonalesPost.nombre_social}}, ¡acabas de culminar la primera etapa de tu postulación!</p>
+
+              <p
+                v-else
+                class="title text-center title font-weight-medium pt-2"
+              >{{this.datosPersonalesPost.nombres}}, ¡acabas de culminar la primera etapa de tu postulación!</p>
+
+              <img src="../assets/confetti.png" style="vertical-align: middle; width: 50px;" />
+              <p
+                class="pb-0 pt-4 body-2 text-justify"
+              >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
+
+              <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
+              <v-row class="justify-center pb-2">
+                <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
+                <p class="primary--text pl-4 pt-1">945787170</p>
+              </v-row>
+
+              <p class="body-2 pt-4 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
+              <div class="text-center teal--text">
+                <v-rating
+                  v-model="rating"
+                  color="#FDD835"
+                  class="teal--text"
+                  v-on:input="buttonFeedbackStatus()"
+                ></v-rating>
+              </div>
+              <v-text-field
+                v-on:input="buttonFeedbackStatus()"
+                name="name"
+                v-model="ratingComment"
+                placeholder="Algún comentario"
+                id="id"
+                class="pa-0"
+              ></v-text-field>
+              <v-row class="justify-center mb-0">
+                <v-btn
+                  :disabled="this.countFeedback"
+                  color="#00B8AD"
+                  class="white--text feedbackButton"
+                  rounded
+                  @click="sendFeedback()"
+                >Enviar</v-btn>
+              </v-row>
+              <v-row class="justify-center">
+                <p
+                  v-if="countFeedback"
+                  class="feedback-message"
+                >¡Gracias por tu calificación/comentarios!</p>
+                <p v-else class="message-blank">¡Gracias por tu calificación/comentarios!</p>
+              </v-row>
+              <v-row class="justify-center mb-1">
+                <v-icon large color="teal">share</v-icon>
+                <a class="pt-2 pl-2"
+                  href="https://api.whatsapp.com/send?text=¿Quieres ser parte? Postula a nuestro proceso de selección: https://vivekonecta.pe"
+                >Compartir Proceso</a>
+              </v-row>
+              <v-row class="justify-center">
+                <v-btn
+                  color="#00B8AD"
+                  class="white--text mt-8"
+                  rounded
+                  @click="$router.push({name: 'home'})"
+                >Regresar a la página de inicio</v-btn>
+              </v-row>
+            </div>
+          </div>
+          <v-row v-if="nextComponente !== 'componente5'">
+            <v-col class="text-start">
               <v-btn
                 color="#00B8AD"
-                class="white--text mt-4"
-                rounded
-                @click="$router.push({name: 'home'})"
-              >Regresar a la página de inicio</v-btn>
-            </v-row>
-          </div>
-        </div>
-        <v-row v-if="nextComponente !== 'componente5'">
-          <v-col class="text-start">
-            <v-btn
-              color="#00B8AD"
-              v-show="hidden"
-              class="white--text"
-              fab
-              large
-              absolute
-              dark
-              bottom
-              left
-              @click="btnPrevStep()"
-            >
-              <v-icon>mdi-arrow-left-bold</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="text-end">
-            <v-btn
-              v-if="countRotacion !== 7"
-              fab
-              large
-              :disabled="!datosPersonalesPost.datosValidPer"
-              color="#00B8AD"
-              class="white--text"
-              absolute
-              bottom
-              right
-              @click="btnNextStep()"
-            >
-              <v-icon>mdi-arrow-right-bold</v-icon>
-            </v-btn>
-            <v-btn
-              v-if="countRotacion === 7"
-              color="#00B8AD"
-              class="white--text"
-              absolute
-              bottom
-              right
-              @click="agregarPersonalDate()"
-            >Finalizar</v-btn>
-          </v-col>
-        </v-row>
+                v-show="hidden"
+                class="white--text"
+                fab
+                large
+                absolute
+                dark
+                bottom
+                left
+                @click="btnPrevStep()"
+              >
+                <v-icon>mdi-arrow-left-bold</v-icon>
+              </v-btn>
+            </v-col>
+            <v-col class="text-end">
+              <v-btn
+                v-if="countRotacion !== 7"
+                fab
+                large
+                :disabled="!datosPersonalesPost.datosValidPer"
+                color="#00B8AD"
+                class="white--text"
+                absolute
+                bottom
+                right
+                @click="btnNextStep()"
+              >
+                <v-icon>mdi-arrow-right-bold</v-icon>
+              </v-btn>
+              <v-btn
+                v-if="countRotacion === 7"
+                color="#00B8AD"
+                class="white--text"
+                absolute
+                bottom
+                right
+                @click="agregarPersonalDate()"
+              >Finalizar</v-btn>
+            </v-col>
+          </v-row>
 
-        <v-dialog v-model="dialog" max-width="290">
-          <v-card>
-            <!-- <v-card-title class="headline">Se registro tu experiencia laboral</v-card-title> -->
-            <v-row class="justify-center pt-6 pb-4">
-              <v-icon color="teal" size="48">work</v-icon>
-            </v-row>
-            <v-card-text
-              class="subtitle-1 black--text text-center"
-            >Se registro tu experiencia laboral</v-card-text>
-            <v-card-actions class="justify-center">
-              <v-btn color="teal" text @click="dialog = false">Aceptar</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-flex>
-    </v-layout>
+          <v-dialog v-model="dialog" max-width="290">
+            <v-card>
+              <!-- <v-card-title class="headline">Se registro tu experiencia laboral</v-card-title> -->
+              <v-row class="justify-center pt-6 pb-4">
+                <v-icon color="teal" size="48">work</v-icon>
+              </v-row>
+              <v-card-text
+                class="subtitle-1 black--text text-center"
+              >Se registro tu experiencia laboral</v-card-text>
+              <v-card-actions class="justify-center">
+                <v-btn color="teal" text @click="dialog = false">Aceptar</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-flex>
+      </v-layout>
+    </div>
+    <!-- <div v-show='!loginData.userState'> -->
+    <login :loginData="loginData" @child-hide-event="childHide" v-if="childVisible" />
+    <!-- </div> -->
   </v-container>
 </template>
 
@@ -235,6 +249,7 @@
 import firebase from "firebase";
 import moment from "moment";
 
+import login from "../components/login.vue";
 import datosPersonales from "../components/Datos-personales.vue";
 import datosProfesionales from "../components/Datos-profesionales.vue";
 import expLaboral from "../components/Experiencia-laboral.vue";
@@ -242,17 +257,20 @@ import datosRotacion from "../components/DatosRotacion";
 
 export default {
   components: {
+    login,
     datosPersonales,
     datosProfesionales,
     expLaboral,
     datosRotacion
   },
-  props: {
-    DocumentType: null,
-    numeroDoc: ""
-  },
+  // props: {
+  //   DocumentType: null,
+  //   numeroDoc: ""
+  // },
   data() {
     return {
+      childVisible: true,
+      loginData: [{ numeroDoc: "", selectDocumentType: "" }],
       dialog: false,
       addressTextPersonal: "",
       markersPersonal: {},
@@ -284,6 +302,7 @@ export default {
       progressRotation: 0,
 
       datosPostulantes: [],
+
       datosPersonalesPost: [
         {
           datosValidPer: true,
@@ -317,7 +336,7 @@ export default {
           rubro_carrera: "",
           coord_estudio: [,], //PASAR UNDEFINED (VACIO) SI NO TIENE QUE LLENAR ESTE DATO
           text_dir_estudio: "",
-          horario_estudio: "",
+          horario_estudio: ""
         }
       ],
       datosExperienciaPost: [
@@ -363,12 +382,12 @@ export default {
           motivacion: "",
           actividad_tiempo_libre: [],
           sede_preferencia: [],
-          arrFamiliares:[],
-          familiares: [],
+          arrFamiliares: [],
+          familiares: []
         }
       ],
       actividad_libre: [],
-      familia:[]
+      familia: []
     };
   },
   computed: {
@@ -386,7 +405,19 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
-   
+    childHide() {
+      this.childVisible = false;
+    },
+    childShow() {
+      this.childVisible = true;
+    },
+    // callFunctionReload: function() {
+    //   setTimeout(function() {
+    //     alert(gff);
+    //     // this.$router.push
+    //     this.$router.push({ path: "/" });
+    //   }, 200);
+    // },
     agregarExperiencia() {
       if (this.countBtnAddExp < 2) {
         this.countExpLab = 0;
@@ -395,7 +426,6 @@ export default {
       }
     },
     arrExperiencias() {
-
       if (this.datosExperienciaPost.flag_conExp === "rbtExtContact") {
         this.datosExperienciaPost.flag_ec = 1;
         this.datosExperienciaPost.flag_eo = 0;
@@ -454,24 +484,20 @@ export default {
     arrDatosFamiliares() {
       // var fam_rotacion = [];
       this.datosRotacionPost.arrFamiliares.forEach(element => {
-        if(element.parentesco !== ''){
+        if (element.parentesco !== "") {
           this.familia.push({
             parentesco: element.parentesco,
             edad: element.edad,
             trabaja: element.trabaja
-            });
+          });
         }
       });
-      // this.familia = [];
-      console.log('arrFamiliares',this.datosRotacionPost.arrFamiliares);
-      console.log('array familia',this.familia);
-      console.log('rotacion', this.datosRotacionPost.familiares);
     },
     agregarPersonalDate() {
       this.nextComponente = "componente5";
       this.datosPostulantes.push({
-        tipodoc: this.DocumentType,
-        numdoc: this.numeroDoc,
+        tipodoc: this.loginData.selectDocumentType,
+        numdoc: this.loginData.numeroDoc,
         nombres: this.datosPersonalesPost.nombres,
         apellido_p: this.datosPersonalesPost.apellido_p,
         apellido_m: this.datosPersonalesPost.apellido_m,
@@ -516,7 +542,7 @@ export default {
       });
       localStorage.setItem("datos", JSON.stringify(this.datosPostulantes));
       console.log(this.datosPostulantes);
-      console.log(this.familiares);
+      // console.log(this.familiares);
       this.PostPostulante(this.datosPostulantes[0]);
     },
 
@@ -567,7 +593,7 @@ export default {
     },
 
     postDatosFamiliares(id, familiares) {
-     if (familiares != undefined) {
+      if (familiares != undefined) {
         for (let i = 0; i < familiares.length; i++) {
           const familiaresKey = firebase
             .database()
@@ -689,7 +715,6 @@ export default {
         this.countRotacion += 1;
         this.progressRotation += 14;
         this.countRotacion === 1 ? (this.hidden = false) : (this.hidden = true);
-
       }
       if (
         this.countRotacion === 2 &&
@@ -702,9 +727,9 @@ export default {
         this.hidden = true;
         this.progressRotation = 100;
       }
-      if(this.countRotacion === 5){
+      if (this.countRotacion === 5) {
         this.arrDatosFamiliares();
-        console.log('numero count rotacion', this.countRotacion);
+        // console.log("numero count rotacion", this.countRotacion);
       }
       // }
 
@@ -756,11 +781,11 @@ export default {
         this.progressRotation -= 28;
         this.hidden = false;
       }
-      if(this.countRotacion === 4){
+      if (this.countRotacion === 4) {
         // this.datosRotacionPost.arrFamiliares = [];
         this.familia = [];
-        console.log('limpiando array',this.datosRotacionPost.arrFamiliares);
-        console.log('this familia', this.familia);
+        // console.log("limpiando array", this.datosRotacionPost.arrFamiliares);
+        // console.log("this familia", this.familia);
       }
     },
 
@@ -893,7 +918,7 @@ export default {
     },
     sendFeedback() {
       let feedback = {
-        numDoc: this.numeroDoc,
+        numDoc: this.loginData.numeroDoc,
         rating: this.rating,
         comment: this.ratingComment
       };
@@ -914,6 +939,9 @@ export default {
       this.countFeedback = false;
     }
   }
+  // mounted() {
+  //   this.callFunctionReload();
+  // }
 };
 </script>
 
@@ -948,5 +976,9 @@ export default {
 }
 .message-blank {
   visibility: hidden;
+}
+.v-application a {
+    color:  #00B8AD;
+    text-decoration: none;
 }
 </style>

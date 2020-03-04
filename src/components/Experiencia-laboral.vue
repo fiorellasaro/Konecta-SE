@@ -351,7 +351,7 @@
           maxlength="3"
           type="number"
           pattern="[0-9]*"
-              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
           :rules="[v => !!v || 'Ingresa el tiempo en número de meses']"
           required
@@ -379,7 +379,7 @@
           :rules="[v => !!v || 'Ingresa un monto']"
           required
           pattern="[0-9]*"
-              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           @keypress="isNumber($event)"
         ></v-text-field>
       </v-form>
@@ -477,6 +477,7 @@
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p class="text-center black--text title mb-4">¿Rubro del Cliente?</p>
         <v-select
+        color="teal"
           v-model="datosExperienciaPost.ec_rubro_cliente"
           :items="rubroEmpresa"
           :rules="[v => !!v || 'Selecciona un rubro']"
@@ -543,6 +544,8 @@
           prefix="S/"
           :rules="[v => !!v || 'Ingresa un monto']"
           required
+          pattern="[0-9]*"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           type="number"
           @keypress="isNumber($event)"
         ></v-text-field>
@@ -553,6 +556,8 @@
           maxlength="4"
           type="number"
           label="Comisiones / Incentivos / Bonos:"
+          pattern="[0-9]*"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           prefix="S/"
           @keypress="isNumber($event)"
         ></v-text-field>

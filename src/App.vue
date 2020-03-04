@@ -39,7 +39,7 @@
       </v-btn>
       <v-btn
         v-if="$route.name == 'home'"
-        @click="$router.push('/login')"
+        @click="$router.push('/selection')"
         target="_blank"
         class="ml-6"
         outlined
