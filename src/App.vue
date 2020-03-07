@@ -41,11 +41,13 @@
         v-if="$route.name == 'home'"
         @click="$router.push('/selection')"
         target="_blank"
-        class="ml-6 teal--text"
-        color="white"
+        
+        class="ml-6 darken-2 orange--text"
+              color="white"
       >
-        <span class="mr-2">Postula</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <span class="mr-2">POSTULA</span>
+        <img src="../src/assets/partner-orange.png" alt="">
+        <!-- <v-icon>mdi-open-in-new</v-icon> -->
       </v-btn>
     </v-app-bar>
 

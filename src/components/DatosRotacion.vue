@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div id="step2" v-if="countRotacion == 1" class="px-1 pt-8">
+    <div id="stepRot1" v-if="countRotacion === 1" class="px-1 pt-8" >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p
-          class="text-center title mb-0"
+          class="text-center title mb-0" id="preg1"
         >¿Cuál de las siguientes actividades realizas con mayor frecuencia en la semana?</p>
         <v-radio-group
           v-model="datosRotacionPost.actividades"
@@ -46,12 +46,12 @@
       </v-form>
     </div>
     <div
-      id="step2"
+      id="stepRot2"
       v-if="countRotacion == 2 && datosRotacionPost.actividades !== 'F'"
       class="px-1 pt-12"
     >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center title mb-0">¿Dónde realizas esa actividad?</p>
+        <p class="text-center title mb-0" id="preg2">¿Dónde realizas esa actividad?</p>
         <!--Map -->
         <div class="input-google-container">
           <gmap-autocomplete
@@ -86,12 +86,12 @@
       </v-form>
     </div>
     <div
-      id="step2"
+      id="stepRot3"
       v-if="countRotacion == 3 && datosRotacionPost.actividades !== 'F'"
       class="px-1 pt-12"
     >
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center title mb-0">¿En que horario realizas esa actividad?</p>
+        <p class="text-center title mb-0" id="preg3">¿En que horario realizas esa actividad?</p>
         <v-select
           :items="horarioActividad"
           v-model="datosRotacionPost.horario_actividad"
@@ -103,10 +103,10 @@
       </v-form>
     </div>
     <!-- personas -->
-    <div id="step2" v-if="countRotacion == 4" class="px-1 pt-12">
+    <div id="stepRot4" v-if="countRotacion == 4" class="px-1 pt-12">
 
         <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center black--text title mb-4">¿Cuántas personas viven contigo?</p>
+        <p class="text-center black--text title mb-4" id="preg4">¿Cuántas personas viven contigo?</p>
         <v-text-field
           v-model.number="datosRotacionPost.fam_postulante"
           class="pt-2"
@@ -195,9 +195,9 @@
         </div>
       </v-form>
     </div>
-    <div id="step2" v-if="countRotacion == 5" class="px-1 pt-12">
+    <div id="stepRot5" v-if="countRotacion == 5" class="px-1 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center title mb-0">¿Qué te motiva día a día?</p>
+        <p class="text-center title mb-0" id="preg5">¿Qué te motiva día a día?</p>
         <v-radio-group
           v-model="datosRotacionPost.motivacion"
           :mandatory="false"
@@ -218,9 +218,9 @@
         </v-radio-group>
       </v-form>
     </div>
-    <div id="step2" v-if="countRotacion == 6" class="px-1 pt-12">
+    <div id="stepRot6" v-if="countRotacion == 6" class="px-1 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
-        <p class="text-center title mb-0">¿Qué actividades te gusta realizar en tus tiempos libres?</p>
+        <p class="text-center title mb-0" id="preg6">¿Qué actividades te gusta realizar en tus tiempos libres?</p>
         <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p>
 
         <v-checkbox
@@ -321,10 +321,10 @@
         ></v-checkbox>
       </v-form>
     </div>
-    <div id="step2" v-if="countRotacion == 7" class="px-1 pt-12">
+    <div id="stepRot7" v-if="countRotacion == 7" class="px-1 pt-12">
       <v-form ref="form" v-model="datosPersonalesPost.datosValidPer">
         <p
-          class="text-center title mb-0"
+          class="text-center title mb-0" id="preg7"
         >¿Cuáles son tus sedes de preferencia para trabajar con nosotros?</p>
         <!-- <p class="text-center body-2 mb-0 gray--text">Debes de seleccionar 3 opciones</p> -->
         <v-checkbox
