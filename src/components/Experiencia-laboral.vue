@@ -47,7 +47,7 @@
     </div>
     <!-- FLUJO NO EXPERIENCIA -->
     <div
-      id="step2"
+      id="stepExp2"
       v-if="countExpLab == 1 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
       class="px-1 pt-12"
     >
@@ -74,7 +74,7 @@
       </v-form>
     </div>
     <div
-      id="stepExp1"
+      id="stepExp3"
       v-if="countExpLab == 2 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
       class="px-3 pt-12"
     >
@@ -114,7 +114,7 @@
       </v-form>
     </div>
     <div
-      id="stepExp1"
+      id="stepExp4"
       v-if="countExpLab == 3 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
       class="px-3 pt-8"
     >
@@ -157,7 +157,7 @@
       </v-form>
     </div>
     <div
-      id="stepExp1"
+      id="stepExp5"
       v-if="countExpLab == 4 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
       class="px-3 pt-8"
     >
@@ -199,7 +199,7 @@
       </v-form>
     </div>
     <div
-      id="stepExp1"
+      id="stepExp6"
       v-if="countExpLab == 5 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
       class="px-3 pt-8"
     >
@@ -248,7 +248,7 @@
       </v-form>
     </div>
     <div
-      id="stepExp1"
+      id="stepExp7"
       v-if="countExpLab == 6 && datosExperienciaPost.flag_conExp !== 'rbtExpOtros' && datosExperienciaPost.flag_conExp !== 'rbtExtContact'"
       class="px-3 pt-12"
     >

@@ -9,13 +9,28 @@
       style="display: block;"
     >
       <v-carousel-item v-for="(slide, i) in slide" :key="i" :src="slide.bannerImg">
+     
         <v-row class="fill-height pb-10" align="end" justify="center">
           <v-row class="opasity justify-center">
+             <v-col cols="12" md="12" class="pb-0 mb-0">
+                <v-btn
+                  large
+                  @click="$router.push('/selection')"
+                  target="_blank"
+                  class="ml-6 WHITE--text font-weight-bold"
+                  color="orange darken-3"
+                >
+                  <span class="mr-2">ÚNETE AL EQUIPO</span>
+                   <img src="../assets/partner-white.png" alt="">
+                  <!-- <v-icon>mdi-open-in-new</v-icon> -->
+                </v-btn>
+              </v-col>
             <v-col cols="12" md="12" class="pb-0 mb-0">
               <h1
                 class="white--text mb-0 display-text text-center pt-0 font-weight-bold"
               >{{slide.text1}}</h1>
             </v-col>
+
             <v-col cols="12" md="12" class="py-0 mb-0">
               <h3 class="white--text headline-text text-center pt-0 mb-0">{{slide.text2}}</h3>
             </v-col>
@@ -36,21 +51,39 @@
       style="display: none;"
     >
       <v-carousel-item v-for="(slideM, i) in slide_mob" :key="i" :src="slideM.bannerImg">
-        <v-row class="fill-height pb-10" align="end" justify="center">
-          <v-row class="opasity justify-center">
-            <v-col cols="12" md="12" class="pb-0 mb-0">
-              <h1
-                class="white--text mb-0 display-text text-center pt-0 font-weight-bold"
-              >{{slideM.text1}}</h1>
-            </v-col>
-            <v-col cols="12" md="12" class="py-0 mb-0">
-              <h3 class="white--text headline-text text-center pt-0 mb-0">{{slideM.text2}}</h3>
-            </v-col>
-            <v-col cols="12" md="12" class="py-0 mb-2">
-              <h4 class="white--text mb-2 mx-5 headline-text text-center pt-0 mt-0">{{slideM.text}}</h4>
-            </v-col>
+       
+         
+          <v-row class="fill-height pb-10" align="end" justify="center">
+            <v-row class="opasity justify-center">
+              <v-col cols="12" md="12" class="pb-0 mb-0">
+                <v-btn
+                  large
+                  @click="$router.push('/selection')"
+                  target="_blank"
+                  class="ml-6 WHITE--text font-weight-bold"
+                  color="orange darken-3"
+                >
+                  <span class="mr-2">ÚNETE AL EQUIPO</span>
+                  <img src="../assets/partner-white.png" alt="">
+                  <!-- <v-icon>mdi-open-in-new</v-icon> -->
+                </v-btn>
+              </v-col>
+              <v-col cols="12" md="12" class="pb-0 mb-0">
+                <h1
+                  class="white--text mb-0 display-text text-center pt-0 font-weight-bold"
+                >{{slideM.text1}}</h1>
+              </v-col>
+              <v-col cols="12" md="12" class="py-0 mb-0">
+                <h3 class="white--text headline-text text-center pt-0 mb-0">{{slideM.text2}}</h3>
+              </v-col>
+              <v-col cols="12" md="12" class="py-0 mb-2">
+                <h4
+                  class="white--text mb-2 mx-5 headline-text text-center pt-0 mt-0"
+                >{{slideM.text}}</h4>
+              </v-col>
+            </v-row>
           </v-row>
-        </v-row>
+       
       </v-carousel-item>
     </v-carousel>
     <section>
@@ -225,12 +258,13 @@
           >Somos una familia de más de 14K personas</div>
           <em>Tú también puedes ser parte</em>
           <v-btn
-            class="mt-12"
-            color="teal lighten-2"
+            class="mt-12 white--text font-weight-bold"
+                  color="orange darken-3"
             dark
             large
             @click="$router.push('/selection')"
-          >Quiero ser parte</v-btn>
+          >Quiero ser parte
+           <img src="../assets/partner-white.png" alt=""></v-btn>
         </v-layout>
       </v-parallax>
     </section>
@@ -432,7 +466,7 @@ export default {
   min-height: 80% !important;
 }
 .opasity {
-  opacity: 0.8;
+  opacity: 0.83;
   background-color: rgb(0, 0, 0);
   /* height: 2em; */
   /* width: 150px; */
@@ -440,6 +474,9 @@ export default {
   top: 10px;
   text-align: center;
   /* padding-top: 1em; */
+}
+.btn-postula {
+  margin-top: 18em !important;
 }
 @media screen and (max-width: 600px) {
   .video {
@@ -461,6 +498,9 @@ export default {
   }
   .headline-text {
     font-size: 20px !important;
+  }
+  .btn-postula {
+    margin-top: 16em !important;
   }
   #mob-size {
     /* content: url("../assets/Banners/Call-600x360.jpg") */

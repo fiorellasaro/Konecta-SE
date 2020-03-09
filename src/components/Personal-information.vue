@@ -124,12 +124,13 @@
                 class="pb-0 pt-4 body-2 text-justify"
               >Nuestro equipo de Selección se contactará contigo dentro de las 24 horas.</p>
 
-              <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
+              <!-- <p class="body-2 text-center">Si tienes dudas escríbenos al WhatsApp :</p>
               <v-row class="justify-center pb-2">
                 <img src="../assets/logos_whatsapp.png" style="height: 35px;" />
                 <p class="primary--text pl-4 pt-1">945787170</p>
-              </v-row>
-
+              </v-row> -->
+              <p class="body-2 text-center">Conoce más sobre nosotros y lo que hacemos! </p>  
+             <p>Ingresa a: <a color="primary" href="https://vivekonecta.pe/">https://vivekonecta.pe/</a></p>
               <p class="body-2 pt-4 pb-0 mb-0">Califica la experiencia de tu proceso :</p>
               <div class="text-center teal--text">
                 <v-rating
@@ -169,14 +170,14 @@
                   href="https://api.whatsapp.com/send?text=¿Quieres ser parte? Postula a nuestro proceso de selección: https://vivekonecta.pe"
                 >Compartir Proceso</a>
               </v-row>
-              <v-row class="justify-center">
+              <!-- <v-row class="justify-center">
                 <v-btn
                   color="#00B8AD"
                   class="white--text mt-8"
                   rounded
                   @click="$router.push({name: 'home'})"
                 >Regresar a la página de inicio</v-btn>
-              </v-row>
+              </v-row> -->
             </div>
           </div>
           <v-row v-if="nextComponente !== 'componente5'">
@@ -1012,7 +1013,7 @@ export default {
   visibility: hidden;
 }
 .v-application a {
-    color:  #00B8AD;
+    /* color:  #00B8AD; */
     text-decoration: none;
 }
 </style>
