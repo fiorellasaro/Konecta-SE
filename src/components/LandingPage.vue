@@ -18,10 +18,11 @@
                   @click="$router.push('/selection')"
                   target="_blank"
                   class="ml-6 WHITE--text font-weight-bold"
-                  color="orange darken-2"
+                  color="orange darken-3"
                 >
                   <span class="mr-2">ÚNETE AL EQUIPO</span>
-                  <v-icon>mdi-open-in-new</v-icon>
+                   <img src="../assets/partner-white.png" alt="">
+                  <!-- <v-icon>mdi-open-in-new</v-icon> -->
                 </v-btn>
               </v-col>
             <v-col cols="12" md="12" class="pb-0 mb-0">
@@ -60,7 +61,7 @@
                   @click="$router.push('/selection')"
                   target="_blank"
                   class="ml-6 WHITE--text font-weight-bold"
-                  color="orange darken-2"
+                  color="orange darken-3"
                 >
                   <span class="mr-2">ÚNETE AL EQUIPO</span>
                   <img src="../assets/partner-white.png" alt="">
@@ -257,12 +258,13 @@
           >Somos una familia de más de 14K personas</div>
           <em>Tú también puedes ser parte</em>
           <v-btn
-            class="mt-12"
-            color="teal lighten-2"
+            class="mt-12 white--text font-weight-bold"
+                  color="orange darken-3"
             dark
             large
             @click="$router.push('/selection')"
-          >Quiero ser parte</v-btn>
+          >Quiero ser parte
+           <img src="../assets/partner-white.png" alt=""></v-btn>
         </v-layout>
       </v-parallax>
     </section>

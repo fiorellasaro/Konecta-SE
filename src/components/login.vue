@@ -8,8 +8,8 @@
             class="text-center subtitle-2 py-4"
             style="color: #042B54; font-size: 16px!important;"
           >A ser parte de la familia de Konecta</p>
-          <!-- length 5 -->    
-<!-- <input  type="number"  maxlength="2"   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/> -->
+          <!-- length 5 -->
+          <!-- <input  type="number"  maxlength="2"   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/> -->
           <v-form ref="form" v-model="valid" :lazy-validation="lazy">
             <p class="text-center black--text title mb-2 mt-6">Tipo de documento</p>
 
@@ -161,6 +161,20 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+
+          <v-dialog v-model="dialog" class="modal">
+            <v-card class="pt-6">
+              <v-card-text
+                class="title black--text text-justify"
+              >Hola! Estás a un paso de iniciar tu viaje para ser parte de la familia Konecta.</v-card-text>
+              <v-card-text
+                class="body-1 text-justify"
+              >A partir de este momento te pediremos tus datos personales y profesionales para iniciar el proceso de selección. Tus datos no serán compartidos con ninguna empresa y los usaremos únicamente para analizar tu perfil de trabajo.</v-card-text>
+              <v-card-actions class="justify-center pb-4">
+                <v-btn color="orange darken-3" class="white--text" @click="dialog = false">Iniciar proceso</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
       </v-flex>
     </v-layout>
@@ -173,8 +187,8 @@ export default {
     loginData: {
       type: Array,
       required: true
-    },
-    // userState: false, 
+    }
+    // userState: false,
   },
   data: () => ({
     valid: true,
@@ -189,14 +203,13 @@ export default {
       v => (v && v.length === 11) || "El número debe ser de 11 carácteres"
     ],
     ptpteRules: [
-       v => !!v || "El número de documento es requerido",
+      v => !!v || "El número de documento es requerido",
       v => (v && v.length === 9) || "El número debe ser de 9 carácteres"
-      
     ],
     conditions: false,
-  
-  userState: false,
-    
+
+    userState: false,
+
     selectDocumentType: null,
     DocumentType: [
       "DNI",
@@ -206,15 +219,17 @@ export default {
     ],
     checkbox: false,
     lazy: false,
-    
+    dialog: false 
   }),
-
-
+ mounted() {
+    // this.datosPersonalesPost.arrEjm = this.rrselect;
+    this.dialog = true;
+  },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-         this.snackbar = true;
-        this.$emit('child-hide-event');
+        this.snackbar = true;
+        this.$emit("child-hide-event");
         // this.$router.push({
         //   name: "selection",
         //   params: {
@@ -224,7 +239,7 @@ export default {
         // });
       }
     },
-    
+
     isNumber: function(evt) {
       // this.testCollection = [];
       evt = evt ? evt : window.event;
@@ -249,8 +264,7 @@ export default {
         str = str.substring(0, str.length - 1);
         ele.value = str;
       }
-    },
-    
+    }
   }
 };
 </script>
